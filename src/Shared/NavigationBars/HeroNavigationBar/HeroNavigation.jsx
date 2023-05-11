@@ -1,9 +1,5 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ForumSharpIcon from "@mui/icons-material/ForumSharp";
-import HomeIcon from "@mui/icons-material/Home";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import PrecisionManufacturingSharpIcon from "@mui/icons-material/PrecisionManufacturingSharp";
-import RssFeedSharpIcon from "@mui/icons-material/RssFeedSharp";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
@@ -20,6 +16,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./HeroNavigation.module.scss";
 import SelectCategory from "./SelectCategory";
 
@@ -35,7 +32,7 @@ const theme = createTheme({
 const HeroNavigation = () => {
   const [category, setCategory] = useState("");
   const location = useLocation();
-console.log(location);
+  console.log(location);
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
@@ -164,29 +161,8 @@ console.log(location);
             justifyContent={`center`}
             alignItems={`center`}
           >
-            <Box
-              id="page-menu"
-              className={styles.navigationMenu_wrapper}
-              sx={{}}
-              display={`flex`}
-              justifyContent={`space-center`}
-              alignItems={`center`}
-            >
-              <NavLink className={`${location.pathname==="/"||location.pathname==="/home"?styles.activeRoute:""} ${styles.navigationMenu_Item}`} >
-                <HomeIcon /> <span>Home</span>
-              </NavLink>
-              <NavLink className={`${location.pathname==="/products"?styles.activeRoute:""} ${styles.navigationMenu_Item}`}>
-                <PrecisionManufacturingSharpIcon /> <span> Products</span>
-              </NavLink>
-              <NavLink className={`${location.pathname==="/blogs"?styles.activeRoute:""} ${styles.navigationMenu_Item}`}>
-                <RssFeedSharpIcon /> <span>Blogs</span>
-              </NavLink>
-              <NavLink className={`${location.pathname==="/forum"?styles.activeRoute:""} ${styles.navigationMenu_Item}`}>
-                <ForumSharpIcon /> <span> Forum</span>
-              </NavLink>
-            </Box>
+            <PageNavigationBar />
           </Grid>
-          
         </Grid>
       </Container>
     </AppBar>

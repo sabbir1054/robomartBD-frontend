@@ -1,0 +1,28 @@
+.heroNavigation_Container {
+  max-width: 85%;
+  //   padding: 15px 0px;
+}
+
+.profileIcon {
+  color: white;
+  font-size: 35px;
+  transition: all 0.3s ease-in;
+  &:hover {
+    color: rgb(0, 0, 0);
+  }
+}
+.loginSectionNav {
+  display: flex;
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+  }
+  p {
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      border-bottom: 1px solid white;
+    }
+  }
+}
