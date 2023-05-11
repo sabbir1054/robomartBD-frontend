@@ -10,8 +10,8 @@ const CommonNavigation = () => {
     <AppBar
       sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset" }}
       component=""
-      position=""
-      positionRelative
+      position="relative"
+      
     >
       <Container maxWidth="lg" className={styles.heroNavigation_Container}>
         <Grid

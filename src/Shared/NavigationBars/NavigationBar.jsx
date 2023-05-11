@@ -5,8 +5,8 @@ import CommonNavigation from "./CommonNavigationBar/CommonNavigation";
 const NavigationBar = () => {
   return (
     <>
-      {/* <HeroNavigation /> */}
-      <CommonNavigation/>
+      <HeroNavigation />
+      {/* <CommonNavigation/> */}
     </>
   );
 };
