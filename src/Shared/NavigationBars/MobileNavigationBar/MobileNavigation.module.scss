@@ -1,0 +1,18 @@
+.searchField {
+  background-color: white;
+  border-radius: 0px;
+  width: 100%;
+  &:focus-visible {
+    outline: 1px solid red !important;
+  }
+}
+.searchBtn {
+  margin-top: 5px;
+  border-radius: 0px;
+  background-color: black;
+  padding: 9px 25px;
+
+  &:hover {
+    background-color: rgb(32, 32, 32);
+  }
+}

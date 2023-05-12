@@ -1,14 +1,21 @@
-import React from "react";
-import HeroNavigation from "./HeroNavigationBar/HeroNavigation";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import MobileTopNavigation from "./MobileNavigationBar/MobileTopNavigation";
 import CommonNavigation from "./CommonNavigationBar/CommonNavigation";
+import HeroNavigation from "./HeroNavigationBar/HeroNavigation";
 
 const NavigationBar = () => {
-  return (
-    <>
-      <HeroNavigation />
-      {/* <CommonNavigation/> */}
-    </>
-  );
+  const location = useLocation();
+  const [normalNavigation, setNormalNavigation] = useState(false);
+  if (
+    location.pathname.includes("blogs") ||
+    location.pathname.includes("forum")
+  ) {
+    return <CommonNavigation />;
+  } else {
+    return <HeroNavigation />;
+  }
+ 
 };
 
 export default NavigationBar;
