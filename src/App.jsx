@@ -9,22 +9,7 @@ import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mob
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 
 function App() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [mobileNav, setMobileNav] = useState(false);
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleResize);
-    if (windowWidth < 550) {
-      setMobileNav(true);
-    }
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  console.log(windowWidth);
+  
   return (
     <>
       <NavigationBar />
