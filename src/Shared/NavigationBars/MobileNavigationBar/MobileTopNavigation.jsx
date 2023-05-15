@@ -6,6 +6,7 @@ const MobileTopNavigation = () => {
   return (
     <>
       <AppBar
+        className="mobile-top-navigation"
         sx={{
           backgroundColor: "var(--primaryColor)",
           boxShadow: "unset",

@@ -7,7 +7,7 @@ font-family: 'Roboto', sans-serif;
 
 */
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -17,8 +17,6 @@ font-family: 'Roboto', sans-serif;
   --secondaryColor: #fd141a;
   --primaryFont: "Lato", sans-serif;
   --secondaryFont: "Roboto", sans-serif;
-  
- 
 }
 
 h1,
@@ -33,4 +31,22 @@ p,
 span,
 small {
   font-family: var(--secondaryFont);
+}
+
+.mobile-bottom-navigation {
+  display: none;
+}
+.mobile-top-navigation {
+  display: none;
+}
+@media only screen and (max-width: 900px) {
+  .desktop-navigation {
+    display: none !important;
+  }
+  .mobile-top-navigation {
+    display: block !important;
+  }
+  .mobile-bottom-navigation {
+    display: block !important;
+  }
 }

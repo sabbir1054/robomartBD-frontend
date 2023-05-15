@@ -11,6 +11,7 @@ const MobileNavigation = () => {
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
+        className="mobile-bottom-navigation"
       >
         <BottomNavigation
           style={{ backgroundColor: "var(--primaryColor)" }}
