@@ -1,5 +1,6 @@
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
+import OfferCards from "./Components/OfferCards/OfferCards";
 import HeroSlider from "./Components/Slider/HeroSlider";
 import styles from "./Hero.module.scss";
 const Hero = () => {
@@ -11,15 +12,17 @@ const Hero = () => {
             <HeroSlider />
           </Grid>
           <Grid item lg={4} width={"100%"}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam,
-            rerum voluptate. Earum reprehenderit, repellendus sed quis, eligendi
-            fugit et officiis vel autem nemo numquam? Eveniet, officiis
-            explicabo provident corporis inventore praesentium placeat unde sint
-            itaque ea suscipit adipisci possimus nam culpa, minima ipsum error
-            assumenda excepturi quis odio. Aspernatur, vel?
+            <Box>
+              <OfferCards />
+            </Box>
           </Grid>
         </Grid>
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis minima eligendi consequuntur voluptates, eius sunt blanditiis obcaecati quos itaque ducimus harum odit optio perferendis corporis ullam laboriosam quis odio. Et nam, nobis quisquam consectetur accusantium eaque quidem perferendis magnam quasi consequatur consequuntur placeat alias rem voluptatum vero laudantium labore sapiente!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis minima
+        eligendi consequuntur voluptates, eius sunt blanditiis obcaecati quos
+        itaque ducimus harum odit optio perferendis corporis ullam laboriosam
+        quis odio. Et nam, nobis quisquam consectetur accusantium eaque quidem
+        perferendis magnam quasi consequatur consequuntur placeat alias rem
+        voluptatum vero laudantium labore sapiente!
       </Container>
     </>
   );
