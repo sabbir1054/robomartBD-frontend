@@ -50,3 +50,6 @@ small {
     display: block !important;
   }
 }
+.swiper-pagination-bullet{
+    background-color: rgb(255, 255, 255);
+}
