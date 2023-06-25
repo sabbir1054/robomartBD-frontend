@@ -87,6 +87,13 @@ const Footer = () => {
             <Grid item xs={12} sm={6} md={4} lg={3}>
               {/* logo */}
               <img src="/assets/logo.png" alt="" srcset="" width={200} />
+              <Typography
+                variant="h6"
+                className={styles.footerTitle}
+                paddingTop={0}
+              >
+                Helpline:
+              </Typography>
               <div
                 style={{ display: "flex", alignItems: "center" }}
                 className={styles.helpNumber}
