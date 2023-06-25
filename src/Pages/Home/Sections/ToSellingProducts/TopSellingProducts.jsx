@@ -1,0 +1,98 @@
+import { Box, Container, Typography } from "@mui/material";
+import React from "react";
+import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+// import required modules
+import { Navigation } from "swiper";
+
+import styles from "./TopSellingProducts.module.scss";
+const TopSellingProducts = () => {
+  return (
+    <>
+      <Container className={styles.topSellingWrapper}>
+        <Box paddingY={5} marginY={2}>
+          <Box className={styles.topSeelingHeading}>
+            <Typography
+              variant="h4"
+              style={{
+                borderLeft: "4px solid var(--primaryColor)",
+                textTransform: "uppercase",
+                fontFamily: "var(--primaryFont)",
+              }}
+            >
+              {" "}
+              Best selling Items{" "}
+            </Typography>
+            <hr />
+          </Box>
+
+          <Box paddingY={2}>
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={10}
+              navigation={true}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                1100: {
+                  slidesPerView: 4,
+                  spaceBetween: 10,
+                },
+                1600: {
+                  slidesPerView: 5,
+                  spaceBetween: 10,
+                },
+              }}
+              modules={[Navigation]}
+              className="mySwiper"
+            >
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SingleProductCard />
+              </SwiperSlide>
+            </Swiper>
+          </Box>
+        </Box>
+      </Container>
+    </>
+  );
+};
+
+export default TopSellingProducts;

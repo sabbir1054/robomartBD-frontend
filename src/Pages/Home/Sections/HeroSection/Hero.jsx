@@ -3,6 +3,7 @@ import React from "react";
 import OfferCards from "./Components/OfferCards/OfferCards";
 import HeroSlider from "./Components/Slider/HeroSlider";
 import styles from "./Hero.module.scss";
+import OurFeatures from "./OurFeatures/OurFeatures";
 const Hero = () => {
   return (
     <>
@@ -17,12 +18,7 @@ const Hero = () => {
             </Box>
           </Grid>
         </Grid>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis minima
-        eligendi consequuntur voluptates, eius sunt blanditiis obcaecati quos
-        itaque ducimus harum odit optio perferendis corporis ullam laboriosam
-        quis odio. Et nam, nobis quisquam consectetur accusantium eaque quidem
-        perferendis magnam quasi consequatur consequuntur placeat alias rem
-        voluptatum vero laudantium labore sapiente!
+        <OurFeatures />
       </Container>
     </>
   );

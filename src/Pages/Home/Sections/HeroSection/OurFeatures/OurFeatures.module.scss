@@ -1,0 +1,22 @@
+.ourFeatures_wrapper {
+  border: 1px solid #d9d9d9;
+  width: 95%;
+  border-radius: 5px;
+}
+.singleFeature {
+    border-right: 1px solid #d9d9d9;
+    &hover{
+
+    }
+}
+.featureIcons {
+  color: red;
+}
+.featureTitle {
+    font-family: var(--secondaryFont);
+    
+}
+.featureText {
+    font-family: var(--secondaryFont);
+    color: #666;
+}
