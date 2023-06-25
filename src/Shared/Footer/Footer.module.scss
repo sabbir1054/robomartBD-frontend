@@ -1,7 +1,42 @@
 .footerBottom {
-  background-color: #f2f2f2;
-  padding: 20px 0px;
+  background-color: black;
+  color: #f2f2f2;
 }
 .socialIcon {
   font-size: 40px;
+}
+.footerTopWrapper {
+  padding: 8vh 0;
+  background-color: #f2f2f2;
+}
+.footerTitle {
+  font-family: var(--secondaryFont);
+  font-weight: bold;
+  text-decoration: underline;
+}
+.footerLists {
+  list-style: circle;
+  .footerListItem {
+    text-decoration: none;
+    color: black;
+    font-family: var(--secondaryFont);
+
+    font-size: 18px;
+    &:hover {
+      color: var(--primaryColor);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  li {
+    padding: 5px 0;
+  }
+}
+.helpNumber {
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--primaryColor);
+  }
 }

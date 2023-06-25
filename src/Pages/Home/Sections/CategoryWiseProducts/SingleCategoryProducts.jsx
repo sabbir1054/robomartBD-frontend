@@ -41,7 +41,7 @@ const SingleCategoryProducts = ({ title }) => {
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}
-          <Button variant="contained" >
+          <Button variant="contained" className={styles.showMoreBtn}>
             Show More
           </Button>
         </Box>
