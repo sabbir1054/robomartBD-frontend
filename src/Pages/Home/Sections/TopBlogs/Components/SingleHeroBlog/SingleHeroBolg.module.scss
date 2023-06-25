@@ -1,0 +1,27 @@
+.cardWrapper {
+  transition: all 0.3s ease-in-out;
+  &:hover .cardMedia {
+    transform: scale(1.02);
+  }
+}
+.cardMedia {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+.blogTitle {
+  transition: all 0.3s ease-in;
+  &:hover {
+    color: var(--primaryColor);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.buyThisBtn{
+    background-color: var(--primaryColor);
+    &:hover{
+        background-color: rgb(14, 121, 0);
+    }
+}

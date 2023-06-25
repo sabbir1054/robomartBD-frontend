@@ -20,7 +20,7 @@ const TopSellingProducts = () => {
             borderBottom={"1px solid #d1d1d1"}
           >
             <Typography
-              variant="h4"
+              variant="h5"
               style={{
                 borderLeft: "4px solid var(--primaryColor)",
                 textTransform: "uppercase",
