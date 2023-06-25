@@ -15,7 +15,10 @@ const TopSellingProducts = () => {
     <>
       <Container className={styles.topSellingWrapper}>
         <Box paddingY={5} marginY={2}>
-          <Box className={styles.topSeelingHeading}>
+          <Box
+            className={styles.topSeelingHeading}
+            borderBottom={"1px solid #d1d1d1"}
+          >
             <Typography
               variant="h4"
               style={{
@@ -27,7 +30,7 @@ const TopSellingProducts = () => {
               {" "}
               Best selling Items{" "}
             </Typography>
-            <hr />
+            {/* <hr /> */}
           </Box>
 
           <Box paddingY={2}>

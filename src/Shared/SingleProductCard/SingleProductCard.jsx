@@ -10,7 +10,7 @@ const SingleProductCard = () => {
     <>
       <Card
         style={{ boxShadow: "none", width: "100%" }}
-        sx={{ height: "100%", paddingBottom: "15px" }}
+        sx={{ height: "100%", paddingBottom: "5px" }}
         className={`${styles.card} card`}
       >
         <Box

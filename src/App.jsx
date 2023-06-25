@@ -7,6 +7,7 @@ import Home from "./Pages/Home/Home";
 import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
+import Footer from "./Shared/Footer/Footer";
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
         <Route path="/blogs" element={<BlogsMainPage />} />
         <Route path="/forum" element={<ForumMainPage />} />
       </Routes>
+      <Footer/>
       <MobileNavigation />
     </>
   );
