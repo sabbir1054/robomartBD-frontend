@@ -15,15 +15,16 @@ const SelectCategory = () => {
             className={styles.categoryBtn}
             variant="text"
             sx={{
+              width: "200px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              fontSize: "18px",
+              fontSize: "16px",
               color: "white",
             }}
           >
             <DensityMediumIcon />{" "}
-            <span style={{ padding: "0px 8px" }}> Select Category</span>
+            <span style={{ paddingLeft: "2px" }}> Select Category</span>
           </Button>
         }
         transition

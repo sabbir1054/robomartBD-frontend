@@ -19,22 +19,22 @@ const OurFeatures = () => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h5">
+              <Typography variant="h6">
                 <LocalShippingIcon
-                  sx={{ fontSize: "50px" }}
+                  sx={{ fontSize: "40px" }}
                   className={styles.featureIcons}
                 />
               </Typography>
               <Box paddingX={3}>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   fontWeight={"bold"}
                   className={styles.featureTitle}
                 >
                   Fast Delivery
                 </Typography>
                 <Typography
-                  variant="subTitle"
+                  variant="subTitle2"
                   fontWeight={"normal"}
                   className={styles.featureText}
                 >
@@ -51,22 +51,22 @@ const OurFeatures = () => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h5">
+              <Typography variant="h6">
                 <SyncIcon
-                  sx={{ fontSize: "50px" }}
+                  sx={{ fontSize: "40px" }}
                   className={styles.featureIcons}
                 />
               </Typography>
               <Box paddingX={3}>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   fontWeight={"bold"}
                   className={styles.featureTitle}
                 >
                   15 Days Return
                 </Typography>
                 <Typography
-                  variant="subTitle"
+                  variant="subTitle2"
                   fontWeight={"normal"}
                   className={styles.featureText}
                 >
@@ -83,22 +83,22 @@ const OurFeatures = () => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h5">
+              <Typography variant="h6">
                 <CreditCardIcon
-                  sx={{ fontSize: "50px" }}
+                  sx={{ fontSize: "40px" }}
                   className={styles.featureIcons}
                 />
               </Typography>
               <Box paddingX={3}>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   fontWeight={"bold"}
                   className={styles.featureTitle}
                 >
                   Secure Payment
                 </Typography>
                 <Typography
-                  variant="subTitle"
+                  variant="subTitle2"
                   fontWeight={"normal"}
                   className={styles.featureText}
                 >
@@ -115,15 +115,15 @@ const OurFeatures = () => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h5">
+              <Typography variant="h6">
                 <ForumIcon
-                  sx={{ fontSize: "50px" }}
+                  sx={{ fontSize: "40px" }}
                   className={styles.featureIcons}
                 />
               </Typography>
               <Box paddingX={3}>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   fontWeight={"bold"}
                   className={styles.featureTitle}
                 >

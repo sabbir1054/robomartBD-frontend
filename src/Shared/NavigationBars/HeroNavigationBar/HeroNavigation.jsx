@@ -64,10 +64,7 @@ const HeroNavigation = () => {
         <Container className={styles.heroNavigation_Container}>
           <Grid
             container
-            display={`flex`}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
+            className={styles.heroNavGrid}
           >
             <Grid
               item
@@ -82,7 +79,7 @@ const HeroNavigation = () => {
                 {changeIcon ? (
                   <SelectCategory />
                 ) : (
-                  <img src="/assets/logo.png" alt="" width={250} srcset="" />
+                  <img src="/assets/logo.png" alt="" width={200} srcset="" />
                 )}
               </Box>
             </Grid>
