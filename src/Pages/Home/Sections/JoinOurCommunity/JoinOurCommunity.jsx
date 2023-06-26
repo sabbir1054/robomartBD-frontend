@@ -45,7 +45,7 @@ const JoinOurCommunity = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <img src="https://i.ibb.co/FKmYjCj/p.png" alt="" srcset="" />
+              <img src="https://i.ibb.co/FKmYjCj/p.png" alt="" srcset="" style={{width:"100%"}}/>
             </Grid>
           </Grid>
         </Container>
