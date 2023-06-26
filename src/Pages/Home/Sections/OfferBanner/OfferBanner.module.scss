@@ -1,0 +1,16 @@
+.offerBannerWrapper {
+  max-width: 100%;
+  min-height: 60vh;
+  background: url("https://i.ibb.co/YBSXYNn/offer-Banner.png");
+  background-position: center;
+  background-size: cover;
+}
+.OfferBannerBtn {
+  height: 55vh;
+  position: relative;
+  button {
+    &:hover {
+      background-color: green;
+    }
+  }
+}

@@ -74,7 +74,7 @@ const SingleProductCard = () => {
           </Box>
         </CardContent>
         <Button className={styles.productViewBtn} color="primary" fullWidth sx={{ width: "100%" }}>
-          Full Width Button
+          View Details
         </Button>
       </Card>
     </>
