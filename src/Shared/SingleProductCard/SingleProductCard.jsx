@@ -3,7 +3,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Box, Button, Card, CardContent, CardMedia, Rating } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./SingleProductCard.module.scss";
 const SingleProductCard = () => {
   return (
@@ -73,9 +73,16 @@ const SingleProductCard = () => {
             </p>
           </Box>
         </CardContent>
-        <Button className={styles.productViewBtn} color="primary" fullWidth sx={{ width: "100%" }}>
-          View Details
-        </Button>
+        <NavLink to={"/products/id"}>
+          <Button
+            className={styles.productViewBtn}
+            color="primary"
+            fullWidth
+            sx={{ width: "100%" }}
+          >
+            View Details
+          </Button>
+        </NavLink>
       </Card>
     </>
   );

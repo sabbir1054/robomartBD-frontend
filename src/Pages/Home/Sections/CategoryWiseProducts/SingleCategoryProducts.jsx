@@ -1,11 +1,12 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React from "react";
+import { NavLink } from "react-router-dom";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 import styles from "./CategoryProducts.module.scss";
 const SingleCategoryProducts = ({ title }) => {
   return (
     <Container className={styles.categoryProductsWrapper}>
-      <Box paddingY={5} marginY={2}>
+      <Box paddingY={1} marginY={1}>
         <Box
           className={styles.topSeelingHeading}
           borderBottom={"1px solid #d1d1d1"}
@@ -41,9 +42,11 @@ const SingleCategoryProducts = ({ title }) => {
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}
-          <Button variant="contained" className={styles.showMoreBtn}>
-            Show More
-          </Button>
+          <NavLink to={"/sections/id"}>
+            <Button variant="contained" className={styles.showMoreBtn}>
+              Show More
+            </Button>
+          </NavLink>
         </Box>
       </Box>
     </Container>

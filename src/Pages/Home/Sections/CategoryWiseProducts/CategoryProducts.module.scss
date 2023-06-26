@@ -1,9 +1,13 @@
-.categoryProductsWrapper {
-  max-width: 85%;
-}
+
 .showMoreBtn{
     background-color: red;
     &:hover{
         background-color: rgb(196, 9, 9);
     }
+}
+
+@media (min-width: 1400px) {
+  .categoryProductsWrapper {
+  max-width: 85%;
+}
 }
