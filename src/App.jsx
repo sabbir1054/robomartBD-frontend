@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import BlogsMainPage from "./Pages/Blogs/BlogsMainPage";
 import ForumMainPage from "./Pages/Forums/ForumMainPage";
 import Home from "./Pages/Home/Home";
+import ProductDetailsPage from "./Pages/ProductDetailsPage/ProductDetailsPage";
+import Footer from "./Shared/Footer/Footer";
 import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
-import Footer from "./Shared/Footer/Footer";
 
 function App() {
-  
   return (
     <>
       <NavigationBar />
@@ -21,8 +20,9 @@ function App() {
         <Route path="/products" element={<AllProductPage />} />
         <Route path="/blogs" element={<BlogsMainPage />} />
         <Route path="/forum" element={<ForumMainPage />} />
+        <Route path="/products/:id" element={<ProductDetailsPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
       <MobileNavigation />
     </>
   );
