@@ -1,18 +1,17 @@
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import SyncIcon from "@mui/icons-material/Sync";
 import ForumIcon from "@mui/icons-material/Forum";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import SyncIcon from "@mui/icons-material/Sync";
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import styles from "./OurFeatures.module.scss";
 const OurFeatures = () => {
- 
   return (
     <div>
       {/* <Container className={styles.ourFeatures_wrapper}> */}
       <Box paddingY={2} marginY={3} className={styles.ourFeatures_wrapper}>
         <Grid container spacing={0}>
-          <Grid item xs={3} className={styles.singleFeature}>
+          <Grid item xs={12} sm={6} md={3} className={styles.singleFeature}>
             <Box
               sx={{
                 display: "flex",
@@ -44,7 +43,7 @@ const OurFeatures = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={3} className={styles.singleFeature}>
+          <Grid item xs={12} sm={6} md={3} className={styles.singleFeature}>
             <Box
               sx={{
                 display: "flex",
@@ -76,7 +75,7 @@ const OurFeatures = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={3} className={styles.singleFeature}>
+          <Grid item xs={12} sm={6} md={3} className={styles.singleFeature}>
             <Box
               sx={{
                 display: "flex",
@@ -108,7 +107,7 @@ const OurFeatures = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={3}>
             <Box
               sx={{
                 display: "flex",
