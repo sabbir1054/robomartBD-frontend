@@ -5,6 +5,10 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.scss";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 const Footer = () => {
   return (
     <div>
@@ -142,6 +146,10 @@ const Footer = () => {
           <Box style={{ display: "flex", alignItems: "center" }}>
             <p>Stay Connected:</p>{" "}
             <FacebookIcon className={styles.socialIcon} />
+            <YouTubeIcon className={styles.socialIcon} />
+            <LinkedInIcon className={styles.socialIcon} />
+            <TwitterIcon className={styles.socialIcon} />
+            <InstagramIcon className={styles.socialIcon} />
           </Box>
         </Container>
       </Box>

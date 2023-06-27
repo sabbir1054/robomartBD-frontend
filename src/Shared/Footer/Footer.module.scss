@@ -4,6 +4,12 @@
 }
 .socialIcon {
   font-size: 40px;
+  margin: 5px 2px;
+  transition: all 0.3s ease-in;
+  &:hover {
+    cursor: pointer;
+    color: var(--primaryColor);
+  }
 }
 .footerTopWrapper {
   padding: 8vh 0;
