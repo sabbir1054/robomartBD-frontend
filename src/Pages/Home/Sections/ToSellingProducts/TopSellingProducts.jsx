@@ -1,6 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
-import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -8,10 +7,16 @@ import "swiper/css";
 import "swiper/css/pagination";
 // import required modules
 import { Navigation } from "swiper";
-
-import styles from "./TopSellingProducts.module.scss";
 import SingleProductCard3 from "../../../../Shared/SingleProductCard/SingleProductCard3";
+import styles from "./TopSellingProducts.module.scss";
+
 const TopSellingProducts = () => {
+  const navigationBtns = {
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  };
   return (
     <>
       <Container className={styles.topSellingWrapper}>
@@ -36,6 +41,7 @@ const TopSellingProducts = () => {
 
           <Box paddingY={2}>
             <Swiper
+              {...navigationBtns}
               slidesPerView={1}
               spaceBetween={10}
               navigation={true}
