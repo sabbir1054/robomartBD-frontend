@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper";
 
 import styles from "./TopSellingProducts.module.scss";
+import SingleProductCard3 from "../../../../Shared/SingleProductCard/SingleProductCard3";
 const TopSellingProducts = () => {
   return (
     <>
@@ -64,31 +65,31 @@ const TopSellingProducts = () => {
               className="mySwiper"
             >
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
               <SwiperSlide>
-                <SingleProductCard />
+                <SingleProductCard3 />
               </SwiperSlide>
             </Swiper>
           </Box>

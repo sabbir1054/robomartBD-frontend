@@ -38,7 +38,14 @@ const SingleCategoryProducts = ({ title }) => {
             <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
               <SingleProductCard />
             </Grid>
+            {/* <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+              <SingleProductCard />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <SingleProductCard />
+            </Grid> */}
           </Grid>
+          
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}

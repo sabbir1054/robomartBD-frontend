@@ -1,16 +1,23 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Box, Button, Card, CardContent, CardMedia, Rating } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Rating,
+} from "@mui/material";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./SingleProductCard.module.scss";
-const SingleProductCard = () => {
+const SingleProductCard2 = () => {
   return (
     <>
       <Card
-        style={{ boxShadow: "none",width:"250px",}}
-        sx={{ paddingBottom: "5px" }}
+        style={{ boxShadow: "none", width: "100%" }}
+        sx={{ height: "100%", paddingBottom: "5px" }}
         className={`${styles.card} card`}
       >
         <Box
@@ -25,10 +32,10 @@ const SingleProductCard = () => {
         >
           <CardMedia
             component="img"
-            image={`https://i.ibb.co/wrLn7wf/Arduino-Uno-R3-SMD-01.jpg`}
+            image={`https://i.ibb.co/zbyRK5d/small-product.png`}
+            // image={`https://i.ibb.co/wrLn7wf/Arduino-Uno-R3-SMD-01.jpg`}
             alt="green iguana"
             sx={{ width: "100%" }}
-            className={styles.cardImg}
           />
           <div
             className={styles.addToWishList}
@@ -89,4 +96,4 @@ const SingleProductCard = () => {
   );
 };
 
-export default SingleProductCard;
+export default SingleProductCard2;

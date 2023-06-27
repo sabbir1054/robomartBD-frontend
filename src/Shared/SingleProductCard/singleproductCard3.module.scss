@@ -1,0 +1,46 @@
+.card {
+  max-width: 300px;
+  margin: 0 auto;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.mediaContainer {
+  position: relative;
+}
+
+.media {
+  background-size: contain;
+  transition: opacity 0.2s;
+}
+
+.media:hover {
+  opacity: 0.8;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.overlay:hover {
+  opacity: 1;
+}
+
+.overlayContent {
+  text-align: center;
+  color: #fff;
+}
