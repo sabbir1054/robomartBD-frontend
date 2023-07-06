@@ -22,7 +22,11 @@ const SmallSearch = () => {
 
   return (
     <>
-      <Button onClick={handleOpen} variant="text">
+      <Button
+        onClick={handleOpen}
+        variant="text"
+        sx={{ color: "#333", textDecoration: "underline" }}
+      >
         Search
       </Button>
       <Modal

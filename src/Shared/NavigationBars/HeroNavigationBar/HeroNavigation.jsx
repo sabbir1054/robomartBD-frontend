@@ -19,7 +19,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./HeroNavigation.module.scss";
 import SelectCategory from "./SelectCategory";
-import { Padding } from "@mui/icons-material";
 
 const theme = createTheme({
   palette: {
@@ -62,10 +61,7 @@ const HeroNavigation = () => {
         position="sticky"
       >
         <Container className={styles.heroNavigation_Container}>
-          <Grid
-            container
-            className={styles.heroNavGrid}
-          >
+          <Grid container className={styles.heroNavGrid}>
             <Grid
               item
               lg={2}
@@ -132,7 +128,7 @@ const HeroNavigation = () => {
                     <FavoriteBorderIcon className={styles.whishListIcon} />
                   </Badge>
                 </NavLink>
-                <NavLink>
+                <NavLink to="/shopping-cart">
                   <Badge
                     color={"black"}
                     className={styles.iconBadge}

@@ -1,3 +1,30 @@
+.drawerList {
+  width: 250px;
+  transition: all 0.3s ease-in;
+  .drawerListItem {
+    &:hover {
+      background-color: var(--primaryColor);
+      color: white;
+    }
+  }
+  .drawerSearch {
+    color: #333;
+  }
+}
+.cartLink {
+  font-family: var(--secondaryFont);
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+  align-items: center;
+  text-decoration: none;
+  svg {
+    color: #333;
+    font-size: 30px;
+  }
+}
 .searchField {
   background-color: white;
   border-radius: 0px;
