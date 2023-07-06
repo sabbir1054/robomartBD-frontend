@@ -1,0 +1,102 @@
+.couponTextField {
+  width: 75%;
+}
+
+.checkOutProcess {
+  padding: 25px 30px 30px;
+  border: 0.1rem dashed #d7d7d7;
+  background-color: #f9f9f9;
+  border-radius: 3px;
+
+  .cartDetail {
+    h5 {
+      font-size: 1rem;
+      font-weight: 500;
+      padding-bottom: 17px;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    p {
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.1rem solid #ebebeb;
+    }
+  }
+
+  .shipping {
+    .title {
+      padding: 20px 0 13px;
+      color: #333333;
+    }
+  }
+}
+
+.test {
+  color: "var(--primaryColor)";
+  & .Mui-checked {
+    color: "var(--primaryColor)";
+  }
+}
+
+.shippingItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 300;
+  color: #333333;
+}
+
+.end {
+  p {
+    height: 70px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondaryColor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .checkOutBtn {
+    width: 100%;
+    font-size: 14px;
+    height: 40px;
+    border: 1px solid var(--primaryColor);
+    background: transparent;
+    color: var(--primaryColor);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--primaryColor);
+      color: #fff;
+    }
+  }
+}
+
+.notActive {
+  opacity: 0.4;
+  background: #c96 !important;
+  color: #fff !important;
+  cursor: not-allowed !important;
+}
+
+.continueBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8.5px 15px;
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid #ebebeb;
+  color: #333;
+  margin: 30px 0;
+  text-decoration: none;
+
+  svg {
+    margin-left: 10px;
+  }
+}
