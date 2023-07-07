@@ -1,24 +1,19 @@
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import CloseIcon from "@mui/icons-material/Close";
+import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Button, Divider, Drawer, List, ListItem } from "@mui/material";
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./MobileNavigation.module.scss";
 import SmallSearch from "./SmallSearch";
-import { NavLink } from "react-router-dom";
 
 const NavigationDrawer = () => {
+
   const [open, setOpen] = useState();
+  const [isSearchTrigger, setIsSearchTrigger] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -47,24 +42,40 @@ const NavigationDrawer = () => {
             sx={{ borderBottom: "1px solid #cfcfcfdb" }}
             className={styles.drawerListItem}
           >
-            <NavLink to={"/shopping-cart"} className={styles.cartLink}>
-              {/* <ListItemIcon> */}
+            <NavLink to={"/shopping-cart"} className={styles.iLink}>
               <ShoppingCartIcon />
               Cart
-              {/* </ListItemIcon> */}
-              {/* <ListItemText primary="Cart" /> */}
+            </NavLink>
+          </ListItem>
+
+          <ListItem
+            sx={{ borderBottom: "1px solid #cfcfcfdb" }}
+            className={styles.drawerListItem}
+          >
+            <NavLink to={"/login"} className={styles.iLink}>
+              <LoginIcon />
+              Login
             </NavLink>
           </ListItem>
           <ListItem
-            sx={{ display: "flex", justifyContent: "space-between" }}
+            sx={{ borderBottom: "1px solid #cfcfcfdb" }}
             className={styles.drawerListItem}
           >
-           
-         
-                <SearchIcon />
+            <NavLink to={"/register"} className={styles.iLink}>
+              <AppRegistrationIcon />
+              Register
+            </NavLink>
+          </ListItem>
+          <ListItem
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderBottom: "1px solid #cfcfcfdb",
+            }}
+            // className={styles.drawerListItem}
+          >
             
-              <SmallSearch />
-           
+            <SmallSearch />
           </ListItem>
         </List>
       </Drawer>

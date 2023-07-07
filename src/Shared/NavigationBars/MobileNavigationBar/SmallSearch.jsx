@@ -1,6 +1,7 @@
 import { Box, Button, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
 import styles from "./MobileNavigation.module.scss";
+import SearchIcon from "@mui/icons-material/Search";
 const style = {
   position: "absolute",
   top: "50%",
@@ -24,8 +25,11 @@ const SmallSearch = () => {
     <>
       <Button
         onClick={handleOpen}
-        variant="text"
-        sx={{ color: "#333", textDecoration: "underline" }}
+        startIcon={<SearchIcon />}
+        sx={{ width: "100%" }}
+        variant="contained"
+        className={styles.searchBtn}
+        disableElevation
       >
         Search
       </Button>

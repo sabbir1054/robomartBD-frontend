@@ -145,10 +145,10 @@ const HeroNavigation = () => {
                   <PermIdentityIcon className={styles.profileIcon} />
                 </div>
                 <div>
-                  <NavLink>
+                  <NavLink to="/login">
                     <p>Login</p>
                   </NavLink>
-                  <NavLink>
+                  <NavLink ro="/register">
                     <p>Register</p>
                   </NavLink>
                 </div>
