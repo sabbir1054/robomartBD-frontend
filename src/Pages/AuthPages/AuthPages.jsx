@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-
+import styles from "./AuthPage.module.scss"
 const AuthPages = () => {
   const [showPass,setShowPass] = useState(false);
   const [component, setComponent] = useState("login");
@@ -29,6 +29,7 @@ const AuthPages = () => {
           >
             <Typography
               variant="h3"
+              className={styles.authTitle}
               sx={{
                 fontWeight: "bold",
                 px: 3,
@@ -48,6 +49,7 @@ const AuthPages = () => {
             to="/register"
           >
             <Typography
+              className={styles.authTitle}
               variant="h3"
               sx={{
                 fontWeight: "bold",
