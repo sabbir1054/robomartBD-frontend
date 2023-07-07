@@ -148,7 +148,7 @@ const HeroNavigation = () => {
                   <NavLink to="/login">
                     <p>Login</p>
                   </NavLink>
-                  <NavLink ro="/register">
+                  <NavLink to="/register">
                     <p>Register</p>
                   </NavLink>
                 </div>
