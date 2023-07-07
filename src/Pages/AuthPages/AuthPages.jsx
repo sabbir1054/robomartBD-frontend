@@ -1,8 +1,11 @@
 import { Box, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
 
 const AuthPages = () => {
+  const [showPass,setShowPass] = useState(false);
   const [component, setComponent] = useState("login");
   const location = useLocation();
   useEffect(() => {
@@ -14,10 +17,16 @@ const AuthPages = () => {
   }, [location]);
 
   return (
-    <div>
-      <Container>
+    <div style={{ backgroundColor: "#ededed" }}>
+      <Container sx={{ minHeight: "70vh", paddingBottom: "10vh" }}>
         <Box sx={{ py: 7, display: "flex", justifyContent: "center" }}>
-          <NavLink style={{textDecoration:"none",color:component==="login"?'black':"#c7c7c7"}} to="/login">
+          <NavLink
+            style={{
+              textDecoration: "none",
+              color: component === "login" ? "black" : "#c7c7c7",
+            }}
+            to="/login"
+          >
             <Typography
               variant="h3"
               sx={{
@@ -31,7 +40,13 @@ const AuthPages = () => {
               Login
             </Typography>
           </NavLink>
-          <NavLink style={{textDecoration:"none",color:component==="register"?'black':"#c7c7c7"}} to="/register">
+          <NavLink
+            style={{
+              textDecoration: "none",
+              color: component === "register" ? "black" : "#c7c7c7",
+            }}
+            to="/register"
+          >
             <Typography
               variant="h3"
               sx={{
@@ -45,6 +60,14 @@ const AuthPages = () => {
               Register
             </Typography>
           </NavLink>
+        </Box>
+        <Box sx={{ py: 3 }} display={"flex"} justifyContent={"center"}>
+          {component === "login" && (
+            <Login showPass={showPass} setShowPass={setShowPass} />
+          )}
+          {component === "register" && (
+            <Register showPass={showPass} setShowPass={setShowPass} />
+          )}
         </Box>
       </Container>
     </div>
