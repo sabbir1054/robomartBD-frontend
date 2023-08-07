@@ -2,33 +2,81 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Box, Typography } from "@mui/material";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import styles from "./AuthPage.module.scss";
+const notify = () => toast.error("Password not match!");
+const successMassage = () =>
+  toast.success("Register successfully! Now Login Here");
+const errorMassage = () => toast.error("Not register please try again!");
+const customError = (massage) => toast.error(massage);
 const Register = ({ showPass, setShowPass }) => {
+  const [showPass2, setShowPass2] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const postNewUser = (data) => {
+    fetch(`https://api.robomartbd.com/api/auth/users/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.id) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Register Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          successMassage();
+          navigate("/login");
+          reset();
+        } else if (result.password) {
+          customError(result.password);
+        } else {
+          errorMassage();
+        }
+      });
+  };
+
+  const onSubmit = (data) => {
+    if (data.password !== data.re_password) {
+      notify();
+    } else {
+      // console.log(data);
+      postNewUser(data);
+    }
+  };
 
   return (
     <div>
+      <Toaster />
       <Box className={styles.auth_wrapper}>
         <Typography variant="subtitle1" className={styles.auth_subtitle}>
           Register An Account
         </Typography>
         <Box className={styles.auth_container}>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.auth_form}>
-            <label htmlFor="email" className={styles.auth_label}>
-              Name:*
+            <label htmlFor="name" className={styles.auth_label}>
+              First name:*
             </label>
             <input
               type="name"
-              {...register("name", { required: true })}
+              {...register("first_name", { required: true })}
               className={styles.auth_form_inputField}
             />
             {errors.name && (
@@ -36,6 +84,15 @@ const Register = ({ showPass, setShowPass }) => {
                 *This field is required
               </span>
             )}
+            <br />
+            <label htmlFor="name" className={styles.auth_label}>
+              Last name:
+            </label>
+            <input
+              type="name"
+              {...register("last_name", { required: true })}
+              className={styles.auth_form_inputField}
+            />
             <label htmlFor="email" className={styles.auth_label}>
               Email:*
             </label>
@@ -54,7 +111,7 @@ const Register = ({ showPass, setShowPass }) => {
               Password:*
             </label>
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
               {...register("password", { required: true })}
               className={styles.auth_form_inputField}
             />{" "}
@@ -66,6 +123,23 @@ const Register = ({ showPass, setShowPass }) => {
                 <VisibilityOffIcon onClick={() => setShowPass(false)} />
               )}
             </p>
+            <br />
+            <label htmlFor="password2" className={styles.auth_label}>
+              Re-Type Password:*
+            </label>
+            <input
+              type={showPass2 ? "text" : "password"}
+              {...register("re_password", { required: true })}
+              className={styles.auth_form_inputField}
+            />{" "}
+            <p className={styles.eyeIconR2}>
+              {!showPass2 && (
+                <RemoveRedEyeIcon onClick={() => setShowPass2(true)} />
+              )}
+              {showPass2 && (
+                <VisibilityOffIcon onClick={() => setShowPass2(false)} />
+              )}
+            </p>
             {errors.password && (
               <span className={styles.auth_form_error}>
                 This field is required
@@ -74,11 +148,12 @@ const Register = ({ showPass, setShowPass }) => {
             <br />
             <input
               type="submit"
-              value={"Log in"}
+              value={"Register Now"}
               className={styles.auth_form_submitBtn}
             />
             <p>
-              Already Have an Account ?<NavLink to={'/login'}>Login Here</NavLink>
+              Already Have an Account ?
+              <NavLink to={"/login"}>Login Here</NavLink>
             </p>
           </form>
         </Box>

@@ -50,6 +50,22 @@
       .eyeIconR {
         position: absolute;
         right: 25px;
+        bottom: 224px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+       .eyeIcon2 {
+        position: absolute;
+        right: 25px;
+        bottom: 109px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .eyeIconR2 {
+        position: absolute;
+        right: 25px;
         bottom: 125px;
         &:hover {
           cursor: pointer;

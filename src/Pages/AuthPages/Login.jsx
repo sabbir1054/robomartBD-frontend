@@ -36,7 +36,7 @@ const Login = ({ showPass, setShowPass }) => {
             )}
             <br />
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
               placeholder="Enter your password"
               {...register("password", { required: true })}
               className={styles.auth_form_inputField}
@@ -62,7 +62,8 @@ const Login = ({ showPass, setShowPass }) => {
             />
           </form>
           <p style={{ margin: "2px 0px" }}>
-            Forget your password ?<NavLink to={"/login"}>Click Here</NavLink>
+            Forget your password ?
+            <NavLink to={"/forget-password"}>Click Here</NavLink>
           </p>
         </Box>
       </Box>
