@@ -1,4 +1,3 @@
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -14,8 +13,10 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
+import localforage from "localforage";
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useGetUserQuery } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./HeroNavigation.module.scss";
 import SelectCategory from "./SelectCategory";
@@ -30,6 +31,12 @@ const theme = createTheme({
 });
 
 const HeroNavigation = () => {
+  const { data, isLoading, isError } = useGetUserQuery();
+  const navigate = useNavigate();
+  if (data) {
+    // console.log(data[0]?.first_name);
+  }
+
   const [category, setCategory] = useState("");
   const location = useLocation();
 
@@ -37,6 +44,11 @@ const HeroNavigation = () => {
   //scrolling navbar
   const listenScrollEvent = () => {
     window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
+  };
+  const handleLogout = () => {
+    localforage.clear();
+    navigate("/");
+    window.location.reload();
   };
   useEffect(() => {
     window.addEventListener("scroll", listenScrollEvent);
@@ -117,42 +129,65 @@ const HeroNavigation = () => {
               alignItems="center"
               className={styles.navigationIcons}
             >
-              <ThemeProvider theme={theme}>
-                <NavLink>
-                  <Badge
-                    color={"black"}
-                    className={styles.iconBadge}
-                    badgeContent={5}
-                    overlap="circular"
-                  >
-                    <FavoriteBorderIcon className={styles.whishListIcon} />
-                  </Badge>
-                </NavLink>
-                <NavLink to="/shopping-cart">
-                  <Badge
-                    color={"black"}
-                    className={styles.iconBadge}
-                    badgeContent={2}
-                    overlap="circular"
-                  >
-                    <ShoppingCartIcon className={styles.cartIcon} />
-                  </Badge>
-                </NavLink>
-              </ThemeProvider>
+              {data && (
+                <ThemeProvider theme={theme}>
+                  {/* <NavLink>
+                    <Badge
+                      color={"black"}
+                      className={styles.iconBadge}
+                      badgeContent={5}
+                      overlap="circular"
+                    >
+                      <FavoriteBorderIcon className={styles.whishListIcon} />
+                    </Badge>
+                  </NavLink> */}
+                  <NavLink to="/shopping-cart">
+                    <Badge
+                      color={"black"}
+                      className={styles.iconBadge}
+                      badgeContent={2}
+                      overlap="circular"
+                    >
+                      <ShoppingCartIcon className={styles.cartIcon} />
+                    </Badge>
+                  </NavLink>
+                </ThemeProvider>
+              )}
 
               <div className={styles.loginSectionNav}>
                 <div>
-                  <PermIdentityIcon className={styles.profileIcon} />
+                  {!data && <PermIdentityIcon className={styles.profileIcon} />}
                 </div>
-                <div>
-                  <NavLink to="/login">
-                    <p>Login</p>
-                  </NavLink>
-                  <NavLink to="/register">
-                    <p>Register</p>
-                  </NavLink>
-                </div>
+
+                {data ? (
+                  <>
+                    <p style={{ fontSize: "20px", fontWeight: "bold" }}>
+                      {data[0]?.first_name}
+                    </p>
+                  </>
+                ) : (
+                  <div>
+                    <NavLink to="/login">
+                      <p>Login</p>
+                    </NavLink>
+                    <NavLink to="/register">
+                      <p>Register</p>
+                    </NavLink>
+                  </div>
+                )}
               </div>
+              {data && (
+                // <NavLink to="/login">
+                <Button
+                  disableElevation
+                  variant="contained"
+                  style={{ background: "red", color: "white" }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+                // </NavLink>
+              )}
             </Grid>
           </Grid>
         </Container>
