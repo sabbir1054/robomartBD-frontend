@@ -13,7 +13,6 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
-import localforage from "localforage";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useGetCartQuery, useGetUserQuery } from "../../../redux/api/api";
@@ -48,7 +47,7 @@ const HeroNavigation = () => {
     window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
   };
   const handleLogout = () => {
-    localforage.clear();
+    localStorage.clear();
     navigate("/");
     window.location.reload();
   };

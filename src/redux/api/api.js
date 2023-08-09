@@ -7,18 +7,23 @@ export const robomartApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.robomartbd.com/",
     prepareHeaders: async (headers) => {
-      try {
-        const accessToken = await localforage.getItem("accessToken");
-
-        if (accessToken) {
-          headers.set("Authorization", `JWT ${accessToken}`);
+      const storedData = localStorage.getItem("user");
+      const userData = JSON.parse(storedData);
+        if (userData) {
+          headers.set("Authorization", `JWT ${userData}`);
         }
+      // try {
+      //   const accessToken = await localforage.getItem("accessToken");
 
-        return headers;
-      } catch (error) {
-        console.error("Error retrieving access token:", error);
-        return headers;
-      }
+      //   if (accessToken) {
+      //     headers.set("Authorization", `JWT ${accessToken}`);
+      //   }
+
+      //   return headers;
+      // } catch (error) {
+      //   console.error("Error retrieving access token:", error);
+      //   return headers;
+      // }
     },
   }),
   endpoints: (builder) => ({

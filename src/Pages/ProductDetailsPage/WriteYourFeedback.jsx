@@ -1,8 +1,11 @@
-import { Button, Modal, Rating, TextField } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
+import { Button, Modal, Rating, TextField } from "@mui/material";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { useGetUserQuery } from "../../redux/api/api";
 import styles from "./ProductDetail.module.scss";
 const WriteYourFeedback = () => {
+  const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState("");
   const [value, setValue] = useState(3);
@@ -21,9 +24,29 @@ const WriteYourFeedback = () => {
     handleClose();
   };
 
+  const handleReviewOpenBtn = () => {
+    if (!userData) {
+      Swal.fire({
+        // position: "top-end",
+        icon: "error",
+        title: "Please login first !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      handleOpen();
+    }
+  };
+
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen} sx={{marginTop:"10px"}} startIcon={<CreateIcon/>}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleReviewOpenBtn}
+        sx={{ marginTop: "10px" }}
+        startIcon={<CreateIcon />}
+      >
         Write your review
       </Button>
       <Modal
@@ -50,7 +73,12 @@ const WriteYourFeedback = () => {
               multiline
               rows={4}
             />
-            <Button variant="contained" color="primary" type="submit" className={styles.reviewSubmit} >
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className={styles.reviewSubmit}
+            >
               Submit
             </Button>
           </form>
