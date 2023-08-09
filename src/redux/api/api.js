@@ -5,15 +5,15 @@ import localforage from "localforage";
 export const robomartApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.robomartbd.com/api/",
+    baseUrl: "https://api.robomartbd.com/",
     prepareHeaders: async (headers) => {
-     try {
+      try {
         const accessToken = await localforage.getItem("accessToken");
-        
+
         if (accessToken) {
           headers.set("Authorization", `JWT ${accessToken}`);
         }
-        
+
         return headers;
       } catch (error) {
         console.error("Error retrieving access token:", error);
@@ -26,11 +26,14 @@ export const robomartApi = createApi({
     //   query: () => `/news`,
     // }),
     getUser: builder.query({
-      query: () => "/auth/users/",
+      query: () => "/api/auth/users/",
+    }),
+    getCart: builder.query({
+      query: () => "/cart/get_cart",
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserQuery } = robomartApi;
+export const { useGetUserQuery,useGetCartQuery } = robomartApi;

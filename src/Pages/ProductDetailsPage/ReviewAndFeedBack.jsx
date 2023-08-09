@@ -6,9 +6,9 @@ const ReviewAndFeedBack = () => {
   return (
     <div>
       <Box sx={{ marginTop: "5vh" }}>
-        <Typography variant="h6" borderBottom={"1px solid #e1e1e1"}>
+        {/* <Typography variant="h6" borderBottom={"1px solid #e1e1e1"}>
           Review & Feedback :
-        </Typography>
+        </Typography> */}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <WriteYourFeedback />
         </Box>

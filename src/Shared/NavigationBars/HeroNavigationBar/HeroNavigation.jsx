@@ -16,7 +16,7 @@ import {
 import localforage from "localforage";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "../../../redux/api/api";
+import { useGetCartQuery, useGetUserQuery } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./HeroNavigation.module.scss";
 import SelectCategory from "./SelectCategory";
@@ -32,6 +32,8 @@ const theme = createTheme({
 
 const HeroNavigation = () => {
   const { data, isLoading, isError } = useGetUserQuery();
+  const { data: cartData } = useGetCartQuery();
+  const cartCount = cartData ? cartData.count : 0;
   const navigate = useNavigate();
   if (data) {
     // console.log(data[0]?.first_name);
@@ -145,7 +147,7 @@ const HeroNavigation = () => {
                     <Badge
                       color={"black"}
                       className={styles.iconBadge}
-                      badgeContent={2}
+                      badgeContent={`${cartCount}`}
                       overlap="circular"
                     >
                       <ShoppingCartIcon className={styles.cartIcon} />

@@ -6,6 +6,7 @@ import { Box, Button, Container, Grid, Rating } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import styles from "./ProductDetail.module.scss";
 import ReviewAndFeedBack from "./ReviewAndFeedBack";
+import BottomTabs from "./BottomTabs";
 const ProductDetailsPage = () => {
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [amount, setAmount] = useState(1);
@@ -114,6 +115,7 @@ const ProductDetailsPage = () => {
           <Grid item md={6}>
             <div className={styles.right}>
               <h1>1.54 inch E-Ink display module (Three Color)</h1>
+              <h3 style={{marginBottom:"10px"}}>Product code: e4de234</h3>
               <div className={styles.rate}>
                 <Rating name="read-only" size="small" value={4} readOnly />
                 <p>(5 Reviews)</p>
@@ -201,7 +203,8 @@ const ProductDetailsPage = () => {
             </div>
           </Grid>
         </Grid>
-        <ReviewAndFeedBack />
+        {/* <ReviewAndFeedBack /> */}
+        <BottomTabs/>
       </Container>
     </div>
   );
