@@ -139,8 +139,8 @@ const BottomTabs = () => {
           <Link>Download this documentation</Link> <br />
           <h5 style={{fontSize:"16px",padding:"10px 0px"}}>Video Tutorials</h5>
           <iframe
-            width="560"
-            height="315"
+            width="300"
+            height="200"
             src="https://www.youtube.com/embed/yLVQ5j6LUR0"
             title="YouTube video player"
             frameborder="0"

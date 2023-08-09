@@ -17,6 +17,7 @@ $orange-gray: #fcb941;
 
 .title {
   display: block;
+  font-family: 'Roboto';
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
@@ -48,19 +49,18 @@ $orange-gray: #fcb941;
     font-weight: 300;
   }
   .price {
-    font-size: 1rem;
-    color: var(--primaryColor);
-    display: flex;
-    padding: 10px 0px;
-    font-weight: 400;
-    text-align: center;
+    // font-size: 1rem;
 
-    span {
-      color: #ccc;
-      margin-left: 8px;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
+    padding: 10px 0px;
+    font-weight: bold;
+    // text-align: left !important;
+
+    // span {
+    //   color: #ccc;
+    //   margin-left: 8px;
+    //   font-size: 1rem;
+    //   margin-bottom: 1rem;
+    // }
   }
 }
 
