@@ -10,6 +10,7 @@ import Footer from "./Shared/Footer/Footer";
 import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
+import SingleCategoryProducts from "./Pages/SingleCategoryProducts/SingleCategoryProducts";
 
 function App() {
   return (
@@ -22,10 +23,11 @@ function App() {
         <Route path="/login" element={<AuthPages />} />
         <Route path="/register" element={<AuthPages />} />
         <Route path="/products" element={<AllProductPage />} />
+        <Route path="/products/categories/:categoryId" element={<SingleCategoryProducts />} />
         <Route path="/blogs" element={<BlogsMainPage />} />
         <Route path="/forum" element={<ForumMainPage />} />
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
-        <Route path="/products/:id" element={<ProductDetailsPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
       </Routes>
       <Footer />
       <MobileNavigation />

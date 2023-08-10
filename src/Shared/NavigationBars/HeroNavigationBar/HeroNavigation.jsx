@@ -208,13 +208,14 @@ const HeroNavigation = () => {
             // sx={{ padding: "5px 0px" }}
             display={`flex`}
             alignItems={`center`}
+            justifyContent={"center"}
           >
-            <Grid item md={2}>
+            {/* <Grid item md={2}>
               <SelectCategory />
-            </Grid>
+            </Grid> */}
             <Grid
               item
-              md={10}
+              // md={10}
               display={`flex`}
               justifyContent={`center`}
               alignItems={`center`}

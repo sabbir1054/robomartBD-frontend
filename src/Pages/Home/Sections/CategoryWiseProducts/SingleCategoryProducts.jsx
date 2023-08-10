@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 import styles from "./CategoryProducts.module.scss";
-const SingleCategoryProducts = ({ title }) => {
+const SingleCategoryProducts = ({ title,products }) => {
   return (
     <Container className={styles.categoryProductsWrapper}>
       <Box paddingY={1} marginY={1}>
@@ -24,28 +24,59 @@ const SingleCategoryProducts = ({ title }) => {
           </Typography>
         </Box>
 
-        <Box paddingY={2}>
+        <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
+          {/* <SingleProductCard />
+          <SingleProductCard />
+          <SingleProductCard />
+          <SingleProductCard />
+          <SingleProductCard /> */}
+
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              display={"flex"}
+              justifyContent={"center"}
+            >
               <SingleProductCard />
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              display={"flex"}
+              justifyContent={"center"}
+            >
               <SingleProductCard />
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              display={"flex"}
+              justifyContent={"center"}
+            >
               <SingleProductCard />
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              display={"flex"}
+              justifyContent={"center"}
+            >
               <SingleProductCard />
             </Grid>
-            {/* <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+            {/* <Grid item xs={12} sm={6} md={3}>
               <SingleProductCard />
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <SingleProductCard />
-            </Grid> */}
+             */}
           </Grid>
-          
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}

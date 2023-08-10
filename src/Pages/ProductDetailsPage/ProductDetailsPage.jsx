@@ -7,6 +7,8 @@ import React, { useCallback, useState } from "react";
 import styles from "./ProductDetail.module.scss";
 import ReviewAndFeedBack from "./ReviewAndFeedBack";
 import BottomTabs from "./BottomTabs";
+import SingleCategoryProducts from "../Home/Sections/CategoryWiseProducts/SingleCategoryProducts";
+import RelatedProducts from "./RelatedProducts";
 const ProductDetailsPage = () => {
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [amount, setAmount] = useState(1);
@@ -115,7 +117,7 @@ const ProductDetailsPage = () => {
           <Grid item md={6}>
             <div className={styles.right}>
               <h1>1.54 inch E-Ink display module (Three Color)</h1>
-              <h3 style={{marginBottom:"10px"}}>Product code: e4de234</h3>
+              <h3 style={{ marginBottom: "10px" }}>Product code: e4de234</h3>
               <div className={styles.rate}>
                 <Rating name="read-only" size="small" value={4} readOnly />
                 <p>(5 Reviews)</p>
@@ -204,7 +206,11 @@ const ProductDetailsPage = () => {
           </Grid>
         </Grid>
         {/* <ReviewAndFeedBack /> */}
-        <BottomTabs/>
+        <BottomTabs />
+        <div style={{ padding: "5vh 0" }}>
+          {/* <SingleCategoryProducts title={"Sensors"} /> */}
+          {/* <RelatedProducts/> */}
+        </div>
       </Container>
     </div>
   );

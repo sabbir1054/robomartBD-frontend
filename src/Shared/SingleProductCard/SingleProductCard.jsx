@@ -1,8 +1,5 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import Brightness1Icon from "@mui/icons-material/Brightness1";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddTaskIcon from "@mui/icons-material/AddTask";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   Box,
   Button,
@@ -14,7 +11,8 @@ import {
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./SingleProductCard.module.scss";
-const SingleProductCard = () => {
+const SingleProductCard = ({ product }) => {
+  console.log(product?.photo);
   return (
     <>
       <Card
@@ -34,7 +32,7 @@ const SingleProductCard = () => {
         >
           <CardMedia
             component="img"
-            image={`https://i.ibb.co/wrLn7wf/Arduino-Uno-R3-SMD-01.jpg`}
+            image={`https://api.robomartbd.com${product?.photo}`}
             alt="green iguana"
             sx={{ width: "100%" }}
             className={styles.cardImg}
@@ -55,18 +53,18 @@ const SingleProductCard = () => {
                 <AddShoppingCartIcon />
                 <h5>add to cart</h5>
               </div>
-              <div className={styles.rode}></div>
+              {/* <div className={styles.rode}></div>
               <Link to={`product/`}>
                 <VisibilityIcon />
                 <h5>quick view</h5>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </Box>
         <CardContent className={styles.cardContent}>
           {/* <p className={styles.category}>{props.data.category}</p> */}
           <Link to={`/products/id`} className={styles.title}>
-            Arduino Uno
+            {product?.name}
           </Link>
           <Box
             // alignItems={"center"}
@@ -79,28 +77,33 @@ const SingleProductCard = () => {
             {" "}
             <div style={{ display: "flex", justifyContent: "center" }}>
               {" "}
-              <Rating name="read-only" size="small" value={3} readOnly />
+              <Rating
+                name="read-only"
+                size="small"
+                value={product?.ratting}
+                readOnly
+              />
             </div>
             <p
               className={styles.productDescription}
               style={{ fontSize: "13px", textAlign: "justify" }}
             >
               {/* {props.data.description.substring(0, 12)} */}
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro
-              tempora,...
+              Lorem ipsum, dolor sit amet consectetur jdd sa ...
               {/* {props.data.description.length > 12 ? "..." : ""} */}
             </p>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                // display: "flex",
+                // alignItems: "center",
+                // justifyContent: "space-between",
+                textAlign: "center",
               }}
             >
               <p className={styles.price} paddingTop={1}>
-                Price: <span> 100Tk </span>{" "}
+                BDT <span> {product?.price} </span>{" "}
               </p>
-              <p
+              {/* <p
                 style={{
                   marginLeft: "5px",
                   fontWeight: "bold",
@@ -109,11 +112,11 @@ const SingleProductCard = () => {
               >
                 {" "}
                 <Brightness1Icon sx={{ fontSize: "8px" }} /> In-Stock
-              </p>
+              </p> */}
             </div>
           </Box>
         </CardContent>
-        <NavLink to={"/products/id"}>
+        <NavLink to={`/product/${product?.id}`}>
           <Button
             className={styles.productViewBtn}
             color="primary"

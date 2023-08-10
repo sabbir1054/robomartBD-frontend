@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./MobileNavigation.module.scss";
 import SmallSearch from "./SmallSearch";
+import SelectCategory from "../HeroNavigationBar/SelectCategory";
 
 const NavigationDrawer = () => {
 
@@ -36,6 +37,10 @@ const NavigationDrawer = () => {
             >
               Close
             </Button>
+            <Divider />
+          </ListItem>
+          <ListItem sx={{ borderBottom: "1px solid gray" }}>
+            <SelectCategory/>
             <Divider />
           </ListItem>
           <ListItem

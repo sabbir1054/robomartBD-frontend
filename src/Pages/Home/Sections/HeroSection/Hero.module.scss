@@ -3,3 +3,8 @@
     max-width: 85%;
   }
 }
+@media (max-width: 900px) {
+  .categoryList {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-.heroNavGrid{
+.heroNavGrid {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -8,7 +8,10 @@
   //           justifyContent="center"
   //           alignItems="center"
 }
-
+.categoryBtn {
+  color: black;
+  background-color: white;
+}
 .categorySelectField {
   //   height: 10px ;
   background-color: white;
