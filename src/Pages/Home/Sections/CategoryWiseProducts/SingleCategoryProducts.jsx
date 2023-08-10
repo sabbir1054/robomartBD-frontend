@@ -1,9 +1,21 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 import styles from "./CategoryProducts.module.scss";
-const SingleCategoryProducts = ({ title,products }) => {
+const SingleCategoryProducts = ({ title, id }) => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.robomartbd.com/api/catagory/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.length > 4) {
+          setProducts(data.slice(0, 4));
+        } else {
+          setProducts(data);
+        }
+      });
+  });
   return (
     <Container className={styles.categoryProductsWrapper}>
       <Box paddingY={1} marginY={1}>
@@ -16,7 +28,8 @@ const SingleCategoryProducts = ({ title,products }) => {
             style={{
               borderLeft: "4px solid var(--primaryColor)",
               textTransform: "uppercase",
-              fontFamily: "var(--primaryFont)",
+              fontFamily: "Poppins",
+              fontWeight: "bold",
             }}
           >
             {" "}
@@ -25,57 +38,22 @@ const SingleCategoryProducts = ({ title,products }) => {
         </Box>
 
         <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
-          {/* <SingleProductCard />
-          <SingleProductCard />
-          <SingleProductCard />
-          <SingleProductCard />
-          <SingleProductCard /> */}
-
           <Grid container spacing={2}>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={3}
-              display={"flex"}
-              justifyContent={"center"}
-            >
-              <SingleProductCard />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={3}
-              display={"flex"}
-              justifyContent={"center"}
-            >
-              <SingleProductCard />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={3}
-              display={"flex"}
-              justifyContent={"center"}
-            >
-              <SingleProductCard />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={3}
-              display={"flex"}
-              justifyContent={"center"}
-            >
-              <SingleProductCard />
-            </Grid>
-            {/* <Grid item xs={12} sm={6} md={3}>
-              <SingleProductCard />
-            </Grid>
-             */}
+            {products?.map((product) => (
+              <>
+                {" "}
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  display={"flex"}
+                  justifyContent={"center"}
+                >
+                  <SingleProductCard product={product} />
+                </Grid>
+              </>
+            ))}
           </Grid>
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>

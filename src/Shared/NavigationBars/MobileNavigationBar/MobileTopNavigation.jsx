@@ -1,6 +1,7 @@
 import { AppBar, Grid } from "@mui/material";
 import React from "react";
 import NavigationDrawer from "./NavigationDrawer";
+import { NavLink } from "react-router-dom";
 
 const MobileTopNavigation = () => {
   return (
@@ -14,14 +15,17 @@ const MobileTopNavigation = () => {
         component=""
         position="sticky"
       >
-        <Grid container padding={"1px"} display={`flex`} justifyContent={`space-between`}>
+        <Grid
+          container
+          padding={"1px"}
+          display={`flex`}
+          justifyContent={`space-between`}
+        >
           <Grid item>
-            <img
-              src="/assets/logo.png"
-              alt=""
-              srcset=""
-              style={{ width: "30vw" }}
-            />
+            <NavLink to="/">
+              {" "}
+              <img src="/assets/logo.png" alt="" width={200} srcset="" />
+            </NavLink>
           </Grid>
           <Grid item>
             <NavigationDrawer />

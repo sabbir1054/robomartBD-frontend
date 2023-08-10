@@ -29,8 +29,8 @@ const NavigationDrawer = () => {
           <ListItem sx={{ borderBottom: "1px solid gray" }}>
             <Button
               onClick={toggleDrawer}
-              startIcon={<CloseIcon />}
-              sx={{ width: "100%" }}
+              startIcon={<CloseIcon  />}
+              sx={{ width: "100%", }}
               variant="contained"
               className={styles.searchBtn}
               disableElevation

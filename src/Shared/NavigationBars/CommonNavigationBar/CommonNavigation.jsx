@@ -11,7 +11,6 @@ const CommonNavigation = () => {
       sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset" }}
       component=""
       position="relative"
-      
     >
       <Container maxWidth="lg" className={styles.heroNavigation_Container}>
         <Grid
@@ -31,7 +30,10 @@ const CommonNavigation = () => {
             alignItems="center"
           >
             <Box>
-              <img src="/assets/logo.png" alt="" width={200} srcset="" />
+              <NavLink to="/">
+                {" "}
+                <img src="/assets/logo.png" alt="" width={200} srcset="" />
+              </NavLink>
             </Box>
           </Grid>
           <Grid
@@ -49,10 +51,10 @@ const CommonNavigation = () => {
                 <PermIdentityIcon className={styles.profileIcon} />
               </div>
               <div>
-                <NavLink to={'/login'}>
+                <NavLink to={"/login"}>
                   <p>Login</p>
                 </NavLink>
-                <NavLink to='/register'>
+                <NavLink to="/register">
                   <p>Register</p>
                 </NavLink>
               </div>

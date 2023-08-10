@@ -4,8 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import ReviewAndFeedBack from "./ReviewAndFeedBack";
 import { Link } from "react-router-dom";
+import ReviewAndFeedBack from "./ReviewAndFeedBack";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,6 +53,8 @@ const BottomTabs = () => {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
+            variant="scrollable"
+            allowScrollButtonsMobile
             onChange={handleChange}
             aria-label="basic tabs example"
             sx={{
@@ -137,7 +139,9 @@ const BottomTabs = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <Link>Download this documentation</Link> <br />
-          <h5 style={{fontSize:"16px",padding:"10px 0px"}}>Video Tutorials</h5>
+          <h5 style={{ fontSize: "16px", padding: "10px 0px" }}>
+            Video Tutorials
+          </h5>
           <iframe
             width="300"
             height="200"

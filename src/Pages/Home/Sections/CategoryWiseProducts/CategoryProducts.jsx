@@ -3,10 +3,9 @@ import SingleCategoryProducts from "./SingleCategoryProducts";
 const CategoryProducts = () => {
   return (
     <>
-          <SingleCategoryProducts title={"Network Modules" } />
-          <SingleCategoryProducts title={"Controller Boards" } />
-          <SingleCategoryProducts title={"Battery and Chargers" } />
-         
+      <SingleCategoryProducts title={"Best Selling Products"} id={ 1} />
+      <SingleCategoryProducts title={"Electronics"} id={2 } />
+      <SingleCategoryProducts title={"Micro Controller"} id={3} />
     </>
   );
 };

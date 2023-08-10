@@ -85,10 +85,13 @@ const HeroNavigation = () => {
               alignItems="center"
             >
               <Box>
+                {" "}
                 {changeIcon ? (
                   <SelectCategory />
                 ) : (
-                  <img src="/assets/logo.png" alt="" width={200} srcset="" />
+                  <NavLink to={"/"} >
+                    <img src="/assets/logo.png" alt="" width={200} srcset="" />
+                  </NavLink>
                 )}
               </Box>
             </Grid>
