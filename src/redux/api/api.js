@@ -23,9 +23,17 @@ export const robomartApi = createApi({
     getCart: builder.query({
       query: () => "/cart/get_cart",
     }),
+    getHomeData: builder.query({
+      query: () => `/api/home`,
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserQuery, useGetCartQuery,useGetCategoryListProductsQuery } = robomartApi;
+export const {
+  useGetUserQuery,
+  useGetCartQuery,
+  useGetCategoryListProductsQuery,
+  useGetHomeDataQuery,
+} = robomartApi;

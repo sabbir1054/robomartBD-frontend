@@ -6,8 +6,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import styles from "./Hero.module.scss";
 const CategoryList = () => {
+    const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+
   const [categoriesList, setCategoriesList] = useState([]);
   const params = useParams();
   const navigation = useNavigate();
@@ -49,7 +52,7 @@ const CategoryList = () => {
         </div>
         <nav aria-label="main mailbox folders">
           <List>
-            {categoriesList?.map((category) => (
+            {homeData1?.catagorylist?.map((category) => (
               <>
                 <Divider />
                 <ListItem
@@ -69,6 +72,7 @@ const CategoryList = () => {
                 </ListItem>
               </>
             ))}
+           
           </List>
         </nav>
         <Divider />

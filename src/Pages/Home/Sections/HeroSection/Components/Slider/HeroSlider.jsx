@@ -6,8 +6,15 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Box } from "@mui/material";
+import { useGetHomeDataQuery } from "../../../../../../redux/api/api";
 
 const HeroSlider = () => {
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+
+  if (homeLoading) {
+    return (<p>Loading...</p>)
+  }
+
   return (
     <>
       <Swiper
@@ -17,7 +24,20 @@ const HeroSlider = () => {
         autoplay={true}
         className="mySwiper"
       >
-        <SwiperSlide>
+        {homeData1?.homeslider.map((sliderImg) => (
+          <SwiperSlide>
+            <Box>
+              <img
+                style={{ width: "100%" }}
+                src={`https://api.robomartbd.com${sliderImg?.poster}`}
+                alt=""
+                srcset=""
+              />
+            </Box>
+          </SwiperSlide>
+        ))}
+
+        {/* <SwiperSlide>
           <Box>
             <img
               style={{ width: "100%" }}
@@ -36,17 +56,7 @@ const HeroSlider = () => {
               srcset=""
             />
           </Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box>
-            <img
-              style={{ width: "100%" }}
-              src="https://i.ibb.co/5MbWKSY/img3.jpg"
-              alt=""
-              srcset=""
-            />
-          </Box>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </>
   );

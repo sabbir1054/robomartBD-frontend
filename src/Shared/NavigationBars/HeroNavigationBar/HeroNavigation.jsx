@@ -15,10 +15,13 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useGetCartQuery, useGetUserQuery } from "../../../redux/api/api";
+import {
+  useGetCartQuery,
+  useGetHomeDataQuery,
+  useGetUserQuery,
+} from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./HeroNavigation.module.scss";
-import SelectCategory from "./SelectCategory";
 
 const theme = createTheme({
   palette: {
@@ -30,6 +33,8 @@ const theme = createTheme({
 });
 
 const HeroNavigation = () => {
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+
   const { data, isLoading, isError } = useGetUserQuery();
   const { data: cartData } = useGetCartQuery();
   const cartCount = cartData ? cartData.count : 0;
@@ -85,14 +90,11 @@ const HeroNavigation = () => {
               alignItems="center"
             >
               <Box>
-                {" "}
-                {/* {changeIcon ? (
-                  <SelectCategory />
-                ) : ( */}
-                  <NavLink to={"/"} >
-                    <img src="/assets/logo.png" alt="" width={200} srcset="" />
-                  </NavLink>
-                {/* // )} */}
+                =
+                <NavLink to={"/"}>
+                  <img src="/assets/logo.png" alt="" width={200} srcset="" />
+                </NavLink>
+                =
               </Box>
             </Grid>
             <Grid
@@ -198,7 +200,11 @@ const HeroNavigation = () => {
       </AppBar>
 
       <AppBar
-        sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset",marginTop:"73px" }}
+        sx={{
+          backgroundColor: "var(--primaryColor)",
+          boxShadow: "unset",
+          marginTop: "73px",
+        }}
         component=""
         position=""
         positionRelative

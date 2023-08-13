@@ -1,24 +1,27 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import { useGetHomeDataQuery } from "../../../../../../redux/api/api";
 
 const OfferCards = () => {
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+
+  if (homeLoading) {
+    return <p>Loading...</p>;
+  }
   return (
     <>
       <Grid container>
-        <Grid item xs={6} md={12} paddingY={1}>
-          <img
-            src="https://i.ibb.co/XWktr0z/2023-05-31-09-39-43.jpg"
-            alt=""
-            style={{ width: "85%" }}
-          />
-        </Grid>
-        <Grid item xs={6} md={12} paddingY={1}>
-          <img
-            src="https://i.ibb.co/XWktr0z/2023-05-31-09-39-43.jpg"
-            alt=""
-            style={{ width: "85%" }}
-          />
-        </Grid>
+        {homeData1?.spacialoffer?.map((offer) => (
+          <Grid item xs={6} md={12} paddingY={1}>
+            <img
+              src={`https://api.robomartbd.com${offer?.poster}`}
+              alt=""
+              style={{ width: "85%" }}
+            />
+          </Grid>
+        ))}
+
+    
       </Grid>
     </>
   );
