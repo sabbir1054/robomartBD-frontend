@@ -68,10 +68,10 @@ const HeroNavigation = () => {
         sx={{
           backgroundColor: "var(--primaryColor)",
           boxShadow: "unset",
-          padding: changeIcon ? "10px 0px" : "",
+          padding: changeIcon ? "0px 0px" : "",
         }}
         component=""
-        position="sticky"
+        position="fixed"
       >
         <Container className={styles.heroNavigation_Container}>
           <Grid container className={styles.heroNavGrid}>
@@ -86,13 +86,13 @@ const HeroNavigation = () => {
             >
               <Box>
                 {" "}
-                {changeIcon ? (
+                {/* {changeIcon ? (
                   <SelectCategory />
-                ) : (
+                ) : ( */}
                   <NavLink to={"/"} >
                     <img src="/assets/logo.png" alt="" width={200} srcset="" />
                   </NavLink>
-                )}
+                {/* // )} */}
               </Box>
             </Grid>
             <Grid
@@ -198,7 +198,7 @@ const HeroNavigation = () => {
       </AppBar>
 
       <AppBar
-        sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset" }}
+        sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset",marginTop:"73px" }}
         component=""
         position=""
         positionRelative

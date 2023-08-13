@@ -19,7 +19,7 @@ const AllProductPage = () => {
           <CategoryList />
         </Grid>
         <Grid item xs={12} sm={12} md={10} paddingY={2}>
-          <Container maxWidth="xxl" sx={{borderLeft:"1px solid #f2f2f2"}}>
+          <Container maxWidth="xxl" sx={{ borderLeft: "1px solid #f2f2f2" }}>
             {allProducts?.length > 0 &&
               allProducts?.map((singleCategory) => (
                 <>
@@ -42,9 +42,11 @@ const AllProductPage = () => {
                         xs={12}
                         sm={6}
                         md={3}
+                        lg={2}
+                        xl={2}
                         display={"flex"}
-                            justifyContent={"center"}
-                            marginTop={2}
+                        justifyContent={"center"}
+                        marginTop={2}
                       >
                         <SingleProductCard product={product} />
                       </Grid>

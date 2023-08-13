@@ -25,7 +25,7 @@ const SingleCategoryProducts = () => {
           <CategoryList />
         </Grid>
         <Grid item xs={10}>
-          <Container className={styles.categoryProductsWrapper}>
+         
             <Box paddingY={1} marginY={1}>
               <Box
                 paddingY={2}
@@ -39,6 +39,8 @@ const SingleCategoryProducts = () => {
                       xs={12}
                       sm={6}
                       md={3}
+                      lg={3}
+                      xl={2}
                       display={"flex"}
                       justifyContent={"center"}
                     >
@@ -48,7 +50,7 @@ const SingleCategoryProducts = () => {
                 </Grid>
               </Box>
             </Box>
-          </Container>
+          
         </Grid>
       </Grid>
       <hr style={{ color: "#e2e2e2" }} />

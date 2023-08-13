@@ -4,18 +4,23 @@ import { NavLink } from "react-router-dom";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 import styles from "./CategoryProducts.module.scss";
 const SingleCategoryProducts = ({ title, id }) => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  // const [data, setData] = useState([]);
+  const [maxProductNum, setMaxProductNum] = useState(screenWidth>1200?6:4);
   const [products, setProducts] = useState([]);
   useEffect(() => {
     fetch(`https://api.robomartbd.com/api/catagory/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data?.length > 4) {
-          setProducts(data.slice(0, 4));
+        // setData(data);
+        if (data?.length > maxProductNum) {
+          setProducts(data.slice(0, maxProductNum));
         } else {
           setProducts(data);
         }
       });
-  });
+  }, []);
+
   return (
     <Container className={styles.categoryProductsWrapper}>
       <Box paddingY={1} marginY={1}>
@@ -47,6 +52,8 @@ const SingleCategoryProducts = ({ title, id }) => {
                   xs={12}
                   sm={6}
                   md={3}
+                  lg={2}
+                  xl={2}
                   display={"flex"}
                   justifyContent={"center"}
                 >
@@ -58,7 +65,7 @@ const SingleCategoryProducts = ({ title, id }) => {
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}
-          <NavLink to={"/sections/id"}>
+          <NavLink to={`/products/categories/${id}`}>
             <Button variant="contained" className={styles.showMoreBtn}>
               Show More
             </Button>
