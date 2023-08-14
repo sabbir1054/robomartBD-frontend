@@ -1,6 +1,6 @@
-.cardListWrapper{
-    display: flex;
-    justify-content: space-around;
+.cardListWrapper {
+  display: flex;
+  justify-content: space-around;
 }
 .blogTitle {
   transition: all 0.3s ease-in;
@@ -11,9 +11,14 @@
   }
 }
 
-.buyThisBtn{
-    background-color: var(--primaryColor);
-    &:hover{
-        background-color: rgb(14, 121, 0);
-    }
+.buyThisBtn {
+  background-color: var(--primaryColor);
+  &:hover {
+    background-color: rgb(14, 121, 0);
+  }
+}
+
+.cardMedia {
+  
+  max-height: 200px;
 }

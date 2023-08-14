@@ -12,6 +12,8 @@
 }
 .blogTitle {
   transition: all 0.3s ease-in;
+  font-family: "Poppins";
+  color: black;
   &:hover {
     color: var(--primaryColor);
     cursor: pointer;
@@ -19,9 +21,13 @@
   }
 }
 
-.buyThisBtn{
-    background-color: var(--primaryColor);
-    &:hover{
-        background-color: rgb(14, 121, 0);
-    }
+.buyThisBtn {
+  background-color: var(--primaryColor);
+  &:hover {
+    background-color: rgb(14, 121, 0);
+  }
+}
+
+.cardContent {
+  font-family: "Roboto" !important;
 }

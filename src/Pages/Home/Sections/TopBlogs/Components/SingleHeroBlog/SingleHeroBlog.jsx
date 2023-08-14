@@ -10,34 +10,39 @@ import {
 } from "@mui/material";
 
 import styles from "./SingleHeroBolg.module.scss";
-const SingleHeroBlog = () => {
+import { NavLink } from "react-router-dom";
+const SingleHeroBlog = ({blog}) => {
   return (
     <>
       <Card className={styles.cardWrapper}>
         <CardMedia
           component="img"
           className={styles.cardMedia}
-          image={"https://i.ibb.co/gJVbQqN/blogphoto.jpg"}
+          image={`${blog?.image}`}
           title="Blog Image"
         />
         <CardContent className={styles.cardContent}>
-          <Typography variant="h5" component="h2" className={styles.blogTitle}>
-            New Products 6/21/23 Feat. Adafruit EYESPI BFF for QT Py or Xiao –
-            18 Pin FPC Connector!
+          <Typography variant="h5" component="h2">
+            <NavLink to={`/blog/${blog?.id}`} className={styles.blogTitle}>
+              {" "}
+              {blog?.title}
+            </NavLink>
           </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Written by Author
+          <Typography variant="body2" color="textSecondary" fontWeight={"bold"}>
+            Written by : {blog?.created_by?.first_name}
           </Typography>
-          <Typography variant="body2" color="textSecondary">
+          {/* <Typography variant="body2" color="textSecondary">
             Date Published
-          </Typography>
+          </Typography> */}
           <Box display={"flex"} justifyContent={"flex-end"}>
             {" "}
-            <Button variant="contained" className={styles.buyThisBtn}>
-              <Typography variant="body1" component="p">
-                Buy This
-              </Typography>
-            </Button>
+            <NavLink to={`/blog/${blog?.id}`}>
+              <Button variant="contained" className={styles.buyThisBtn}>
+                <Typography variant="body1" component="p">
+                  Details
+                </Typography>
+              </Button>
+            </NavLink>
           </Box>
         </CardContent>
       </Card>

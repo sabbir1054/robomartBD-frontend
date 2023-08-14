@@ -1,39 +1,49 @@
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
 import styles from "./BlogList.module.scss";
-const SingleBlogList = () => {
+import { NavLink } from "react-router-dom";
+const SingleBlogList = ({blog}) => {
   return (
     <>
       <Card className={styles.cardListWrapper}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <CardMedia
-              component="img"
-              className={styles.cardMedia}
-              image={"https://i.ibb.co/gJVbQqN/blogphoto.jpg"}
-              title="Blog Image"
-            />
+            <NavLink to={`/blog/${blog?.id}`}>
+              <CardMedia
+                component="img"
+                className={styles.cardMedia}
+                image={`${blog?.image}`}
+                title="Blog Image"
+              />
+            </NavLink>
           </Grid>
           <Grid item xs={12} md={6}>
             <CardContent className={styles.cardContent}>
-              <Typography
-                variant="subtitle2"
-                paddingBottom={2}
-                className={styles.blogTitle}
-              >
-                New Products 6/21/23 Feat. Adafruit EYESPI BFF for QT Py or Xiao
-                – 18 Pin FPC Connector!
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Written by Author
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Date Published
-              </Typography>
-              <Button variant="contained" className={styles.buyThisBtn}>
-                <Typography variant="body1" component="p">
-                  Buy This
+              <NavLink to={`/blog/${blog?.id}`} style={{ color: "black" }}>
+                {" "}
+                <Typography
+                  variant="subtitle2"
+                  paddingBottom={2}
+                  className={styles.blogTitle}
+                >
+                  {blog?.title}
                 </Typography>
+              </NavLink>
+
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                fontWeight={"bold"}
+              >
+                Written by : {blog?.created_by?.first_name}
+              </Typography>
+
+              <Button variant="contained" className={styles.buyThisBtn}>
+                <NavLink to={`/blog/${blog?.id}`} style={{color:"white",textDecoration:"none"}}>
+                  <Typography variant="body1" component="p">
+                    Details
+                  </Typography>
+                </NavLink>
               </Button>
             </CardContent>
           </Grid>

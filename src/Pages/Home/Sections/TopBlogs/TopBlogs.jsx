@@ -1,9 +1,21 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import React from "react";
-import AllBlogsList from "./Components/BlogList/AllBlogsList";
+import React, { useEffect, useState } from "react";
+import SingleBlogList from "./Components/BlogList/SingleBlogList";
 import SingleHeroBlog from "./Components/SingleHeroBlog/SingleHeroBlog";
 import styles from "./TopBlogs.module.scss";
+import { NavLink } from "react-router-dom";
 const TopBlogs = () => {
+  const [blogsData, setBlogsData] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.robomartbd.com/blog/get_all_blog`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogsData(data.slice(0, 4));
+      });
+    console.log(blogsData);
+  }, []);
+
   return (
     <>
       <Container className={styles.topBlogsWrapper}>
@@ -25,20 +37,25 @@ const TopBlogs = () => {
           alignItems={"center"}
         >
           <Grid item xs={12} md={6}>
-            <SingleHeroBlog />
+            <SingleHeroBlog blog={blogsData[0]} />
           </Grid>
           <Grid item xs={12} md={6}>
-            <AllBlogsList />
+            {/* <AllBlogsList /> */}
+            <SingleBlogList blog={blogsData[1]} /> <br />
+            <SingleBlogList blog={blogsData[2]} /> <br />
+            <SingleBlogList blog={blogsData[3]} /> <br />
           </Grid>
         </Grid>
         <Box display={"flex"} justifyContent={"center"}>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "var(--secondaryColor)" }}
-            className={styles.blogSectionBtn}
-          >
-            Explore Blog Section
-          </Button>
+          <NavLink to={`/blogs`}>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "black" }}
+              className={styles.blogSectionBtn}
+            >
+              Explore Blog Section
+            </Button>
+          </NavLink>
         </Box>
       </Container>
     </>
