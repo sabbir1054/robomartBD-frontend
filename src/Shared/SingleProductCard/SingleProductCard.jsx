@@ -30,13 +30,16 @@ const SingleProductCard = ({ product }) => {
           }}
           className={styles.imageDiv}
         >
-          <CardMedia
-            component="img"
-            image={`https://api.robomartbd.com${product?.photo}`}
-            alt="green iguana"
-            sx={{ width: "100%" }}
-            className={styles.cardImg}
-          />
+          <Link to={`/product/${product?.id}`}>
+            <CardMedia
+              component="img"
+              image={`https://api.robomartbd.com${product?.photo}`}
+              alt="green iguana"
+              sx={{ width: "100%" }}
+              className={styles.cardImg}
+            />
+          </Link>
+
           <div
             className={styles.addToWishList}
             //   productid={props.data.id}
@@ -63,7 +66,7 @@ const SingleProductCard = ({ product }) => {
         </Box>
         <CardContent className={styles.cardContent}>
           {/* <p className={styles.category}>{props.data.category}</p> */}
-          <Link to={`/products/id`} className={styles.title}>
+          <Link to={`/product/${product?.id}`} className={styles.title}>
             {product?.name}
           </Link>
           <Box

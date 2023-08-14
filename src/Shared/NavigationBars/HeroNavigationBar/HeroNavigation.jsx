@@ -90,11 +90,11 @@ const HeroNavigation = () => {
               alignItems="center"
             >
               <Box>
-                =
+                
                 <NavLink to={"/"}>
                   <img src="/assets/logo.png" alt="" width={200} srcset="" />
                 </NavLink>
-                =
+                
               </Box>
             </Grid>
             <Grid
@@ -137,16 +137,7 @@ const HeroNavigation = () => {
             >
               {data && (
                 <ThemeProvider theme={theme}>
-                  {/* <NavLink>
-                    <Badge
-                      color={"black"}
-                      className={styles.iconBadge}
-                      badgeContent={5}
-                      overlap="circular"
-                    >
-                      <FavoriteBorderIcon className={styles.whishListIcon} />
-                    </Badge>
-                  </NavLink> */}
+                  
                   <NavLink to="/shopping-cart">
                     <Badge
                       color={"black"}

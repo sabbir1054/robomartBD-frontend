@@ -1,15 +1,14 @@
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, Container, Grid, Rating } from "@mui/material";
-import React, { useCallback, useState } from "react";
-import styles from "./ProductDetail.module.scss";
-import ReviewAndFeedBack from "./ReviewAndFeedBack";
+import React, { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import BottomTabs from "./BottomTabs";
-import SingleCategoryProducts from "../Home/Sections/CategoryWiseProducts/SingleCategoryProducts";
-import RelatedProducts from "./RelatedProducts";
+import styles from "./ProductDetail.module.scss";
 const ProductDetailsPage = () => {
+  const params = useParams();
+  const [productDetails, setProductDetails] = useState({});
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [amount, setAmount] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
@@ -37,39 +36,19 @@ const ProductDetailsPage = () => {
     }
   };
 
+  useEffect(() => {
+    fetch(`https://api.robomartbd.com/api/product/${params?.productId}`)
+      .then((res) => res.json())
+      .then((data) => setProductDetails(data));
+  }, []);
+
   return (
     <div>
       <Container sx={{ py: "10vh" }}>
-        {/* <div role="presentation" onClick={handleClick}>
-          <Breadcrumbs
-            aria-label="breadcrumb"
-            separator={<NavigateNext fontSize="small" />}
-            sx={{ p: "14px 0" }}
-          >
-            <BCLink
-              className={styles.brdHov}
-              underline="none"
-              color="inherit"
-              href="/"
-              fontSize={"14px"}
-            >
-              Home
-            </BCLink>
-            <BCLink
-              underline="none"
-              color="text.primary"
-              href="/wishlist"
-              aria-current="page"
-              fontSize={"14px"}
-            >
-              Shopping Cart
-            </BCLink>
-          </Breadcrumbs>
-        </div> */}
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           <Grid item md={6} className={styles.left}>
             <div className={styles.images}>
-              {revImgArr.map((item, index) => (
+              {/* {revImgArr.map((item, index) => (
                 <img
                   onClick={changeMainImage}
                   imgindex={index}
@@ -80,18 +59,28 @@ const ProductDetailsPage = () => {
                   key={index}
                   alt={"images"}
                 />
-              ))}
+              ))} */}
+              {/* <img
+                // onClick={changeMainImage}
+                // imgindex={index}
+                // className={
+                //   index === imageIndex ? styles.activeImage : styles.notActive
+                // }
+                src={`https://api.robomartbd.com${productDetails?.photo}`}
+                // key={index}
+                alt={"images"}
+              /> */}
             </div>
             <div
               className={styles.mainImage}
               onMouseMove={zoom}
               style={{
-                backgroundImage: `url(${revImgArr[imageIndex]})`,
+                backgroundImage: `url(https://api.robomartbd.com${productDetails?.photo})`,
                 backgroundPosition: bgPosition,
               }}
             >
               <img
-                src={revImgArr[imageIndex]}
+                src={`https://api.robomartbd.com${productDetails?.photo}`}
                 alt="mainImage"
                 style={{
                   border: "1px solid #f2f2f2",
@@ -100,56 +89,66 @@ const ProductDetailsPage = () => {
                 }}
               />
             </div>
-            {/* <div
-              className={styles.mainImage}
-              onMouseMove={zoom}
-              style={{
-                backgroundImage: `url(https://i.ibb.co/wrLn7wf/Arduino-Uno-R3-SMD-01.jpg)`,
-                backgroundPosition: bgPosition,
-              }}
-            >
-              <img
-                src="https://i.ibb.co/wrLn7wf/Arduino-Uno-R3-SMD-01.jpg"
-                alt="mainImage"
-              />
-            </div> */}
           </Grid>
           <Grid item md={6}>
             <div className={styles.right}>
-              <h1>1.54 inch E-Ink display module (Three Color)</h1>
-              <h3 style={{ marginBottom: "10px" }}>Product code: e4de234</h3>
+              <h1>{productDetails?.name}</h1>
+              <h3 style={{ marginBottom: "10px" }}>
+                Product code: {productDetails?.id}
+              </h3>
               <div className={styles.rate}>
-                <Rating name="read-only" size="small" value={4} readOnly />
-                <p>(5 Reviews)</p>
+                <Rating name="read-only" size="small" value={productDetails?.ratting} readOnly />
+                <p>({productDetails?.total_review})</p>
               </div>
               <p className={styles.price}>
-                100 Tk{" "}
-                <Button
-                  sx={{
-                    marginLeft: "20px",
-                    backgroundColor: "var(--primaryColor)",
-                    "&:hover": {
+                BDT
+                <span style={{ margin: "0 3px" }}>
+                  {" "}
+                  {productDetails?.after_discount}
+                </span>
+                <small>
+                  {" "}
+                  <del>{productDetails?.price}</del>
+                </small>
+                {productDetails?.in_stock === false ? (
+                  <Button
+                    sx={{
+                      marginLeft: "20px",
+                      backgroundColor: "red",
+                      "&:hover": {
+                        backgroundColor: "red",
+                        cursor: "auto",
+                      },
+                    }}
+                    size={"small"}
+                    variant="contained"
+                    disableElevation
+                  >
+                    Out of Stock
+                  </Button>
+                ) : (
+                  <Button
+                    sx={{
+                      marginLeft: "20px",
                       backgroundColor: "var(--primaryColor)",
-                      cursor: "auto",
-                    },
-                  }}
-                  size={"small"}
-                  variant="contained"
-                  disableElevation
-                >
-                  In Stoke
-                </Button>
+                      "&:hover": {
+                        backgroundColor: "var(--primaryColor)",
+                        cursor: "auto",
+                      },
+                    }}
+                    size={"small"}
+                    variant="contained"
+                    disableElevation
+                  >
+                    In Stock ({productDetails?.stock})
+                  </Button>
+                )}
               </p>
               <Box></Box>
               <p className={styles.description}>
-                {/* {product[productID].description} */}This is an E-Ink
-                (E-Paper) display module, similar to those used in E-book
-                readers. The Size is 1.54inch covering a 200x200 resolution,
-                with embedded controller, communicating via SPI interface.
-                refreshing SPI interface, for connecting with controller boards
-                like Raspberry Pi/Arduino/Nucleo, etc. Comes with development
-                resources and manual (examples for Raspberry Pi/Arduino/STM32)
+                {productDetails?.discription}
               </p>
+
               <div className={styles.quantity}>
                 <div>
                   <button onClick={(event) => changeAmount(-1)}>
@@ -162,55 +161,23 @@ const ProductDetailsPage = () => {
                 </div>
               </div>
               <div className={styles.buttons}>
-                <button
-                  className={styles.addToCardBtn}
-                  //   onClick={addToCart}
-                  //   id={product[productID].id}
-                >
+                <button className={styles.addToCardBtn}>
                   <AddShoppingCartIcon />
                   ADD TO CART
                 </button>
-                <button
+                {/* <button
                   className={styles.addToWishlist}
-                  //   onClick={addToWishlist}
-                  //   id={product[productID].id}
+             
                 >
                   <FavoriteBorderIcon />
                   <p>Add to Wishlist</p>
-                </button>
+                </button> */}
               </div>
-              {/* <div className={styles.end}>
-                <p>Category: {product[productID].category}</p>
-                <div className={styles.socials}>
-                  <p>Share on:</p>
-                  <div className={styles.socialsIcon}>
-                    <div>
-                      <FaFacebookF />
-                    </div>
-                    <div>
-                      <FaTwitter />
-                    </div>
-                    <div>
-                      <FaInstagram />
-                    </div>
-                    <div>
-                      <FaYoutube />
-                    </div>
-                    <div>
-                      <FaPinterest />
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </Grid>
         </Grid>
-        {/* <ReviewAndFeedBack /> */}
+
         <BottomTabs />
-        <div style={{ padding: "5vh 0" }}>
-          {/* <SingleCategoryProducts title={"Sensors"} /> */}
-          {/* <RelatedProducts/> */}
-        </div>
       </Container>
     </div>
   );
