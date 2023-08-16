@@ -22,19 +22,12 @@ $orange-gray: #fcb941;
 
 .title {
   display: block;
+  font-size: 14px;
   font-family: "Roboto";
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-  overflow: hidden;
-  font-weight: 400;
-  max-height: 2.8em;
-  line-height: 1.4em;
-  font-size: 1.2rem;
-  text-align: initial;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  color: #333;
   text-align: center;
+  text-decoration: none;
+  color: black;
+  height: 4vh;
 
   &:hover {
     color: var(--primaryColor);
@@ -84,7 +77,6 @@ $orange-gray: #fcb941;
         }
       }
     }
-
     .bottom {
       bottom: 0;
     }

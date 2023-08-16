@@ -1,13 +1,12 @@
-
-.showMoreBtn{
-    background-color: red;
-    &:hover{
-        background-color: rgb(196, 9, 9);
-    }
+.showMoreBtn {
+  background-color: black;
+  &:hover {
+    background-color: rgb(54, 54, 54);
+  }
 }
 
 @media (min-width: 1400px) {
   .categoryProductsWrapper {
-  max-width: 95%;
-}
+    max-width: 95%;
+  }
 }

@@ -1,6 +1,10 @@
 .cardListWrapper {
   display: flex;
   justify-content: space-around;
+   transition: all 0.3s ease-in-out;
+  &:hover .cardMedia {
+    transform: scale(1.02);
+  }
 }
 .blogTitle {
   transition: all 0.3s ease-in;
@@ -19,6 +23,6 @@
 }
 
 .cardMedia {
-  
+
   max-height: 200px;
 }

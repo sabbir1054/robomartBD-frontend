@@ -15,12 +15,16 @@ const SingleHeroBlog = ({blog}) => {
   return (
     <>
       <Card className={styles.cardWrapper}>
-        <CardMedia
-          component="img"
-          className={styles.cardMedia}
-          image={`${blog?.image}`}
-          title="Blog Image"
-        />
+        <NavLink to={`/blog/${blog?.id}`}>
+          {" "}
+          <CardMedia
+            component="img"
+            className={styles.cardMedia}
+            image={`${blog?.image}`}
+            title="Blog Image"
+          />
+        </NavLink>
+
         <CardContent className={styles.cardContent}>
           <Typography variant="h5" component="h2">
             <NavLink to={`/blog/${blog?.id}`} className={styles.blogTitle}>

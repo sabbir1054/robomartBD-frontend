@@ -68,15 +68,9 @@ const SingleProductCard = ({ product }) => {
           {/* <p className={styles.category}>{props.data.category}</p> */}
           <Link to={`/product/${product?.id}`} className={styles.title}>
             {product?.name}
+            {/* nnnnnnnnnnnnnnnnn nnn nnnnn nn nnnn nnnnn nnnnn nnnnn nnn */}
           </Link>
-          <Box
-            // alignItems={"center"}
-            // display={"flex"}
-            // flexDirection={"column"}
-            // justifyContent={"center"}
-            paddingBottom={1}
-            borderBottom={"1px solid #f2f2f2"}
-          >
+          <Box paddingBottom={1} borderBottom={"1px solid #f2f2f2"}>
             {" "}
             <div style={{ display: "flex", justifyContent: "center" }}>
               {" "}
@@ -89,10 +83,10 @@ const SingleProductCard = ({ product }) => {
             </div>
             <p
               className={styles.productDescription}
-              style={{ fontSize: "13px", textAlign: "justify" }}
+              style={{ fontSize: "12px", textAlign: "justify" }}
             >
               {/* {product?.substring(0, 12)} */}
-              Lorem ipsum, dolor sit amet consectetur jdd sa ...
+              Lorem ipsum, dolor sit amet consectetur jdd sabbir...
               {/* {props.data.description.length > 12 ? "..." : ""} */}
             </p>
             <div
