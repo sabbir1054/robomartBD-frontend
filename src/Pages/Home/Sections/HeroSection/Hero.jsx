@@ -26,6 +26,7 @@ const Hero = () => {
         </Grid>
         <Grid item md={3} width={"100%"}>
           <OfferCards />
+       
         </Grid>
       </Grid>
       <OurFeatures />

@@ -10,6 +10,7 @@ import { useGetHomeDataQuery } from "../../../../../../redux/api/api";
 
 const HeroSlider = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  console.log(homeData1);
 
   if (homeLoading) {
     return (<p>Loading...</p>)

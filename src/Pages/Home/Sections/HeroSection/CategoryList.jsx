@@ -4,23 +4,20 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SelectCategory from "../../../../Shared/NavigationBars/HeroNavigationBar/SelectCategory";
 import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import styles from "./Hero.module.scss";
 const CategoryList = () => {
-    const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  console.log(
+    homeData1?.catagorylist?.slice(5, homeData1?.catagorylist?.length)
+  );
+  console.log(homeData1?.catagorylist);
 
-  const [categoriesList, setCategoriesList] = useState([]);
   const params = useParams();
   const navigation = useNavigate();
-  useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagorylist`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategoriesList(data);
-      });
-  }, []);
 
   const handleNavigation = (id) => {
     navigation(`/products/categories/${id}`);
@@ -52,7 +49,7 @@ const CategoryList = () => {
         </div>
         <nav aria-label="main mailbox folders">
           <List>
-            {homeData1?.catagorylist?.map((category) => (
+            {homeData1?.catagorylist?.slice(0, 7).map((category) => (
               <>
                 <Divider />
                 <ListItem
@@ -72,9 +69,16 @@ const CategoryList = () => {
                 </ListItem>
               </>
             ))}
-           
+            <Divider />
+            <SelectCategory
+              categoriesList={homeData1?.categoriesList?.slice(
+                8,
+                homeData1?.categoriesList?.length - 1
+              )}
+            />
           </List>
         </nav>
+
         <Divider />
       </Box>
     </>

@@ -2,17 +2,17 @@ import { Button } from "@mui/material";
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./HeroNavigation.module.scss";
-const SelectCategory = () => {
-  const [categoriesList, setCategoriesList] = useState([]);
-  useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagorylist`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategoriesList(data);
-      });
-  }, []);
+const SelectCategory = ({ categoriesList }) => {
+  // const [categoriesList, setCategoriesList] = useState([]);
+  // useEffect(() => {
+  //   fetch(`https://api.robomartbd.com/api/catagorylist`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCategoriesList(data);
+  //     });
+  // }, []);
   return (
     <>
       <Menu
@@ -25,26 +25,29 @@ const SelectCategory = () => {
             sx={{
               // backgroundColor:"black",
 
-              width: "200px",
+              width: "100%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               fontSize: "16px",
               color: "white",
+              textTransform: "capitalize",
               "&:hover": {
-                backgroundColor: "white !important",
-                border: "1px solid #e2e2e2",
+                backgroundColor: "var(--primaryColor) !important",
+
+                // border: "1px solid #e2e2e2",
               },
             }}
           >
             {/* <DensityMediumIcon />{" "} */}
-            <span style={{ paddingLeft: "2px" }}> Select Category</span>
+            <span style={{ paddingLeft: "2px" }}> More </span>
           </Button>
         }
         transition
       >
+     
         {categoriesList?.map((category) => (
-          <MenuItem className={styles.menuItems}>{category?.name}</MenuItem>
+          <MenuItem className={styles.menuItems}>{category?.name} </MenuItem>
         ))}
       </Menu>
     </>

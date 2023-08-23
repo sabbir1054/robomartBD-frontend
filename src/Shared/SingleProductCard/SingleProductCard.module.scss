@@ -26,8 +26,9 @@ $orange-gray: #fcb941;
   font-family: "Roboto";
   text-align: center;
   text-decoration: none;
+  padding-bottom:2px ;
   color: black;
-  height: 4vh;
+  height: 6vh;
 
   &:hover {
     color: var(--primaryColor);

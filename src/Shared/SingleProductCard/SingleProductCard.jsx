@@ -67,7 +67,9 @@ const SingleProductCard = ({ product }) => {
         <CardContent className={styles.cardContent}>
           {/* <p className={styles.category}>{props.data.category}</p> */}
           <Link to={`/product/${product?.id}`} className={styles.title}>
-            {product?.name}
+            {product?.name?.length > 50
+              ? product?.name?.substring(0, 50) + "..."
+              : product?.name}
             {/* nnnnnnnnnnnnnnnnn nnn nnnnn nn nnnn nnnnn nnnnn nnnnn nnn */}
           </Link>
           <Box paddingBottom={1} borderBottom={"1px solid #f2f2f2"}>

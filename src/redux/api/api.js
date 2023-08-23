@@ -6,8 +6,8 @@ export const robomartApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.robomartbd.com/",
     prepareHeaders: async (headers) => {
-      const storedData = localStorage.getItem("user");
-      const userData = JSON.parse(storedData);
+      const storedData = await localStorage.getItem("user");
+      const userData = await JSON.parse(storedData);
       if (userData) {
         headers.set("Authorization", `JWT ${userData}`);
       }
