@@ -3,15 +3,57 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, Container, Grid, Rating } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BottomTabs from "./BottomTabs";
 import styles from "./ProductDetail.module.scss";
+import { useGetCartQuery, useGetUserQuery, usePostToCartMutation } from "../../redux/api/api";
+import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
+const loadingNotify = () => toast.loading("Adding...");
+const successNotify = () => toast.success("Successfully added !");
+const errorNotify = () => toast.error("Something went wrong !");
 const ProductDetailsPage = () => {
   const params = useParams();
   const [productDetails, setProductDetails] = useState({});
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [amount, setAmount] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
+ const navigate = useNavigate();
+ const {
+   data: userData,
+   isLoading: userLoading,
+   isError: userError,
+ } = useGetUserQuery();
+ const { data: cartData } = useGetCartQuery();
+ const [postToCart, { isLoading, isError, isSuccess }] =
+   usePostToCartMutation();
+
+ const addToCart = () => {
+   if (!userData) {
+     navigate("/login");
+     Swal.fire({
+       position: "top-center",
+       icon: "warning",
+       title: "Please Login First !",
+       showConfirmButton: false,
+       timer: 1500,
+     });
+   } else {
+     const options = {
+       product: { product: productDetails?.id, quantity: amount },
+     };
+     postToCart(options);
+   }
+ };
+ if (isError) {
+   errorNotify();
+   console.log(postToCart);
+ }
+ if (isSuccess) {
+   successNotify();
+ }
+ 
+
   const zoom = (e) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
@@ -97,7 +139,12 @@ const ProductDetailsPage = () => {
                 Product code: {productDetails?.id}
               </h3>
               <div className={styles.rate}>
-                <Rating name="read-only" size="small" value={productDetails?.ratting} readOnly />
+                <Rating
+                  name="read-only"
+                  size="small"
+                  value={productDetails?.ratting}
+                  readOnly
+                />
                 <p>({productDetails?.total_review})</p>
               </div>
               <p className={styles.price}>
@@ -161,7 +208,7 @@ const ProductDetailsPage = () => {
                 </div>
               </div>
               <div className={styles.buttons}>
-                <button className={styles.addToCardBtn}>
+                <button className={styles.addToCardBtn} onClick={addToCart}>
                   <AddShoppingCartIcon />
                   ADD TO CART
                 </button>
