@@ -10,19 +10,27 @@ import {
   Typography,
 } from "@mui/material";
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartPrice.module.scss";
 const CartPrice = () => {
+  const { data: cartData } = useGetCartQuery();
+
+  const [shipping, setShipping] = useState(0);
   const handleChange = (event) => {
     // setShipping(event.target.value);
   };
+
+  let total = parseInt(cartData?.price + shipping);
+
+  console.log(shipping);
   return (
     <div>
       <Grid container sx={{ paddingY: "5vh" }}>
         <Grid item lg={8} xs={12}>
           <Box sx={{ pb: 3 }}>
-            <Link to="/">
+            <Link to="/products">
               <Button
                 variant="outlined"
                 size="large"
@@ -47,7 +55,6 @@ const CartPrice = () => {
               sx={{
                 fontFamily: "var(--secondaryFont)",
                 fontWeight: "bold",
-               
               }}
             >
               Coupon Discount :
@@ -79,7 +86,7 @@ const CartPrice = () => {
             <div className={styles.cartDetail}>
               <h5>Cart Total</h5>
               <p>
-                Subtotal: <span>1200</span>
+                Subtotal: <span>{cartData?.price}</span>
               </p>
             </div>
             <div className={styles.shipping}>
@@ -93,7 +100,13 @@ const CartPrice = () => {
                 <FormControlLabel
                   sx={{ mr: 0 }}
                   value="100"
-                  control={<Radio size="small" color="success" />}
+                  control={
+                    <Radio
+                      size="small"
+                      color="success"
+                      onClick={() => setShipping(100)}
+                    />
+                  }
                   label={
                     <p className={styles.shippingItem}>
                       Inside Dhaka: <span>100 Tk</span>
@@ -103,7 +116,13 @@ const CartPrice = () => {
                 <FormControlLabel
                   sx={{ mr: 0 }}
                   value="150"
-                  control={<Radio size="small" color="success" />}
+                  control={
+                    <Radio
+                      size="small"
+                      color="success"
+                      onClick={() => setShipping(150)}
+                    />
+                  }
                   label={
                     <p className={styles.shippingItem}>
                       OutSide Dhaka: <span>150 Tk</span>
@@ -115,7 +134,7 @@ const CartPrice = () => {
             <div className={styles.end}>
               <p>
                 Total
-                <span>1200</span>
+                <span>{total}</span>
               </p>
               <button
                 className={`${styles.checkOutBtn}`}

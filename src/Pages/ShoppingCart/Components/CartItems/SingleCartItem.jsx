@@ -20,6 +20,10 @@ const SingleCartItem = ({ product }) => {
     },
   ] = useChangeQuantityMutation();
 
+
+
+
+
   const handleDeleteItemFromCart = () => {
     const options = { data: { id: product?.id } };
 
@@ -53,7 +57,7 @@ const SingleCartItem = ({ product }) => {
                 className={styles.imgCard}
               />
             </div>
-            <Link to={`/products/l`}>{product?.product?.name}</Link>
+            <Link to={`/product/${product?.product?.id}`}>{product?.product?.name}</Link>
           </div>
         </td>
         <td>

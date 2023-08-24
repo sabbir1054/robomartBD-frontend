@@ -1,13 +1,11 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import { useDeleteProductFromCartMutation, useGetCartQuery } from "../../../../redux/api/api";
+import { useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartItems.module.scss";
 import SingleCartItem from "./SingleCartItem";
 const CartItems = () => {
   const { data: cartData } = useGetCartQuery();
 
-
-  console.log(cartData);
   return (
     <>
       {/* heading title */}
