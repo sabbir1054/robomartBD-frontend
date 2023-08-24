@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import AuthPages from "./Pages/AuthPages/AuthPages";
@@ -18,6 +19,7 @@ function App() {
     <>
       <NavigationBar />
       <MobileTopNavigation />
+      <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />

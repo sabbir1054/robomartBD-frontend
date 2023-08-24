@@ -11,13 +11,43 @@ import {
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./SingleProductCard.module.scss";
+import { usePostToCartMutation } from "../../redux/api/api";
+import toast, { Toaster } from "react-hot-toast";
+
+const loadingNotify = () => toast.loading("Adding...");
+const successNotify = () => toast.success("Successfully added !");
+const errorNotify = () => toast.error("Something went wrong !");
+// toast.promise(myPromise, {
+//   loadingNotify: "Adding...",
+//   successNotify: "Successfully added !",
+//   errorNotify: "Something went wrong !",
+// });
 const SingleProductCard = ({ product }) => {
-  console.log(product?.photo);
+
+  const [postToCart, { isLoading, isError, isSuccess }] =
+    usePostToCartMutation();
+
+  const addToCart = () => {
+    const options = { product: { product: product?.id ,quantity:1} };
+    postToCart(options);
+  };
+   if (isError) {
+     errorNotify();
+     console.log(postToCart);
+   }
+   if (isSuccess) {
+     successNotify();
+   }
+
+  // if (isLoading) {
+  //   loadingNotify();
+  // }
+
+ 
   return (
     <>
       <Card
         style={{ boxShadow: "none", width: "250px" }}
-        sx={{ paddingBottom: "5px" }}
         className={`${styles.card} card`}
       >
         <Box
@@ -33,8 +63,12 @@ const SingleProductCard = ({ product }) => {
           <Link to={`/product/${product?.id}`}>
             <CardMedia
               component="img"
-              image={`https://api.robomartbd.com${product?.photo}`}
-              alt="green iguana"
+              image={
+                product?.photo
+                  ? `https://api.robomartbd.com${product?.photo}`
+                  : "/assets/no-img.jpg"
+              }
+              alt="Products Image"
               sx={{ width: "100%" }}
               className={styles.cardImg}
             />
@@ -52,7 +86,7 @@ const SingleProductCard = ({ product }) => {
           </div>
           <div className={styles.bottom}>
             <div className={styles.content}>
-              <div productid={"props.data.id"}>
+              <div productid={"props.data.id"} onClick={() => addToCart()}>
                 <AddShoppingCartIcon />
                 <h5>add to cart</h5>
               </div>
@@ -120,7 +154,7 @@ const SingleProductCard = ({ product }) => {
             className={styles.productViewBtn}
             color="primary"
             fullWidth
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", borderRadius: "0px" }}
           >
             View Details
           </Button>

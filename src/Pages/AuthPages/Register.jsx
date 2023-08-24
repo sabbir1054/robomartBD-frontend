@@ -64,7 +64,7 @@ const Register = ({ showPass, setShowPass }) => {
 
   return (
     <div>
-      <Toaster />
+     
       <Box className={styles.auth_wrapper}>
         <Typography variant="subtitle1" className={styles.auth_subtitle}>
           Register An Account

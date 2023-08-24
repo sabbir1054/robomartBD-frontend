@@ -6,10 +6,10 @@ import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./AuthPage.module.scss";
 
-import localforage from "localforage";
-import toast, { Toaster } from "react-hot-toast";
-import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+import localforage from "localforage";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 const notify = () => toast.error("Password not match!");
 const successMassage = () =>
   toast.success("Register successfully! Now Login Here");
@@ -75,7 +75,6 @@ const Login = ({ showPass, setShowPass }) => {
 
   return (
     <div>
-      <Toaster />
       <Box className={styles.auth_wrapper}>
         <Typography variant="subtitle1" className={styles.auth_subtitle}>
           Log In Your Account

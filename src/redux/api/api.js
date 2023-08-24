@@ -13,6 +13,7 @@ export const robomartApi = createApi({
       }
     },
   }),
+  tagTypes: ["cartProduct"],
   endpoints: (builder) => ({
     getCategoryListProducts: builder.query({
       query: () => "/api/catagorylist",
@@ -20,8 +21,17 @@ export const robomartApi = createApi({
     getUser: builder.query({
       query: () => "/api/auth/users/",
     }),
+    postToCart: builder.mutation({
+      query: ({ product }) => ({
+        url: `/cart/get_cart`,
+        method: "POST",
+        body: product,
+      }),
+      invalidatesTags: ["cartProduct"],
+    }),
     getCart: builder.query({
       query: () => "/cart/get_cart",
+      providesTags: ["cartProduct"],
     }),
     getHomeData: builder.query({
       query: () => `/api/home`,
@@ -36,4 +46,5 @@ export const {
   useGetCartQuery,
   useGetCategoryListProductsQuery,
   useGetHomeDataQuery,
+  usePostToCartMutation
 } = robomartApi;

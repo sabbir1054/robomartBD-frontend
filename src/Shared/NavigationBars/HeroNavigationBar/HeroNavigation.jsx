@@ -39,6 +39,7 @@ const HeroNavigation = () => {
   const { data: cartData } = useGetCartQuery();
   const cartCount = cartData ? cartData.count : 0;
   const navigate = useNavigate();
+
   if (data) {
     // console.log(data[0]?.first_name);
   }
