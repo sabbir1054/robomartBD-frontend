@@ -37,7 +37,9 @@ const HeroNavigation = () => {
 
   const { data, isLoading, isError } = useGetUserQuery();
   const { data: cartData } = useGetCartQuery();
-  const cartCount = cartData ? cartData.count : 0;
+  const cartCount = cartData
+    ? cartData?.items?.reduce((acc, item) => acc + item.quantity, 0)
+    : 0;
   const navigate = useNavigate();
 
   if (data) {
@@ -91,11 +93,9 @@ const HeroNavigation = () => {
               alignItems="center"
             >
               <Box>
-                
                 <NavLink to={"/"}>
                   <img src="/assets/logo.png" alt="" width={200} srcset="" />
                 </NavLink>
-                
               </Box>
             </Grid>
             <Grid
@@ -138,7 +138,6 @@ const HeroNavigation = () => {
             >
               {data && (
                 <ThemeProvider theme={theme}>
-                  
                   <NavLink to="/shopping-cart">
                     <Badge
                       color={"black"}

@@ -1,8 +1,13 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import { useDeleteProductFromCartMutation, useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartItems.module.scss";
 import SingleCartItem from "./SingleCartItem";
 const CartItems = () => {
+  const { data: cartData } = useGetCartQuery();
+
+
+  console.log(cartData);
   return (
     <>
       {/* heading title */}
@@ -26,15 +31,12 @@ const CartItems = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {cartList.map((item) => ( */}
-              <SingleCartItem />
-              <SingleCartItem />
-              <SingleCartItem />
-              {/* ))} */}
+              {cartData?.items?.map((item) => (
+                <SingleCartItem product={item} />
+              ))}
             </tbody>
           </table>
         </Grid>
-       
       </Grid>
     </>
   );

@@ -9,10 +9,10 @@ import {
   Rating,
 } from "@mui/material";
 import React from "react";
+import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
+import { useGetCartQuery, usePostToCartMutation } from "../../redux/api/api";
 import styles from "./SingleProductCard.module.scss";
-import { usePostToCartMutation } from "../../redux/api/api";
-import toast, { Toaster } from "react-hot-toast";
 
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
@@ -23,27 +23,26 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   errorNotify: "Something went wrong !",
 // });
 const SingleProductCard = ({ product }) => {
-
+  const { data: cartData } = useGetCartQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
     usePostToCartMutation();
 
   const addToCart = () => {
-    const options = { product: { product: product?.id ,quantity:1} };
+    const  options = { product: { product: product?.id, quantity: 1 } };
     postToCart(options);
   };
-   if (isError) {
-     errorNotify();
-     console.log(postToCart);
-   }
-   if (isSuccess) {
-     successNotify();
-   }
+  if (isError) {
+    errorNotify();
+    console.log(postToCart);
+  }
+  if (isSuccess) {
+    successNotify();
+  }
 
   // if (isLoading) {
   //   loadingNotify();
   // }
 
- 
   return (
     <>
       <Card

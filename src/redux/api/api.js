@@ -29,6 +29,22 @@ export const robomartApi = createApi({
       }),
       invalidatesTags: ["cartProduct"],
     }),
+    deleteProductFromCart: builder.mutation({
+      query: ({ data }) => ({
+        url: `/cart/get_cart`,
+        method: "DELETE",
+        body: data,
+      }),
+      invalidatesTags: ["cartProduct"],
+    }),
+    changeQuantity: builder.mutation({
+      query: ({ data }) => ({
+        url: "/cart/control_quantity",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["cartProduct"],
+    }),
     getCart: builder.query({
       query: () => "/cart/get_cart",
       providesTags: ["cartProduct"],
@@ -46,5 +62,7 @@ export const {
   useGetCartQuery,
   useGetCategoryListProductsQuery,
   useGetHomeDataQuery,
-  usePostToCartMutation
+  usePostToCartMutation,
+  useDeleteProductFromCartMutation,
+  useChangeQuantityMutation,
 } = robomartApi;
