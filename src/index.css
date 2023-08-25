@@ -75,6 +75,12 @@ small {
 
 
 
+.code_area{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #383B40;
+  color: #D3D3D3;
+}
 
 
 /* X-Small devices (portrait phones, less than 576px)  */

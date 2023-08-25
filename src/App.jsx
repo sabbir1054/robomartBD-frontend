@@ -13,6 +13,7 @@ import Footer from "./Shared/Footer/Footer";
 import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
+import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           path="/products/categories/:categoryId"
           element={<SingleCategoryProducts />}
         />
+        <Route path="/dashboard/portal-admin/addBlogs" element={<AddBlogsPage />} />
         <Route path="/blogs" element={<BlogsMainPage />} />
         <Route path="/blog/:blogId" element={<SingleBlogPage />} />
         <Route path="/forum" element={<ForumMainPage />} />
