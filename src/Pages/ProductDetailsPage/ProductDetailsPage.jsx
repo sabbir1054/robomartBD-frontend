@@ -1,14 +1,25 @@
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Box, Button, Container, Grid, Rating } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Rating,
+  Typography,
+} from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import {
+  useGetCartQuery,
+  useGetUserQuery,
+  usePostToCartMutation,
+} from "../../redux/api/api";
 import BottomTabs from "./BottomTabs";
 import styles from "./ProductDetail.module.scss";
-import { useGetCartQuery, useGetUserQuery, usePostToCartMutation } from "../../redux/api/api";
-import Swal from "sweetalert2";
-import { toast } from "react-hot-toast";
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -18,41 +29,40 @@ const ProductDetailsPage = () => {
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [amount, setAmount] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
- const navigate = useNavigate();
- const {
-   data: userData,
-   isLoading: userLoading,
-   isError: userError,
- } = useGetUserQuery();
- const { data: cartData } = useGetCartQuery();
- const [postToCart, { isLoading, isError, isSuccess }] =
-   usePostToCartMutation();
+  const navigate = useNavigate();
+  const {
+    data: userData,
+    isLoading: userLoading,
+    isError: userError,
+  } = useGetUserQuery();
+  const { data: cartData } = useGetCartQuery();
+  const [postToCart, { isLoading, isError, isSuccess }] =
+    usePostToCartMutation();
 
- const addToCart = () => {
-   if (!userData) {
-     navigate("/login");
-     Swal.fire({
-       position: "top-center",
-       icon: "warning",
-       title: "Please Login First !",
-       showConfirmButton: false,
-       timer: 1500,
-     });
-   } else {
-     const options = {
-       product: { product: productDetails?.id, quantity: amount },
-     };
-     postToCart(options);
-   }
- };
- if (isError) {
-   errorNotify();
-   console.log(postToCart);
- }
- if (isSuccess) {
-   successNotify();
- }
- 
+  const addToCart = () => {
+    if (!userData) {
+      navigate("/login");
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please Login First !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      const options = {
+        product: { product: productDetails?.id, quantity: amount },
+      };
+      postToCart(options);
+    }
+  };
+  if (isError) {
+    errorNotify();
+    console.log(postToCart);
+  }
+  if (isSuccess) {
+    successNotify();
+  }
 
   const zoom = (e) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
@@ -196,30 +206,48 @@ const ProductDetailsPage = () => {
                 {productDetails?.discription}
               </p>
 
-              <div className={styles.quantity}>
-                <div>
-                  <button onClick={(event) => changeAmount(-1)}>
-                    <RemoveIcon />
-                  </button>
-                  <input type={"number"} min={1} value={amount} readOnly />
-                  <button onClick={(event) => changeAmount(+1)}>
-                    <AddIcon />
-                  </button>
-                </div>
-              </div>
-              <div className={styles.buttons}>
-                <button className={styles.addToCardBtn} onClick={addToCart}>
-                  <AddShoppingCartIcon />
-                  ADD TO CART
-                </button>
-                {/* <button
+              <Grid container>
+                {" "}
+                <Grid item md={12} lg={6}>
+                  <div className={styles.quantity}>
+                    <div>
+                      <button onClick={(event) => changeAmount(-1)}>
+                        <RemoveIcon />
+                      </button>
+                      <input type={"number"} min={1} value={amount} readOnly />
+                      <button onClick={(event) => changeAmount(+1)}>
+                        <AddIcon />
+                      </button>
+                    </div>
+                  </div>
+                  <div className={styles.buttons}>
+                    <button className={styles.addToCardBtn} onClick={addToCart}>
+                      <AddShoppingCartIcon />
+                      ADD TO CART
+                    </button>
+                    {/* <button
                   className={styles.addToWishlist}
              
                 >
                   <FavoriteBorderIcon />
                   <p>Add to Wishlist</p>
                 </button> */}
-              </div>
+                  </div>
+                </Grid>{" "}
+                <Grid item md={12} lg={6}>
+                  <Typography
+                    variant="title1"
+                    style={{ fontWeight: "bold", fontFamily: "Poppins" }}
+                  >
+                    Subtotal: <span>{productDetails?.price} </span> X
+                    <span style={{ margin: "0 5px" }}> {amount}</span> =
+                    <span style={{ margin: "0 5px" }}>
+                      {" "}
+                      {amount * productDetails?.price}
+                    </span>
+                  </Typography>
+                </Grid>{" "}
+              </Grid>
             </div>
           </Grid>
         </Grid>

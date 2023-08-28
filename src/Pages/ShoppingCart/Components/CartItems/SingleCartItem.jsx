@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useChangeQuantityMutation, useDeleteProductFromCartMutation } from "../../../../redux/api/api";
 import styles from "./CartItems.module.scss";
+import { CircularProgress, colors } from "@mui/material";
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
 const SingleCartItem = ({ product }) => {
@@ -57,22 +58,33 @@ const SingleCartItem = ({ product }) => {
                 className={styles.imgCard}
               />
             </div>
-            <Link to={`/product/${product?.product?.id}`}>{product?.product?.name}</Link>
+            <Link to={`/product/${product?.product?.id}`}>
+              {product?.product?.name}
+            </Link>
           </div>
         </td>
         <td>
           <h4 className={styles.price}>{product?.product?.price}</h4>
         </td>
         <td className={styles.quantity}>
-          <div>
-            <button onClick={() => handleQuantity("d")}>
-              <RemoveIcon sx={{ fontWeight: "bold" }} />
-            </button>
-            <input type={"number"} min={1} value={product?.quantity} readOnly />
-            <button onClick={() => handleQuantity("i")}>
-              <AddIcon />
-            </button>
-          </div>
+          {updateQuantityLoading ? (
+            <CircularProgress sx={{color:'green'}}/>
+          ) : (
+            <div>
+              <button onClick={() => handleQuantity("d")}>
+                <RemoveIcon sx={{ fontWeight: "bold" }} />
+              </button>
+              <input
+                type={"number"}
+                min={1}
+                value={product?.quantity}
+                readOnly
+              />
+              <button onClick={() => handleQuantity("i")}>
+                <AddIcon />
+              </button>
+            </div>
+          )}
         </td>
         <td className={styles.totalPrice}>
           {(product?.product?.price * product?.quantity).toFixed(2)}
