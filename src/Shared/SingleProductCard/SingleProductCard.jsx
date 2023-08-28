@@ -11,9 +11,13 @@ import {
 import React from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useGetCartQuery, useGetUserQuery, usePostToCartMutation } from "../../redux/api/api";
-import styles from "./SingleProductCard.module.scss";
 import Swal from "sweetalert2";
+import {
+  useGetCartQuery,
+  useGetUserQuery,
+  usePostToCartMutation,
+} from "../../redux/api/api";
+import styles from "./SingleProductCard.module.scss";
 
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
@@ -37,13 +41,13 @@ const SingleProductCard = ({ product }) => {
   const addToCart = () => {
     if (!userData) {
       navigate("/login");
-       Swal.fire({
-         position: "top-center",
-         icon: "warning",
-         title: "Please Login First !",
-         showConfirmButton: false,
-         timer: 1500,
-       });
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please Login First !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } else {
       const options = { product: { product: product?.id, quantity: 1 } };
       postToCart(options);
@@ -77,7 +81,9 @@ const SingleProductCard = ({ product }) => {
           }}
           className={styles.imageDiv}
         >
-          <Link to={`/product/${product?.id}`}>
+          <Link
+            to={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
+          >
             <CardMedia
               component="img"
               image={

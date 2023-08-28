@@ -41,7 +41,7 @@ function App() {
         <Route path="/blog/:blogId" element={<SingleBlogPage />} />
         <Route path="/forum" element={<ForumMainPage />} />
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
-        <Route path="/product/:productId" element={<ProductDetailsPage />} />
+        <Route path="/product/:productId/:productName" element={<ProductDetailsPage />} />
       </Routes>
       <Footer />
       <MobileNavigation />

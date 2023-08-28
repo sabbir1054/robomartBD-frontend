@@ -1,12 +1,15 @@
 import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useChangeQuantityMutation, useDeleteProductFromCartMutation } from "../../../../redux/api/api";
+import {
+  useChangeQuantityMutation,
+  useDeleteProductFromCartMutation,
+} from "../../../../redux/api/api";
 import styles from "./CartItems.module.scss";
-import { CircularProgress, colors } from "@mui/material";
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
 const SingleCartItem = ({ product }) => {
@@ -20,10 +23,6 @@ const SingleCartItem = ({ product }) => {
       isSuccess: updateQuantitySuccess,
     },
   ] = useChangeQuantityMutation();
-
-
-
-
 
   const handleDeleteItemFromCart = () => {
     const options = { data: { id: product?.id } };
@@ -58,7 +57,11 @@ const SingleCartItem = ({ product }) => {
                 className={styles.imgCard}
               />
             </div>
-            <Link to={`/product/${product?.product?.id}`}>
+            <Link
+              to={`/product/${
+                product?.product?.id
+              }/${(product?.product?.name).replace(/ /g, "_")}`}
+            >
               {product?.product?.name}
             </Link>
           </div>
@@ -68,7 +71,7 @@ const SingleCartItem = ({ product }) => {
         </td>
         <td className={styles.quantity}>
           {updateQuantityLoading ? (
-            <CircularProgress sx={{color:'green'}}/>
+            <CircularProgress sx={{ color: "green" }} />
           ) : (
             <div>
               <button onClick={() => handleQuantity("d")}>
