@@ -11,7 +11,7 @@ const SingleCategoryProducts = () => {
 
   console.log(params);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagory/${params.categoryId}`)
+    fetch(`https://api.robomartbd.com/api/catagory/${params.categoryId}/category`)
       .then((res) => res.json())
       .then((data) => {
         setCategoryProducts(data);

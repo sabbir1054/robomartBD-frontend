@@ -15,6 +15,9 @@ export const robomartApi = createApi({
   }),
   tagTypes: ["cartProduct"],
   endpoints: (builder) => ({
+    getAllProducts: builder.query({
+      query: () => "/api/products",
+    }),
     getCategoryListProducts: builder.query({
       query: () => "/api/catagorylist",
     }),
@@ -65,4 +68,5 @@ export const {
   usePostToCartMutation,
   useDeleteProductFromCartMutation,
   useChangeQuantityMutation,
+  useGetAllProductsQuery,
 } = robomartApi;

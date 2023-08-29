@@ -13,6 +13,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import RecentView from "../../Shared/RecntView/RecentView";
 import {
   useGetCartQuery,
   useGetUserQuery,
@@ -24,6 +25,7 @@ const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
 const ProductDetailsPage = () => {
+  const [checkDuplicate, setCheckDuplicate] = useState(false);
   const params = useParams();
   const [productDetails, setProductDetails] = useState({});
   const [bgPosition, setBgPosition] = useState("50% 50%");
@@ -91,7 +93,29 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     fetch(`https://api.robomartbd.com/api/product/${params?.productId}`)
       .then((res) => res.json())
-      .then((data) => setProductDetails(data));
+      .then((data) => {
+        setProductDetails(data);
+        const cacheRecentView = localStorage.getItem("recentViewProducts");
+        if (!cacheRecentView) {
+          const recentArr = [];
+          recentArr.push(data);
+          localStorage.setItem("recentViewProducts", JSON.stringify(recentArr));
+        } else {
+          const pastRecentArr = JSON.parse(cacheRecentView);
+
+          const checkDuplicateInput = cacheRecentView.includes(
+            JSON.stringify(data)
+          );
+
+          if (!checkDuplicateInput) {
+            pastRecentArr.push(data);
+            localStorage.setItem(
+              "recentViewProducts",
+              JSON.stringify(pastRecentArr)
+            );
+          }
+        }
+      });
   }, []);
 
   return (
@@ -99,30 +123,7 @@ const ProductDetailsPage = () => {
       <Container sx={{ py: "10vh" }}>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           <Grid item md={6} className={styles.left}>
-            <div className={styles.images}>
-              {/* {revImgArr.map((item, index) => (
-                <img
-                  onClick={changeMainImage}
-                  imgindex={index}
-                  className={
-                    index === imageIndex ? styles.activeImage : styles.notActive
-                  }
-                  src={item}
-                  key={index}
-                  alt={"images"}
-                />
-              ))} */}
-              {/* <img
-                // onClick={changeMainImage}
-                // imgindex={index}
-                // className={
-                //   index === imageIndex ? styles.activeImage : styles.notActive
-                // }
-                src={`https://api.robomartbd.com${productDetails?.photo}`}
-                // key={index}
-                alt={"images"}
-              /> */}
-            </div>
+            <div className={styles.images}></div>
             <div
               className={styles.mainImage}
               onMouseMove={zoom}
@@ -253,6 +254,7 @@ const ProductDetailsPage = () => {
         </Grid>
 
         <BottomTabs />
+        <RecentView />
       </Container>
     </div>
   );

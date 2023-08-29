@@ -9,7 +9,7 @@ const SingleCategoryProducts = ({ title, id }) => {
   const [maxProductNum, setMaxProductNum] = useState(screenWidth>1200?6:4);
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagory/${id}`)
+    fetch(`https://api.robomartbd.com/api/catagory/${id}/category`)
       .then((res) => res.json())
       .then((data) => {
         // setData(data);

@@ -1,11 +1,94 @@
-import React from 'react';
-
+import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 const RecentView = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const productsData = localStorage.getItem("recentViewProducts");
+    setData(JSON.parse(productsData));
+  }, []);
+
+  return (
+    <div>
+      <Typography
+        variant="h5"
+        sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
+      >
+        Recently Viewed
+      </Typography>
+      <>
+        <Swiper
+          slidesPerView={5}
+          spaceBetween={20}
+          // pagination={{ clickable: true }}
+          navigation={true}
+          modules={[ Navigation]}
+          // autoplay={true}
+          breakpoints={{
+            300: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            500: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 50,
+            },
+          }}
+          className="mySwiper"
+        >
+          {data?.reverse().map((product) => (
+            <SwiperSlide>
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: "#4f4f4f",
+                  "&:hover": { color: "black !important" },
+                }}
+                to={`/product/${product?.id}/${(product?.name).replace(
+                  / /g,
+                  "_"
+                )}`}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    style={{ width: "200px", border: "1px solid #e2e2e2" }}
+                    // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
+                    src={`https://api.robomartbd.com${product?.photo}`}
+                    alt="no-image"
+                    srcset=""
+                  />
+                </Box>
+                <p style={{ textAlign: "center" }}>{product?.name}</p>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </>
+    </div>
+  );
 };
 
 export default RecentView;
