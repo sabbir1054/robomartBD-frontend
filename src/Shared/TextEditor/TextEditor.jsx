@@ -1,5 +1,5 @@
 import FroalaEditorComponent from "react-froala-wysiwyg";
-
+import styles from "./Editor.module.scss";
 // Require Editor CSS files.
 import "froala-editor/css/froala_editor.pkgd.min.css";
 import "froala-editor/css/froala_style.min.css";
@@ -7,7 +7,7 @@ import "froala-editor/css/froala_style.min.css";
 // Import all Froala Editor plugins;
 import Froalaeditor from "froala-editor";
 import "froala-editor/js/plugins.pkgd.min.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 Froalaeditor.DefineIcon("insertCodeBlock", {
   NAME: "insertCodeBlock",
@@ -25,10 +25,66 @@ Froalaeditor.RegisterCommand("insertCodeBlock", {
   },
 });
 
+import { Button } from "@mui/material";
 import React from "react";
 
-const TextEditor = ({ setSectionDescription }) => {
+const TextEditor = ({
+  setSectionDescription,
+  append,
+  remove,
+  index,
+  sectionTitle,
+  sectionDescription,
+  setCheckBeforeSubmit,
+}) => {
   const [editorContent, setEditorContent] = useState("");
+  const [checkSave, setCheckSave] = useState(false);
+
+  const saveToCache = (data) => {
+    const cacheSections = localStorage.getItem("cacheSections");
+    const check = false;
+
+    if (cacheSections) {
+      const sectionsArr = JSON.parse(cacheSections);
+      sectionsArr.map((section) => {
+        if (section.sectionTitle == data.sectionTitle) {
+          sectionDescription = data?.sectionDescription;
+        } else {
+          sectionsArr.push(data);
+        }
+      });
+
+      localStorage.setItem("cacheSections", JSON.stringify(sectionsArr));
+    } else {
+      const sectionsArr = [];
+      sectionsArr.push(data);
+      localStorage.setItem("cacheSections", JSON.stringify(sectionsArr));
+    }
+
+    setCheckSave(true);
+  };
+  useEffect(() => {
+    setCheckSave(false);
+  }, [sectionDescription, sectionTitle]);
+
+  useEffect(() => {
+    if (checkSave) {
+      setCheckBeforeSubmit(true);
+    }
+  }, [checkSave]);
+
+  const removeFromCache = (indexToRemove) => {
+    const cacheSections = localStorage.getItem("cacheSections");
+
+    if (cacheSections) {
+      const sectionsArr = JSON.parse(cacheSections);
+      const newArray = sectionsArr.filter(
+        (item, index) => index !== indexToRemove
+      );
+      localStorage.setItem("cacheSections", JSON.stringify(newArray));
+    }
+  };
+
   const config = {
     toolbarButtons: [
       [
@@ -64,7 +120,7 @@ const TextEditor = ({ setSectionDescription }) => {
   };
   const handleModelChange = (model) => {
     // Update the editor content when it changes
-   
+
     setEditorContent(model);
     setSectionDescription(model);
   };
@@ -77,6 +133,46 @@ const TextEditor = ({ setSectionDescription }) => {
         config={config}
         onModelChange={handleModelChange}
       />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "end",
+          margin: "10px 0",
+        }}
+      >
+        <Button
+          size="small"
+          variant="contained"
+          className={styles.removeBtn}
+          sx={{
+            backgroundColor: "var(--primaryColor) !important",
+            "&:hover": {
+              backgroundColor: "#006000 !important",
+              color: "white",
+            },
+          }}
+          disableElevation
+          onClick={() =>
+            saveToCache({
+              sectionTitle: sectionTitle,
+              sectionDescription: sectionDescription,
+            })
+          }
+        >
+          {checkSave ? "Saved" : "Please Save"}
+        </Button>
+        <Button
+          size="small"
+          variant="contained"
+          className={styles.removeBtn}
+          disableElevation
+          onClick={() => {
+            removeFromCache(index), remove(index);
+          }}
+        >
+          Remove
+        </Button>
+      </div>
     </>
   );
 };

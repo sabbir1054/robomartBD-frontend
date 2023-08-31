@@ -1,10 +1,10 @@
+import GoogleIcon from "@mui/icons-material/Google";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Box, Typography } from "@mui/material";
-
+import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import styles from "./AuthPage.module.scss";
@@ -64,7 +64,6 @@ const Register = ({ showPass, setShowPass }) => {
 
   return (
     <div>
-     
       <Box className={styles.auth_wrapper}>
         <Typography variant="subtitle1" className={styles.auth_subtitle}>
           Register An Account
@@ -151,11 +150,23 @@ const Register = ({ showPass, setShowPass }) => {
               value={"Register Now"}
               className={styles.auth_form_submitBtn}
             />
-            <p>
-              Already Have an Account ?
-              <NavLink to={"/login"}>Login Here</NavLink>
-            </p>
           </form>
+          <p style={{ textAlign: "center", marginBottom: "10px" }}>- or -</p>
+          <Button
+            disableElevation
+            style={{
+              backgroundColor: "black",
+              color: "white",
+              width: "100%",
+              padding: "10px",
+            }}
+          >
+            <GoogleIcon />{" "}
+            <span style={{ margin: "0px 5px" }}> Login with google</span>
+          </Button>
+          <p style={{margin:"15px 0px"}}>
+            Already Have an Account ?<NavLink to={"/login"}>Login Here</NavLink>
+          </p>
         </Box>
       </Box>
     </div>

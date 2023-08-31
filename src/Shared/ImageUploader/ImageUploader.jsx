@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ImageUploading from "react-images-uploading";
 import styles from "./ImageUploader.module.scss";
-const ImageUploader = ({ setImgData }) => {
-  const [images, setImages] = useState([]);
-
+const ImageUploader = ({ images, setImages }) => {
   let imageBase64 = images[0]?.data_url;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+
     setImages(imageList);
-    setImgData(imageBase64);
   };
   return (
     <>
@@ -37,7 +34,11 @@ const ImageUploader = ({ setImgData }) => {
               {...dragProps}
             >
               {imageList.length > 0 ? (
-                <img src={imageBase64} alt="" style={{width:"100%",height:"auto"}}/>
+                <img
+                  src={imageBase64}
+                  alt=""
+                  style={{ width: "100%", height: "auto" }}
+                />
               ) : (
                 `Click or Drop here `
               )}
@@ -46,8 +47,18 @@ const ImageUploader = ({ setImgData }) => {
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
                 <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)} className={styles.imageChangeBtn}>Update</button>
-                  <button onClick={() => onImageRemove(index)} className={styles.imageChangeBtn}>Remove</button>
+                  <button
+                    onClick={() => onImageUpdate(index)}
+                    className={styles.imageChangeBtn}
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => onImageRemove(index)}
+                    className={styles.imageChangeBtn}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             ))}

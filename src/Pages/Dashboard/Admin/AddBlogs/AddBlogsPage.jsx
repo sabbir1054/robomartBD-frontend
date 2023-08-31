@@ -1,14 +1,19 @@
-import { Container, Divider, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Container, Typography } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
+import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import ImageUploader from "../../../../Shared/ImageUploader/ImageUploader";
 import styles from "./AddBlogs.module.scss";
+import AddRelatedProducts from "./AddRelatedProducts";
 import TutorialsSections from "./TutorialsSections";
-
 const AddBlogsPage = () => {
+  const [finalData, setFinalData] = useState({});
+  const [checkBeforeSubmit, setCheckBeforeSubmit] = useState(false);
+  const [images, setImages] = useState([]);
   const [sections, setSections] = useState([]);
-  const [imgData, setImgData] = useState("");
-
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  console.log(checkBeforeSubmit);
   const {
     register,
     control,
@@ -26,15 +31,50 @@ const AddBlogsPage = () => {
     control,
     name: "sections",
   });
-
+  const handleSubmitBtn = () => {
+    if (
+      finalData.title &&
+      finalData.coverPhoto &&
+      finalData.sections &&
+      finalData.relatedProducts
+    ) {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Tutorial Added",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    } else {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: "Fill up the form",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
+  };
   const onSubmit = (data) => {
+    // create data
+    data.coverPhoto = images && images[0]?.data_url;
     delete data.sectionTitle;
     const cacheSections = JSON.parse(localStorage.getItem("cacheSections"));
     data.sections = cacheSections;
     localStorage.removeItem("cacheSections");
+    data.relatedProducts = relatedProducts;
+    setFinalData(data);
     console.log(data);
-  };
 
+    // // window.location.reload();
+    // reset();
+  };
+  useEffect(() => {
+    localStorage.removeItem("cacheSections");
+  }, []);
   return (
     <div style={{ minHeight: "70vh" }}>
       <Typography
@@ -42,6 +82,7 @@ const AddBlogsPage = () => {
         style={{
           textAlign: "center",
           padding: "5vh 0",
+          paddingBottom: "0",
           fontFamily: "Poppins",
           fontWeight: "bold",
         }}
@@ -49,6 +90,25 @@ const AddBlogsPage = () => {
         {" "}
         Make Tutorial{" "}
       </Typography>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {" "}
+        <Typography
+          variant="title2"
+          style={{
+            textAlign: "center",
+            padding: "2vh 0",
+            paddingBottom: "5vh",
+            fontFamily: "Roboto",
+            fontWeight: "bold",
+            color: "red",
+          }}
+        >
+          {" "}
+          Note: Without Submit form not reload this page. If reload page this
+          form will reset and you lost data.
+        </Typography>
+      </div>
+
       <Container maxWidth="md">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -69,8 +129,8 @@ const AddBlogsPage = () => {
             </Typography>
           </label>
           <input
-            type="email"
-            {...register("email", { required: true })}
+            type="text"
+            {...register("title", { required: true })}
             className={styles.auth_form_inputField}
           />
           <br />
@@ -89,14 +149,14 @@ const AddBlogsPage = () => {
               Upload Tutorial thumbnail photo :
             </Typography>
           </label>
-          <ImageUploader setImgData={setImgData} />
+          <ImageUploader images={images} setImages={setImages} />
           <br />
-        
+
           <br />
           <Typography
             variant="h3"
             style={{
-              textDecoration:"underline",
+              textDecoration: "underline",
               textAlign: "center",
               padding: "2vh 0",
               fontFamily: "Poppins",
@@ -109,7 +169,7 @@ const AddBlogsPage = () => {
             Add Necessary Sections for Tutorial
           </Typography>
           <br />
-         
+
           <br />
           {/* Added Sections Part */}
           <TutorialsSections
@@ -118,6 +178,7 @@ const AddBlogsPage = () => {
             append={append}
             remove={remove}
             control={control}
+            setCheckBeforeSubmit={setCheckBeforeSubmit}
           />
           <br />
           <label
@@ -140,7 +201,7 @@ const AddBlogsPage = () => {
               Related Products : <br />
             </Typography>
           </label>
-          ....page is under development
+          <AddRelatedProducts setRelatedProducts={setRelatedProducts} />
           <br />
           <div
             style={{
@@ -149,11 +210,17 @@ const AddBlogsPage = () => {
               margin: "3vh 0",
             }}
           >
-            <input
-              type="submit"
-              value={"Add Blog"}
-              className={styles.auth_form_submitBtn}
-            />
+            <Tooltip title="Please Save all section first">
+              <div onClick={handleSubmitBtn}>
+                <input
+                  // disabled={checkBeforeSubmit ? false : true}
+                  type="submit"
+                  value={"Add Tutorial"}
+                  style={{ backgroundColor: "#d8d8d8 !important" }}
+                  className={styles.auth_form_submitBtn}
+                />
+              </div>
+            </Tooltip>
           </div>
         </form>
       </Container>

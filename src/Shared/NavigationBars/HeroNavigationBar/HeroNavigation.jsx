@@ -1,5 +1,4 @@
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
@@ -9,7 +8,6 @@ import {
   Container,
   Divider,
   Grid,
-  TextField,
   ThemeProvider,
   createTheme,
 } from "@mui/material";
@@ -22,6 +20,7 @@ import {
 } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./HeroNavigation.module.scss";
+import SearchBar from "./SearchBar";
 
 const theme = createTheme({
   palette: {
@@ -107,24 +106,7 @@ const HeroNavigation = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <TextField
-                InputProps={{
-                  startAdornment: <SearchIcon />,
-                  style: { height: "42px" },
-                }}
-                id="outlined-basic"
-                // label="Outlined
-                placeholder="Search "
-                variant="outlined"
-                className={styles.searchField}
-              />
-              <Button
-                variant="contained"
-                className={styles.searchBtn}
-                disableElevation
-              >
-                Search
-              </Button>
+              <SearchBar />
             </Grid>
             <Grid
               item

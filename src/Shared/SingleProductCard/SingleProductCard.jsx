@@ -123,7 +123,10 @@ const SingleProductCard = ({ product }) => {
         </Box>
         <CardContent className={styles.cardContent}>
           {/* <p className={styles.category}>{props.data.category}</p> */}
-          <Link to={`/product/${product?.id}`} className={styles.title}>
+          <Link
+            to={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
+            className={styles.title}
+          >
             {product?.name?.length > 50
               ? product?.name?.substring(0, 50) + "..."
               : product?.name}
@@ -172,7 +175,9 @@ const SingleProductCard = ({ product }) => {
             </div>
           </Box>
         </CardContent>
-        <NavLink to={`/product/${product?.id}`}>
+        <NavLink
+          to={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
+        >
           <Button
             className={styles.productViewBtn}
             color="primary"

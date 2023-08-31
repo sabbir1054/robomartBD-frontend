@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigation, Pagination } from "swiper";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -11,7 +11,9 @@ const RecentView = () => {
 
   useEffect(() => {
     const productsData = localStorage.getItem("recentViewProducts");
-    setData(JSON.parse(productsData));
+    const parseData = JSON.parse(productsData);
+    const reverseData = parseData.reverse();
+    setData(reverseData);
   }, []);
 
   return (
@@ -28,7 +30,7 @@ const RecentView = () => {
           spaceBetween={20}
           // pagination={{ clickable: true }}
           navigation={true}
-          modules={[ Navigation]}
+          modules={[Navigation]}
           // autoplay={true}
           breakpoints={{
             300: {
@@ -54,7 +56,7 @@ const RecentView = () => {
           }}
           className="mySwiper"
         >
-          {data?.reverse().map((product) => (
+          {data?.map((product) => (
             <SwiperSlide>
               <Link
                 style={{
@@ -74,7 +76,11 @@ const RecentView = () => {
                   }}
                 >
                   <img
-                    style={{ width: "200px", border: "1px solid #e2e2e2" }}
+                    style={{
+                      width: "200px",
+                      height: "150px",
+                      border: "1px solid #e2e2e2",
+                    }}
                     // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
                     src={`https://api.robomartbd.com${product?.photo}`}
                     alt="no-image"
