@@ -94,6 +94,7 @@ const ProductDetailsPage = () => {
     fetch(`https://api.robomartbd.com/api/product/${params?.productId}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setProductDetails(data);
         const cacheRecentView = localStorage.getItem("recentViewProducts");
         if (!cacheRecentView) {

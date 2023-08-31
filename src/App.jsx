@@ -15,6 +15,7 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
+import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
         <Route
           path="/dashboard/portal-admin/addBlogs"
           element={<AddBlogsPage />}
+        />
+        <Route
+          path="/dashboard/portal-admin/addProducts"
+          element={<AddProducts />}
         />
         <Route path="/blogs" element={<BlogsMainPage />} />
         <Route path="/blog/:blogId" element={<SingleBlogPage />} />
