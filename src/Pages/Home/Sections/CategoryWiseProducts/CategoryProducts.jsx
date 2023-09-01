@@ -1,11 +1,19 @@
 import React from "react";
+import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import SingleCategoryProducts from "./SingleCategoryProducts";
 const CategoryProducts = () => {
+  const { data:homeData, isLoading, isError } = useGetHomeDataQuery();
+
   return (
     <>
-      <SingleCategoryProducts title={"Best Selling Products"} id={ 1} />
-      <SingleCategoryProducts title={"Electronics"} id={2 } />
-      <SingleCategoryProducts title={"Micro Controller"} id={3} />
+      {homeData?.catagory?.map((category) => (
+        <SingleCategoryProducts
+          title={category?.name}
+          id={category?.id}
+          fetchProducts={category?.product}
+        />
+      ))}
+ 
     </>
   );
 };

@@ -6,6 +6,25 @@ import ProductDescriptionEditor from "../../../../Shared/TextEditor/ProductDescr
 import ProductDoc from "../../../../Shared/TextEditor/ProductDoc";
 import styles from "./AddProducts.module.scss";
 import FormLebel from "./FormLebel";
+
+
+
+const exampleData = [
+    {
+        id: 1,
+        name: "Development Board",
+        sub_category: [
+            {
+                
+            }
+        ]
+    }
+]
+
+
+
+
+
 const AddProducts = () => {
   const [images, setImages] = useState([]);
   const [fullDescription, setFullDescription] = useState("");
@@ -147,16 +166,19 @@ const AddProducts = () => {
               </Grid>
             </Grid>{" "}
             <br />
-            <Grid container spacing={2} paddingY={2}>
+            {/* <Grid container spacing={2} paddingY={2} border={"2"}>
               <Grid item xs={12} sm={6}>
                 <FormLebel text={"Select Category :"} />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormLebel text={"Select Sub-Category :"} />
               </Grid>
-            </Grid>
+            </Grid> */}
           </div>
-          <br />
+                  <br />
+                  
+                  {/* CATEGORIES ADDED */}
+
           <br />
           <FormLebel text={"Short Description (40-50 words) :"} />
           <textarea

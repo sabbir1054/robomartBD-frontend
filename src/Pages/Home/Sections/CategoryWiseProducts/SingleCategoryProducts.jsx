@@ -3,22 +3,19 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 import styles from "./CategoryProducts.module.scss";
-const SingleCategoryProducts = ({ title, id }) => {
+const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   // const [data, setData] = useState([]);
-  const [maxProductNum, setMaxProductNum] = useState(screenWidth>1200?6:4);
-  const [products, setProducts] = useState([]);
+  const [maxProductNum, setMaxProductNum] = useState(
+    screenWidth > 1200 ? 6 : 4
+  );
+  const [products, setProducts] = useState(fetchProducts ? fetchProducts : []);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagory/${id}/category`)
-      .then((res) => res.json())
-      .then((data) => {
-        // setData(data);
-        if (data?.length > maxProductNum) {
-          setProducts(data.slice(0, maxProductNum));
-        } else {
-          setProducts(data);
-        }
-      });
+    if (products?.length > maxProductNum) {
+      setProducts(products.slice(0, maxProductNum));
+    } else {
+      setProducts(products);
+    }
   }, []);
 
   return (
