@@ -55,14 +55,14 @@ const AddProducts = () => {
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      categories: [],
-    },
+    // defaultValues: {
+    //   categories: [],
+    // },
   });
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "categories",
-  });
+//   const { fields, append, remove } = useFieldArray({
+//     control,
+//     name: "categories",
+//   });
   const onSubmit = (data) => {
     // create data
     data.coverPhoto = images && images[0]?.data_url;
@@ -72,7 +72,7 @@ const AddProducts = () => {
     data.rating = 0;
     data.feedback = [];
     data.category = selectedCategory;
-    data.subCategories = selectedSubCategory;
+    data.subCategory = selectedSubCategory;
     console.log(data);
 
     // // window.location.reload();
@@ -114,7 +114,7 @@ const AddProducts = () => {
         }}
       >
         {" "}
-        Add Product
+        Add Product Description
       </Typography>
       <div style={{ display: "flex", justifyContent: "center" }}>
         {" "}
@@ -140,7 +140,7 @@ const AddProducts = () => {
           onSubmit={handleSubmit(onSubmit)}
           className={styles.submitBlogForm}
         >
-          <FormLebel text={"Product name :"} />
+          {/* <FormLebel text={"Product name :"} />
           <input
             type="text"
             {...register("name", { required: true })}
@@ -244,7 +244,7 @@ const AddProducts = () => {
               </Grid>
             </Grid>
           </div>
-          <br />
+          <br /> */}
           {/* Full Description ADDED */}
           <br />
           <FormLebel text={"Short Description (40-50 words) :"} />

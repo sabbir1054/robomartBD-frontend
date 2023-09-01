@@ -74,17 +74,18 @@ const HeroNavigation = () => {
       <AppBar
         sx={{
           backgroundColor: "var(--primaryColor)",
+          height:"73px",
           boxShadow: "unset",
           padding: changeIcon ? "0px 0px" : "",
         }}
         component=""
         position="fixed"
       >
-        <Container className={styles.heroNavigation_Container}>
-          <Grid container className={styles.heroNavGrid}>
+        <Container className={styles.heroNavigation_Container} maxWidth={"xl"}>
+          <Grid container className={styles.heroNavGrid} spacing={3}>
             <Grid
               item
-              lg={2}
+              md={2}
               id="branding-section"
               display={`flex`}
               direction="row"
@@ -93,24 +94,24 @@ const HeroNavigation = () => {
             >
               <Box>
                 <NavLink to={"/"}>
-                  <img src="/assets/logo.png" alt="" width={200} srcset="" />
+                  <img src="/assets/logo.png" alt="" style={{width:"100%",maxWidth:"200px"}} srcset="" />
                 </NavLink>
               </Box>
             </Grid>
             <Grid
               item
-              lg={8}
-              id="search-category"
-              display={`flex`}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
+              md={8}
+              // id="search-category"
+              // display={`flex`}
+              // direction="row"
+              // justifyContent="center"
+              // alignItems="center"
             >
               <SearchBar />
             </Grid>
             <Grid
               item
-              lg={2}
+              md={2}
               id="dashboard-icons"
               display={`flex`}
               direction="row"

@@ -16,6 +16,7 @@ import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mob
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
+import ProductSearch from "./Pages/ProductSearchPage/ProductSearch";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<AuthPages />} />
         <Route path="/register" element={<AuthPages />} />
         <Route path="/products" element={<AllProductPage />} />
+        <Route path="/products/search=/:searchTerm?" element={<ProductSearch />} />
         <Route
           path="/products/categories/:categoryId"
           element={<SingleCategoryProducts />}

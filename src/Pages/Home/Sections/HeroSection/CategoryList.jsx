@@ -1,14 +1,14 @@
+import { Collapse, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import SelectCategory from "../../../../Shared/NavigationBars/HeroNavigationBar/SelectCategory";
 import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import styles from "./Hero.module.scss";
+import SingleListItem from "./SingleListItem";
 const CategoryList = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   console.log(
@@ -22,6 +22,8 @@ const CategoryList = () => {
   const handleNavigation = (id) => {
     navigation(`/products/categories/${id}`);
   };
+
+ 
 
   return (
     <>
@@ -47,7 +49,7 @@ const CategoryList = () => {
             Categories
           </h2>
         </div>
-        <nav aria-label="main mailbox folders">
+        {/* <nav aria-label="main mailbox folders">
           <List>
             {homeData1?.catagorylist?.slice(0, 7).map((category) => (
               <>
@@ -77,8 +79,20 @@ const CategoryList = () => {
               )}
             />
           </List>
-        </nav>
-
+        </nav> */}
+        <div>
+          <List component="nav">
+            {homeData1?.catagorylist?.slice(0, 7)?.map((category) => (
+              <SingleListItem category={category} />
+            ))}
+            {/* <ListItemButton onClick={handleClick}>
+              <ListItemText primary="Category 1" />
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton> */}
+          
+            {/* Add more categories and subcategories */}
+          </List>
+        </div>
         <Divider />
       </Box>
     </>

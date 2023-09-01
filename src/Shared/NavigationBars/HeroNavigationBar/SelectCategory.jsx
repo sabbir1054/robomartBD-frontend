@@ -5,14 +5,7 @@ import "@szhsin/react-menu/dist/transitions/slide.css";
 import React from "react";
 import styles from "./HeroNavigation.module.scss";
 const SelectCategory = ({ categoriesList }) => {
-  // const [categoriesList, setCategoriesList] = useState([]);
-  // useEffect(() => {
-  //   fetch(`https://api.robomartbd.com/api/catagorylist`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setCategoriesList(data);
-  //     });
-  // }, []);
+
   return (
     <>
       <Menu

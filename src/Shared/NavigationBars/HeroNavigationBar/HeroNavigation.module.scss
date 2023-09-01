@@ -1,12 +1,9 @@
 .heroNavGrid {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  // display={`flex`}
-  //           direction="row"
-  //           justifyContent="center"
-  //           alignItems="center"
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-around;
+  // align-items: center;
+ 
 }
 .categoryBtn {
   color: black;
@@ -28,6 +25,7 @@
   }
 }
 .searchBtn {
+  
   border-radius: 0px;
   background-color: black;
   padding: 9px 25px;
@@ -116,8 +114,8 @@
 }
 
 @media (min-width: 1400px) {
-  .heroNavigation_Container {
-    max-width: 85%;
-    //   padding: 15px 0px;
-  }
+  // .heroNavigation_Container {
+  //   max-width: 85%;
+  //   //   padding: 15px 0px;
+  // }
 }
