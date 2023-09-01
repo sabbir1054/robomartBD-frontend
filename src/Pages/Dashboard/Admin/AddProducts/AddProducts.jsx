@@ -1,5 +1,12 @@
-import { Container, Grid, Tooltip, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Container,
+  Grid,
+  MenuItem,
+  Select,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import ImageUploader from "../../../../Shared/ImageUploader/ImageUploader";
 import ProductDescriptionEditor from "../../../../Shared/TextEditor/ProductDescriptionEditor";
@@ -7,25 +14,35 @@ import ProductDoc from "../../../../Shared/TextEditor/ProductDoc";
 import styles from "./AddProducts.module.scss";
 import FormLebel from "./FormLebel";
 
-
-
 const exampleData = [
-    {
+  {
+    id: 1,
+    name: "Development Board",
+    sub_category: [
+      {
         id: 1,
-        name: "Development Board",
-        sub_category: [
-            {
-                
-            }
-        ]
-    }
-]
-
-
-
-
+        name: "Arduino Board",
+        image: "/uploads/SubCategoryImage/2023-05-31-09-39-43.jpg",
+      },
+      {
+        id: 2,
+        name: "PI board",
+        image: null,
+      },
+      {
+        id: 3,
+        name: "SMT board",
+        image: null,
+      },
+    ],
+  },
+];
 
 const AddProducts = () => {
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [images, setImages] = useState([]);
   const [fullDescription, setFullDescription] = useState("");
   const [doc, setDoc] = useState("");
@@ -54,12 +71,36 @@ const AddProducts = () => {
     data.total_review = 0;
     data.rating = 0;
     data.feedback = [];
-
+    data.category = selectedCategory;
+    data.subCategories = selectedSubCategory;
     console.log(data);
 
     // // window.location.reload();
     // reset();
   };
+
+  useEffect(() => {
+    fetch(`https://api.robomartbd.com/api/catagorylist`)
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
+  useEffect(() => {
+    if (selectedCategory) {
+      categories?.map((category) => {
+        if (category?.id == selectedCategory) {
+          setSubCategories(category?.sub_category);
+        }
+      });
+    }
+  }, [selectedCategory]);
+  const handleChangeCategory = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const handleChangeSubCategory = (event) => {
+    setSelectedSubCategory(event.target.value);
+  };
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <Typography
@@ -166,19 +207,45 @@ const AddProducts = () => {
               </Grid>
             </Grid>{" "}
             <br />
-            {/* <Grid container spacing={2} paddingY={2} border={"2"}>
+            <Grid container spacing={2} paddingY={2} border={"2"}>
               <Grid item xs={12} sm={6}>
                 <FormLebel text={"Select Category :"} />
+                <Select
+                  className={styles.auth_form_inputField}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedCategory}
+                  onChange={handleChangeCategory}
+                >
+                  {categories.map((category) => (
+                    <MenuItem key={category.id} value={category.id}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormLebel text={"Select Sub-Category :"} />
+                {subCategories?.length > 0 && (
+                  <Select
+                    className={styles.auth_form_inputField}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={selectedSubCategory}
+                    onChange={handleChangeSubCategory}
+                  >
+                    {subCategories?.map((category) => (
+                      <MenuItem key={category.id} value={category.id}>
+                        {category.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
               </Grid>
-            </Grid> */}
+            </Grid>
           </div>
-                  <br />
-                  
-                  {/* CATEGORIES ADDED */}
-
+          <br />
+          {/* Full Description ADDED */}
           <br />
           <FormLebel text={"Short Description (40-50 words) :"} />
           <textarea
@@ -205,7 +272,6 @@ const AddProducts = () => {
             <Tooltip title="Please Save all section first">
               <div>
                 <input
-                  // disabled={checkBeforeSubmit ? false : true}
                   type="submit"
                   value={"Add Product"}
                   style={{ backgroundColor: "#d8d8d8 !important" }}

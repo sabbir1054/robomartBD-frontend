@@ -11,9 +11,8 @@ import { useGetHomeDataQuery } from "../../../../../../redux/api/api";
 const HeroSlider = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
-
   if (homeLoading) {
-    return (<p>Loading...</p>)
+    return <p>Loading...</p>;
   }
 
   return (
@@ -37,27 +36,6 @@ const HeroSlider = () => {
             </Box>
           </SwiperSlide>
         ))}
-
-        {/* <SwiperSlide>
-          <Box>
-            <img
-              style={{ width: "100%" }}
-              src="https://i.ibb.co/5MbWKSY/img3.jpg"
-              alt=""
-              srcset=""
-            />
-          </Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box>
-            <img
-              style={{ width: "100%" }}
-              src="https://i.ibb.co/5MbWKSY/img3.jpg"
-              alt=""
-              srcset=""
-            />
-          </Box>
-        </SwiperSlide> */}
       </Swiper>
     </>
   );
