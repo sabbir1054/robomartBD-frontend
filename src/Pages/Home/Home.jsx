@@ -7,14 +7,12 @@ import TopBlogs from "./Sections/TopBlogs/TopBlogs";
 
 const Home = () => {
  
-  const { data, isLoading, isError } = useGetUserQuery();
- 
+
 
   return (
     <>
       <Hero />
-      {/* <TopSellingProducts /> */}
-      {/* <OfferBanner /> */}
+     
       <CategoryProducts />
       <TopBlogs />
       <JoinOurCommunity />

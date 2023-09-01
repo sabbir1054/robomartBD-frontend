@@ -12,7 +12,7 @@ const OfferCards = () => {
     <>
       <Grid container>
         {homeData1?.spacialoffer?.map((offer) => (
-          <Grid item xs={6} md={12} paddingY={1}>
+          <Grid item xs={6} md={6} lg={12} paddingY={1}>
             <img
               src={`https://api.robomartbd.com${offer?.poster}`}
               alt=""
