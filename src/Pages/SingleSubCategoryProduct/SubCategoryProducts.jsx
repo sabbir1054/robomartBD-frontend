@@ -1,9 +1,9 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
 import CategoryList from "../Home/Sections/HeroSection/CategoryList";
-const SingleCategoryProducts = () => {
+const SubCategoryProducts = () => {
   const params = useParams();
 
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -11,25 +11,26 @@ const SingleCategoryProducts = () => {
   console.log(params);
   useEffect(() => {
     fetch(
-      `https://api.robomartbd.com/api/catagory/${params.categoryId}/category`
+      `https://api.robomartbd.com/api/catagory/${params.subCategoryId}/subcategory`
     )
       .then((res) => res.json())
       .then((data) => {
         setCategoryProducts(data);
       });
   }, [params]);
-
   return (
     <div>
+      {" "}
       <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
         <Grid item xs={2} padding={2}>
           <CategoryList />
         </Grid>
         <Grid item xs={10}>
-          <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-            {params?.categoryName.replace(/ /g, "_")} :
-          </Typography>
-          <Divider />
+          <Typography
+            variant="h6"
+            style={{ fontFamily: "Poppins" }}
+          ></Typography>
+
           <Box paddingY={1} marginY={1}>
             <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
               <Grid container spacing={2}>
@@ -57,4 +58,4 @@ const SingleCategoryProducts = () => {
   );
 };
 
-export default SingleCategoryProducts;
+export default SubCategoryProducts;

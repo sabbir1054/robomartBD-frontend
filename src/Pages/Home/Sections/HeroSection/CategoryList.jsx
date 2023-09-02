@@ -1,10 +1,9 @@
-import { Collapse, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import styles from "./Hero.module.scss";
@@ -22,8 +21,6 @@ const CategoryList = () => {
   const handleNavigation = (id) => {
     navigation(`/products/categories/${id}`);
   };
-
- 
 
   return (
     <>
@@ -49,48 +46,21 @@ const CategoryList = () => {
             Categories
           </h2>
         </div>
-        {/* <nav aria-label="main mailbox folders">
-          <List>
-            {homeData1?.catagorylist?.slice(0, 7).map((category) => (
-              <>
-                <Divider />
-                <ListItem
-                  disablePadding
-                  onClick={() => handleNavigation(category?.id)}
-                >
-                  <ListItemButton
-                    sx={{
-                      backgroundColor:
-                        params?.categoryId == category?.id
-                          ? "var(--primaryColor)"
-                          : "white",
-                    }}
-                  >
-                    <ListItemText primary={`${category?.name}`} />
-                  </ListItemButton>
-                </ListItem>
-              </>
-            ))}
-            <Divider />
-            <SelectCategory
-              categoriesList={homeData1?.categoriesList?.slice(
-                8,
-                homeData1?.categoriesList?.length - 1
-              )}
-            />
-          </List>
-        </nav> */}
+      
         <div>
           <List component="nav">
             {homeData1?.catagorylist?.slice(0, 7)?.map((category) => (
               <SingleListItem category={category} />
             ))}
-            {/* <ListItemButton onClick={handleClick}>
-              <ListItemText primary="Category 1" />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton> */}
           
+
             {/* Add more categories and subcategories */}
+            <ListItemButton>
+              <ListItemText
+                style={{ textAlign: "center" }}
+                primary="View all"
+              />
+            </ListItemButton>
           </List>
         </div>
         <Divider />

@@ -109,7 +109,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <Grid container marginTop={"12px"}>
+      <Grid container marginLeft={10}>
         <Grid item sm={9}>
           <Autosuggest
             // className={styles.searchField}

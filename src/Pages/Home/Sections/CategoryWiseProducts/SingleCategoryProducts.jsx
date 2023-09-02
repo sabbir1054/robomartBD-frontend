@@ -62,7 +62,9 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}
-          <NavLink to={`/products/categories/${id}`}>
+          <NavLink
+            to={`/products/categories/${id}/${title.replace(/ /g, "_")}`}
+          >
             <Button variant="contained" className={styles.showMoreBtn}>
               Show More
             </Button>

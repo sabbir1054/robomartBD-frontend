@@ -17,6 +17,8 @@ import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
 import ProductSearch from "./Pages/ProductSearchPage/ProductSearch";
+import SubCategoryProducts from "./Pages/SingleSubCategoryProduct/SubCategoryProducts";
+import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 
 function App() {
   return (
@@ -31,10 +33,18 @@ function App() {
         <Route path="/login" element={<AuthPages />} />
         <Route path="/register" element={<AuthPages />} />
         <Route path="/products" element={<AllProductPage />} />
-        <Route path="/products/search=/:searchTerm?" element={<ProductSearch />} />
+        <Route path="/checkout" element={<CheckOutPage />} />
         <Route
-          path="/products/categories/:categoryId"
+          path="/products/search=/:searchTerm?"
+          element={<ProductSearch />}
+        />
+        <Route
+          path="/products/categories/:categoryId/:categoryName"
           element={<SingleCategoryProducts />}
+        />
+        <Route
+          path="/products/categories/:subCategoryId/:subCategoryName"
+          element={<SubCategoryProducts />}
         />
         <Route
           path="/dashboard/portal-admin/addBlogs"
@@ -48,7 +58,10 @@ function App() {
         <Route path="/blog/:blogId" element={<SingleBlogPage />} />
         <Route path="/forum" element={<ForumMainPage />} />
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
-        <Route path="/product/:productId/:productName" element={<ProductDetailsPage />} />
+        <Route
+          path="/product/:productId/:productName"
+          element={<ProductDetailsPage />}
+        />
       </Routes>
       <Footer />
       <MobileNavigation />

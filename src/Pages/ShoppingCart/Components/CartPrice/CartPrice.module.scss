@@ -74,8 +74,18 @@
       color: #fff;
     }
   }
+  
 }
-
+.checkOutBtnDisable {
+    width: 100%;
+    font-size: 14px;
+    height: 40px;
+    border: 1px solid #e2e2e2;
+    background: transparent;
+    color: #e2e2e2;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
 .notActive {
   opacity: 0.4;
   background: #c96 !important;

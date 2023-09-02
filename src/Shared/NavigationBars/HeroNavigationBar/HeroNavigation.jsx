@@ -102,10 +102,10 @@ const HeroNavigation = () => {
               item
               md={8}
               // id="search-category"
-              // display={`flex`}
+              display={`flex`}
               // direction="row"
-              // justifyContent="center"
-              // alignItems="center"
+              justifyContent="center"
+              alignItems="center"
             >
               <SearchBar />
             </Grid>

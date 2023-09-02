@@ -8,13 +8,17 @@ import {
   Paper,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SingleListItem = ({ category }) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setOpen(!open);
+  };
+  const handleSubCategory = (name) => {
+    navigate(name);
   };
   return (
     <>
@@ -37,7 +41,15 @@ const SingleListItem = ({ category }) => {
           {category?.sub_category?.length > 0 ? (
             category?.sub_category?.map((singleSub) => (
               <>
-                <ListItemButton>
+                <ListItemButton
+                  onClick={() =>
+                    handleSubCategory(
+                      `/products/categories/${
+                        singleSub?.id
+                      }/${singleSub?.name?.replace(/ /g, "_")}`
+                    )
+                  }
+                >
                   <ListItemText primary={singleSub?.name} />
                 </ListItemButton>
                 <Divider />
@@ -48,7 +60,12 @@ const SingleListItem = ({ category }) => {
               <Divider />
             </>
           )}
-          <Link to={`/products/categories/${category?.id}`}>
+          <Link
+            to={`/products/categories/${category?.id}/${category?.name.replace(
+              / /g,
+              "_"
+            )}`}
+          >
             {" "}
             <ListItemText
               primary={"Show All"}

@@ -1,0 +1,20 @@
+.checkout_wrapper {
+  width: 100%;
+}
+.auth_label {
+  font-family: "Roboto";
+  color: #000000;
+}
+.auth_form_inputField {
+  width: 95%;
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  &:focus-visible {
+    outline: 1px solid var(--primaryColor);
+  }
+}

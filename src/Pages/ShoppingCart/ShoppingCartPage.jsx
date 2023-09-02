@@ -11,15 +11,15 @@ const ShoppingCartPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!data) {
+    if (!data && !isLoading) {
       navigate("/login");
-       Swal.fire({
-         position: "top-center",
-         icon: "warning",
-         title: "Login Required",
-         showConfirmButton: false,
-         timer: 1500,
-       });
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Login Required",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }, []);
 

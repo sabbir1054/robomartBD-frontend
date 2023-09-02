@@ -11,20 +11,58 @@ import {
 } from "@mui/material";
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartPrice.module.scss";
 const CartPrice = () => {
   const { data: cartData } = useGetCartQuery();
-
+  const [coupon, setCoupon] = useState("");
+  const navigate = useNavigate();
   const [shipping, setShipping] = useState(0);
   const handleChange = (event) => {
     // setShipping(event.target.value);
   };
-
+  console.log(shipping);
   let total = parseInt(cartData?.price + shipping);
 
-  console.log(shipping);
+  const handleApplyCoupon = () => {
+    const data = { cupon: coupon, total_price: total };
+    const storedData = localStorage.getItem("user");
+    const userData = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/order/cheak_copun`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userData}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: "Coupon is not Valid",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setCoupon("");
+        document.getElementById("coupon-field").value = "";
+        console.error("Fetch error:", error);
+      });
+  };
+  const handleNavigateCheckout = () => {
+    navigate("/checkOut");
+  };
   return (
     <div>
       <Grid container sx={{ paddingY: "5vh" }}>
@@ -60,7 +98,9 @@ const CartPrice = () => {
               Coupon Discount :
             </Typography>
             <TextField
-              id="outlined-basic"
+              id="coupon-field"
+              onChange={(e) => setCoupon(e.target.value)}
+              // id="outlined-basic"
               label="Coupon"
               variant="outlined"
               className={styles.couponTextField}
@@ -68,6 +108,7 @@ const CartPrice = () => {
             <br />
             <Button
               variant="contained"
+              onClick={handleApplyCoupon}
               sx={{
                 my: 2,
                 backgroundColor: "var(--primaryColor)",
@@ -137,12 +178,15 @@ const CartPrice = () => {
                 <span>{total}</span>
               </p>
               <button
-                className={`${styles.checkOutBtn}`}
-                //   disabled={auth.currentUser.isAnonymous}
-                //   onClick={checkOut}
+                className={
+                  !shipping == 0
+                    ? `${styles.checkOutBtn}`
+                    : `${styles.checkOutBtnDisable}`
+                }
+                disabled={!shipping == 0 && false}
+                onClick={!shipping==0&&handleNavigateCheckout}
               >
                 {/* {auth.currentUser.isAnonymous */}Proceed To Checkout
-                {/* : "Checkout"} */}
               </button>
             </div>
           </div>
