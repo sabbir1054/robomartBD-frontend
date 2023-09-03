@@ -1,7 +1,7 @@
 import CryptoJS from "crypto-js";
 
 export const encryptAndStoreData = (data) => {
-    console.log(import.meta.env.VITE_SECRET_KEY);
+ 
   // Convert your data to a JSON string
   const dataString = JSON.stringify(data);
 

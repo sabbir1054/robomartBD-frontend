@@ -19,7 +19,7 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
   }, []);
 
   return (
-    <Container className={styles.categoryProductsWrapper}>
+    <Container maxWidth={"xl"}>
       <Box paddingY={1} marginY={1}>
         <Box
           className={styles.topSeelingHeading}

@@ -7,7 +7,7 @@ import React from "react";
 import styles from "./OurFeatures.module.scss";
 const OurFeatures = () => {
   return (
-    <div>
+    <div style={{ width: "98%", display: "flex", justifyContent: "center" }}>
       {/* <Container className={styles.ourFeatures_wrapper}> */}
       <Box paddingY={2} marginY={3} className={styles.ourFeatures_wrapper}>
         <Grid container spacing={0}>
@@ -70,7 +70,7 @@ const OurFeatures = () => {
                   fontWeight={"normal"}
                   className={styles.featureText}
                 >
-                  If components have problem
+                  If products have problem
                 </Typography>
               </Box>
             </Box>

@@ -1,5 +1,5 @@
 import { Autocomplete, Grid, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetAllProductsQuery } from "../../../../redux/api/api";
 
 const AddRelatedProducts = ({ setRelatedProducts }) => {
@@ -24,25 +24,26 @@ const AddRelatedProducts = ({ setRelatedProducts }) => {
     <>
       <Grid container spacing={2} margin={"10px 0px"}>
         <Grid item xs={12} md={8}>
-          {" "}
-          <Autocomplete
-            // className={styles.autoCompleteField}
-
-            multiple
-            id="multi-select"
-            options={
-              data ? data?.map((item) => item?.name + "-PID: " + item?.id) : ""
-            }
-            value={selectedItems}
-            onChange={handleChange}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Select multiple products"
-              />
-            )}
-          />
+          {data && (
+            <Autocomplete
+              multiple
+              id="multi-select"
+              options={
+                data
+                  ? data?.map((item) => item?.name + "-PID: " + item?.id)
+                  : ""
+              }
+              value={selectedItems}
+              onChange={handleChange}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Select multiple products"
+                />
+              )}
+            />
+          )}
         </Grid>
         <Grid item xs={12} md={4}>
           {" "}
