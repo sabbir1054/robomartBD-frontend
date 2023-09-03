@@ -4,7 +4,6 @@ import {
   AppBar,
   Badge,
   Box,
-  Button,
   Container,
   Divider,
   Grid,
@@ -19,6 +18,7 @@ import {
   useGetUserQuery,
 } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
+import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
 
@@ -53,11 +53,7 @@ const HeroNavigation = () => {
   const listenScrollEvent = () => {
     window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
   };
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
-    window.location.reload();
-  };
+
   useEffect(() => {
     window.addEventListener("scroll", listenScrollEvent);
     return () => {
@@ -74,7 +70,7 @@ const HeroNavigation = () => {
       <AppBar
         sx={{
           backgroundColor: "var(--primaryColor)",
-          height:"73px",
+          height: "73px",
           boxShadow: "unset",
           padding: changeIcon ? "0px 0px" : "",
         }}
@@ -94,7 +90,12 @@ const HeroNavigation = () => {
             >
               <Box>
                 <NavLink to={"/"}>
-                  <img src="/assets/logo.png" alt="" style={{width:"100%",maxWidth:"200px"}} srcset="" />
+                  <img
+                    src="/assets/logo.png"
+                    alt=""
+                    style={{ width: "100%", maxWidth: "200px" }}
+                    srcset=""
+                  />
                 </NavLink>
               </Box>
             </Grid>
@@ -138,36 +139,20 @@ const HeroNavigation = () => {
                 <div>
                   {!data && <PermIdentityIcon className={styles.profileIcon} />}
                 </div>
+                {data && data[0]?.email && <AvaterBtnMeny data={data} />}
 
-                {data ? (
+                {!data && (
                   <>
-                    <p style={{ fontSize: "20px", fontWeight: "bold" }}>
-                      {data[0]?.first_name}
-                    </p>
-                  </>
-                ) : (
-                  <div>
                     <NavLink to="/login">
                       <p>Login</p>
                     </NavLink>
+                    <p style={{ margin: "0px 3px" }}>/</p>
                     <NavLink to="/register">
-                      <p>Register</p>
+                      <p> Register</p>
                     </NavLink>
-                  </div>
+                  </>
                 )}
               </div>
-              {data && (
-                // <NavLink to="/login">
-                <Button
-                  disableElevation
-                  variant="contained"
-                  style={{ background: "red", color: "white" }}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-                // </NavLink>
-              )}
             </Grid>
           </Grid>
         </Container>
