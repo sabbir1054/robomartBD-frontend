@@ -12,7 +12,7 @@ const RecentView = () => {
   useEffect(() => {
     const productsData = localStorage.getItem("recentViewProducts");
     const parseData = JSON.parse(productsData);
-    const reverseData = parseData.reverse();
+    const reverseData = parseData?.reverse();
     setData(reverseData);
   }, []);
 

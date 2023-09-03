@@ -9,7 +9,7 @@ const Hero = () => {
 
   return (
     <>
-      {screenWidth < 1100 ||
+      {screenWidth < 1200 ||
         (screenWidth > 1500 && (
           <>
             <Grid
@@ -33,7 +33,7 @@ const Hero = () => {
             <OurFeatures />
           </>
         ))}
-      {screenWidth > 1100 && screenWidth < 1500 && (
+      {screenWidth > 1200 && screenWidth < 1500 && (
         <Grid container paddingTop={1}>
           <Grid item md={3} lg={2}>
             <Box style={{ backgroundColor: "white", margin: "0px 10px" }}>

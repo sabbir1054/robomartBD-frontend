@@ -4,13 +4,15 @@ import { encryptAndStoreData } from "../../utils/encript";
 import CategoryProducts from "./Sections/CategoryWiseProducts/CategoryProducts";
 import Hero from "./Sections/HeroSection/Hero";
 import JoinOurCommunity from "./Sections/JoinOurCommunity/JoinOurCommunity";
+import OurCorporateClients from "./Sections/OurSupplierPartner/OurCorporateClients";
+import OurSupplierNPartner from "./Sections/OurSupplierPartner/OurSupplierNPartner";
 import TopBlogs from "./Sections/TopBlogs/TopBlogs";
 
 const Home = () => {
   const { data: homeData, isLoading, isError } = useGetHomeDataQuery();
 
   useEffect(() => {
-    if ( homeData) {
+    if (homeData) {
       fetch(`https://api.robomartbd.com/api/products`)
         .then((res) => res.json())
         .then((data) => {
@@ -23,9 +25,10 @@ const Home = () => {
   return (
     <>
       <Hero />
-
       <CategoryProducts />
       <TopBlogs />
+      <OurSupplierNPartner />
+      <OurCorporateClients />
       <JoinOurCommunity />
     </>
   );
