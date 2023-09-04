@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
   Rating,
   Typography,
@@ -21,6 +22,7 @@ import {
 } from "../../redux/api/api";
 import BottomTabs from "./BottomTabs";
 import styles from "./ProductDetail.module.scss";
+import RelatedProducts from "./RelatedProducts";
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -96,6 +98,7 @@ const ProductDetailsPage = () => {
       .then((data) => {
         console.log(data);
         setProductDetails(data);
+        // recent view products
         const cacheRecentView = localStorage.getItem("recentViewProducts");
         if (!cacheRecentView) {
           const recentArr = [];
@@ -255,6 +258,8 @@ const ProductDetailsPage = () => {
         </Grid>
 
         <BottomTabs />
+        <RelatedProducts categoriesId={productDetails?.catagorys} />
+        <Divider/>
         <RecentView />
       </Container>
     </div>

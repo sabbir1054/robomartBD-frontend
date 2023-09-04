@@ -17,7 +17,7 @@ const RecentView = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "3vh 0vh" }}>
       <Typography
         variant="h5"
         sx={{ fontFamily: "Poppins", fontWeight: "bold" }}

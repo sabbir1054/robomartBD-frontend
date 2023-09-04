@@ -154,6 +154,47 @@ const CartPrice = () => {
               </Button>
             )}
           </Box>
+          <Box sx={{ py: 3 }}>
+            <Typography
+              variant={"h5"}
+              sx={{
+                fontFamily: "var(--secondaryFont)",
+                fontWeight: "bold",
+              }}
+            >
+             Your balance (BDT 100):
+            </Typography>
+            <TextField
+              
+              defaultValue={100}
+              id="coupon-field"
+              onChange={(e) => setCoupon(e.target.value)}
+              // id="outlined-basic"
+              label="Balance"
+              variant="outlined"
+              className={styles.couponTextField}
+            />{" "}
+            <br />
+            {couponLoading ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                id="apply-btn"
+                variant="contained"
+                // onClick={handleApplyCoupon}
+                sx={{
+                  my: 2,
+                  backgroundColor: "var(--primaryColor)",
+                  transition: "all 0.3s ease-in",
+                  "&:hover": { backgroundColor: "green" },
+                }}
+                disableElevation
+                size="large"
+              >
+                USE Balance
+              </Button>
+            )}
+          </Box>
         </Grid>
         <Grid item lg={4} xs={12}>
           <div className={styles.checkOutProcess}>
