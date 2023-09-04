@@ -9,7 +9,7 @@ const OurFeatures = () => {
   return (
     <div style={{ width: "98%", display: "flex", justifyContent: "center" }}>
       {/* <Container className={styles.ourFeatures_wrapper}> */}
-      <Box paddingY={2} marginY={3} className={styles.ourFeatures_wrapper}>
+      <Box paddingY={2} className={styles.ourFeatures_wrapper}>
         <Grid container spacing={0}>
           <Grid item xs={12} sm={6} md={3} className={styles.singleFeature}>
             <Box
