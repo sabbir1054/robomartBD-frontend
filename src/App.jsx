@@ -4,21 +4,22 @@ import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import AuthPages from "./Pages/AuthPages/AuthPages";
 import BlogsMainPage from "./Pages/Blogs/BlogsMainPage";
 import SingleBlogPage from "./Pages/Blogs/SingleBlogPage/SingleBlogPage";
+import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
+import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
+import Profile from "./Pages/Dashboard/Customer/Profile/Profile";
 import ForumMainPage from "./Pages/Forums/ForumMainPage";
 import Home from "./Pages/Home/Home";
 import ProductDetailsPage from "./Pages/ProductDetailsPage/ProductDetailsPage";
+import ProductSearch from "./Pages/ProductSearchPage/ProductSearch";
 import ShoppingCartPage from "./Pages/ShoppingCart/ShoppingCartPage";
 import SingleCategoryProducts from "./Pages/SingleCategoryProducts/SingleCategoryProducts";
+import SubCategoryProducts from "./Pages/SingleSubCategoryProduct/SubCategoryProducts";
 import Footer from "./Shared/Footer/Footer";
 import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
-import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
-import ProductSearch from "./Pages/ProductSearchPage/ProductSearch";
-import SubCategoryProducts from "./Pages/SingleSubCategoryProduct/SubCategoryProducts";
-import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           path="/dashboard/portal-admin/addProducts"
           element={<AddProducts />}
         />
+        <Route path="/dashboard/user/profile" element={<Profile />} />
         <Route path="/blogs" element={<BlogsMainPage />} />
         <Route path="/blog/:blogId" element={<SingleBlogPage />} />
         <Route path="/forum" element={<ForumMainPage />} />

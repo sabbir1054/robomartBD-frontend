@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const AvaterBtnMeny = ({ data }) => {
@@ -66,16 +66,27 @@ const AvaterBtnMeny = ({ data }) => {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          <MenuItem onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">Profile</Typography>
-          </MenuItem>
+          <NavLink
+            to="/dashboard/user/profile"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <MenuItem onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Profile</Typography>
+            </MenuItem>
+          </NavLink>
           <Divider />
+          <NavLink
+            to="/shopping-cart"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <MenuItem onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Go to Cart</Typography>
+            </MenuItem>
+          </NavLink>
+          <Divider />
+
           <MenuItem onClick={handleCloseUserMenu}>
             <Typography textAlign="center">Order History</Typography>
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">Track Order</Typography>
           </MenuItem>
           <Divider />
           <MenuItem onClick={handleLogout}>

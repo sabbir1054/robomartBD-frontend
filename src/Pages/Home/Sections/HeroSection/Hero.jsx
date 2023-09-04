@@ -9,31 +9,8 @@ const Hero = () => {
 
   return (
     <>
-      {screenWidth < 1200 ||
-        (screenWidth > 1500 && (
-          <>
-            <Grid
-              container
-              columnSpacing={2}
-              paddingTop={1}
-              // style={{ backgroundColor: "#F0F2F5" }}
-            >
-              <Grid item md={3} lg={2}>
-                <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
-                  <CategoryList />
-                </Box>
-              </Grid>
-              <Grid item md={9} lg={7} width={"100%"}>
-                <HeroSlider />
-              </Grid>
-              <Grid item md={12} lg={3} width={"100%"}>
-                <OfferCards />
-              </Grid>
-            </Grid>
-            <OurFeatures />
-          </>
-        ))}
-      {screenWidth > 1200 && screenWidth < 1500 && (
+
+      {screenWidth > 1200 && screenWidth < 1500 ? (
         <Grid container paddingTop={1}>
           <Grid item md={3} lg={2}>
             <Box style={{ backgroundColor: "white", margin: "0px 10px" }}>
@@ -56,6 +33,28 @@ const Hero = () => {
             </Grid>
           </Grid>
         </Grid>
+      ) : (
+        <>
+          <Grid
+            container
+            columnSpacing={2}
+            paddingTop={1}
+            // style={{ backgroundColor: "#F0F2F5" }}
+          >
+            <Grid item md={3} lg={2}>
+              <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
+                <CategoryList />
+              </Box>
+            </Grid>
+            <Grid item md={9} lg={7} width={"100%"}>
+              <HeroSlider />
+            </Grid>
+            <Grid item md={12} lg={3} width={"100%"}>
+              <OfferCards />
+            </Grid>
+          </Grid>
+          <OurFeatures />
+        </>
       )}
     </>
   );

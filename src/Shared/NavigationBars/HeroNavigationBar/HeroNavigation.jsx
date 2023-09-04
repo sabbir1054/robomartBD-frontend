@@ -1,5 +1,6 @@
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   AppBar,
   Badge,
@@ -7,8 +8,7 @@ import {
   Container,
   Divider,
   Grid,
-  ThemeProvider,
-  createTheme,
+
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";

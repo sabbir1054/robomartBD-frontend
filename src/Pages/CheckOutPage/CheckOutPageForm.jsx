@@ -3,9 +3,14 @@ import {
   CircularProgress,
   Container,
   Divider,
+  FormControl,
+  FormControlLabel,
   Grid,
+  Radio,
+  RadioGroup,
   Typography,
 } from "@mui/material";
+
 import {
   getAllDistrict,
   getAllDivision,
@@ -21,6 +26,8 @@ import styles from "./CheckOut.module.scss";
 import FormAddressFieldCheckout from "./FormAddressFieldCheckout";
 import FormLabelCheckout from "./FormLabelCheckout";
 const CheckOutPage = () => {
+  const [billingOptions, setBillingOptions] = useState("");//cod=cash on delivery // 
+
   const [sameAsAddress, setSameAsAddress] = useState(false);
   const [division, setDivision] = useState({});
   const [district, setDistrict] = useState({});
@@ -100,7 +107,7 @@ const CheckOutPage = () => {
           className={styles.checkout_wrapper}
         >
           <Grid container spacing={2}>
-            <Grid item sm={12} md={3}>
+            <Grid item sm={12} md={2}>
               <FormLabelCheckout label={" Name:"} />
               {data && (
                 <input
@@ -134,7 +141,7 @@ const CheckOutPage = () => {
                 className={styles.auth_form_inputField}
               />
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item sm={12} md={4}>
               {" "}
               <FormLabelCheckout label={" Your Address:"} />
               <input
@@ -220,14 +227,13 @@ const CheckOutPage = () => {
               </Grid>
             )}
           </Grid>
-
+          {/* Billing */}
           <Grid container paddingY={2}>
             <Grid item xs={12}>
               <label htmlFor="title" className={styles.auth_label}>
                 <Typography
                   variant="h5"
                   style={{
-                    
                     // padding: "5vh 0",
                     fontFamily: "Poppins",
                     fontWeight: "bold",
@@ -237,6 +243,57 @@ const CheckOutPage = () => {
                 </Typography>
               </label>
               <Divider />
+            </Grid>
+            <Grid item xs={12} sm={4} style={{ borderRight: "1px solid #ddd",minHeight:"30vh" ,padding:"3vh"}}>
+              <FormControl fullWidth sx={{ pb: "23px" }}>
+                <RadioGroup>
+                  <FormControlLabel
+                    sx={{ mr: 0 }}
+                    value="100"
+                    control={
+                      <Radio
+                        size="small"
+                        color="success"
+                        onClick={() => setShipping(100)}
+                      />
+                    }
+                    label={
+                      <p className={styles.shippingItem}>Cash on delivery</p>
+                    }
+                  />
+                  <FormControlLabel
+                    sx={{ mr: 0 }}
+                    value="150"
+                    control={
+                      <Radio
+                        size="small"
+                        color="success"
+                        onClick={() => setShipping(150)}
+                      />
+                    }
+                    label={
+                      <p className={styles.shippingItem}>Manual Payment</p>
+                    }
+                  />
+                  <FormControlLabel
+                    sx={{ mr: 0 }}
+                    value="200"
+                    control={
+                      <Radio
+                        size="small"
+                        color="success"
+                        onClick={() => setShipping(150)}
+                      />
+                    }
+                    label={
+                      <p className={styles.shippingItem}>Online Payment</p>
+                    }
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+
             </Grid>
           </Grid>
         </form>

@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import styles from "./CategoryProducts.module.scss";
@@ -9,8 +9,10 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const RelatedProducts = ({ categoriesId }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const newData = [];
 
@@ -29,11 +31,12 @@ const RelatedProducts = ({ categoriesId }) => {
       }
 
       setData(...newData);
+      setIsLoading(false);
     };
 
     fetchData();
-  }, []);
-  console.log(data);
+  }, [categoriesId]);
+  console.log(categoriesId);
   return (
     <>
       <div style={{ padding: "3vh 0vh" }}>
@@ -43,7 +46,7 @@ const RelatedProducts = ({ categoriesId }) => {
         >
           Related Products
         </Typography>
-        
+        {isLoading && <CircularProgress />}
         <>
           <Swiper
             slidesPerView={5}
