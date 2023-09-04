@@ -5,7 +5,7 @@ import styles from "./CartItems.module.scss";
 import SingleCartItem from "./SingleCartItem";
 const CartItems = () => {
   const { data: cartData } = useGetCartQuery();
-
+console.log(cartData);
   return (
     <>
       {/* heading title */}

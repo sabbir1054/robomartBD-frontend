@@ -1,10 +1,4 @@
 import {
-  allDistict,
-  allDivision,
-  allUpazila,
-} from "@bangladeshi/bangladesh-address";
-import {
-  Button,
   Checkbox,
   CircularProgress,
   Container,
@@ -12,6 +6,12 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import {
+  getAllDistrict,
+  getAllDivision,
+  getAllUnion,
+  getAllUpazila,
+} from "bd-divisions-to-unions";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -20,12 +20,6 @@ import { useGetCartQuery, useGetUserQuery } from "../../redux/api/api";
 import styles from "./CheckOut.module.scss";
 import FormAddressFieldCheckout from "./FormAddressFieldCheckout";
 import FormLabelCheckout from "./FormLabelCheckout";
-import {
-  getAllDivision,
-  getAllDistrict,
-  getAllUnion,
-  getAllUpazila,
-} from "bd-divisions-to-unions";
 const CheckOutPage = () => {
   const [sameAsAddress, setSameAsAddress] = useState(false);
   const [division, setDivision] = useState({});
@@ -38,13 +32,10 @@ const CheckOutPage = () => {
   const upozilaData = getAllUpazila("en");
   const unionData = getAllUnion("en");
 
-
-
   const { data, isLoading, isError } = useGetUserQuery();
   const { data: cartData } = useGetCartQuery();
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-
 
   const {
     register,
@@ -72,7 +63,6 @@ const CheckOutPage = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
- 
 
   if (isLoading) {
     return (
@@ -91,7 +81,7 @@ const CheckOutPage = () => {
 
   return (
     <div style={{ minHeight: "70vh", padding: "5vh 0" }}>
-      <Container maxWidth={"lg"}>
+      <Container maxWidth={"xl"}>
         <Typography
           variant="h5"
           style={{
@@ -110,7 +100,7 @@ const CheckOutPage = () => {
           className={styles.checkout_wrapper}
         >
           <Grid container spacing={2}>
-            <Grid item sm={12} md={6}>
+            <Grid item sm={12} md={3}>
               <FormLabelCheckout label={" Name:"} />
               {data && (
                 <input
@@ -122,29 +112,9 @@ const CheckOutPage = () => {
                   className={styles.auth_form_inputField}
                 />
               )}{" "}
-              <br />
-              <FormLabelCheckout label={" Your Address:"} />
-              <input
-                type="text"
-                {...register("address", { required: true })}
-                className={styles.auth_form_inputField}
-              />
             </Grid>
-            <Grid item sm={12} md={6}>
-              <label htmlFor="title" className={styles.auth_label}>
-                <Typography
-                  variant="title1"
-                  style={{
-                    textAlign: "center",
-                    padding: "5vh 0",
-                    fontFamily: "Poppins",
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  Email:
-                </Typography>
-              </label>
+            <Grid item sm={12} md={3}>
+              <FormLabelCheckout label={"Email :"} />
               {data && (
                 <input
                   type="text"
@@ -155,20 +125,18 @@ const CheckOutPage = () => {
                   className={styles.auth_form_inputField}
                 />
               )}
-              <label htmlFor="title" className={styles.auth_label}>
-                <Typography
-                  variant="title1"
-                  style={{
-                    textAlign: "center",
-                    padding: "5vh 0",
-                    fontFamily: "Poppins",
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  Contact number :
-                </Typography>
-              </label>
+            </Grid>
+            <Grid item sm={12} md={3}>
+              <FormLabelCheckout label={"Contact number :"} />
+              <input
+                type="text"
+                {...register("address", { required: true })}
+                className={styles.auth_form_inputField}
+              />
+            </Grid>
+            <Grid item sm={12} md={3}>
+              {" "}
+              <FormLabelCheckout label={" Your Address:"} />
               <input
                 type="text"
                 {...register("address", { required: true })}
@@ -176,13 +144,11 @@ const CheckOutPage = () => {
               />
             </Grid>
           </Grid>
+          <br />
           <Grid container>
             <Grid container spacing={2} display={"flex"} alignItems={"center"}>
-              <Grid item xs={12} sm={12} md={6}>
+              <Grid item xs={12} display={"flex"} alignItems={"center"}>
                 <FormLabelCheckout label={" Delivery Address:"} />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6}>
-                {" "}
                 <div style={{ display: "flex", justifyContent: "end" }}>
                   <div>
                     <Checkbox
@@ -230,7 +196,7 @@ const CheckOutPage = () => {
                     />
                   )}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <Typography
                     variant="title1"
                     style={{
@@ -250,8 +216,28 @@ const CheckOutPage = () => {
                     className={styles.auth_form_inputField}
                   />
                 </Grid>
+                <Grid item xs={6}></Grid>
               </Grid>
             )}
+          </Grid>
+
+          <Grid container paddingY={2}>
+            <Grid item xs={12}>
+              <label htmlFor="title" className={styles.auth_label}>
+                <Typography
+                  variant="h5"
+                  style={{
+                    
+                    // padding: "5vh 0",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Billing Options :
+                </Typography>
+              </label>
+              <Divider />
+            </Grid>
           </Grid>
         </form>
       </Container>
