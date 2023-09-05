@@ -28,7 +28,7 @@ const Profile = () => {
   const [district, setDistrict] = useState({});
   const [upozila, setUpozila] = useState({});
   const [union, setUnion] = useState({});
-
+  const [fullAddress, setFullAddress] = useState("");
   const divisionData = getAllDivision("en");
   const districtsData = getAllDistrict("en");
   const upozilaData = getAllUpazila("en");
@@ -75,6 +75,11 @@ const Profile = () => {
       timer: 1500,
     });
     setIsUpdate(false);
+    setDivision("");
+    setDistrict("");
+    setUpozila("");
+    setUnion("");
+    setFullAddress(""); //this will update
   };
   return (
     <div
