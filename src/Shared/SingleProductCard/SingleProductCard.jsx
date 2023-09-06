@@ -8,7 +8,7 @@ import {
   CardMedia,
   Rating,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -28,6 +28,7 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   errorNotify: "Something went wrong !",
 // });
 const SingleProductCard = ({ product }) => {
+   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
   const {
     data: userData,
@@ -134,15 +135,17 @@ const SingleProductCard = ({ product }) => {
           </Link>
           <Box paddingBottom={1} borderBottom={"1px solid #f2f2f2"}>
             {" "}
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              {" "}
-              <Rating
-                name="read-only"
-                size="small"
-                value={product?.ratting}
-                readOnly
-              />
-            </div>
+            {screenWidth > 500 && (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                {" "}
+                <Rating
+                  name="read-only"
+                  size="small"
+                  value={product?.ratting}
+                  readOnly
+                />
+              </div>
+            )}
             <p
               className={styles.productDescription}
               style={{ fontSize: "12px", textAlign: "justify" }}

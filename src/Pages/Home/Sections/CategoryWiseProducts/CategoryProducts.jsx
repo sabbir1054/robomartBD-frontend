@@ -2,7 +2,7 @@ import React from "react";
 import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import SingleCategoryProducts from "./SingleCategoryProducts";
 const CategoryProducts = () => {
-  const { data:homeData, isLoading, isError } = useGetHomeDataQuery();
+  const { data: homeData, isLoading, isError } = useGetHomeDataQuery();
 
   return (
     <>
@@ -13,7 +13,6 @@ const CategoryProducts = () => {
           fetchProducts={category?.product}
         />
       ))}
- 
     </>
   );
 };

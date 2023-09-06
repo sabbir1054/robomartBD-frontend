@@ -11,22 +11,24 @@ import {
   Typography,
 } from "@mui/material";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartPrice.module.scss";
 const CartPrice = () => {
+  const [discountPercentage, setDisCountPercentage] = useState(0);
+
+  const [isCouponValid, setIsCouponValid] = useState(false);
   const [couponLoading, setCouponLoading] = useState(false);
   const dispatch = useDispatch();
   const { data: cartData } = useGetCartQuery();
   const [coupon, setCoupon] = useState("");
   const navigate = useNavigate();
   const [shipping, setShipping] = useState(0);
-
-  console.log(shipping);
-  let total = parseInt(cartData?.price + shipping);
+  const [discount, setDiscount] = useState(0);
+  let total = parseInt((cartData?.price + shipping)-discount);
 
   const handleApplyCoupon = () => {
     setCouponLoading(true);
@@ -49,6 +51,20 @@ const CartPrice = () => {
       })
       .then((result) => {
         console.log(result);
+        if (result?.discount) {
+          setIsCouponValid(true);
+          //discount
+          setDisCountPercentage(result.discount);
+          console.log(total * (result.discount / 100));
+
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `You get `,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
         setCouponLoading(false);
       })
       .catch((error) => {
@@ -60,13 +76,7 @@ const CartPrice = () => {
           timer: 1500,
         });
         setCouponLoading(false);
-        // Get the element by its id
-        const couponField = document.getElementById("coupon-field");
-        const applyBtn = document.getElementById("apply-btn");
-
-        applyBtn.disabled = true;
-        couponField.disabled = true;
-        console.error("Fetch error:", error);
+        setCoupon("");
       });
   };
 
@@ -91,6 +101,14 @@ const CartPrice = () => {
     navigate("/checkOut");
   };
 
+  useEffect(() => {
+    if (discountPercentage > 0) {
+      const discountAmount = total * (discountPercentage / 100);
+
+      setDiscount(parseInt(discountAmount));
+    }
+  }, [discountPercentage]);
+  console.log(discount);
   return (
     <div>
       <Grid container sx={{ paddingY: "5vh" }}>
@@ -126,6 +144,7 @@ const CartPrice = () => {
               Coupon Discount :
             </Typography>
             <TextField
+              disabled={isCouponValid && true}
               id="coupon-field"
               onChange={(e) => setCoupon(e.target.value)}
               // id="outlined-basic"
@@ -138,6 +157,7 @@ const CartPrice = () => {
               <CircularProgress />
             ) : (
               <Button
+                disabled={isCouponValid && true}
                 id="apply-btn"
                 variant="contained"
                 onClick={handleApplyCoupon}
@@ -162,10 +182,9 @@ const CartPrice = () => {
                 fontWeight: "bold",
               }}
             >
-             Your balance (BDT 100):
+              Your balance (BDT 100):
             </Typography>
             <TextField
-              
               defaultValue={100}
               id="coupon-field"
               onChange={(e) => setCoupon(e.target.value)}
@@ -202,6 +221,9 @@ const CartPrice = () => {
               <h5>Cart Total</h5>
               <p>
                 Subtotal: <span>{cartData?.price}</span>
+              </p>
+              <p style={{ color: "#025a0e", fontWeight: "bold" }}>
+                Discount: <span> - {discount}</span>
               </p>
             </div>
             <div className={styles.shipping}>

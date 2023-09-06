@@ -46,7 +46,7 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
                 {" "}
                 <Grid
                   item
-                  xs={12}
+                  xs={6}
                   sm={6}
                   md={3}
                   lg={2}

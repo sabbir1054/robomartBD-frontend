@@ -258,9 +258,9 @@ const ProductDetailsPage = () => {
         </Grid>
 
         <BottomTabs />
-        <RelatedProducts categoriesId={productDetails?.catagorys} />
-        <Divider/>
         <RecentView />
+        <Divider />
+        <RelatedProducts categoriesId={productDetails?.catagorys} />
       </Container>
     </div>
   );
