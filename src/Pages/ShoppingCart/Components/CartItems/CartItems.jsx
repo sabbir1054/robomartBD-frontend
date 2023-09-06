@@ -3,9 +3,9 @@ import React from "react";
 import { useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartItems.module.scss";
 import SingleCartItem from "./SingleCartItem";
-const CartItems = () => {
+const CartItems = ({ setIsDataChange }) => {
   const { data: cartData } = useGetCartQuery();
-console.log(cartData);
+
   return (
     <>
       {/* heading title */}
@@ -30,7 +30,10 @@ console.log(cartData);
             </thead>
             <tbody>
               {cartData?.items?.map((item) => (
-                <SingleCartItem product={item} />
+                <SingleCartItem
+                  product={item}
+                  setIsDataChange={setIsDataChange}
+                />
               ))}
             </tbody>
           </table>

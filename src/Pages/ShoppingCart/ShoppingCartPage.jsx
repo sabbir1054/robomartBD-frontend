@@ -1,12 +1,13 @@
 import { Box, Container, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../redux/api/api";
 import CartItems from "./Components/CartItems/Cartitems";
 import CartPrice from "./Components/CartPrice/CartPrice";
 import styles from "./ShoppingCartPages.module.scss";
-import Swal from "sweetalert2";
 const ShoppingCartPage = () => {
+  const [isDataChange, setIsDataChange] = useState(false);
   const { data, isLoading, isError } = useGetUserQuery();
   const navigate = useNavigate();
 
@@ -34,8 +35,8 @@ const ShoppingCartPage = () => {
             Shopping Cart
           </Typography>
         </Box>
-        <CartItems />
-        <CartPrice />
+        <CartItems setIsDataChange={setIsDataChange} />
+        <CartPrice isDataChange={isDataChange } />
       </Container>
     </div>
   );

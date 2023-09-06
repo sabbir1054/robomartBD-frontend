@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useGetCartQuery } from "../../../../redux/api/api";
 import styles from "./CartPrice.module.scss";
-const CartPrice = () => {
+const CartPrice = ({ isDataChange }) => {
   const [discountPercentage, setDisCountPercentage] = useState(0);
 
   const [isCouponValid, setIsCouponValid] = useState(false);
@@ -28,11 +28,12 @@ const CartPrice = () => {
   const navigate = useNavigate();
   const [shipping, setShipping] = useState(0);
   const [discount, setDiscount] = useState(0);
-  let total = parseInt((cartData?.price + shipping)-discount);
+  let total = parseInt(cartData?.price + shipping - discount);
 
   const handleApplyCoupon = () => {
     setCouponLoading(true);
     const data = { cupon: coupon, total_price: total };
+    console.log(data);
     const storedData = localStorage.getItem("user");
     const userData = JSON.parse(storedData);
     fetch(`https://api.robomartbd.com/order/cheak_copun`, {
@@ -68,6 +69,7 @@ const CartPrice = () => {
         setCouponLoading(false);
       })
       .catch((error) => {
+        console.log(error);
         Swal.fire({
           position: "top-center",
           icon: "error",
@@ -76,7 +78,6 @@ const CartPrice = () => {
           timer: 1500,
         });
         setCouponLoading(false);
-        setCoupon("");
       });
   };
 
@@ -108,7 +109,10 @@ const CartPrice = () => {
       setDiscount(parseInt(discountAmount));
     }
   }, [discountPercentage]);
-  console.log(discount);
+  useEffect(() => {
+    setDiscount(0);
+    setIsCouponValid(false);
+  }, [isDataChange]);
   return (
     <div>
       <Grid container sx={{ paddingY: "5vh" }}>

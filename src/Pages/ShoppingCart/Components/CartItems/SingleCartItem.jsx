@@ -12,7 +12,7 @@ import {
 import styles from "./CartItems.module.scss";
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
-const SingleCartItem = ({ product }) => {
+const SingleCartItem = ({ product, setIsDataChange }) => {
   const [deleteProductFromCart, { isLoading, isError, isSuccess }] =
     useDeleteProductFromCartMutation();
   const [
@@ -28,11 +28,13 @@ const SingleCartItem = ({ product }) => {
     const options = { data: { id: product?.id } };
 
     deleteProductFromCart(options);
+    setIsDataChange(true);
   };
 
   const handleQuantity = (flag) => {
     const options = { data: { flag: flag, id: product?.id } };
     changeQuantity(options);
+    setIsDataChange(true)
   };
 
   if ((isSuccess, updateQuantitySuccess)) {
