@@ -1,4 +1,4 @@
-import { Button, Grid, MenuItem, Select } from "@mui/material";
+import { Grid, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 import FormLabelCheckout from "./FormLabelCheckout";
 
@@ -15,7 +15,12 @@ const mystyles = {
   },
 };
 
-const BillingOptions = ({ billingOptions }) => {
+const BillingOptions = ({
+  billingOptions,
+  setPaymentMedium,
+  setTrnxID,
+  setPaymentNumber,
+}) => {
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const handleSSL = () => {
@@ -40,9 +45,7 @@ const BillingOptions = ({ billingOptions }) => {
     watch,
     formState: { errors },
   } = useForm({});
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+
   if (billingOptions === "") {
     return (
       <div
@@ -69,7 +72,7 @@ const BillingOptions = ({ billingOptions }) => {
           >
             <img src="/public/assets/cod-photo.png" width={"300px"} />
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          {/* <div style={{ display: "flex", justifyContent: "center" }}>
             {" "}
             <Button
               variant="contained"
@@ -78,7 +81,7 @@ const BillingOptions = ({ billingOptions }) => {
             >
               Confirm Order
             </Button>
-          </div>
+          </div> */}
         </>
       )}
 
@@ -90,10 +93,7 @@ const BillingOptions = ({ billingOptions }) => {
                 label={" Fill up this form for payment confirmation :"}
               />{" "}
               <br /> <br />
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className={styles.checkout_wrapper}
-              >
+              <form className={styles.checkout_wrapper}>
                 <FormLabelCheckout label={" Payment Method:"} />
                 <Select
                   labelId="demo-simple-select-label"
@@ -103,29 +103,31 @@ const BillingOptions = ({ billingOptions }) => {
                   onChange={handleChange}
                   className={styles.auth_form_inputField}
                 >
-                  <MenuItem value={"bkash"}>Bkash</MenuItem>
-                  <MenuItem value={"nagad"}>Nagad</MenuItem>
-                  <MenuItem value={"rocket"}>Rocket</MenuItem>
+                  <MenuItem value={"bkash"} onClick={setPaymentMedium("BKASH")}>
+                    Bkash
+                  </MenuItem>
+                  <MenuItem value={"nagad"} onClick={setPaymentMedium("NAGAD")}>
+                    Nagad
+                  </MenuItem>
+                  <MenuItem
+                    value={"rocket"}
+                    onClick={setPaymentMedium("ROCKET")}
+                  >
+                    Rocket
+                  </MenuItem>
                 </Select>
                 <FormLabelCheckout label={"Uses mobile no for payment :"} />
                 <input
                   type="text"
-                  // {...register(, { required: true })}
+                  onChange={(e) => setPaymentNumber(e.target.value)}
                   className={styles.auth_form_inputField}
                 />
                 <FormLabelCheckout label={"Transaction ID :"} />
                 <input
                   type="text"
-                  // {...register(, { required: true })}
+                  onChange={(e) => setTrnxID(e.target.value)}
                   className={styles.auth_form_inputField}
                 />
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "var(--primaryColor)" }}
-                  disableElevation
-                >
-                  Confirm Order
-                </Button>
               </form>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
@@ -195,7 +197,7 @@ const BillingOptions = ({ billingOptions }) => {
               />
             </div>
             <br />
-            <div style={{ display: "flex", justifyContent: "end" }}>
+            {/* <div style={{ display: "flex", justifyContent: "end" }}>
               <Button
                 onClick={handleSSL}
                 variant="outlined"
@@ -206,7 +208,7 @@ const BillingOptions = ({ billingOptions }) => {
               >
                 Make Payment & Confirm Order
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

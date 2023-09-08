@@ -19,14 +19,23 @@ import {
 } from "bd-divisions-to-unions";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useGetCartQuery, useGetUserQuery } from "../../redux/api/api";
+import {
+  useGetCartQuery,
+  useGetUserProfileQuery,
+  useGetUserQuery,
+} from "../../redux/api/api";
 import BillingOptions from "./BillingOptions";
 import styles from "./CheckOut.module.scss";
 import FormAddressFieldCheckout from "./FormAddressFieldCheckout";
 import FormLabelCheckout from "./FormLabelCheckout";
 const CheckOutPage = () => {
+  const { data: userProfile, isLoading: userProfileLoading } =
+    useGetUserProfileQuery();
+  const checkoutData = useSelector((state) => state.checkoutData);
+
   const [billingOptions, setBillingOptions] = useState(""); //cod=cash on delivery //
 
   const [sameAsAddress, setSameAsAddress] = useState(false);
@@ -34,11 +43,16 @@ const CheckOutPage = () => {
   const [district, setDistrict] = useState({});
   const [upozila, setUpozila] = useState({});
   const [union, setUnion] = useState({});
+  const [fullAddress, setFullAddress] = useState("");
 
   const divisionData = getAllDivision("en");
   const districtsData = getAllDistrict("en");
   const upozilaData = getAllUpazila("en");
   const unionData = getAllUnion("en");
+
+  const [paymentMedium, setPaymentMedium] = useState("");
+  const [trnxID, setTrnxID] = useState("");
+  const [paymentNumber, setPaymentNumber] = useState("");
 
   const { data, isLoading, isError } = useGetUserQuery();
   const { data: cartData } = useGetCartQuery();
@@ -68,10 +82,6 @@ const CheckOutPage = () => {
     setUser(data);
   }, [data]);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
   if (isLoading) {
     return (
       <div
@@ -86,6 +96,86 @@ const CheckOutPage = () => {
       </div>
     );
   }
+  const makeAddressString = () => {
+    let updatedAddress = fullAddress;
+    if (union.title) {
+      updatedAddress += "," + union?.title + ",";
+    }
+    if (upozila.title) {
+      updatedAddress += upozila?.title + ",";
+    }
+    if (upozila.title) {
+      updatedAddress += upozila?.title + ",";
+    }
+    if (district.title) {
+      updatedAddress += district?.title + ",";
+    }
+    if (division.title) {
+      updatedAddress += division?.title;
+    }
+
+    return updatedAddress;
+  };
+
+  const postAnOrder = (orderData) => {
+    const storedData = localStorage.getItem("user");
+    const userData = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/order/get_order`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userData}`,
+      },
+      body: JSON.stringify(orderData),
+    })
+      .then((res) => {
+        console.log(res);
+        res.json();
+      })
+      .then((result) => {
+        console.log(result);
+      });
+  };
+
+  const handleSubmitBtn = () => {
+    let confirmAddress = "";
+    if (sameAsAddress) {
+      confirmAddress = userProfile?.address;
+    } else {
+      confirmAddress = makeAddressString();
+    }
+    if (!sameAsAddress && confirmAddress == "") {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please Select Address",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    let billing_options = "";
+    if (checkoutData?.useBalance) {
+      billing_options = "BALANCE";
+    }
+    if (billingOptions === "mp") {
+      billing_options = "MANUAL";
+    } else {
+      billing_options = "CashOnDelivery";
+    }
+
+    const data = {
+      delevary: checkoutData?.delivery,
+      address: confirmAddress,
+      phone: userProfile?.phone,
+      cupon: checkoutData?.cupon,
+      billing_option: billing_options,
+      payment_method: paymentMedium,
+      payment_id: trnxID,
+      payment_number: paymentNumber,
+      items: cartData?.items,
+    };
+    postAnOrder(data);
+  };
 
   return (
     <div style={{ minHeight: "70vh", padding: "5vh 0" }}>
@@ -103,10 +193,7 @@ const CheckOutPage = () => {
         <Divider />
 
         <br />
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className={styles.checkout_wrapper}
-        >
+        <form className={styles.checkout_wrapper}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={2}>
               <FormLabelCheckout label={" Name:"} />
@@ -116,7 +203,7 @@ const CheckOutPage = () => {
                   disabled
                   defaultChecked
                   defaultValue={data[0]?.first_name + " " + data[0]?.last_name}
-                  // {...register(, { required: true })}
+                  {...register("name")}
                   className={styles.auth_form_inputField}
                 />
               )}
@@ -129,27 +216,40 @@ const CheckOutPage = () => {
                   disabled
                   defaultChecked
                   defaultValue={data[0]?.email}
-                  // {...register(, { required: true })}
+                  {...register("email")}
                   className={styles.auth_form_inputField}
                 />
               )}
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
               <FormLabelCheckout label={"Contact number :"} />
-              <input
-                type="text"
-                {...register("address", { required: true })}
-                className={styles.auth_form_inputField}
-              />
+              {userProfileLoading ? (
+                <CircularProgress />
+              ) : (
+                <input
+                  type="text"
+                  disabled
+                  defaultValue={userProfile?.phone}
+                  {...register("phone")}
+                  className={styles.auth_form_inputField}
+                />
+              )}
             </Grid>
             <Grid item xs={12} sm={12} md={4}>
               {" "}
               <FormLabelCheckout label={" Your Address:"} />
-              <input
-                type="text"
-                {...register("address", { required: true })}
-                className={styles.auth_form_inputField}
-              />
+              {userProfileLoading ? (
+                <CircularProgress />
+              ) : (
+                <input
+                  id="name"
+                  type="text"
+                  disabled
+                  defaultValue={userProfile?.address}
+                  {...register("phone")}
+                  className={styles.auth_form_inputField}
+                />
+              )}
             </Grid>
           </Grid>
           <br />
@@ -158,13 +258,15 @@ const CheckOutPage = () => {
               <Grid item xs={12} display={"flex"} alignItems={"center"}>
                 <FormLabelCheckout label={" Delivery Address:"} />
                 <div style={{ display: "flex", justifyContent: "end" }}>
-                  <div>
-                    <Checkbox
-                      color="success"
-                      onChange={(e) => setSameAsAddress(e.target.checked)}
-                    />{" "}
-                    <Typography variant="title1">Same as address </Typography>
-                  </div>
+                  {!userProfileLoading && userProfile?.address && (
+                    <div>
+                      <Checkbox
+                        color="success"
+                        onChange={(e) => setSameAsAddress(e.target.checked)}
+                      />{" "}
+                      <Typography variant="title1">Same as address </Typography>
+                    </div>
+                  )}
                 </div>
               </Grid>
             </Grid>
@@ -220,7 +322,7 @@ const CheckOutPage = () => {
                   </Typography>
                   <input
                     type="text"
-                    {...register("address", { required: true })}
+                    onChange={(e) => setFullAddress(e.target.value)}
                     className={styles.auth_form_inputField}
                   />
                 </Grid>
@@ -306,10 +408,22 @@ const CheckOutPage = () => {
               <BillingOptions
                 setBillingOptions={setBillingOptions}
                 billingOptions={billingOptions}
+                setPaymentNumber={setPaymentNumber}
+                setTrnxID={setTrnxID}
+                setPaymentMedium={setPaymentMedium}
               />
             </Grid>
           </Grid>
         </form>
+        <div style={{ display: "flex", justifyContent: "end" }}>
+          <input
+            type="submit"
+            className={styles.form_submitBtn}
+            onClick={handleSubmitBtn}
+            value={"Confirm Order"}
+            style={{ width: "100%", maxWidth: "200px" }}
+          />
+        </div>
       </Container>
     </div>
   );

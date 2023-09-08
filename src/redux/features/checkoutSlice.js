@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   delivery: "",
-  items: [],
   cupon: "",
+  useBalance: false,
 };
 
 const checkoutSlice = createSlice({
@@ -12,7 +12,6 @@ const checkoutSlice = createSlice({
   reducers: {
     addCheckoutData: (state, action) => {
       state.delivery = action.payload.delivery;
-      state.items = action.items;
       state.cupon = action.cupon;
     },
   },

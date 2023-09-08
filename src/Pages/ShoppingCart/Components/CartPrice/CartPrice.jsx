@@ -15,10 +15,22 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useGetCartQuery } from "../../../../redux/api/api";
+import {
+  useGetCartQuery,
+  useGetUserProfileQuery,
+} from "../../../../redux/api/api";
 import styles from "./CartPrice.module.scss";
+import { addCheckoutData } from "../../../../redux/features/checkoutSlice";
 const CartPrice = ({ isDataChange }) => {
+  const {
+    data: userProfile,
+    isLoading: profileLoading,
+    isError: profileError,
+    error,
+  } = useGetUserProfileQuery();
+
   const [discountPercentage, setDisCountPercentage] = useState(0);
+  const [useBalance, setUseBalance] = useState(false);
 
   const [isCouponValid, setIsCouponValid] = useState(false);
   const [couponLoading, setCouponLoading] = useState(false);
@@ -33,7 +45,7 @@ const CartPrice = ({ isDataChange }) => {
   const handleApplyCoupon = () => {
     setCouponLoading(true);
     const data = { cupon: coupon, total_price: total };
-    console.log(data);
+ 
     const storedData = localStorage.getItem("user");
     const userData = JSON.parse(storedData);
     fetch(`https://api.robomartbd.com/order/cheak_copun`, {
@@ -61,7 +73,7 @@ const CartPrice = ({ isDataChange }) => {
           Swal.fire({
             position: "top-center",
             icon: "success",
-            title: `You get `,
+            title: `You get discount ${result?.discount}%`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -69,7 +81,7 @@ const CartPrice = ({ isDataChange }) => {
         setCouponLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+       setCoupon("")
         Swal.fire({
           position: "top-center",
           icon: "error",
@@ -91,10 +103,10 @@ const CartPrice = ({ isDataChange }) => {
     const data = {
       delivery: ship,
       cupon: coupon,
-      items: cartData?.items,
+      useBalance: useBalance,
     };
     console.log(data);
-    // dispatch(addCheckoutData({}));
+    dispatch(addCheckoutData(data));
   };
 
   const handleNavigateCheckout = () => {
@@ -113,6 +125,36 @@ const CartPrice = ({ isDataChange }) => {
     setDiscount(0);
     setIsCouponValid(false);
   }, [isDataChange]);
+
+  const handleBalanceBtn = () => {
+    if (shipping === 0) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: `Please choose shipping `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else if (shipping > 0 && userProfile?.balance > total) {
+      setUseBalance(true);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: `You able to use balance `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else if (userProfile?.balance < total) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: `You have not enough money `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
   return (
     <div>
       <Grid container sx={{ paddingY: "5vh" }}>
@@ -186,37 +228,32 @@ const CartPrice = ({ isDataChange }) => {
                 fontWeight: "bold",
               }}
             >
-              Your balance (BDT 100):
+              Your balance BDT:
             </Typography>
             <TextField
-              defaultValue={100}
+              disabled
+              value={userProfile?.balance}
               id="coupon-field"
-              onChange={(e) => setCoupon(e.target.value)}
-              // id="outlined-basic"
-              label="Balance"
               variant="outlined"
               className={styles.couponTextField}
             />{" "}
             <br />
-            {couponLoading ? (
-              <CircularProgress />
-            ) : (
-              <Button
-                id="apply-btn"
-                variant="contained"
-                // onClick={handleApplyCoupon}
-                sx={{
-                  my: 2,
-                  backgroundColor: "var(--primaryColor)",
-                  transition: "all 0.3s ease-in",
-                  "&:hover": { backgroundColor: "green" },
-                }}
-                disableElevation
-                size="large"
-              >
-                USE Balance
-              </Button>
-            )}
+            <Button
+              id="apply-btn"
+              variant="contained"
+              onClick={handleBalanceBtn}
+              disabled={useBalance ? true : false}
+              sx={{
+                my: 2,
+                backgroundColor: "var(--primaryColor)",
+                transition: "all 0.3s ease-in",
+                "&:hover": { backgroundColor: "green" },
+              }}
+              disableElevation
+              size="large"
+            >
+              USE Balance
+            </Button>
           </Box>
         </Grid>
         <Grid item lg={4} xs={12}>
