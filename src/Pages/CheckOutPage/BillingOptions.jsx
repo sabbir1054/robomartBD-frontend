@@ -43,7 +43,7 @@ const BillingOptions = ({ billingOptions }) => {
   const onSubmit = (data) => {
     console.log(data);
   };
-  if (billingOptions === "a") {
+  if (billingOptions === "") {
     return (
       <div
         style={{

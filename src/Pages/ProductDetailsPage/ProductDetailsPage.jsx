@@ -121,12 +121,44 @@ const ProductDetailsPage = () => {
         }
       });
   }, []);
-
+  console.log(productDetails);
   return (
     <div>
       <Container sx={{ py: "10vh" }}>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           <Grid item md={6} className={styles.left}>
+            {/*  <div className={styles.images}>
+              {revImgArr.map((item, index) => (
+                <img
+                  onClick={changeMainImage}
+                  imgindex={index}
+                  className={
+                    index === imageIndex ? styles.activeImage : styles.notActive
+                  }
+                  src={item}
+                  key={index}
+                  alt={"images"}
+                />
+              ))}
+            </div>
+            <div
+              className={styles.mainImage}
+              onMouseMove={zoom}
+              style={{
+                backgroundImage: `url(${revImgArr[imageIndex]})`,
+                backgroundPosition: bgPosition,
+              }}
+            >
+              <img
+                src={revImgArr[imageIndex]}
+                alt="mainImage"
+                style={{
+                  border: "1px solid #f2f2f2",
+                  boxShadow: "1px 1px 20px #e1e1e185",
+                  borderRadius: "5px",
+                }}
+              />
+            </div> */}
             <div className={styles.images}></div>
             <div
               className={styles.mainImage}
