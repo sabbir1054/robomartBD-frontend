@@ -24,20 +24,26 @@ import { useGetUserQuery } from "../../../../redux/api/api";
 import FormAddressFieldCheckout from "../../../CheckOutPage/FormAddressFieldCheckout";
 import styles from "./Profile.module.scss";
 const Profile = () => {
+  const [updateData, setUpdateData] = useState(false);
+
   const [division, setDivision] = useState({});
   const [district, setDistrict] = useState({});
   const [upozila, setUpozila] = useState({});
   const [union, setUnion] = useState({});
+
+  const { data, isLoading, isError } = useGetUserQuery();
+  const [userProfile, setUserProfile] = useState({});
+
   const [fullAddress, setFullAddress] = useState("");
+  const [mobile, setMobile] = useState("");
+
   const divisionData = getAllDivision("en");
   const districtsData = getAllDistrict("en");
   const upozilaData = getAllUpazila("en");
   const unionData = getAllUnion("en");
 
   const [isUpdate, setIsUpdate] = useState(false);
-  const { data, isLoading, isError } = useGetUserQuery();
 
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   const {
@@ -49,6 +55,23 @@ const Profile = () => {
     watch,
     formState: { errors },
   } = useForm({});
+
+  const getProfileData = () => {
+    const storedData = localStorage.getItem("user");
+    const userData = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/api/profile`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userData}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setUserProfile(result);
+      });
+  };
+
   useEffect(() => {
     if (!data && !isLoading) {
       navigate("/login");
@@ -60,27 +83,93 @@ const Profile = () => {
         timer: 1500,
       });
     }
-    setUser(data);
+    // fetch profile data
+    if (data && data[0]?.first_name) {
+      getProfileData();
+    }
   }, [data]);
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data) => {};
+
+  // console.log(userProfile);
+
+  const updateInformation = (updatedData) => {
+    console.log(updatedData);
+    setUpdateData(true);
+    const storedData = localStorage.getItem("user");
+    const userData = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/api/profile`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userData}`,
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.success) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Update successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // getProfileData();
+          // window.location.reload();
+        } else {
+          Swal.fire({
+            position: "top-center",
+            icon: "warning",
+            title: "Something went wrong !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        setUpdateData(false);
+      });
+  };
+
+  const makeAddressString = () => {
+    let updatedAddress = fullAddress;
+    if (union.title) {
+      updatedAddress += "," + union?.title + ",";
+    }
+    if (upozila.title) {
+      updatedAddress += upozila?.title + ",";
+    }
+    if (upozila.title) {
+      updatedAddress += upozila?.title + ",";
+    }
+    if (district.title) {
+      updatedAddress += district?.title + ",";
+    }
+    if (division.title) {
+      updatedAddress += division?.title;
+    }
+
+    return updatedAddress;
   };
 
   const handleSaveBtn = () => {
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Update successfully",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    let updatedAddress = makeAddressString();
+    if (mobile == "") {
+      setMobile(userProfile?.phone);
+    }
+    if (updatedAddress == "") {
+      updatedAddress = userProfile?.address;
+    }
+    updateInformation({ phone: mobile, address: updatedAddress });
+
     setIsUpdate(false);
-    setDivision("");
-    setDistrict("");
-    setUpozila("");
-    setUnion("");
-    setFullAddress(""); //this will update
+    // setDivision("");
+    // setDistrict("");
+    // setUpozila("");
+    // setUnion("");
+    // setFullAddress(""); //this will update
   };
+
+  // console.log(userProfile);
   return (
     <div
       style={{
@@ -131,156 +220,164 @@ const Profile = () => {
                 }}
               >
                 {" "}
-                {data[0]?.first_name} {data[0]?.last_name}{" "}
+                {userProfile?.first_name} {userProfile?.last_name}{" "}
               </Typography>
               <Typography
                 variant="h6"
                 style={{ textAlign: "center", fontFamily: "Poppins" }}
               >
                 {" "}
-                {data[0]?.email}
+                {userProfile?.email}
               </Typography>
             </Grid>
             <Grid item sm={12} md={6} padding={"4vh"}>
-              <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <label htmlFor="title" className={styles.auth_label}>
-                    <Typography
-                      variant="title1"
-                      style={{
-                        textAlign: "center",
-                        padding: "5vh 0",
-                        fontFamily: "Poppins",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                      }}
-                    >
-                      {isUpdate && "Update your"} Contact Number:
-                    </Typography>
-                  </label>
-                  <input
-                    type="text"
-                    disabled={!isUpdate ? true : false}
-                    defaultChecked
-                    defaultValue={data[0]?.contact_no}
-                    // {...register(, { required: true })}
-                    className={styles.auth_form_inputField}
-                  />
-                  <label htmlFor="title" className={styles.auth_label}>
-                    <Typography
-                      variant="title1"
-                      style={{
-                        textAlign: "center",
-                        padding: "5vh 0",
-                        fontFamily: "Poppins",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                      }}
-                    >
-                      {isUpdate && "Update your"} Address:
-                    </Typography>
-                  </label>
-                  {!isUpdate && (
-                    <textarea
-                      rows={"5"}
-                      type="text"
-                      style={{ width: "100%" }}
-                      disabled={!isUpdate ? true : false}
-                      defaultChecked
-                      defaultValue={data[0]?.contact_no}
-                      // {...register(, { required: true })}
-                      // className={styles.auth_form_inputField}
-                    />
-                  )}
-                  {/* update */}
-
-                  {isUpdate && (
-                    <Grid container spacing={2}>
-                      <Grid item sm={12} md={6}>
-                        <FormAddressFieldCheckout
-                          label={"Division"}
-                          data={divisionData}
-                          setSelectedData={setDivision}
-                        />
-                      </Grid>
-                      <Grid item sm={12} md={6}>
-                        {division?.title && (
-                          <FormAddressFieldCheckout
-                            label={"District"}
-                            data={districtsData[division.value]}
-                            setSelectedData={setDistrict}
-                          />
-                        )}
-                      </Grid>
-                      <Grid item sm={12} md={6}>
-                        {district?.title && (
-                          <FormAddressFieldCheckout
-                            label={"Upozila"}
-                            data={upozilaData[district?.value]}
-                            setSelectedData={setUpozila}
-                          />
-                        )}
-                      </Grid>
-                      <Grid item sm={12} md={6}>
-                        {upozila?.title && (
-                          <FormAddressFieldCheckout
-                            label={"Union"}
-                            data={unionData[upozila?.value]}
-                            setSelectedData={setUnion}
-                          />
-                        )}
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Typography
-                          variant="title1"
-                          style={{
-                            fontWeight: "bold",
-                            fontFamily: "Poppins",
-                            marginLeft: "10px",
-                            padding: "10px 0px",
-                          }}
-                        >
-                          <label htmlFor="">
-                            Street/Vill/Sector (Provide in details)
-                          </label>
-                        </Typography>
-                        <input
-                          type="text"
-                          {...register("address", { required: true })}
-                          className={styles.auth_form_inputField}
-                        />
-                      </Grid>
-                    </Grid>
-                  )}
-
-                  {/* buttons */}
-                  <div style={{ display: "flex", justifyContent: "end" }}>
-                    {isUpdate ? (
-                      <Button
-                        onClick={handleSaveBtn}
-                        variant="contained"
-                        startIcon={<CheckIcon />}
-                        disableElevation
-                        style={{ backgroundColor: "var(--primaryColor" }}
+              {updateData ? (
+                <CircularProgress />
+              ) : (
+                <div>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <label htmlFor="title" className={styles.auth_label}>
+                      <Typography
+                        variant="title1"
+                        style={{
+                          textAlign: "center",
+                          padding: "5vh 0",
+                          fontFamily: "Poppins",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                        }}
                       >
-                        Save
-                      </Button>
-                    ) : (
-                      <Tooltip title="Update your profile">
-                        <IconButton
-                          variant="contained"
-                          color="primary"
-                          aria-label="update-button"
-                          onClick={() => setIsUpdate(true)}
-                          size="large"
-                        >
-                          <EditNoteIcon style={{ fontSize: "40px" }} />
-                        </IconButton>
-                      </Tooltip>
+                        {isUpdate && "Update your"} Contact Number:
+                      </Typography>
+                    </label>
+                    <input
+                      type="text"
+                      disabled={!isUpdate ? true : false}
+                      value={mobile}
+                      defaultValue={userProfile?.phone}
+                      onChange={(e) => setMobile(e.target.value)}
+                      className={styles.auth_form_inputField}
+                    />
+                    <label htmlFor="title" className={styles.auth_label}>
+                      <Typography
+                        variant="title1"
+                        style={{
+                          textAlign: "center",
+                          padding: "5vh 0",
+                          fontFamily: "Poppins",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                        }}
+                      >
+                        {isUpdate && "Update your"} Address:
+                      </Typography>
+                    </label>
+                    {!isUpdate && (
+                      <textarea
+                        rows={"5"}
+                        type="text"
+                        style={{
+                          width: "100%",
+                          fontSize: "16px",
+                          padding: "5px",
+                          fontFamily: "Roboto",
+                        }}
+                        disabled={!isUpdate ? true : false}
+                        defaultChecked
+                        defaultValue={userProfile?.address}
+                      />
                     )}
-                  </div>
-                </form>
-              </div>
+                    {/* update */}
+
+                    {isUpdate && (
+                      <Grid container spacing={2}>
+                        <Grid item sm={12} md={6}>
+                          <FormAddressFieldCheckout
+                            label={"Division"}
+                            data={divisionData}
+                            setSelectedData={setDivision}
+                          />
+                        </Grid>
+                        <Grid item sm={12} md={6}>
+                          {division?.title && (
+                            <FormAddressFieldCheckout
+                              label={"District"}
+                              data={districtsData[division.value]}
+                              setSelectedData={setDistrict}
+                            />
+                          )}
+                        </Grid>
+                        <Grid item sm={12} md={6}>
+                          {district?.title && (
+                            <FormAddressFieldCheckout
+                              label={"Upozila"}
+                              data={upozilaData[district?.value]}
+                              setSelectedData={setUpozila}
+                            />
+                          )}
+                        </Grid>
+                        <Grid item sm={12} md={6}>
+                          {upozila?.title && (
+                            <FormAddressFieldCheckout
+                              label={"Union"}
+                              data={unionData[upozila?.value]}
+                              setSelectedData={setUnion}
+                            />
+                          )}
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Typography
+                            variant="title1"
+                            style={{
+                              fontWeight: "bold",
+                              fontFamily: "Poppins",
+                              marginLeft: "10px",
+                              padding: "10px 0px",
+                            }}
+                          >
+                            <label htmlFor="">
+                              Street/Vill/Sector (Provide in details)
+                            </label>
+                          </Typography>
+                          <input
+                            type="text"
+                            defaultValue={userProfile?.address}
+                            onChange={(e) => setFullAddress(e.target.value)}
+                            className={styles.auth_form_inputField}
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
+
+                    {/* buttons */}
+                    <div style={{ display: "flex", justifyContent: "end" }}>
+                      {isUpdate ? (
+                        <Button
+                          onClick={handleSaveBtn}
+                          variant="contained"
+                          startIcon={<CheckIcon />}
+                          disableElevation
+                          style={{ backgroundColor: "var(--primaryColor" }}
+                        >
+                          Save
+                        </Button>
+                      ) : (
+                        <Tooltip title="Update your profile">
+                          <IconButton
+                            variant="contained"
+                            color="primary"
+                            aria-label="update-button"
+                            onClick={() => setIsUpdate(true)}
+                            size="large"
+                          >
+                            <EditNoteIcon style={{ fontSize: "40px" }} />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+                    </div>
+                  </form>
+                </div>
+              )}
             </Grid>
           </Grid>
         ) : (

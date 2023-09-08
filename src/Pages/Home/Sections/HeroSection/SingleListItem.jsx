@@ -15,6 +15,7 @@ const SingleListItem = ({ category }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    console.log(open);
     setOpen(!open);
   };
   const handleSubCategory = (name) => {

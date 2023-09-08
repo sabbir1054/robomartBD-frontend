@@ -146,7 +146,7 @@ const Footer = () => {
           }}
         >
           <p className="">Copyright © 2023 RoboMart BD. All Rights Reserved.</p>
-          <Box style={{ display: "flex", alignItems: "center" }}>
+          <Box style={{ display: "flex", alignItems: "center",flexWrap:"wrap" }}>
             <p>Stay Connected:</p>{" "}
             <NavLink to={`${homeData1?.facebook}`} style={{ color: "white" }}>
               {" "}

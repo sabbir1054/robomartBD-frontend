@@ -119,10 +119,17 @@ const BillingOptions = ({ billingOptions }) => {
                   // {...register(, { required: true })}
                   className={styles.auth_form_inputField}
                 />
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "var(--primaryColor)" }}
+                  disableElevation
+                >
+                  Confirm Order
+                </Button>
               </form>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
-              <div style={{ padding: "4vh" }}>
+              <div>
                 <FormLabelCheckout label={"Our payment info :"} />
                 <div>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -133,9 +140,8 @@ const BillingOptions = ({ billingOptions }) => {
                       srcset=""
                     />
                     <p style={{ margin: "10px" }}>
-                      <FormLabelCheckout
-                        label={": 01682921257   (Send Money)"}
-                      />
+                      <FormLabelCheckout label={": 01682921257   "} />
+                      <small>(Send Money)</small>
                     </p>
                   </div>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -146,7 +152,8 @@ const BillingOptions = ({ billingOptions }) => {
                       srcset=""
                     />
                     <p style={{ margin: "10px" }}>
-                      <FormLabelCheckout label={": 01682921257   ( Payment)"} />
+                      <FormLabelCheckout label={": 01682921257  "} />
+                      <small>(Payment)</small>
                     </p>
                   </div>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -157,7 +164,8 @@ const BillingOptions = ({ billingOptions }) => {
                       srcset=""
                     />
                     <p style={{ margin: "10px" }}>
-                      <FormLabelCheckout label={": 01682921257   (Payment)"} />
+                      <FormLabelCheckout label={": 01682921257  "} />{" "}
+                      <small>(Payment)</small>
                     </p>
                   </div>
                 </div>
