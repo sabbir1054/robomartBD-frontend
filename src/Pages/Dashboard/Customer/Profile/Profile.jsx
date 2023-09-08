@@ -20,7 +20,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useGetUserQuery } from "../../../../redux/api/api";
+import {
+  useGetUserProfileQuery,
+  useGetUserQuery,
+  useUpdateUserProfileMutation,
+} from "../../../../redux/api/api";
 import FormAddressFieldCheckout from "../../../CheckOutPage/FormAddressFieldCheckout";
 import styles from "./Profile.module.scss";
 const Profile = () => {
@@ -32,8 +36,21 @@ const Profile = () => {
   const [union, setUnion] = useState({});
 
   const { data, isLoading, isError } = useGetUserQuery();
-  const [userProfile, setUserProfile] = useState({});
-
+  // const [userProfile, setUserProfile] = useState({});
+  const {
+    data: userProfile,
+    isLoading: profileLoading,
+    isError: profileError,
+    error,
+  } = useGetUserProfileQuery();
+  const [
+    updateUserProfile,
+    {
+      isLoading: updateLoading,
+      isError: updateError,
+      isSuccess: profileUpdateSuccess,
+    },
+  ] = useUpdateUserProfileMutation();
   const [fullAddress, setFullAddress] = useState("");
   const [mobile, setMobile] = useState("");
 
@@ -56,21 +73,6 @@ const Profile = () => {
     formState: { errors },
   } = useForm({});
 
-  const getProfileData = () => {
-    const storedData = localStorage.getItem("user");
-    const userData = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/api/profile`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `JWT ${userData}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setUserProfile(result);
-      });
-  };
 
   useEffect(() => {
     if (!data && !isLoading) {
@@ -85,7 +87,7 @@ const Profile = () => {
     }
     // fetch profile data
     if (data && data[0]?.first_name) {
-      getProfileData();
+      // getProfileData();
     }
   }, [data]);
   const onSubmit = (data) => {};
@@ -93,41 +95,8 @@ const Profile = () => {
   // console.log(userProfile);
 
   const updateInformation = (updatedData) => {
-    console.log(updatedData);
-    setUpdateData(true);
-    const storedData = localStorage.getItem("user");
-    const userData = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/api/profile`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `JWT ${userData}`,
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result?.success) {
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: "Update successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          // getProfileData();
-          // window.location.reload();
-        } else {
-          Swal.fire({
-            position: "top-center",
-            icon: "warning",
-            title: "Something went wrong !",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-        setUpdateData(false);
-      });
+    const options = { updatedData: updatedData };
+    updateUserProfile(options);
   };
 
   const makeAddressString = () => {
@@ -162,14 +131,28 @@ const Profile = () => {
     updateInformation({ phone: mobile, address: updatedAddress });
 
     setIsUpdate(false);
-    // setDivision("");
-    // setDistrict("");
-    // setUpozila("");
-    // setUnion("");
-    // setFullAddress(""); //this will update
+
   };
 
-  // console.log(userProfile);
+  useEffect(() => {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Update successfully",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }, [profileUpdateSuccess]);
+
+  if (updateError) {
+    Swal.fire({
+      position: "top-center",
+      icon: "error",
+      title: "Something went wrong !",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
   return (
     <div
       style={{

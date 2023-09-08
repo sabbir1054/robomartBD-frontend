@@ -13,7 +13,7 @@ export const robomartApi = createApi({
       }
     },
   }),
-  tagTypes: ["cartProduct"],
+  tagTypes: ["cartProduct", "profile"],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => "/api/products",
@@ -23,6 +23,18 @@ export const robomartApi = createApi({
     }),
     getUser: builder.query({
       query: () => "/api/auth/users/",
+    }),
+    getUserProfile: builder.query({
+      query: () => "/api/profile",
+      providesTags: ["profile"],
+    }),
+    updateUserProfile: builder.mutation({
+      query: ({ updatedData }) => ({
+        url: "/api/profile",
+        method: "POST",
+        body: updatedData,
+      }),
+      invalidatesTags: ["profile"],
     }),
     postToCart: builder.mutation({
       query: ({ product }) => ({
@@ -69,4 +81,6 @@ export const {
   useDeleteProductFromCartMutation,
   useChangeQuantityMutation,
   useGetAllProductsQuery,
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
 } = robomartApi;
