@@ -22,11 +22,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useGetCartQuery, useGetUserQuery } from "../../redux/api/api";
+import BillingOptions from "./BillingOptions";
 import styles from "./CheckOut.module.scss";
 import FormAddressFieldCheckout from "./FormAddressFieldCheckout";
 import FormLabelCheckout from "./FormLabelCheckout";
 const CheckOutPage = () => {
-  const [billingOptions, setBillingOptions] = useState("");//cod=cash on delivery // 
+  const [billingOptions, setBillingOptions] = useState(""); //cod=cash on delivery //
 
   const [sameAsAddress, setSameAsAddress] = useState(false);
   const [division, setDivision] = useState({});
@@ -107,7 +108,7 @@ const CheckOutPage = () => {
           className={styles.checkout_wrapper}
         >
           <Grid container spacing={2}>
-            <Grid item sm={12} md={2}>
+            <Grid item xs={12} sm={12} md={2}>
               <FormLabelCheckout label={" Name:"} />
               {data && (
                 <input
@@ -118,9 +119,9 @@ const CheckOutPage = () => {
                   // {...register(, { required: true })}
                   className={styles.auth_form_inputField}
                 />
-              )}{" "}
+              )}
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item xs={12} sm={12} md={3}>
               <FormLabelCheckout label={"Email :"} />
               {data && (
                 <input
@@ -133,7 +134,7 @@ const CheckOutPage = () => {
                 />
               )}
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item xs={12} sm={12} md={3}>
               <FormLabelCheckout label={"Contact number :"} />
               <input
                 type="text"
@@ -141,7 +142,7 @@ const CheckOutPage = () => {
                 className={styles.auth_form_inputField}
               />
             </Grid>
-            <Grid item sm={12} md={4}>
+            <Grid item xs={12} sm={12} md={4}>
               {" "}
               <FormLabelCheckout label={" Your Address:"} />
               <input
@@ -169,14 +170,14 @@ const CheckOutPage = () => {
             </Grid>
             {!sameAsAddress && (
               <Grid container spacing={2}>
-                <Grid item sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3}>
                   <FormAddressFieldCheckout
                     label={"Division"}
                     data={divisionData}
                     setSelectedData={setDivision}
                   />
                 </Grid>
-                <Grid item sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3}>
                   {division?.title && (
                     <FormAddressFieldCheckout
                       label={"District"}
@@ -185,7 +186,7 @@ const CheckOutPage = () => {
                     />
                   )}
                 </Grid>
-                <Grid item sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3}>
                   {district?.title && (
                     <FormAddressFieldCheckout
                       label={"Upozila"}
@@ -194,7 +195,7 @@ const CheckOutPage = () => {
                     />
                   )}
                 </Grid>
-                <Grid item sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3}>
                   {upozila?.title && (
                     <FormAddressFieldCheckout
                       label={"Union"}
@@ -203,7 +204,7 @@ const CheckOutPage = () => {
                     />
                   )}
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <Typography
                     variant="title1"
                     style={{
@@ -223,7 +224,6 @@ const CheckOutPage = () => {
                     className={styles.auth_form_inputField}
                   />
                 </Grid>
-                <Grid item xs={6}></Grid>
               </Grid>
             )}
           </Grid>
@@ -244,17 +244,27 @@ const CheckOutPage = () => {
               </label>
               <Divider />
             </Grid>
-            <Grid item xs={12} sm={4} style={{ borderRight: "1px solid #ddd",minHeight:"30vh" ,padding:"3vh"}}>
+            <Grid
+              item
+              xs={12}
+              sm={3}
+              md={2}
+              style={{
+                borderRight: "1px solid #ddd",
+                minHeight: "30vh",
+                padding: "3vh",
+              }}
+            >
               <FormControl fullWidth sx={{ pb: "23px" }}>
                 <RadioGroup>
                   <FormControlLabel
                     sx={{ mr: 0 }}
-                    value="100"
+                    value="cod"
                     control={
                       <Radio
                         size="small"
                         color="success"
-                        onClick={() => setShipping(100)}
+                        onClick={() => setBillingOptions("cod")}
                       />
                     }
                     label={
@@ -263,12 +273,12 @@ const CheckOutPage = () => {
                   />
                   <FormControlLabel
                     sx={{ mr: 0 }}
-                    value="150"
+                    value="mp"
                     control={
                       <Radio
                         size="small"
                         color="success"
-                        onClick={() => setShipping(150)}
+                        onClick={() => setBillingOptions("mp")}
                       />
                     }
                     label={
@@ -277,12 +287,12 @@ const CheckOutPage = () => {
                   />
                   <FormControlLabel
                     sx={{ mr: 0 }}
-                    value="200"
+                    value="op"
                     control={
                       <Radio
                         size="small"
                         color="success"
-                        onClick={() => setShipping(150)}
+                        onClick={() => setBillingOptions("op")}
                       />
                     }
                     label={
@@ -292,8 +302,11 @@ const CheckOutPage = () => {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={8}>
-
+            <Grid item xs={12} sm={9} md={10}>
+              <BillingOptions
+                setBillingOptions={setBillingOptions}
+                billingOptions={billingOptions}
+              />
             </Grid>
           </Grid>
         </form>

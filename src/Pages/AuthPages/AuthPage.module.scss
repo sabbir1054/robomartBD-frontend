@@ -99,3 +99,37 @@
     width: 90%;
   }
 }
+@media (max-width: 400px) {
+  .eyeIcon {
+        position: absolute;
+        right: 25px;
+        bottom: 109px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .eyeIconR {
+        position: absolute;
+        right: 25px;
+        bottom: 245px !important;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .eyeIcon2 {
+        position: absolute;
+        right: 25px;
+        bottom: 109px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .eyeIconR2 {
+        position: absolute;
+        right: 25px;
+        bottom: 125px !important;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+}

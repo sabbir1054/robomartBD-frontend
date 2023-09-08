@@ -18,3 +18,9 @@
     outline: 1px solid var(--primaryColor);
   }
 }
+
+@media screen and (max-width: 900px) {
+  .billMPGrid {
+    flex-direction: column-reverse;
+  }
+}

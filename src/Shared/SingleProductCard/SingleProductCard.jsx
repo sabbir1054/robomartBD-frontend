@@ -150,7 +150,7 @@ const SingleProductCard = ({ product }) => {
               className={styles.productDescription}
               style={{ fontSize: "12px", textAlign: "justify" }}
             >
-              {product?.discription?.substring(0, 12)}
+              {product?.discription?.substring(0, 90)+"..."}
               {/* Lorem ipsum, dolor sit amet consectetur jdd sabbir... */}
               {/* {props.data.description.length > 12 ? "..." : ""} */}
             </p>

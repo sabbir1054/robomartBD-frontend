@@ -12,10 +12,11 @@ const Home = () => {
   const { data: homeData, isLoading, isError, error } = useGetHomeDataQuery();
 
   useEffect(() => {
-    if (error?.status && !isLoading) {
+    if (error?.status===401 && !isLoading) {
       localStorage.removeItem("user");
     }
   }, [error]);
+  
   useEffect(() => {
     if (homeData) {
       fetch(`https://api.robomartbd.com/api/products`)
