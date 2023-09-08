@@ -13,7 +13,7 @@ const CategoryList = () => {
   console.log(
     homeData1?.catagorylist?.slice(5, homeData1?.catagorylist?.length)
   );
-  console.log(homeData1?.catagorylist);
+ 
 
   const params = useParams();
   const navigation = useNavigate();

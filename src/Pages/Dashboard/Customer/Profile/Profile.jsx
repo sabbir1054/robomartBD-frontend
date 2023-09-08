@@ -37,6 +37,9 @@ const Profile = () => {
 
   const { data, isLoading, isError } = useGetUserQuery();
   // const [userProfile, setUserProfile] = useState({});
+
+  const [fullAddress, setFullAddress] = useState("");
+  const [mobile, setMobile] = useState("");
   const {
     data: userProfile,
     isLoading: profileLoading,
@@ -51,9 +54,6 @@ const Profile = () => {
       isSuccess: profileUpdateSuccess,
     },
   ] = useUpdateUserProfileMutation();
-  const [fullAddress, setFullAddress] = useState("");
-  const [mobile, setMobile] = useState("");
-
   const divisionData = getAllDivision("en");
   const districtsData = getAllDistrict("en");
   const upozilaData = getAllUpazila("en");
@@ -73,7 +73,6 @@ const Profile = () => {
     formState: { errors },
   } = useForm({});
 
-
   useEffect(() => {
     if (!data && !isLoading) {
       navigate("/login");
@@ -84,10 +83,6 @@ const Profile = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-    }
-    // fetch profile data
-    if (data && data[0]?.first_name) {
-      // getProfileData();
     }
   }, [data]);
   const onSubmit = (data) => {};
@@ -128,13 +123,13 @@ const Profile = () => {
     if (updatedAddress == "") {
       updatedAddress = userProfile?.address;
     }
+    // console.log(mobile);
     updateInformation({ phone: mobile, address: updatedAddress });
 
     setIsUpdate(false);
-
   };
 
-  useEffect(() => {
+  if (profileUpdateSuccess) {
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -142,17 +137,18 @@ const Profile = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-  }, [profileUpdateSuccess]);
+  }
 
   if (updateError) {
     Swal.fire({
       position: "top-center",
-      icon: "error",
+      icon: "warning",
       title: "Something went wrong !",
       showConfirmButton: false,
       timer: 1500,
     });
   }
+  // console.log(userProfile);
   return (
     <div
       style={{
@@ -214,7 +210,7 @@ const Profile = () => {
               </Typography>
             </Grid>
             <Grid item sm={12} md={6} padding={"4vh"}>
-              {updateData ? (
+              {updateLoading ? (
                 <CircularProgress />
               ) : (
                 <div>
@@ -235,10 +231,17 @@ const Profile = () => {
                     </label>
                     <input
                       type="text"
-                      disabled={!isUpdate ? true : false}
-                      value={mobile}
+                      style={{ display: !isUpdate ? "none" : "block" }}
+                      defaultChecked
                       defaultValue={userProfile?.phone}
                       onChange={(e) => setMobile(e.target.value)}
+                      className={styles.auth_form_inputField}
+                    />
+                    <input
+                      type="text"
+                      style={{ display: !isUpdate ? "block" : "none" }}
+                      disabled={true}
+                      value={userProfile?.phone}
                       className={styles.auth_form_inputField}
                     />
                     <label htmlFor="title" className={styles.auth_label}>
@@ -267,7 +270,7 @@ const Profile = () => {
                         }}
                         disabled={!isUpdate ? true : false}
                         defaultChecked
-                        defaultValue={userProfile?.address}
+                        value={userProfile?.address}
                       />
                     )}
                     {/* update */}
