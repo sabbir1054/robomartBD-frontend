@@ -10,11 +10,12 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const SingleListItem = ({ category }) => {
+const SingleListItem = ({ category, setToggle,toggle }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
+    setToggle(!toggle);
     setOpen(!open);
   };
   const handleSubCategory = (name) => {

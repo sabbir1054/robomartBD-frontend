@@ -98,7 +98,7 @@ const CartPrice = ({ isDataChange }) => {
     if (shipping === 100) {
       ship = "in_dhaka";
     } else if (shipping === 150) {
-      ship = "outside_dhaka";
+      ship = "out_dhaka";
     }
     const data = {
       delivery: ship,

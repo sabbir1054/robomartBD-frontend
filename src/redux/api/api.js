@@ -44,6 +44,14 @@ export const robomartApi = createApi({
       }),
       invalidatesTags: ["cartProduct"],
     }),
+    postOrder: builder.mutation({
+      query: ({ data }) => ({
+        url: `/order/get_order`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["cartProduct"],
+    }),
     deleteProductFromCart: builder.mutation({
       query: ({ data }) => ({
         url: `/cart/get_cart`,
@@ -83,4 +91,5 @@ export const {
   useGetAllProductsQuery,
   useGetUserProfileQuery,
   useUpdateUserProfileMutation,
+  usePostOrderMutation,
 } = robomartApi;

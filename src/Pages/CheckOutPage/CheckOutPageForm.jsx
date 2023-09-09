@@ -26,6 +26,7 @@ import {
   useGetCartQuery,
   useGetUserProfileQuery,
   useGetUserQuery,
+  usePostOrderMutation,
 } from "../../redux/api/api";
 import BillingOptions from "./BillingOptions";
 import styles from "./CheckOut.module.scss";
@@ -58,6 +59,15 @@ const CheckOutPage = () => {
   const { data: cartData } = useGetCartQuery();
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+
+  const [
+    postOrder,
+    {
+      isLoading: postOrderLoading,
+      isError: postOrderError,
+      isSuccess: postOrderSuccess,
+    },
+  ] = usePostOrderMutation();
 
   const {
     register,
@@ -118,26 +128,31 @@ const CheckOutPage = () => {
   };
 
   const postAnOrder = (orderData) => {
-    const storedData = localStorage.getItem("user");
-    const userData = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/order/get_order`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `JWT ${userData}`,
-      },
-      body: JSON.stringify(orderData),
-    })
-      .then((res) => {
-        console.log(res);
-        res.json();
-      })
-      .then((result) => {
-        console.log(result);
-      });
+    if (billingOptions !== "op") {
+      const options = { data: orderData };
+      postOrder(options);
+    }
   };
 
   const handleSubmitBtn = () => {
+    if (billingOptions === "op") {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "This Payment method is under development",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    if (!billingOptions) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Select Payment Options",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
     let confirmAddress = "";
     if (sameAsAddress) {
       confirmAddress = userProfile?.address;
@@ -160,37 +175,42 @@ const CheckOutPage = () => {
     if (billingOptions === "mp") {
       billing_options = "MANUAL";
     } else {
-      billing_options = "CashOnDelivery";
+      billing_options = null;
     }
+
+    const newItems = [];
+
+    cartData?.items?.map((item) => newItems.push(item));
 
     const data = {
       delevary: checkoutData?.delivery,
       address: confirmAddress,
       phone: userProfile?.phone,
-      cupon: checkoutData?.cupon,
+      cupon: checkoutData?.cupon === undefined ? null : checkoutData?.cupon,
       billing_option: billing_options,
       payment_method: paymentMedium,
-      payment_id: trnxID,
-      payment_number: paymentNumber,
-      items: cartData?.items,
+      payment_id: trnxID === undefined ? null : trnxID,
+      payment_number: paymentNumber === undefined ? null : paymentNumber,
+      items: newItems,
     };
     postAnOrder(data);
   };
 
+  if (postOrderSuccess) {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Thanks for your order",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate("/")
+  }
+
   return (
     <div style={{ minHeight: "70vh", padding: "5vh 0" }}>
       <Container maxWidth={"xl"}>
-        <Typography
-          variant="h5"
-          style={{
-            fontFamily: "Poppins",
-            textAlign: "center",
-            padding: "3vh 0",
-          }}
-        >
-          Checkout
-        </Typography>
-        <Divider />
+ 
 
         <br />
         <form className={styles.checkout_wrapper}>

@@ -3,17 +3,17 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetHomeDataQuery } from "../../../../redux/api/api";
 import styles from "./Hero.module.scss";
 import SingleListItem from "./SingleListItem";
 const CategoryList = () => {
+  const [toggle, setToggle] = useState(false);
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   console.log(
     homeData1?.catagorylist?.slice(5, homeData1?.catagorylist?.length)
   );
- 
 
   const params = useParams();
   const navigation = useNavigate();
@@ -21,7 +21,7 @@ const CategoryList = () => {
   const handleNavigation = (id) => {
     navigation(`/products/categories/${id}`);
   };
-
+  console.log(toggle);
   return (
     <>
       <Box
@@ -46,13 +46,16 @@ const CategoryList = () => {
             Categories
           </h2>
         </div>
-      
+
         <div>
           <List component="nav">
             {homeData1?.catagorylist?.slice(0, 7)?.map((category) => (
-              <SingleListItem category={category} />
+              <SingleListItem
+                category={category}
+                setToggle={setToggle}
+                toggle={toggle}
+              />
             ))}
-          
 
             {/* Add more categories and subcategories */}
             <ListItemButton>

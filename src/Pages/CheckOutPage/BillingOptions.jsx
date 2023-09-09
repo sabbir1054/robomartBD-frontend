@@ -20,22 +20,15 @@ const BillingOptions = ({
   setPaymentMedium,
   setTrnxID,
   setPaymentNumber,
+  
 }) => {
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  const handleSSL = () => {
-    Swal.fire({
-      position: "top-center",
-      icon: "warning",
-      title: "This Payment method is under development",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
-
   const handleChange = (event) => {
     setPaymentMethod(event.target.value);
+    setPaymentMedium(event.target.value);
   };
+
   const {
     register,
     control,
@@ -103,18 +96,9 @@ const BillingOptions = ({
                   onChange={handleChange}
                   className={styles.auth_form_inputField}
                 >
-                  <MenuItem value={"bkash"} onClick={setPaymentMedium("BKASH")}>
-                    Bkash
-                  </MenuItem>
-                  <MenuItem value={"nagad"} onClick={setPaymentMedium("NAGAD")}>
-                    Nagad
-                  </MenuItem>
-                  <MenuItem
-                    value={"rocket"}
-                    onClick={setPaymentMedium("ROCKET")}
-                  >
-                    Rocket
-                  </MenuItem>
+                  <MenuItem value={"BKASH"}>Bkash</MenuItem>
+                  <MenuItem value={"NAGAD"}>Nagad</MenuItem>
+                  <MenuItem value={"ROCKET"}>Rocket</MenuItem>
                 </Select>
                 <FormLabelCheckout label={"Uses mobile no for payment :"} />
                 <input
@@ -197,18 +181,7 @@ const BillingOptions = ({
               />
             </div>
             <br />
-            {/* <div style={{ display: "flex", justifyContent: "end" }}>
-              <Button
-                onClick={handleSSL}
-                variant="outlined"
-                style={{
-                  color: "var(--primaryColor)",
-                  border: "1px solid var(--primaryColor)",
-                }}
-              >
-                Make Payment & Confirm Order
-              </Button>
-            </div> */}
+           
           </div>
         </div>
       )}
