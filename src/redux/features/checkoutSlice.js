@@ -12,7 +12,8 @@ const checkoutSlice = createSlice({
   reducers: {
     addCheckoutData: (state, action) => {
       state.delivery = action.payload.delivery;
-      state.cupon = action.cupon;
+      state.cupon = action.payload.cupon;
+      state.useBalance = action.payload.useBalance;
     },
   },
 });

@@ -59,6 +59,16 @@ const CheckOutPage = () => {
   const { data: cartData } = useGetCartQuery();
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  //when reload page this data remove from redux so we redirect it previous page
+  useEffect(() => {
+    if (
+      checkoutData?.delivery === "" &&
+      checkoutData?.cupon === "" &&
+      checkoutData?.useBalance === false
+    ) {
+      navigate("/shopping-cart");
+    }
+  }, [checkoutData?.delivery, checkoutData?.cupon, checkoutData?.useBalance]);
 
   const [
     postOrder,
@@ -66,6 +76,7 @@ const CheckOutPage = () => {
       isLoading: postOrderLoading,
       isError: postOrderError,
       isSuccess: postOrderSuccess,
+      error: postOrderErrors,
     },
   ] = usePostOrderMutation();
 
@@ -128,6 +139,7 @@ const CheckOutPage = () => {
   };
 
   const postAnOrder = (orderData) => {
+
     if (billingOptions !== "op") {
       const options = { data: orderData };
       postOrder(options);
@@ -169,12 +181,12 @@ const CheckOutPage = () => {
       });
     }
     let billing_options = "";
+
     if (checkoutData?.useBalance) {
       billing_options = "BALANCE";
-    }
-    if (billingOptions === "mp") {
+    } else if (billingOptions === "mp") {
       billing_options = "MANUAL";
-    } else {
+    } else if (billingOptions === "cod") {
       billing_options = null;
     }
 
@@ -186,13 +198,23 @@ const CheckOutPage = () => {
       delevary: checkoutData?.delivery,
       address: confirmAddress,
       phone: userProfile?.phone,
-      cupon: checkoutData?.cupon === undefined ? null : checkoutData?.cupon,
+      cupon: checkoutData?.cupon === "" ? null : checkoutData?.cupon,
       billing_option: billing_options,
-      payment_method: paymentMedium,
-      payment_id: trnxID === undefined ? null : trnxID,
-      payment_number: paymentNumber === undefined ? null : paymentNumber,
+      payment_method: paymentMedium === "" ? null : paymentMedium,
+      payment_id: trnxID === "" ? null : trnxID,
+      payment_number: paymentNumber === "" ? null : paymentNumber,
       items: newItems,
     };
+
+    if (data?.phone === null) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Update contact from profile",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
     postAnOrder(data);
   };
 
@@ -204,14 +226,12 @@ const CheckOutPage = () => {
       showConfirmButton: false,
       timer: 2000,
     });
-    navigate("/")
+    navigate("/");
   }
 
   return (
     <div style={{ minHeight: "70vh", padding: "5vh 0" }}>
       <Container maxWidth={"xl"}>
- 
-
         <br />
         <form className={styles.checkout_wrapper}>
           <Grid container spacing={2}>
