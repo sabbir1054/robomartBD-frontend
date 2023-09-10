@@ -50,7 +50,7 @@ export const robomartApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["cartProduct"],
+      invalidatesTags: ["cartProduct","profile"],
     }),
     deleteProductFromCart: builder.mutation({
       query: ({ data }) => ({

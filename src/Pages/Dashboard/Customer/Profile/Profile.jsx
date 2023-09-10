@@ -210,6 +210,22 @@ const Profile = () => {
               </Typography>
             </Grid>
             <Grid item sm={12} md={6} padding={"4vh"}>
+              <label htmlFor="title" className={styles.auth_label}>
+                <Typography
+                  variant="title1"
+                  style={{
+                    textAlign: "center",
+                    padding: "5vh 0",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                  }}
+                >
+                  Balance : {userProfile?.balance}
+                </Typography>
+              </label>
+              <br />
+              <br />
               {updateLoading ? (
                 <CircularProgress />
               ) : (
@@ -226,7 +242,7 @@ const Profile = () => {
                           fontSize: "18px",
                         }}
                       >
-                        {isUpdate && "Update your"} Contact Number:
+                        {isUpdate && "Update your"} Contact Number :
                       </Typography>
                     </label>
                     <input
