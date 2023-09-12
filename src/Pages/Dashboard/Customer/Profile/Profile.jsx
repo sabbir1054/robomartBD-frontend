@@ -129,25 +129,28 @@ const Profile = () => {
     setIsUpdate(false);
   };
 
-  if (profileUpdateSuccess) {
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Update successfully",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  }
+  useEffect(() => {
+    if (profileUpdateSuccess) {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Update successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
 
-  if (updateError) {
-    Swal.fire({
-      position: "top-center",
-      icon: "warning",
-      title: "Something went wrong !",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  }
+    if (updateError) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Something went wrong !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  }, [updateError, profileUpdateSuccess]);
+
   // console.log(userProfile);
   return (
     <div

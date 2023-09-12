@@ -139,7 +139,7 @@ const CheckOutPage = () => {
   };
 
   const postAnOrder = (orderData) => {
-
+    console.log(orderData);
     if (billingOptions !== "op") {
       const options = { data: orderData };
       postOrder(options);
@@ -155,8 +155,9 @@ const CheckOutPage = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      return 0;
     }
-    if (!billingOptions) {
+    if (!billingOptions && !checkoutData?.useBalance) {
       Swal.fire({
         position: "top-center",
         icon: "warning",
@@ -164,6 +165,7 @@ const CheckOutPage = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      return 0;
     }
     let confirmAddress = "";
     if (sameAsAddress) {
@@ -179,6 +181,7 @@ const CheckOutPage = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      return 0;
     }
     let billing_options = "";
 
@@ -206,7 +209,7 @@ const CheckOutPage = () => {
       items: newItems,
     };
 
-    if (data?.phone === null) {
+    if (data?.phone === "") {
       Swal.fire({
         position: "top-center",
         icon: "warning",
@@ -214,6 +217,7 @@ const CheckOutPage = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      return 0;
     }
     postAnOrder(data);
   };
@@ -386,73 +390,90 @@ const CheckOutPage = () => {
               </label>
               <Divider />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={3}
-              md={2}
-              style={{
-                borderRight: "1px solid #ddd",
-                minHeight: "30vh",
-                padding: "3vh",
-              }}
-            >
-              <FormControl fullWidth sx={{ pb: "23px" }}>
-                <RadioGroup>
-                  <FormControlLabel
-                    sx={{ mr: 0 }}
-                    value="cod"
-                    control={
-                      <Radio
-                        size="small"
-                        color="success"
-                        onClick={() => setBillingOptions("cod")}
+            {checkoutData?.useBalance === true ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "5vh",
+                }}
+              >
+                <FormLabelCheckout label={"You are using your balance now"} />
+              </div>
+            ) : (
+              <>
+                {" "}
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  md={2}
+                  style={{
+                    borderRight: "1px solid #ddd",
+                    minHeight: "30vh",
+                    padding: "3vh",
+                  }}
+                >
+                  <FormControl fullWidth sx={{ pb: "23px" }}>
+                    <RadioGroup>
+                      <FormControlLabel
+                        sx={{ mr: 0 }}
+                        value="cod"
+                        control={
+                          <Radio
+                            size="small"
+                            color="success"
+                            onClick={() => setBillingOptions("cod")}
+                          />
+                        }
+                        label={
+                          <p className={styles.shippingItem}>
+                            Cash on delivery
+                          </p>
+                        }
                       />
-                    }
-                    label={
-                      <p className={styles.shippingItem}>Cash on delivery</p>
-                    }
-                  />
-                  <FormControlLabel
-                    sx={{ mr: 0 }}
-                    value="mp"
-                    control={
-                      <Radio
-                        size="small"
-                        color="success"
-                        onClick={() => setBillingOptions("mp")}
+                      <FormControlLabel
+                        sx={{ mr: 0 }}
+                        value="mp"
+                        control={
+                          <Radio
+                            size="small"
+                            color="success"
+                            onClick={() => setBillingOptions("mp")}
+                          />
+                        }
+                        label={
+                          <p className={styles.shippingItem}>Manual Payment</p>
+                        }
                       />
-                    }
-                    label={
-                      <p className={styles.shippingItem}>Manual Payment</p>
-                    }
-                  />
-                  <FormControlLabel
-                    sx={{ mr: 0 }}
-                    value="op"
-                    control={
-                      <Radio
-                        size="small"
-                        color="success"
-                        onClick={() => setBillingOptions("op")}
+                      <FormControlLabel
+                        sx={{ mr: 0 }}
+                        value="op"
+                        control={
+                          <Radio
+                            size="small"
+                            color="success"
+                            onClick={() => setBillingOptions("op")}
+                          />
+                        }
+                        label={
+                          <p className={styles.shippingItem}>Online Payment</p>
+                        }
                       />
-                    }
-                    label={
-                      <p className={styles.shippingItem}>Online Payment</p>
-                    }
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={9} md={10}>
+                  <BillingOptions
+                    setBillingOptions={setBillingOptions}
+                    billingOptions={billingOptions}
+                    setPaymentNumber={setPaymentNumber}
+                    setTrnxID={setTrnxID}
+                    setPaymentMedium={setPaymentMedium}
                   />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={9} md={10}>
-              <BillingOptions
-                setBillingOptions={setBillingOptions}
-                billingOptions={billingOptions}
-                setPaymentNumber={setPaymentNumber}
-                setTrnxID={setTrnxID}
-                setPaymentMedium={setPaymentMedium}
-              />
-            </Grid>
+                </Grid>
+              </>
+            )}
           </Grid>
         </form>
         <div style={{ display: "flex", justifyContent: "end" }}>

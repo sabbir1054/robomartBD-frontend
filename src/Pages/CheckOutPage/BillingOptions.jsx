@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import FormLabelCheckout from "./FormLabelCheckout";
 
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 import styles from "./CheckOut.module.scss";
 
 const mystyles = {
@@ -20,8 +20,8 @@ const BillingOptions = ({
   setPaymentMedium,
   setTrnxID,
   setPaymentNumber,
-  
 }) => {
+  const checkoutData = useSelector((state) => state.checkoutData);
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const handleChange = (event) => {
@@ -39,7 +39,7 @@ const BillingOptions = ({
     formState: { errors },
   } = useForm({});
 
-  if (billingOptions === "") {
+  if (billingOptions === "" && checkoutData?.useBalance === false) {
     return (
       <div
         style={{
@@ -52,6 +52,7 @@ const BillingOptions = ({
       </div>
     );
   }
+
   return (
     <>
       {billingOptions === "cod" && (
@@ -181,7 +182,6 @@ const BillingOptions = ({
               />
             </div>
             <br />
-           
           </div>
         </div>
       )}

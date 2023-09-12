@@ -13,7 +13,9 @@ const AddBlogsPage = () => {
   const [images, setImages] = useState([]);
   const [sections, setSections] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  console.log(checkBeforeSubmit);
+ 
+
+
   const {
     register,
     control,
@@ -31,6 +33,8 @@ const AddBlogsPage = () => {
     control,
     name: "sections",
   });
+
+
   const handleSubmitBtn = () => {
     if (
       finalData.title &&
@@ -58,6 +62,8 @@ const AddBlogsPage = () => {
       }, 2000);
     }
   };
+
+  
   const onSubmit = (data) => {
     // create data
     data.coverPhoto = images && images[0]?.data_url;
@@ -211,7 +217,7 @@ const AddBlogsPage = () => {
             }}
           >
             <Tooltip title="Please Save all section first">
-              <div onClick={handleSubmitBtn}>
+              <div>
                 <input
                   // disabled={checkBeforeSubmit ? false : true}
                   type="submit"

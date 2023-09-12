@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetHomeDataQuery } from "../../redux/api/api";
 import { encryptAndStoreData } from "../../utils/encript";
 import CategoryProducts from "./Sections/CategoryWiseProducts/CategoryProducts";
@@ -9,14 +9,15 @@ import OurSupplierNPartner from "./Sections/OurSupplierPartner/OurSupplierNPartn
 import TopBlogs from "./Sections/TopBlogs/TopBlogs";
 
 const Home = () => {
+  const [reFetch, setRefetch] = useState(false);
   const { data: homeData, isLoading, isError, error } = useGetHomeDataQuery();
 
   useEffect(() => {
-    if (error?.status===401 && !isLoading) {
+    if (error?.status === 401 && !isLoading) {
       localStorage.removeItem("user");
     }
   }, [error]);
-  
+
   useEffect(() => {
     if (homeData) {
       fetch(`https://api.robomartbd.com/api/products`)
