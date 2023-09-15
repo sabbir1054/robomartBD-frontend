@@ -49,7 +49,7 @@ const TutorialHead = () => {
             border: "1px solid #e2e2e2",
           }}
           srcset=""
-          onMouseOver={(e) => (e.target.style.transform = "scale(1.1)")}
+          onMouseOver={(e) => (e.target.style.transform = "scale(1.03)")}
           onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
         />
       </div>
