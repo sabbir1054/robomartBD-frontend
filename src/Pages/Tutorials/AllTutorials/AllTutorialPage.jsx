@@ -3,6 +3,7 @@ import React from "react";
 import BottomPagination from "./Components/PaginationsFilter/BottomPagination/BottomPagination";
 import PaginationFilter from "./Components/PaginationsFilter/PaginationFilter";
 import TutorialSearchBar from "./Components/SearchBar/TutorialSearchBar";
+import TutorialCategoryNav from "./Components/TutorialCategoryNav/TutorialCategoryNav";
 import SingleTutorialCard from "./Components/Tutorials/SingleTutorialCard";
 
 const AllTutorialPage = () => {
@@ -24,7 +25,7 @@ const AllTutorialPage = () => {
       </Container>
       <Divider style={{ borderColor: "#e2e2e2" }} />
       {/* search Bar */}
-      <div style={{ backgroundColor: "#F7F7F7", padding: "10vh 2vh" }}>
+      <div style={{ backgroundColor: "#F7F7F7", padding: "10vh 0vh 5vh 0vh" }}>
         <p style={{ textAlign: "center" }}>
           <Typography
             variant="title1"
@@ -41,6 +42,9 @@ const AllTutorialPage = () => {
         </p>
         <Container maxWidth={"xl"}>
           <TutorialSearchBar />
+
+          {/* Category Nav */}
+          <TutorialCategoryNav />
         </Container>
       </div>
       <Divider style={{ borderColor: "#e2e2e2" }} />

@@ -1,0 +1,20 @@
+.categoryList{
+    list-style-type: none;
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+transition: all 0.3s ease-in;
+    li{
+        font-family: "Poppins";
+        margin: 5px;
+        outline: 1px solid #e2e2e2;
+        padding: 5px;
+        
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(38, 245, 38, 0.281);
+           
+        }
+    }
+}
