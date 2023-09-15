@@ -25,7 +25,7 @@ const options = [
 const ITEM_HEIGHT = 48;
 
 const PaginationFilter = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState("None");
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

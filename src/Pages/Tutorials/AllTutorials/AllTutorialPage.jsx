@@ -50,7 +50,7 @@ const AllTutorialPage = () => {
       </Container>
 
       <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} padding={1}>
           <Grid item xs={6} sm={6} md={4} lg={3}>
             <SingleTutorialCard />
           </Grid>
