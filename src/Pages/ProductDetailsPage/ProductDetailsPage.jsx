@@ -1,15 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Rating,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Divider, Grid, Rating } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -242,49 +234,44 @@ const ProductDetailsPage = () => {
               <p className={styles.description}>
                 {productDetails?.discription}
               </p>
-
-              <Grid container>
-                {" "}
-                <Grid item md={12} lg={6}>
-                  <div className={styles.quantity}>
-                    <div>
-                      <button onClick={(event) => changeAmount(-1)}>
-                        <RemoveIcon />
-                      </button>
-                      <input type={"number"} min={1} value={amount} readOnly />
-                      <button onClick={(event) => changeAmount(+1)}>
-                        <AddIcon />
-                      </button>
-                    </div>
-                  </div>
-                  <div className={styles.buttons}>
-                    <button className={styles.addToCardBtn} onClick={addToCart}>
-                      <AddShoppingCartIcon />
-                      ADD TO CART
+              <div style={{ display: "inline-block", marginRight: "5px" }}>
+                <div className={styles.quantity}>
+                  <div>
+                    <button onClick={(event) => changeAmount(-1)}>
+                      <RemoveIcon />
                     </button>
-                    {/* <button
+                    <input type={"number"} min={1} value={amount} readOnly />
+                    <button onClick={(event) => changeAmount(+1)}>
+                      <AddIcon />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <span style={{ fontFamily: "Poppins", fontWeight: "bold" }}>
+                X
+                <span style={{ margin: "0 5px" }}>
+                  {" "}
+                  {productDetails?.price}
+                </span>{" "}
+                =
+                <span style={{ margin: "0 5px" }}>
+                  {" "}
+                  {amount * productDetails?.price}
+                </span>
+              </span>
+              <div className={styles.buttons}>
+                <button className={styles.addToCardBtn} onClick={addToCart}>
+                  <AddShoppingCartIcon />
+                  ADD TO CART
+                </button>
+                {/* <button
                   className={styles.addToWishlist}
              
                 >
                   <FavoriteBorderIcon />
                   <p>Add to Wishlist</p>
                 </button> */}
-                  </div>
-                </Grid>{" "}
-                <Grid item md={12} lg={6}>
-                  <Typography
-                    variant="title1"
-                    style={{ fontWeight: "bold", fontFamily: "Poppins" }}
-                  >
-                    Subtotal: <span>{productDetails?.price} </span> X
-                    <span style={{ margin: "0 5px" }}> {amount}</span> =
-                    <span style={{ margin: "0 5px" }}>
-                      {" "}
-                      {amount * productDetails?.price}
-                    </span>
-                  </Typography>
-                </Grid>{" "}
-              </Grid>
+              </div>
             </div>
           </Grid>
         </Grid>
