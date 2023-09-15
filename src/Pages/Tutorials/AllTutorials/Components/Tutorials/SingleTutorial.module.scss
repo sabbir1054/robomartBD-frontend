@@ -1,0 +1,8 @@
+.tutorial_title {
+  color: var(--primaryColor) !important;
+  &:hover {
+    color: green !important;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

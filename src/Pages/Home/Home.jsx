@@ -15,6 +15,7 @@ const Home = () => {
   useEffect(() => {
     if (error?.status === 401 && !isLoading) {
       localStorage.removeItem("user");
+      window.location.reload();
     }
   }, [error]);
 

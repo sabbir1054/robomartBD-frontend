@@ -2,8 +2,6 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import AuthPages from "./Pages/AuthPages/AuthPages";
-import BlogsMainPage from "./Pages/Blogs/BlogsMainPage";
-import SingleBlogPage from "./Pages/Blogs/SingleBlogPage/SingleBlogPage";
 import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
@@ -15,6 +13,8 @@ import ProductSearch from "./Pages/ProductSearchPage/ProductSearch";
 import ShoppingCartPage from "./Pages/ShoppingCart/ShoppingCartPage";
 import SingleCategoryProducts from "./Pages/SingleCategoryProducts/SingleCategoryProducts";
 import SubCategoryProducts from "./Pages/SingleSubCategoryProduct/SubCategoryProducts";
+import AllTutorialPage from "./Pages/Tutorials/AllTutorials/AllTutorialPage";
+import SIngleTutorialPage from "./Pages/Tutorials/SingleTutorial/SIngleTutorialPage";
 import Footer from "./Shared/Footer/Footer";
 import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
@@ -56,8 +56,11 @@ function App() {
           element={<AddProducts />}
         />
         <Route path="/dashboard/user/profile" element={<Profile />} />
-        <Route path="/blogs" element={<BlogsMainPage />} />
-        <Route path="/blog/:blogId" element={<SingleBlogPage />} />
+        <Route path="/tutorials" element={<AllTutorialPage />} />
+        <Route
+          path="/tutorials/:tutorialId/:tutorialName"
+          element={<SIngleTutorialPage />}
+        />
         <Route path="/forum" element={<ForumMainPage />} />
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
         <Route

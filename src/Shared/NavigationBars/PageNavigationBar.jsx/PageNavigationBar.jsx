@@ -36,12 +36,12 @@ const PageNavigationBar = () => {
         <PrecisionManufacturingSharpIcon /> <span> Shop</span>
       </NavLink>
       <NavLink
-        to="/blogs"
+        to="/tutorials"
         className={`${
-          location.pathname === "/blogs" ? styles.activeRoute : ""
+          location.pathname === "/tutorials" ? styles.activeRoute : ""
         } ${styles.navigationMenu_Item}`}
       >
-        <RssFeedSharpIcon /> <span>Blogs</span>
+        <RssFeedSharpIcon /> <span>Tutorials</span>
       </NavLink>
       <NavLink
         to="/forum"
