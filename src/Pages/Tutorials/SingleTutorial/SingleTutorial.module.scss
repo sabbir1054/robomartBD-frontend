@@ -1,0 +1,7 @@
+.listItemSections {
+  transition: all 0.3s ease-in;
+  &:hover {
+    background-color: var(--primaryColor);
+    cursor: pointer;
+  }
+}
