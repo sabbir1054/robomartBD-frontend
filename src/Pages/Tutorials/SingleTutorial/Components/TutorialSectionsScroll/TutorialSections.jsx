@@ -1,12 +1,42 @@
 import { Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
-const TutorialSections = () => {
+const TutorialSections = ({ activeSection,setActiveSection }) => {
+ 
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 } // Adjust this threshold as needed
+    );
+
+    const sections = document.querySelectorAll(".scroll-spy-section");
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        observer.unobserve(section);
+      });
+    };
+  }, []);
+
+
   return (
     <>
-      <div>
+      <div
+        id={"sec2"}
+  
+        className="scroll-spy-section"
+      >
         <Typography
-          id={"sec2"}
           variant="h6"
           style={{
             fontFamily: "Poppins",
@@ -49,9 +79,12 @@ const TutorialSections = () => {
           />
         </div>
       </div>
-      <div>
+      <div
+        id={"sec3"}
+        className="scroll-spy-section"
+  
+      >
         <Typography
-          id={"sec3"}
           variant="h6"
           style={{
             fontFamily: "Poppins",
@@ -94,9 +127,12 @@ const TutorialSections = () => {
           />
         </div>
       </div>
-      <div>
+      <div
+        id={"sec4"}
+        className="scroll-spy-section"
+  
+      >
         <Typography
-          id={"sec4"}
           variant="h6"
           style={{
             fontFamily: "Poppins",

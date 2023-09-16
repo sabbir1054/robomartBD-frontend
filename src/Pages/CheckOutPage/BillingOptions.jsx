@@ -64,7 +64,7 @@ const BillingOptions = ({
               marginTop: "5vh",
             }}
           >
-            <img src="/public/assets/cod-photo.png" width={"300px"} />
+            <img src="/assets/cod-photo.png" width={"300px"} />
           </div>
           {/* <div style={{ display: "flex", justifyContent: "center" }}>
             {" "}

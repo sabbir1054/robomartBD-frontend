@@ -15,7 +15,7 @@ const SingleTutorialCard = () => {
           component="img"
           alt="green iguana"
           height="140"
-          image="/public/assets/photo-blog.jpg"
+          image="/assets/photo-blog.jpg"
         />
         <CardContent>
           <Typography
