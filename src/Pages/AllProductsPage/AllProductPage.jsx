@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
-import CategoryList from "../Home/Sections/HeroSection/CategoryList";
 
 const AllProductPage = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -16,7 +16,7 @@ const AllProductPage = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={12} md={2} padding={2}>
-          <CategoryList />
+          <AllCategorySideMenu />
         </Grid>
         <Grid item xs={12} sm={12} md={10} paddingY={2}>
           <Container maxWidth="xxl" sx={{ borderLeft: "1px solid #f2f2f2" }}>
