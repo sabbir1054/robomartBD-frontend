@@ -1,7 +1,8 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import { useGetCategoryListProductsQuery } from "../../redux/api/api";
+import AllProductsSection from "./Components/AllProductsSection/AllProductsSection";
 import CategorySection from "./Components/CategorySection/CategorySection";
 
 const AllProductPage = () => {
@@ -30,6 +31,7 @@ const AllProductPage = () => {
         <Grid item xs={12} sm={12} md={10} paddingY={2}>
           <Container maxWidth="xxl" sx={{ borderLeft: "1px solid #f2f2f2" }}>
             <CategorySection categoryList={categoryList} />
+            <AllProductsSection />
             {/*   {allProducts?.length > 0 &&
               allProducts?.map((singleCategory) => (
                 <>

@@ -45,7 +45,7 @@ const CategorySection = ({ categoryList }) => {
                       />
                     </NavLink>
                   </div>
-                  <Typography variant="subtitle1" textAlign={"center"}>
+                  <Typography variant="subtitle1" textAlign={"center"} fontWeight={"bold"}>
                     {singleCategory?.name}
                   </Typography>
                 </Grid>
@@ -82,7 +82,7 @@ const CategorySection = ({ categoryList }) => {
                             />
                           </NavLink>
                         </div>
-                        <Typography variant="subtitle1" textAlign={"center"}>
+                        <Typography variant="subtitle1" textAlign={"center"} fontWeight={"bold"}>
                           {item?.name}
                         </Typography>
                       </Grid>
