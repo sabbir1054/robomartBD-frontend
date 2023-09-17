@@ -1,11 +1,15 @@
 import { Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
-import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
 import { useGetCategoryListProductsQuery } from "../../redux/api/api";
+import CategorySection from "./Components/CategorySection/CategorySection";
 
 const AllProductPage = () => {
-  const { data: categoryList, isLoading, isError } = useGetCategoryListProductsQuery();
+  const {
+    data: categoryList,
+    isLoading,
+    isError,
+  } = useGetCategoryListProductsQuery();
   console.log(categoryList);
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
@@ -25,7 +29,8 @@ const AllProductPage = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={10} paddingY={2}>
           <Container maxWidth="xxl" sx={{ borderLeft: "1px solid #f2f2f2" }}>
-            {allProducts?.length > 0 &&
+            <CategorySection categoryList={categoryList} />
+            {/*   {allProducts?.length > 0 &&
               allProducts?.map((singleCategory) => (
                 <>
                   <Typography
@@ -41,6 +46,8 @@ const AllProductPage = () => {
                   </Typography>{" "}
                   <hr style={{ borderColor: "#f2f2f2", marginBottom: "5px" }} />
                   <Grid container spacing={2} marginBottom={2}>
+                   
+
                     {singleCategory?.product?.map((product) => (
                       <Grid
                         item
@@ -58,7 +65,7 @@ const AllProductPage = () => {
                     ))}
                   </Grid>
                 </>
-              ))}
+              ))} */}
           </Container>
         </Grid>
       </Grid>

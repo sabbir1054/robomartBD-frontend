@@ -58,25 +58,28 @@ const AllCategorySideMenu = ({ category }) => {
               <Divider />
             </>
           ))}
-        <div
-          style={{
-            padding: "0.7vh 0",
-            borderRadius: "0px 0px 5px 5px",
-          }}
-        >
-          <NavLink
-            style={{ textDecoration: "none", color: "black" }}
-            className={styles.link}
+        {viewAll && (
+          <div
+            style={{
+              padding: "0.7vh 0",
+              borderRadius: "0px 0px 5px 5px",
+            }}
           >
-            <Typography
-              variant="subtitle1"
-              textAlign={"center"}
-              style={{ fontFamily: "Poppins" }}
+            <NavLink
+              to={"/products"}
+              style={{ textDecoration: "none", color: "black" }}
+              className={styles.link}
             >
-              Show All
-            </Typography>
-          </NavLink>
-        </div>
+              <Typography
+                variant="subtitle1"
+                textAlign={"center"}
+                style={{ fontFamily: "Poppins" }}
+              >
+                Show All
+              </Typography>
+            </NavLink>
+          </div>
+        )}
       </Box>
     </div>
   );

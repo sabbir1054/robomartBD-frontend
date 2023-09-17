@@ -12,12 +12,11 @@ const Hero = () => {
 
   return (
     <>
-
       {screenWidth > 1200 && screenWidth < 1500 ? (
         <Grid container paddingTop={1}>
           <Grid item md={3} lg={2}>
             <Box style={{ backgroundColor: "white", margin: "0px 10px" }}>
-              <CategoryList />
+              <AllCategorySideMenu category={categoryList?.slice(0, 9)} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={9} lg={10}>
@@ -46,8 +45,8 @@ const Hero = () => {
           >
             <Grid item md={3} lg={2}>
               <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
-                  {/* <CategoryList /> */}
-                  <AllCategorySideMenu category={categoryList?.slice(0, 10)}/>
+                {/* <CategoryList /> */}
+                <AllCategorySideMenu category={categoryList?.slice(0, 8)} />
               </Box>
             </Grid>
             <Grid item md={9} lg={7} width={"100%"}>
