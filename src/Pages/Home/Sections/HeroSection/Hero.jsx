@@ -4,8 +4,11 @@ import CategoryList from "./CategoryList";
 import OfferCards from "./Components/OfferCards/OfferCards";
 import HeroSlider from "./Components/Slider/HeroSlider";
 import OurFeatures from "./OurFeatures/OurFeatures";
+import { useGetCategoryListProductsQuery } from "../../../../redux/api/api";
+import AllCategorySideMenu from "../../../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const { data: categoryList, isLoading, isError } = useGetCategoryListProductsQuery();
 
   return (
     <>
@@ -43,7 +46,8 @@ const Hero = () => {
           >
             <Grid item md={3} lg={2}>
               <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
-                <CategoryList />
+                  {/* <CategoryList /> */}
+                  <AllCategorySideMenu category={categoryList?.slice(0, 10)}/>
               </Box>
             </Grid>
             <Grid item md={9} lg={7} width={"100%"}>

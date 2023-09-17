@@ -1,11 +1,16 @@
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
-import CategoryList from "../Home/Sections/HeroSection/CategoryList";
+import { useGetCategoryListProductsQuery } from "../../redux/api/api";
 const SingleCategoryProducts = () => {
   const params = useParams();
-
+  const {
+    data: categoryList,
+    isLoading,
+    isError,
+  } = useGetCategoryListProductsQuery();
   const [categoryProducts, setCategoryProducts] = useState([]);
 
   console.log(params);
@@ -23,7 +28,7 @@ const SingleCategoryProducts = () => {
     <div>
       <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
         <Grid item xs={2} padding={2}>
-          <CategoryList />
+          {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
         <Grid item xs={10}>
           <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
