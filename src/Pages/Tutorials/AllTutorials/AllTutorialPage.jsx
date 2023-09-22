@@ -1,5 +1,11 @@
-import { Container, Divider, Grid, Typography } from "@mui/material";
-import React from "react";
+import {
+  CircularProgress,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import BottomPagination from "./Components/PaginationsFilter/BottomPagination/BottomPagination";
 import PaginationFilter from "./Components/PaginationsFilter/PaginationFilter";
 import TutorialSearchBar from "./Components/SearchBar/TutorialSearchBar";
@@ -7,6 +13,36 @@ import TutorialCategoryNav from "./Components/TutorialCategoryNav/TutorialCatego
 import SingleTutorialCard from "./Components/Tutorials/SingleTutorialCard";
 
 const AllTutorialPage = () => {
+  const [load, setLoad] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(10);
+  const [tutorialsData, setTutorialsData] = useState([]);
+
+  /* pagination value */
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  /* get tutorials data  */
+
+  const getTutorialsData = async () => {
+    setLoad(true);
+    const dataToDb = await fetch(
+      `https://api.robomartbd.com/blog/get_blog?page=${currentPage}`
+    );
+    const result = await dataToDb.json();
+    if (result?.results) {
+      setLoad(false);
+    }
+    // set data
+    setTotalPages(result?.count);
+    setTutorialsData(result?.results);
+  };
+
+  useEffect(() => {
+    getTutorialsData();
+  }, [currentPage]);
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container maxWidth={"xl"}>
@@ -50,47 +86,33 @@ const AllTutorialPage = () => {
       <Divider style={{ borderColor: "#e2e2e2" }} />
       {/* Pagination and tags */}
       <Container maxWidth={"xl"}>
-        <PaginationFilter />
+        <PaginationFilter
+          handlePageChange={handlePageChange}
+          totalPages={totalPages}
+          page={currentPage}
+        />
       </Container>
-
+      {/* tutorials */}
       <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
         <Grid container spacing={2} padding={1}>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={3}>
-            <SingleTutorialCard />
-          </Grid>
+          {load && <CircularProgress />}
+          {!load && tutorialsData?.length == 0 && <h5>No tutorials </h5>}
+          {tutorialsData?.length &&
+            tutorialsData?.map((tutorial) => (
+              <Grid item xs={6} sm={6} md={4} lg={3}>
+                <SingleTutorialCard tutorial={tutorial} />
+              </Grid>
+            ))}
         </Grid>
       </Container>
       <div
         style={{ display: "flex", justifyContent: "center", padding: "2vh 0" }}
       >
-        <BottomPagination />
+        <BottomPagination
+          handlePageChange={handlePageChange}
+          totalPages={totalPages}
+          page={currentPage}
+        />
       </div>
     </div>
   );

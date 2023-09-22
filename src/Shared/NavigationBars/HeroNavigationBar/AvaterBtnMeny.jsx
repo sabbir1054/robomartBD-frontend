@@ -84,10 +84,14 @@ const AvaterBtnMeny = ({ data }) => {
             </MenuItem>
           </NavLink>
           <Divider />
-
-          <MenuItem onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">Order History</Typography>
-          </MenuItem>
+          <NavLink
+            to="/dashboard/user/order_history"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <MenuItem onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Order History</Typography>
+            </MenuItem>
+          </NavLink>
           <Divider />
           <MenuItem onClick={handleLogout}>
             <Typography textAlign="center">Logout</Typography>

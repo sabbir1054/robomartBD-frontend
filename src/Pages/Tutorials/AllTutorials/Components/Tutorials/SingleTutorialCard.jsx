@@ -5,8 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./SingleTutorial.module.scss";
-const SingleTutorialCard = () => {
+const SingleTutorialCard = ({ tutorial }) => {
+  console.log(tutorial);
   return (
     <>
       {" "}
@@ -15,24 +17,44 @@ const SingleTutorialCard = () => {
           component="img"
           alt="green iguana"
           height="140"
-          image="/assets/photo-blog.jpg"
+          image={
+            tutorial?.image
+              ? `https://api.robomartbd.com${tutorial?.image}`
+              : "/assets/no-img.jpg"
+          }
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="div"
-            className={styles.tutorial_title}
+          <NavLink
+            to={`/tutorials/${tutorial?.id}/${(tutorial?.title).replace(
+              / /g,
+              "_"
+            )}`}
+            style={{ textDecoration: "none" }}
           >
-            SparkFun Arduino UNO R4 WiFi Qwiic Kit Hookup Guide
-          </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="div"
+              className={styles.tutorial_title}
+            >
+              {tutorial?.title}
+            </Typography>
+          </NavLink>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {tutorial?.description}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Read More</Button>
+          <NavLink
+            to={`/tutorials/${tutorial?.id}/${(tutorial?.title).replace(
+              / /g,
+              "_"
+            )}`}
+            style={{ textDecoration: "none" }}
+          >
+            {" "}
+            <Button size="small">Read More</Button>
+          </NavLink>
         </CardActions>
       </Card>
     </>

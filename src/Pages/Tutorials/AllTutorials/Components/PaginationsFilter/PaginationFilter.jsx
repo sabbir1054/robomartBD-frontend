@@ -3,7 +3,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const options = [
   "None",
@@ -24,7 +25,17 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-const PaginationFilter = () => {
+const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
+  const [tags, seTags] = useState([]);
+  const getTagsData = async () => {
+    const dataToDb = await fetch(`https://api.robomartbd.com/blog/get_all_tag`);
+    const result = await dataToDb.json();
+    seTags(result);
+  };
+  useEffect(() => {
+    getTagsData();
+  }, []);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -33,10 +44,7 @@ const PaginationFilter = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  /* pagination value */
-  const handleChange = (event, value) => {
-    console.log(`Selected page: ${value}`);
-  };
+
   return (
     <div>
       <Grid container spacing={2} paddingY={1}>
@@ -72,25 +80,24 @@ const PaginationFilter = () => {
                 },
               }}
             >
-              {options.map((option) => (
-                <MenuItem
-                  key={option}
-                  selected={option === "Pyxis"}
-                  onClick={handleClose}
-                >
-                  {option}
-                </MenuItem>
-              ))}
+              {tags?.length > 0 &&
+                tags?.map((tag) => (
+                  <NavLink style={{ textDecoration: "none", color: "black" }}>
+                    <MenuItem key={tag?.id} onClick={handleClose}>
+                      {tag?.tag_name}
+                    </MenuItem>
+                  </NavLink>
+                ))}
             </Menu>
           </div>
         </Grid>
         <Grid item xs={12} sm={6} display={"flex"} justifyContent={"end"}>
           <Stack spacing={2}>
             <Pagination
-              count={10}
+              count={totalPages}
               variant="outlined"
               shape="rounded"
-              onChange={handleChange}
+              onChange={handlePageChange}
               color="success"
             />
           </Stack>

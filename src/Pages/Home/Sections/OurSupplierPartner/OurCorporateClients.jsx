@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const SupplierNPartner = [
   {
@@ -21,17 +21,15 @@ const SupplierNPartner = [
   },
 ];
 
-
-
 const OurCorporateClients = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(``)
+    fetch(`https://api.robomartbd.com/api/our_supplier`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
   return (
-    <div style={{ minHeight: "25vh", padding: "3vh 0" }}>
+    <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
       <div>
         <Typography
           variant="h5"
@@ -77,18 +75,44 @@ const OurCorporateClients = () => {
           >
             {data?.map((company) => (
               <SwiperSlide>
-                <img
+                <div
                   style={{
-                    width: "200px",
-                    height: "150px",
-                    // border: "1px solid #e2e2e2",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
-                  // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                  src={`https://api.robomartbd.com${company?.logo}`}
-                  alt="no-image"
-                  srcset=""
-                />
-                <p style={{ textAlign: "center" }}>{company?.name}</p>
+                >
+                  <div
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: "1px solid #e2e2e2",
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: "150px",
+                        // border: "1px solid #e2e2e2",
+                      }}
+                      // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
+                      src={`https://api.robomartbd.com${company?.logo}`}
+                      alt="no-image"
+                      srcset=""
+                    />
+                  </div>
+                </div>
+
+                <Typography
+                  variant="subtitle1"
+                  textAlign={"center"}
+                  fontWeight={"bold"}
+                  fontFamily={"Poppins"}
+                >
+                  {company?.name}
+                </Typography>
               </SwiperSlide>
             ))}
           </Swiper>

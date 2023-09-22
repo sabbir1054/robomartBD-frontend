@@ -1,9 +1,9 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import SingleBlogList from "./Components/BlogList/SingleBlogList";
 import SingleHeroBlog from "./Components/SingleHeroBlog/SingleHeroBlog";
 import styles from "./TopBlogs.module.scss";
-import { NavLink } from "react-router-dom";
 const TopBlogs = () => {
   const [blogsData, setBlogsData] = useState([]);
 
@@ -26,7 +26,7 @@ const TopBlogs = () => {
           fontWeight={"bold"}
           borderBottom={"1px solid #f2f2f2"}
         >
-          Top Blogs
+          Top Tutorials
         </Typography>
         <Grid
           container

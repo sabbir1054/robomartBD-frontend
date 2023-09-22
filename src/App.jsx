@@ -20,6 +20,7 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
+import OrderHistory from "./Pages/Dashboard/Customer/OrderHistory/OrderHistory";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           element={<AddProducts />}
         />
         <Route path="/dashboard/user/profile" element={<Profile />} />
+        <Route path="/dashboard/user/order_history" element={<OrderHistory />} />
         <Route path="/tutorials" element={<AllTutorialPage />} />
         <Route
           path="/tutorials/:tutorialId/:tutorialName"

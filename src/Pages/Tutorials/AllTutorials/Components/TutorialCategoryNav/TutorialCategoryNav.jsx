@@ -1,53 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TutorialCategoryList.module.scss";
 const TutorialCategoryNav = () => {
+  const [categories, setCategories] = useState([]);
+  const getCategoriesData = async () => {
+    const dataToDb = await fetch(
+      `https://api.robomartbd.com/blog/get_all_category`
+    );
+    const result = await dataToDb.json();
+    setCategories(result);
+  };
+  useEffect(() => {
+    getCategoriesData();
+  }, []);
+
+  console.log(categories);
+
   return (
     <div>
       <ul className={styles.categoryList}>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            Small Project
-          </Link>{" "}
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            Large Project
-          </Link>
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            {" "}
-            Arduino Project
-          </Link>
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            IOT Projects
-          </Link>
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            {" "}
-            Ar Vr
-          </Link>{" "}
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            {" "}
-            Micro Controller
-          </Link>
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            Wireless System
-          </Link>
-        </li>
-        <li>
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
-            Home Automation
-          </Link>
-        </li>
+        {categories?.length > 0 &&
+          categories?.map((category) => (
+            <li>
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
+                {category?.name}
+              </Link>{" "}
+            </li>
+          ))}
       </ul>
     </div>
   );

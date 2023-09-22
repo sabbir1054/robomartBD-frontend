@@ -2,10 +2,10 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import styles from "./CategoryProducts.module.scss";
-import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const RelatedProducts = ({ categoriesId }) => {

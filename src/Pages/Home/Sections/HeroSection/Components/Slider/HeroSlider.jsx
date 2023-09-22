@@ -1,5 +1,7 @@
+/* eslint-disable import/no-named-as-default */
+
 import React, { useState } from "react";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -9,7 +11,6 @@ import { Box } from "@mui/material";
 import { useGetHomeDataQuery } from "../../../../../../redux/api/api";
 
 const HeroSlider = () => {
- 
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
   if (homeLoading) {
