@@ -18,15 +18,10 @@ const SIngleTutorialPage = () => {
       .then((data) => setTutorialDetails(data));
   }, []);
 
-/* track */
-  
-  
-
-
+  /* track */
 
   useEffect(() => {
     const handleScroll = () => {
-     
       if (window.scrollY >= 0.1 * window.innerHeight) {
         setChangePosition(true);
       } else {
@@ -40,7 +35,7 @@ const SIngleTutorialPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-console.log(activeSection);
+  console.log(activeSection);
   return (
     <>
       <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>
@@ -63,17 +58,12 @@ console.log(activeSection);
               tutorialDetails={tutorialDetails}
             />
             <TutorialProducts />
-            {tutorialDetails?.pages?.slice(1)?.map((singleTutorialSection) => (
-              <TutorialSections
-                setActiveSection={setActiveSection}
-                activeSection={activeSection}
-                singleTutorialSection={singleTutorialSection}
-              />
-            ))}
-            {/* <TutorialSections
+          
+            <TutorialSections
               setActiveSection={setActiveSection}
               activeSection={activeSection}
-            /> */}
+              tutorialDetails={tutorialDetails}
+            />
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <div

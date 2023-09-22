@@ -2,7 +2,8 @@ import { Divider, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import CardHeader from "@mui/material/CardHeader";
 import React, { useEffect } from "react";
-const TutorialHead = ({ activeSection, setActiveSection }) => {
+import EditorTextViewer from "../../../../../Shared/EditorTextViewer/EditorTextViewer";
+const TutorialHead = ({ activeSection, setActiveSection, tutorialDetails }) => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll(".scroll-spy-section");
@@ -22,19 +23,23 @@ const TutorialHead = ({ activeSection, setActiveSection }) => {
     };
   }, []);
 
+  let divId = "sec1";
+  useEffect(() => {
+    if (tutorialDetails?.pages?.length > 0) {
+      divId = `sec${tutorialDetails?.pages[0]?.page_no}`;
+    }
+  }, [tutorialDetails]);
+
   return (
     <>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        title="Robomart BD Admin"
-        subheader="September 14, 2016"
+        avatar={<Avatar sx={{ bgcolor: "red" }} aria-label="recipe"></Avatar>}
+        title={`${tutorialDetails?.created_by?.first_name}
+          ${tutorialDetails?.created_by?.last_name}`}
+        subheader={tutorialDetails?.created_by?.email}
       />
       <Divider color={"#f2f2f2"} />
-      <div id={"sec1"} className="scroll-spy-section">
+      <div id={divId} className="scroll-spy-section">
         <Typography
           variant="h6"
           style={{
@@ -43,20 +48,15 @@ const TutorialHead = ({ activeSection, setActiveSection }) => {
             marginTop: "3vh",
           }}
         >
-          Introduction
+          {tutorialDetails?.pages?.length > 0 &&
+            tutorialDetails?.pages[0]?.page_title}
         </Typography>
-        <Typography variant="body1" textAlign={"justify"} id={"sec1"}>
-          Is there anything more tedious than having to connect dozens of wires
-          to get your latest project up and running? Wouldn’t it be nice if
-          there was some way to wirelessly send data over short distances and
-          eliminate the need for all those pesky wires? <br />
-          Enter Bluetooth! It’s a relatively simple way for electronic devices
-          to wirelessly connect by using a radio frequency to share data over
-          short distances. In this tutorial, we’ll teach you how to get
-          <br /> started using Bluetooth in your projects by sending sensor data
-          between multiple SparkFun Thing Plus ESP32 Wroom USB-C devices.
+        <Typography variant="body1" textAlign={"justify"}>
+          {tutorialDetails?.pages?.length > 0 && (
+            <EditorTextViewer froalaHTML={tutorialDetails?.pages[0]?.content} />
+          )}
         </Typography>
-        <div
+        {/* <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -76,7 +76,7 @@ const TutorialHead = ({ activeSection, setActiveSection }) => {
             onMouseOver={(e) => (e.target.style.transform = "scale(1.03)")}
             onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
           />
-        </div>
+        </div> */}
       </div>
     </>
   );
