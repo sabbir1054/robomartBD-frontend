@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigation } from "swiper/modules";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -82,7 +82,7 @@ const RecentView = () => {
                       border: "1px solid #e2e2e2",
                     }}
                     // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                    src={`https://api.robomartbd.com${product?.photo}`}
+                    src={`${product?.photo}`}
                     alt="no-image"
                     srcset=""
                   />

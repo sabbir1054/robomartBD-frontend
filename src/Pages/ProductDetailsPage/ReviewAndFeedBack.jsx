@@ -1,8 +1,8 @@
-import { Box, Card, Grid, Rating, Typography } from "@mui/material";
+import { Box, Card, Grid, Rating } from "@mui/material";
 import React from "react";
 import WriteYourFeedback from "./WriteYourFeedback";
 
-const ReviewAndFeedBack = () => {
+const ReviewAndFeedBack = ({ productDetails }) => {
   return (
     <div>
       <Box sx={{ marginTop: "5vh" }}>
@@ -10,7 +10,7 @@ const ReviewAndFeedBack = () => {
           Review & Feedback :
         </Typography> */}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <WriteYourFeedback />
+          <WriteYourFeedback productDetails={productDetails} />
         </Box>
         <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
           <Grid container>

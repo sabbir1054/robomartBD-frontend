@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation } from "swiper/modules";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const OurSupplierNPartner = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/our_client`)
+    fetch(`https://api.robomartbd.com/api/our_supplier`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -22,9 +22,10 @@ const OurSupplierNPartner = () => {
             fontFamily: "Poppins",
             fontWeight: "bold",
             textAlign: "center",
+            padding:"2vh 0"
           }}
         >
-          Our Corporate Partner
+          Our Partner
         </Typography>
         <>
           <Swiper
@@ -83,7 +84,7 @@ const OurSupplierNPartner = () => {
                         // border: "1px solid #e2e2e2",
                       }}
                       // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`https://api.robomartbd.com${company?.logo}`}
+                      src={`${company?.logo}`}
                       alt="no-image"
                       srcset=""
                     />

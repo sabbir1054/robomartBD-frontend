@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../redux/api/api";
 import styles from "./ProductDetail.module.scss";
-const WriteYourFeedback = () => {
+const WriteYourFeedback = ({ productDetails }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
-  const [rating, setRating] = useState("");
-  const [value, setValue] = useState(3);
+
+  const [value, setValue] = useState(5);
   const [feedback, setFeedback] = useState("");
 
   const handleOpen = () => {
@@ -19,7 +19,30 @@ const WriteYourFeedback = () => {
     setOpen(false);
   };
 
+  console.log(userData);
+
+  const postFeedbackData = (data) => {
+    fetch(`https://api.robomartbd.com/api/auth/jwt/create/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {});
+  };
+
   const handleSubmit = (e) => {
+    const newFeedBack = {
+      product: productDetails?.id,
+      ratting: value,
+      review: feedback,
+    };
+
+    postFeedbackData(newFeedBack);
+    console.log(feedback);
+    console.log(value);
     e.preventDefault();
     handleClose();
   };

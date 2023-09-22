@@ -77,7 +77,7 @@ const SearchBar = () => {
         }}
       >
         <img
-          src={`https://api.robomartbd.com${suggestion.photo}`}
+          src={`${suggestion.photo}`}
           alt={suggestion.name}
           width="75"
         />

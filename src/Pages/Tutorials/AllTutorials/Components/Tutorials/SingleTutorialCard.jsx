@@ -19,7 +19,7 @@ const SingleTutorialCard = ({ tutorial }) => {
           height="140"
           image={
             tutorial?.image
-              ? `https://api.robomartbd.com${tutorial?.image}`
+              ? `${tutorial?.image}`
               : "/assets/no-img.jpg"
           }
         />

@@ -74,7 +74,10 @@ small {
 }
 
 
-
+.active-scroll-spy {
+  background-color: yellowgreen;
+  border-radius: 15px;
+}
 
 .code_area{
   padding: 10px;

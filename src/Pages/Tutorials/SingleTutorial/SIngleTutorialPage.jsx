@@ -1,6 +1,7 @@
 import { Container, Grid, Typography } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import TutorialProducts from "./Components/TutorialProducts/TutorialProducts";
 import TutorialSections from "./Components/TutorialSectionsScroll/TutorialSections";
 import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
@@ -8,16 +9,24 @@ import TutorialHead from "./Components/TutorialsHead/TutorialHead";
 const SIngleTutorialPage = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [changePosition, setChangePosition] = useState(false);
+  const [tutorialDetails, setTutorialDetails] = useState({});
+  const params = useParams();
+
+  useEffect(() => {
+    fetch(`https://api.robomartbd.com/blog/get_blog/${params?.tutorialId}`)
+      .then((res) => res.json())
+      .then((data) => setTutorialDetails(data));
+  }, []);
+
+/* track */
+  
+  
+
+
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY < document.body.scrollHeight - window.innerHeight) {
-        console.log(
-          document.body.scrollHeight,
-          window.scrollY + window.innerHeight
-        );
-      }
-
+     
       if (window.scrollY >= 0.1 * window.innerHeight) {
         setChangePosition(true);
       } else {
@@ -31,7 +40,7 @@ const SIngleTutorialPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+console.log(activeSection);
   return (
     <>
       <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>
@@ -43,7 +52,7 @@ const SIngleTutorialPage = () => {
             fontWeight: "bold",
           }}
         >
-          SparkFun Arduino UNO R4 WiFi Qwiic Kit Hookup Guide
+          {tutorialDetails?.title}
         </Typography>
 
         <Grid container spacing={2}>
@@ -51,12 +60,20 @@ const SIngleTutorialPage = () => {
             <TutorialHead
               setActiveSection={setActiveSection}
               activeSection={activeSection}
+              tutorialDetails={tutorialDetails}
             />
             <TutorialProducts />
-            <TutorialSections
+            {tutorialDetails?.pages?.slice(1)?.map((singleTutorialSection) => (
+              <TutorialSections
+                setActiveSection={setActiveSection}
+                activeSection={activeSection}
+                singleTutorialSection={singleTutorialSection}
+              />
+            ))}
+            {/* <TutorialSections
               setActiveSection={setActiveSection}
               activeSection={activeSection}
-            />
+            /> */}
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <div
@@ -69,6 +86,7 @@ const SIngleTutorialPage = () => {
               <TutorialTitleNav
                 setActiveSection={setActiveSection}
                 activeSection={activeSection}
+                tutorialDetails={tutorialDetails}
               />
             </div>
           </Grid>

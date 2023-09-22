@@ -12,7 +12,12 @@ const SingleBlogList = ({blog}) => {
               <CardMedia
                 component="img"
                 className={styles.cardMedia}
-                image={`${blog?.image}`}
+                style={{maxWidth:"200px"}}
+                image={
+                  blog?.image
+                    ? `https://api.robomartbd.com${blog?.image}`
+                    : "/assets/no-img.jpg"
+                }
                 title="Blog Image"
               />
             </NavLink>
@@ -39,7 +44,10 @@ const SingleBlogList = ({blog}) => {
               </Typography>
 
               <Button variant="contained" className={styles.buyThisBtn}>
-                <NavLink to={`/blog/${blog?.id}`} style={{color:"white",textDecoration:"none"}}>
+                <NavLink
+                  to={`/blog/${blog?.id}`}
+                  style={{ color: "white", textDecoration: "none" }}
+                >
                   <Typography variant="body1" component="p">
                     Details
                   </Typography>

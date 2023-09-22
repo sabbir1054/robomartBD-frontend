@@ -156,12 +156,12 @@ const ProductDetailsPage = () => {
               className={styles.mainImage}
               onMouseMove={zoom}
               style={{
-                backgroundImage: `url(https://api.robomartbd.com${productDetails?.photo})`,
+                backgroundImage: `url(${productDetails?.photo})`,
                 backgroundPosition: bgPosition,
               }}
             >
               <img
-                src={`https://api.robomartbd.com${productDetails?.photo}`}
+                src={`${productDetails?.photo}`}
                 alt="mainImage"
                 style={{
                   border: "1px solid #f2f2f2",
@@ -276,7 +276,7 @@ const ProductDetailsPage = () => {
           </Grid>
         </Grid>
 
-        <BottomTabs />
+        <BottomTabs productDetails={productDetails} />
         <RecentView />
         <Divider />
         <RelatedProducts categoriesId={productDetails?.catagorys} />

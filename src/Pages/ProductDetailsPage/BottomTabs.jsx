@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import EditorTextViewer from "../../Shared/EditorTextViewer/EditorTextViewer";
 import ReviewAndFeedBack from "./ReviewAndFeedBack";
 
 function CustomTabPanel(props) {
@@ -40,12 +41,14 @@ function a11yProps(index) {
   };
 }
 
-const BottomTabs = () => {
+const BottomTabs = ({ productDetails }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  console.log(productDetails);
 
   return (
     <>
@@ -98,62 +101,13 @@ const BottomTabs = () => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           {/* Product Description */}
-          <h5>Features</h5>
-          <ul>
-            <li>
-              Let's you make a Line Follower robot without writing any code and
-              with minimal wiring
-            </li>
-            <li>Compatible with any chassis (ready-made or self-made)</li>
-            <li>Compatible with a huge variety of dc motors.</li>
-            <li>
-              Comes with a great line following robot code, preloaded into the
-              onboard microcontroller
-            </li>
-            <li>
-              Detects line of variable thickness, sharp turns, + type line
-              intersection and line gap.
-            </li>
-            <li>Comes with its own line detection sensor.</li>
-            <li>
-              Onboard graphical OLED display, easy & intuitive user interface.
-            </li>
-            <li>Small size and compact design </li>
-          </ul>
-          <br /> <br />
-          <h5>Specs:</h5>
-          <li>
-            Let's you make a Line Follower robot without writing any code and
-            with minimal wiring
-          </li>
-          <li>Compatible with any chassis (ready-made or self-made)</li>
-          <li>Compatible with a huge variety of dc motors.</li>
-          <li>
-            Comes with a great line following robot code, preloaded into the
-            onboard microcontroller
-          </li>
-          <li>
-            Detects line of variable thickness, sharp turns, + type line
-            intersection and line gap.
-          </li>
+          <EditorTextViewer froalaHTML={productDetails?.product_discription} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <Link>Download this documentation</Link> <br />
-          <h5 style={{ fontSize: "16px", padding: "10px 0px" }}>
-            Video Tutorials
-          </h5>
-          <iframe
-            width="300"
-            height="200"
-            src="https://www.youtube.com/embed/yLVQ5j6LUR0"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
+          <EditorTextViewer froalaHTML={productDetails?.product_tutorial} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <ReviewAndFeedBack />
+          <ReviewAndFeedBack productDetails={productDetails } />
         </CustomTabPanel>
         {/* <CustomTabPanel value={value} index={3}></CustomTabPanel> */}
       </Box>

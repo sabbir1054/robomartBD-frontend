@@ -21,6 +21,8 @@ import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mob
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
 import OrderHistory from "./Pages/Dashboard/Customer/OrderHistory/OrderHistory";
+import SingleTagAllTutorial from "./Pages/Tutorials/AllTutorials/Components/SingleTagAllTutorial/SingleTagAllTutorial";
+import SingleCategoryAllTutorial from "./Pages/Tutorials/AllTutorials/Components/SingleCategoryAllTutorial/SingleCategoryAllTutorial";
 
 function App() {
   return (
@@ -59,6 +61,8 @@ function App() {
         <Route path="/dashboard/user/profile" element={<Profile />} />
         <Route path="/dashboard/user/order_history" element={<OrderHistory />} />
         <Route path="/tutorials" element={<AllTutorialPage />} />
+        <Route path="/tutorials/tag/:tagId/:tagName" element={<SingleTagAllTutorial />} />
+        <Route path="/tutorials/category/:categoryId/:categoryName" element={<SingleCategoryAllTutorial />} />
         <Route
           path="/tutorials/:tutorialId/:tutorialName"
           element={<SIngleTutorialPage />}

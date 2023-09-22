@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 
 import React, { useState } from "react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -29,7 +29,7 @@ const HeroSlider = () => {
           <SwiperSlide>
             <img
               style={{ width: "100%" }}
-              src={`https://api.robomartbd.com${sliderImg?.poster}`}
+              src={`${sliderImg?.poster}`}
               // src={`/assets/display.png`}
               alt=""
               srcset=""

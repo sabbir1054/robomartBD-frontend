@@ -8,14 +8,14 @@ const TopBlogs = () => {
   const [blogsData, setBlogsData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/blog/get_all_blog`)
+    fetch(`https://api.robomartbd.com/blog/get_blog?page=1`)
       .then((res) => res.json())
       .then((data) => {
-        setBlogsData(data.slice(0, 4));
+        setBlogsData(data?.results.slice(0, 4));
       });
-    console.log(blogsData);
+   
   }, []);
-
+ console.log(blogsData);
   return (
     <>
       <Container className={styles.topBlogsWrapper}>
@@ -46,14 +46,14 @@ const TopBlogs = () => {
             <SingleBlogList blog={blogsData[3]} /> <br />
           </Grid>
         </Grid>
-        <Box display={"flex"} justifyContent={"center"}>
-          <NavLink to={`/blogs`}>
+        <Box display={"flex"} justifyContent={"center"} paddingY={3}>
+          <NavLink to={`/tutorials`}>
             <Button
               variant="contained"
               sx={{ backgroundColor: "black" }}
               className={styles.blogSectionBtn}
             >
-              Explore Blog Section
+              Explore Tutorial Section
             </Button>
           </NavLink>
         </Box>

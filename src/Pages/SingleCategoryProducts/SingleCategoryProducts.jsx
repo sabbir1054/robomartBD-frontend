@@ -38,20 +38,21 @@ const SingleCategoryProducts = () => {
           <Box paddingY={1} marginY={1}>
             <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
               <Grid container spacing={2}>
-                {categoryProducts?.map((product) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={3}
-                    lg={3}
-                    xl={2}
-                    display={"flex"}
-                    justifyContent={"center"}
-                  >
-                    <SingleProductCard product={product} />
-                  </Grid>
-                ))}
+                {categoryProducts?.length > 0 &&
+                  categoryProducts?.map((product) => (
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={3}
+                      lg={3}
+                      xl={2}
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      <SingleProductCard product={product} />
+                    </Grid>
+                  ))}
               </Grid>
             </Box>
           </Box>

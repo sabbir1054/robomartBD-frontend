@@ -17,12 +17,18 @@ const SingleHeroBlog = ({blog}) => {
       <Card className={styles.cardWrapper}>
         <NavLink to={`/blog/${blog?.id}`}>
           {" "}
-          <CardMedia
-            component="img"
-            className={styles.cardMedia}
-            image={`${blog?.image}`}
-            title="Blog Image"
-          />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              style={{ maxWidth: "300px" }}
+              src={
+                blog?.image
+                  ? `${blog?.image}`
+                  : "/assets/no-img.jpg"
+              }
+              alt=""
+              srcset=""
+            />
+          </div>
         </NavLink>
 
         <CardContent className={styles.cardContent}>

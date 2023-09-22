@@ -89,7 +89,7 @@ const SingleProductCard = ({ product }) => {
               component="img"
               image={
                 product?.photo
-                  ? `https://api.robomartbd.com${product?.photo}`
+                  ? `${product?.photo}`
                   : "/assets/no-img.jpg"
               }
               alt="Products Image"

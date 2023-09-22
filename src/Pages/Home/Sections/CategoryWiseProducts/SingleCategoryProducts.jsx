@@ -12,7 +12,7 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
   const [products, setProducts] = useState(fetchProducts ? fetchProducts : []);
   useEffect(() => {
     if (products?.length > maxProductNum) {
-      setProducts(products.slice(0, maxProductNum));
+      setProducts(products?.slice(0, maxProductNum));
     } else {
       setProducts(products);
     }

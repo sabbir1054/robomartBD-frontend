@@ -1,10 +1,8 @@
-import { Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 const SupplierNPartner = [
   {
@@ -24,10 +22,11 @@ const SupplierNPartner = [
 const OurCorporateClients = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/our_supplier`)
+    fetch(`https://api.robomartbd.com/api/our_client`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
+  console.log(data);
   return (
     <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
       <div>
@@ -37,12 +36,61 @@ const OurCorporateClients = () => {
             fontFamily: "Poppins",
             fontWeight: "bold",
             textAlign: "center",
+            padding: "2vh 0",
           }}
         >
-          Our Corporate Partner
+          Our Corporate Client
         </Typography>
         <>
-          <Swiper
+          {/* grid */}
+          <Container maxWidth={"lg"}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {data?.map((company) => (
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "15px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: "150px",
+                      height: "150px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: "2px solid #e2e2e2",
+                      transition:"all 0.3s ease-in",
+                      "&:hover": {
+                        border: "2px solid var(--primaryColor)",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: "150px",
+                        // border: "1px solid #e2e2e2",
+                      }}
+                      // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
+                      src={`${company?.logo}`}
+                      alt="no-image"
+                      srcset=""
+                    />
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Container>
+          {/* <Swiper
             slidesPerView={5}
             spaceBetween={20}
             // pagination={{ clickable: true }}
@@ -115,7 +163,7 @@ const OurCorporateClients = () => {
                 </Typography>
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper> */}
         </>
       </div>
     </div>

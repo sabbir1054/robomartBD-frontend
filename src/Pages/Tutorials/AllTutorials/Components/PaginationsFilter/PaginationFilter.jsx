@@ -82,7 +82,13 @@ const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
             >
               {tags?.length > 0 &&
                 tags?.map((tag) => (
-                  <NavLink style={{ textDecoration: "none", color: "black" }}>
+                  <NavLink
+                    to={`/tutorials/tag/${tag?.id}/${(tag?.tag_name).replace(
+                      / /g,
+                      "_"
+                    )}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
                     <MenuItem key={tag?.id} onClick={handleClose}>
                       {tag?.tag_name}
                     </MenuItem>

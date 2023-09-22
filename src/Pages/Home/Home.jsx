@@ -35,8 +35,9 @@ const Home = () => {
       <Hero />
       <CategoryProducts />
       <TopBlogs />
-      <OurSupplierNPartner />
+
       <OurCorporateClients />
+      <OurSupplierNPartner />
       <JoinOurCommunity />
     </>
   );

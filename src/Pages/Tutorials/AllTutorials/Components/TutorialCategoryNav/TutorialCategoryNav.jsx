@@ -22,7 +22,13 @@ const TutorialCategoryNav = () => {
         {categories?.length > 0 &&
           categories?.map((category) => (
             <li>
-              <Link style={{ textDecoration: "none", color: "black" }} to="/">
+              <Link
+                to={`/tutorials/category/${category?.id}/${(category?.name).replace(
+                  / /g,
+                  "_"
+                )}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 {category?.name}
               </Link>{" "}
             </li>
