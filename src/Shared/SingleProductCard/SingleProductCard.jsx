@@ -148,7 +148,7 @@ const SingleProductCard = ({ product }) => {
             )}
             <p
               className={styles.productDescription}
-              style={{ fontSize: "12px", textAlign: "justify" }}
+              style={{ fontSize: "12px", textAlign: "justify",height:"30px" }}
             >
               {product?.discription?.substring(0, 90)+"..."}
               {/* Lorem ipsum, dolor sit amet consectetur jdd sabbir... */}
