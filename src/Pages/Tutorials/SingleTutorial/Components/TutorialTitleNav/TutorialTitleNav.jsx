@@ -2,10 +2,42 @@ import { Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../SingleTutorial.module.scss";
 import TagBadge from "./TagBadge";
-const TutorialTitleNav = ({ activeSection, setActiveSection }) => {
+const TutorialTitleNav = ({
+  activeSection,
+  setActiveSection,
+  tutorialDetails,
+}) => {
+  const [allTags, setAllTags] = useState([]);
+  
+  const getData = async () => {
+    try {
+      const response = await fetch(
+        `https://api.robomartbd.com/blog/get_all_tag`
+      );
+      const data = await response.json();
+
+      const newArr = [];
+      data.forEach((element) => {
+        if (tutorialDetails?.tag?.includes(element?.id)) {
+          newArr.push(element);
+        }
+      });
+      setAllTags(newArr);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [tutorialDetails]);
+
+ 
+
   return (
     <div style={{ width: "100%" }}>
       <ListItem
@@ -36,68 +68,22 @@ const TutorialTitleNav = ({ activeSection, setActiveSection }) => {
           "& ul": { padding: 0 },
         }}
       >
-        <ListItem
-          style={{
-            borderBottom: "1px solid #e2e2e2",
-            backgroundColor:
-              activeSection === "sec1" ? "var(--primaryColor)" : "",
-          }}
-          className={`${styles.listItemSections}  ${
-            activeSection === "sec1" ? "active" : ""
-          }`}
-        >
-          <a href="#sec1">
-            {" "}
-            <ListItemText primary={`Introduction `} />
-          </a>
-        </ListItem>
-        <ListItem
-          style={{
-            borderBottom: "1px solid #e2e2e2",
-            backgroundColor:
-              activeSection === "sec2" ? "var(--primaryColor)" : "",
-          }}
-          className={`${styles.listItemSections}  ${
-            activeSection === "sec2" ? "active" : ""
-          }`}
-        >
-          <a href="#sec2">
-            <ListItemText primary={` Installing Arduino `} />
-          </a>
-        </ListItem>
-        <ListItem
-          style={{
-            borderBottom: "1px solid #e2e2e2",
-            backgroundColor:
-              activeSection === "sec3" ? "var(--primaryColor)" : "",
-          }}
-          className={`${styles.listItemSections}  ${
-            activeSection === "sec3" ? "active" : ""
-          }`}
-        >
-          <a href="#sec3">
-            <ListItemText
-              primary={`The Project: Displaying Accelerometer Data Over Bluetooth `}
-            />
-          </a>
-        </ListItem>
-        <ListItem
-          style={{
-            borderBottom: "1px solid #e2e2e2",
-            backgroundColor:
-              activeSection === "sec4" ? "var(--primaryColor)" : "",
-          }}
-          className={`${styles.listItemSections}  ${
-            activeSection === "sec4" ? "active" : ""
-          }`}
-        >
-          <a href="#sec4">
-            <ListItemText
-              primary={`Triple Axis Accelerometer Breakout - BMA400 (Qwiic) `}
-            />
-          </a>
-        </ListItem>
-      
+        {tutorialDetails?.pages?.length > 0 &&
+          tutorialDetails?.pages?.map((singlePage) => (
+            <a
+              href={`#sec${singlePage?.page_no}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <ListItem
+                style={{
+                  borderBottom: "1px solid #e2e2e2",
+                }}
+                className={`${styles.listItemSections}  `}
+              >
+                <ListItemText primary={singlePage?.page_title} />
+              </ListItem>
+            </a>
+          ))}
 
         {/* Tags */}
         <ListItem style={{ padding: "3vh 0 0 0" }}>
@@ -121,9 +107,9 @@ const TutorialTitleNav = ({ activeSection, setActiveSection }) => {
             padding: "10px",
           }}
         >
-          <TagBadge tag={"Circute"} />
-          <TagBadge tag={"Board"} />
-          <TagBadge tag={"Motor Driver"} />
+          {allTags?.map((tag) => (
+            <TagBadge tag={tag?.tag_name} tagId={tag?.id} />
+          ))}
         </div>
       </List>
     </div>

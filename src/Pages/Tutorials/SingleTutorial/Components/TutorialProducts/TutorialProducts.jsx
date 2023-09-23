@@ -28,32 +28,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-const TutorialProducts = () => {
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
+const TutorialProducts = ({ tutorialDetails }) => {
   return (
     <Container style={{ padding: "5vh" }}>
       <Typography
         variant="h6"
-        style={{ fontFamily: "Poppins", fontWeight: "bold",padding:"2vh 0" }}
+        style={{ fontFamily: "Poppins", fontWeight: "bold", padding: "2vh 0" }}
       >
         Components List
       </Typography>
@@ -68,83 +49,19 @@ const TutorialProducts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow
-              //   key={row.name}
-              >
-                <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                <StyledTableCell align="left">Arduino Nano</StyledTableCell>
-                <StyledTableCell align="left">3</StyledTableCell>
-              </StyledTableRow>
+              {tutorialDetails?.items?.map((singleItem) => (
+                <StyledTableRow
+                //   key={row.name}
+                >
+                  <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {singleItem?.product?.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {singleItem?.quantity}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -57,8 +57,8 @@ const SIngleTutorialPage = () => {
               activeSection={activeSection}
               tutorialDetails={tutorialDetails}
             />
-            <TutorialProducts />
-          
+            <TutorialProducts tutorialDetails={tutorialDetails} />
+
             <TutorialSections
               setActiveSection={setActiveSection}
               activeSection={activeSection}
