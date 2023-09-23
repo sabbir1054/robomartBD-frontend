@@ -1,8 +1,28 @@
 import { Box, Card, Grid, Rating } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import WriteYourFeedback from "./WriteYourFeedback";
 
 const ReviewAndFeedBack = ({ productDetails }) => {
+  console.log(productDetails);
+  const [isLoad, setIsLoad] = useState(false);
+  const [allFeedback, setAllFeedback] = useState([]);
+  const getAllFeedData = async () => {
+    setIsLoad(true);
+    const response = await fetch(
+      `https://api.robomartbd.com/feedback/get_all_feedback/${productDetails?.id}`
+    );
+    const data = await response.json();
+    console.log(data);
+    setAllFeedback(data);
+    if (data?.length) {
+      setIsLoad(false);
+    }
+  };
+  // console.log(allComments);
+  useEffect(() => {
+    getAllFeedData();
+  }, []);
+  console.log(allFeedback);
   return (
     <div>
       <Box sx={{ marginTop: "5vh" }}>
@@ -12,81 +32,34 @@ const ReviewAndFeedBack = ({ productDetails }) => {
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <WriteYourFeedback productDetails={productDetails} />
         </Box>
-        <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
-          <Grid container>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <Rating name="read-only" size="small" value={4} readOnly />
-            </Grid>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <p style={{}}>
-                For Gaming and Movie, this Monitor is amazing, but for Graphics
-                design, it's not recommended, and if you are not used to curved
-                displays, you will not feel comfortable with the display
-                surface.
-              </p>
-            </Grid>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <p>
-                {" "}
-                By{" "}
-                <span style={{ color: "var(--primaryColor)" }}>
-                  Shuvo Ahmed
-                </span>{" "}
-                on <span style={{ fontWeight: "bold" }}>20 Mar 2023</span>{" "}
-              </p>
-            </Grid>
-          </Grid>
-        </Card>
-        <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
-          <Grid container>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <Rating name="read-only" size="small" value={4} readOnly />
-            </Grid>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <p style={{}}>
-                For Gaming and Movie, this Monitor is amazing, but for Graphics
-                design, it's not recommended, and if you are not used to curved
-                displays, you will not feel comfortable with the display
-                surface.
-              </p>
-            </Grid>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <p>
-                {" "}
-                By{" "}
-                <span style={{ color: "var(--primaryColor)" }}>
-                  Shuvo Ahmed
-                </span>{" "}
-                on <span style={{ fontWeight: "bold" }}>20 Mar 2023</span>{" "}
-              </p>
-            </Grid>
-          </Grid>
-        </Card>
-        <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
-          <Grid container>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <Rating name="read-only" size="small" value={4} readOnly />
-            </Grid>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <p style={{}}>
-                For Gaming and Movie, this Monitor is amazing, but for Graphics
-                design, it's not recommended, and if you are not used to curved
-                displays, you will not feel comfortable with the display
-                surface.
-              </p>
-            </Grid>
-            <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-              <p>
-                {" "}
-                By{" "}
-                <span style={{ color: "var(--primaryColor)" }}>
-                  Shuvo Ahmed
-                </span>{" "}
-                on <span style={{ fontWeight: "bold" }}>20 Mar 2023</span>{" "}
-              </p>
-            </Grid>
-          </Grid>
-        </Card>
+        {allFeedback?.length > 0 &&
+          allFeedback?.map((feedback) => (
+            <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
+              <Grid container>
+                <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
+                  <Rating
+                    name="read-only"
+                    size="small"
+                    value={parseInt(feedback?.ratting)}
+                    readOnly
+                  />
+                </Grid>
+                <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
+                  <p style={{}}>{feedback?.review}</p>
+                </Grid>
+                <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
+                  <p>
+                    {" "}
+                    By{" "}
+                    <span style={{ color: "var(--primaryColor)" }}>
+                      {feedback?.user?.first_name} {feedback?.user?.last_name}
+                    </span>{" "}
+                    {/* on <span style={{ fontWeight: "bold" }}>20 Mar 2023</span>{" "} */}
+                  </p>
+                </Grid>
+              </Grid>
+            </Card>
+          ))}
       </Box>
     </div>
   );

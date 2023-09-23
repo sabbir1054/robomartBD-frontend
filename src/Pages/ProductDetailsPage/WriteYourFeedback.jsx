@@ -22,14 +22,37 @@ const WriteYourFeedback = ({ productDetails }) => {
   console.log(userData);
 
   const postFeedbackData = (data) => {
-    fetch(`https://api.robomartbd.com/api/auth/jwt/create/`, {
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/feedback/get_feedback`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          getALLComments();
+          Swal.fire({
+            // position: "top-end",
+            icon: "success",
+            title: "Comment Submitted !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            // position: "top-end",
+            icon: "error",
+            title: "Something went wrong !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        return res.json();
+      })
       .then((result) => {});
   };
 
