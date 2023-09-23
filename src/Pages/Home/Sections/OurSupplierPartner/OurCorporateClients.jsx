@@ -4,20 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const SupplierNPartner = [
-  {
-    name: "ROBOTICS BD",
-    logo: "dfs",
-  },
-  {
-    name: "ROBOTICS BD",
-    logo: "dfs",
-  },
-  {
-    name: "ROBOTICS BD",
-    logo: "dfs",
-  },
-];
+
 
 const OurCorporateClients = () => {
   const [data, setData] = useState([]);
@@ -51,7 +38,7 @@ const OurCorporateClients = () => {
                 flexWrap: "wrap",
               }}
             >
-              {data?.map((company) => (
+              {data?.length>0&&data?.map((company) => (
                 <Box
                   style={{
                     display: "flex",

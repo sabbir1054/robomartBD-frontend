@@ -2,6 +2,7 @@ import { Container, Grid, Typography } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AllComments from "./Components/CommentSection/AllComments";
 import TutorialProducts from "./Components/TutorialProducts/TutorialProducts";
 import TutorialSections from "./Components/TutorialSectionsScroll/TutorialSections";
 import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
@@ -64,6 +65,9 @@ const SIngleTutorialPage = () => {
               activeSection={activeSection}
               tutorialDetails={tutorialDetails}
             />
+
+            {/* Comments Section */}
+            <AllComments />
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <div
