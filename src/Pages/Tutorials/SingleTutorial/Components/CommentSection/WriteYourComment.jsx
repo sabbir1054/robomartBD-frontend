@@ -33,7 +33,6 @@ const WriteYourComment = ({ blogId, getALLComments }) => {
       body: JSON.stringify(data),
     })
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           getALLComments();
           Swal.fire({
@@ -54,9 +53,7 @@ const WriteYourComment = ({ blogId, getALLComments }) => {
         }
         return res.json();
       })
-      .then((result) => {
-        console.log(result);
-      });
+      .then((result) => {});
   };
 
   const handleSubmit = (e) => {

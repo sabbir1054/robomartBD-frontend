@@ -1,11 +1,14 @@
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { AppBar, Box, Container, Grid } from "@mui/material";
 import React from "react";
-import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import styles from "./CommnNavigation.module.scss"
 import { NavLink } from "react-router-dom";
+import { useGetUserQuery } from "../../../redux/api/api";
+import AvaterBtnMeny from "../HeroNavigationBar/AvaterBtnMeny";
+import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
+import styles from "./CommnNavigation.module.scss";
 // this navigation is  use in blogs and forum page
 const CommonNavigation = () => {
+  const { data, isLoading, isError } = useGetUserQuery();
   return (
     <AppBar
       sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset" }}
@@ -48,16 +51,21 @@ const CommonNavigation = () => {
           <Grid item md={2}>
             <div className={styles.loginSectionNav}>
               <div>
-                <PermIdentityIcon className={styles.profileIcon} />
+                {!data && <PermIdentityIcon className={styles.profileIcon} />}
               </div>
-              <div>
-                <NavLink to={"/login"}>
-                  <p>Login</p>
-                </NavLink>
-                <NavLink to="/register">
-                  <p>Register</p>
-                </NavLink>
-              </div>
+              {data && data[0]?.email && <AvaterBtnMeny data={data} />}
+
+              {!data && (
+                <>
+                  <NavLink to="/login">
+                    <p>Login</p>
+                  </NavLink>
+                  <p style={{ margin: "0px 3px" }}>/</p>
+                  <NavLink to="/register">
+                    <p> Register</p>
+                  </NavLink>
+                </>
+              )}
             </div>
           </Grid>
         </Grid>
