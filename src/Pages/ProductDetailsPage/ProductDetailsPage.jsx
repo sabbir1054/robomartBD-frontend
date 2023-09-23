@@ -119,15 +119,15 @@ const ProductDetailsPage = () => {
       <Container sx={{ py: "10vh" }}>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           <Grid item md={6} className={styles.left}>
-            {/*  <div className={styles.images}>
-              {revImgArr.map((item, index) => (
+            <div className={styles.images}>
+              {productDetails?.media?.map((item, index) => (
                 <img
                   onClick={changeMainImage}
                   imgindex={index}
                   className={
                     index === imageIndex ? styles.activeImage : styles.notActive
                   }
-                  src={item}
+                  src={item?.photo}
                   key={index}
                   alt={"images"}
                 />
@@ -137,12 +137,18 @@ const ProductDetailsPage = () => {
               className={styles.mainImage}
               onMouseMove={zoom}
               style={{
-                backgroundImage: `url(${revImgArr[imageIndex]})`,
+                backgroundImage: `url(${
+                  productDetails?.media &&
+                  productDetails?.media[imageIndex]?.photo
+                })`,
                 backgroundPosition: bgPosition,
               }}
             >
               <img
-                src={revImgArr[imageIndex]}
+                src={`${
+                  productDetails?.media &&
+                  productDetails?.media[imageIndex]?.photo
+                }`}
                 alt="mainImage"
                 style={{
                   border: "1px solid #f2f2f2",
@@ -150,8 +156,8 @@ const ProductDetailsPage = () => {
                   borderRadius: "5px",
                 }}
               />
-            </div> */}
-            <div className={styles.images}></div>
+            </div>
+            {/*  <div className={styles.images}></div>
             <div
               className={styles.mainImage}
               onMouseMove={zoom}
@@ -169,13 +175,13 @@ const ProductDetailsPage = () => {
                   borderRadius: "5px",
                 }}
               />
-            </div>
+            </div> */}
           </Grid>
           <Grid item md={6}>
             <div className={styles.right}>
               <h1>{productDetails?.name}</h1>
               <h3 style={{ marginBottom: "10px" }}>
-                Product code: {productDetails?.id}
+                Product code: {productDetails?.product_code}
               </h3>
               <div className={styles.rate}>
                 <Rating
