@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useGetAllProductsQuery } from "../../../../redux/api/api";
-
 import {
   Button,
   Divider,
@@ -11,17 +9,43 @@ import {
   Typography,
 } from "@mui/material";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
+import { useGetAllProductsQuery } from "../../../../redux/api/api";
 
 const AllProductsSection = () => {
   const { data: allProducts, isLoading, isError } = useGetAllProductsQuery();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(50); // Set the number of items per page
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Sorting function (to be implemented)
+//  const handleSort = (option) => {
+//    let sortedProducts = [...allProducts]; // Create a copy of the products array
+
+//    if (option === "lowToHigh") {
+//      sortedProducts.sort((a, b) => a.price - b.price); // Sort by price from low to high
+//    } else if (option === "highToLow") {
+//      sortedProducts.sort((a, b) => b.price - a.price); // Sort by price from high to low
+//    }
+
+//    setAllProducts(sortedProducts); // Update the state with the sorted array
+//    setCurrentPage(1); // Reset to the first page after sorting
+//  };
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = allProducts?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div style={{ padding: "5vh 0" }}>
@@ -54,13 +78,17 @@ const AllProductsSection = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Price: Low {`>`} High</MenuItem>
-          <MenuItem onClick={handleClose}>Price: High {`>`} Low</MenuItem>
+          <MenuItem onClick={() => handleSort("lowToHigh")}>
+            Price: Low {`>`} High
+          </MenuItem>
+          <MenuItem onClick={() => handleSort("highToLow")}>
+            Price: High {`>`} Low
+          </MenuItem>
         </Menu>
       </div>
 
       <Grid container spacing={2} marginBottom={2}>
-        {allProducts?.map((product) => (
+        {currentItems?.map((product) => (
           <Grid
             item
             xs={12}
@@ -77,8 +105,14 @@ const AllProductsSection = () => {
         ))}
       </Grid>
       {/* Pagination */}
-      <div style={{padding:"5vh 0",display:"flex",justifyContent:"center"}}>
-        <Pagination count={100} color="success" />
+      <div
+        style={{ padding: "5vh 0", display: "flex", justifyContent: "center" }}
+      >
+        <Pagination
+          count={Math.ceil(allProducts?.length / itemsPerPage)}
+          color="success"
+          onChange={(event, page) => paginate(page)}
+        />
       </div>
     </div>
   );
