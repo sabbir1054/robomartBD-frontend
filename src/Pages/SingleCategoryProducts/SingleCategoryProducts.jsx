@@ -1,9 +1,10 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Box, Divider, Grid, Pagination, Typography } from "@mui/material";
 import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
 import { useGetCategoryListProductsQuery } from "../../redux/api/api";
+
 const SingleCategoryProducts = () => {
   const params = useParams();
   const {
@@ -12,8 +13,9 @@ const SingleCategoryProducts = () => {
     isError,
   } = useGetCategoryListProductsQuery();
   const [categoryProducts, setCategoryProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(50); // Set the number of items per page
 
-  console.log(params);
   useEffect(() => {
     fetch(
       `https://api.robomartbd.com/api/catagory/${params.categoryId}/category`
@@ -23,6 +25,16 @@ const SingleCategoryProducts = () => {
         setCategoryProducts(data);
       });
   }, [params]);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = categoryProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -38,8 +50,8 @@ const SingleCategoryProducts = () => {
           <Box paddingY={1} marginY={1}>
             <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
               <Grid container spacing={2}>
-                {categoryProducts?.length > 0 &&
-                  categoryProducts?.map((product) => (
+                {currentItems?.length > 0 &&
+                  currentItems?.map((product) => (
                     <Grid
                       item
                       xs={12}
@@ -49,6 +61,7 @@ const SingleCategoryProducts = () => {
                       xl={2}
                       display={"flex"}
                       justifyContent={"center"}
+                      key={product.id}
                     >
                       <SingleProductCard product={product} />
                     </Grid>
@@ -56,6 +69,14 @@ const SingleCategoryProducts = () => {
               </Grid>
             </Box>
           </Box>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Pagination
+              color="success"
+              count={Math.ceil(categoryProducts.length / itemsPerPage)}
+              page={currentPage}
+              onChange={(event, page) => paginate(page)}
+            />
+          </div>
         </Grid>
       </Grid>
       <hr style={{ color: "#e2e2e2" }} />
