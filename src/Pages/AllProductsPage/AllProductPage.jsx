@@ -32,42 +32,7 @@ const AllProductPage = () => {
           <Container maxWidth="xxl" sx={{ borderLeft: "1px solid #f2f2f2" }}>
             <CategorySection categoryList={categoryList} />
             <AllProductsSection />
-            {/*   {allProducts?.length > 0 &&
-              allProducts?.map((singleCategory) => (
-                <>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      paddingY: 2,
-                    }}
-                  >
-                    {" "}
-                    {singleCategory?.name}{" "}
-                  </Typography>{" "}
-                  <hr style={{ borderColor: "#f2f2f2", marginBottom: "5px" }} />
-                  <Grid container spacing={2} marginBottom={2}>
-                   
-
-                    {singleCategory?.product?.map((product) => (
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        lg={3}
-                        xl={2}
-                        display={"flex"}
-                        justifyContent={"center"}
-                        marginTop={2}
-                      >
-                        <SingleProductCard product={product} />
-                      </Grid>
-                    ))}
-                  </Grid>
-                </>
-              ))} */}
+     
           </Container>
         </Grid>
       </Grid>

@@ -62,9 +62,7 @@ const SingleProductCard = ({ product }) => {
     successNotify();
   }
 
-  // if (isLoading) {
-  //   loadingNotify();
-  // }
+
 
   return (
     <>
@@ -100,8 +98,7 @@ const SingleProductCard = ({ product }) => {
 
           <div
             className={styles.addToWishList}
-            //   productid={props.data.id}
-            // onClick={addToWishlist}
+         
           >
             <AddTaskIcon />
             <div className={styles.top}>
@@ -114,16 +111,12 @@ const SingleProductCard = ({ product }) => {
                 <AddShoppingCartIcon />
                 <h5>add to cart</h5>
               </div>
-              {/* <div className={styles.rode}></div>
-              <Link to={`product/`}>
-                <VisibilityIcon />
-                <h5>quick view</h5>
-              </Link> */}
+             
             </div>
           </div>
         </Box>
         <CardContent className={styles.cardContent}>
-          {/* <p className={styles.category}>{props.data.category}</p> */}
+        
           <Link
             to={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
             className={styles.title}
@@ -131,7 +124,7 @@ const SingleProductCard = ({ product }) => {
             {product?.name?.length > 50
               ? product?.name?.substring(0, 50) + "..."
               : product?.name}
-            {/* nnnnnnnnnnnnnnnnn nnn nnnnn nn nnnn nnnnn nnnnn nnnnn nnn */}
+            
           </Link>
           <Box paddingBottom={1} borderBottom={"1px solid #f2f2f2"}>
             {" "}
@@ -151,30 +144,18 @@ const SingleProductCard = ({ product }) => {
               style={{ fontSize: "12px", textAlign: "justify",height:"30px" }}
             >
               {product?.discription?.substring(0, 90)+"..."}
-              {/* Lorem ipsum, dolor sit amet consectetur jdd sabbir... */}
-              {/* {props.data.description.length > 12 ? "..." : ""} */}
+              
             </p>
             <div
               style={{
-                // display: "flex",
-                // alignItems: "center",
-                // justifyContent: "space-between",
+            
                 textAlign: "center",
               }}
             >
               <p className={styles.price} paddingTop={1}>
                 BDT <span> {product?.price} </span>{" "}
               </p>
-              {/* <p
-                style={{
-                  marginLeft: "5px",
-                  fontWeight: "bold",
-                  color: "#0d8947",
-                }}
-              >
-                {" "}
-                <Brightness1Icon sx={{ fontSize: "8px" }} /> In-Stock
-              </p> */}
+        
             </div>
           </Box>
         </CardContent>

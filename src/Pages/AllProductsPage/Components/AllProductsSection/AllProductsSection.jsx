@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Button,
   Divider,
@@ -8,11 +7,13 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 import SingleProductCard from "../../../../Shared/SingleProductCard/SingleProductCard";
 import { useGetAllProductsQuery } from "../../../../redux/api/api";
 
 const AllProductsSection = () => {
-  const { data: allProducts, isLoading, isError } = useGetAllProductsQuery();
+  const { data, isLoading, isError } = useGetAllProductsQuery();
+  const [allProducts, setAllProducts] = useState(data);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,18 +28,19 @@ const AllProductsSection = () => {
   };
 
   // Sorting function (to be implemented)
-//  const handleSort = (option) => {
-//    let sortedProducts = [...allProducts]; // Create a copy of the products array
+  const handleSort = (option) => {
+    let sortedProducts = [...allProducts]; // Create a copy of the products array
 
-//    if (option === "lowToHigh") {
-//      sortedProducts.sort((a, b) => a.price - b.price); // Sort by price from low to high
-//    } else if (option === "highToLow") {
-//      sortedProducts.sort((a, b) => b.price - a.price); // Sort by price from high to low
-//    }
+    if (option === "lowToHigh") {
+      sortedProducts.sort((a, b) => a.price - b.price); // Sort by price from low to high
+    } else if (option === "highToLow") {
+      sortedProducts.sort((a, b) => b.price - a.price); // Sort by price from high to low
+    }
 
-//    setAllProducts(sortedProducts); // Update the state with the sorted array
-//    setCurrentPage(1); // Reset to the first page after sorting
-//  };
+    setAllProducts(sortedProducts); // Update the state with the sorted array
+    setCurrentPage(1); // Reset to the first page after sorting
+    handleClose();
+  };
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
