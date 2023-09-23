@@ -23,7 +23,7 @@ const SubCategorySideMenu = ({ items }) => {
       {items?.map((item, index) => (
         <ListItemButton key={index} className={styles.sub_menu_item}>
           <NavLink
-            to={`/products/categories/${item?.id}/${item?.name?.replace(
+            to={`/products/scategories/${item?.id}/${item?.name?.replace(
               / /g,
               "_"
             )}`}

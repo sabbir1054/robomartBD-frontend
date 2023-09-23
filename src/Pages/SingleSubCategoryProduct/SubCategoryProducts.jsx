@@ -1,23 +1,38 @@
-import { Box, Grid, Pagination, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  Grid,
+  Pagination,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
-import CategoryList from "../Home/Sections/HeroSection/CategoryList";
+import { useGetCategoryListProductsQuery } from "../../redux/api/api";
 
 const SubCategoryProducts = () => {
   const params = useParams();
-
+  const {
+    data: categoryList,
+    isLoading: catLoading,
+    isError,
+  } = useGetCategoryListProductsQuery();
+  const [isLoading, setIsLoading] = useState(false);
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(50); // Set the number of items per page
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(
       `https://api.robomartbd.com/api/catagory/${params.subCategoryId}/subcategory`
     )
       .then((res) => res.json())
       .then((data) => {
         setCategoryProducts(data);
+        setIsLoading(false);
       });
   }, [params]);
 
@@ -36,13 +51,14 @@ const SubCategoryProducts = () => {
       {" "}
       <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
         <Grid item xs={2} padding={2}>
-          <CategoryList />
+          {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
         <Grid item xs={10}>
-          <Typography
-            variant="h6"
-            style={{ fontFamily: "Poppins" }}
-          ></Typography>
+          <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
+            {params?.subCategoryName.replace(/ /g, "_")} :
+          </Typography>
+          <Divider />
+          {isLoading && <CircularProgress />}
 
           <Box paddingY={1} marginY={1}>
             <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>

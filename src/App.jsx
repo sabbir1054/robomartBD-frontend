@@ -49,7 +49,7 @@ function App() {
           element={<SingleCategoryProducts />}
         />
         <Route
-          path="/products/categories/:subCategoryId/:subCategoryName"
+          path="/products/scategories/:subCategoryId/:subCategoryName"
           element={<SubCategoryProducts />}
         />
         <Route
