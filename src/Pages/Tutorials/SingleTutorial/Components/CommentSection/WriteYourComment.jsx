@@ -1,10 +1,10 @@
 import CreateIcon from "@mui/icons-material/Create";
-import { Button, Modal, Rating, TextField } from "@mui/material";
+import { Button, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../../../../redux/api/api";
 import styles from "../../SingleTutorial.module.scss";
-const WriteYourComment = () => {
+const WriteYourComment = ({ blogId, getALLComments }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
 
@@ -22,27 +22,50 @@ const WriteYourComment = () => {
   console.log(userData);
 
   const postFeedbackData = (data) => {
-    fetch(`https://api.robomartbd.com/blog/1/get_all_comment`, {
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/blog/get_comment`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((result) => {});
+      .then((res) => {
+        console.log(res);
+        if (res.ok) {
+          getALLComments();
+          Swal.fire({
+            // position: "top-end",
+            icon: "success",
+            title: "Comment Submitted !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            // position: "top-end",
+            icon: "error",
+            title: "Something went wrong !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+      });
   };
 
   const handleSubmit = (e) => {
     const newFeedBack = {
-      product: productDetails?.id,
-      ratting: value,
-      review: feedback,
+      blog: blogId,
+      comment: feedback,
     };
 
     postFeedbackData(newFeedBack);
-    console.log(feedback);
-    console.log(value);
     e.preventDefault();
     handleClose();
   };
@@ -78,16 +101,8 @@ const WriteYourComment = () => {
       >
         <div className={styles.ModalWrapper}>
           <form onSubmit={handleSubmit}>
-            <Rating
-              name="simple-controlled"
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-            />
-
             <TextField
-              label="Feedback Message"
+              label="Write your comment"
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
               fullWidth

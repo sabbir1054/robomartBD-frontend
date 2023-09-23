@@ -1,20 +1,24 @@
-import { Box, Card, Grid, Typography } from "@mui/material";
+import { Box, Card, CircularProgress, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import WriteYourComment from "./WriteYourComment";
 const AllComments = () => {
-    // const {data:userData,isLoading,isError,error}=
+  const [isLoad, setIsLoad] = useState(false);
   const params = useParams();
   const [allComments, setAllComments] = useState([]);
 
   const getALLComments = async () => {
+    setIsLoad(true);
     const response = await fetch(
       `https://api.robomartbd.com/blog/${params?.tutorialId}/get_all_comment`
     );
     const data = await response.json();
     setAllComments(data);
+    if (data?.length) {
+      setIsLoad(false);
+    }
   };
-// console.log(allComments);
+  // console.log(allComments);
   useEffect(() => {
     getALLComments();
   }, []);
@@ -27,37 +31,52 @@ const AllComments = () => {
             Comments :
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <WriteYourComment />
+            <WriteYourComment
+              blogId={params?.tutorialId}
+              getALLComments={getALLComments}
+            />
           </Box>
-
-          {allComments?.length > 0 &&
-            allComments?.map((comment) => (
-              <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
-                <Grid container>
-                  <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-                    <p>
-                      By
-                      <span
-                        style={{
-                          margin: "0 2px ",
-                          color: "var(--primaryColor)",
-                        }}
+          {isLoad && <CircularProgress />}
+          {!isLoad && (
+            <>
+              {allComments?.length > 0 &&
+                allComments?.map((comment) => (
+                  <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
+                    <Grid container>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ marginY: "2vh", paddingX: "3vh" }}
                       >
-                        {comment?.commented_by?.first_name}{" "}
-                        {comment?.commented_by?.last_name}
-                      </span>{" "}
-                      on{" "}
-                      <span style={{ fontWeight: "bold" }}>
-                        {(comment?.created_at).split("T")[0]}
-                      </span>{" "}
-                    </p>
-                  </Grid>
-                  <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
-                    <p style={{}}>{comment?.comment}</p>
-                  </Grid>
-                </Grid>
-              </Card>
-            ))}
+                        <p>
+                          By
+                          <span
+                            style={{
+                              margin: "0 2px ",
+                              color: "var(--primaryColor)",
+                            }}
+                          >
+                            {comment?.commented_by?.first_name}{" "}
+                            {comment?.commented_by?.last_name}
+                          </span>{" "}
+                          on{" "}
+                          <span style={{ fontWeight: "bold" }}>
+                            {(comment?.created_at).split("T")[0]}
+                          </span>{" "}
+                        </p>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{ marginY: "2vh", paddingX: "3vh" }}
+                      >
+                        <p style={{}}>{comment?.comment}</p>
+                      </Grid>
+                    </Grid>
+                  </Card>
+                ))}
+            </>
+          )}
         </Box>
       </div>
     </div>
