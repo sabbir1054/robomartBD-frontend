@@ -61,7 +61,7 @@ const CategorySection = ({ categoryList }) => {
                           }}
                         >
                           <NavLink
-                            to={`/products/categories/${
+                            to={`/products/scategories/${
                               item?.id
                             }/${item?.name?.replace(/ /g, "_")}`}
                             style={{

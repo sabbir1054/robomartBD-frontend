@@ -102,8 +102,8 @@ const RelatedProducts = ({ categoriesId }) => {
                         border: "1px solid #e2e2e2",
                       }}
                       // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`https://api.robomartbd.com${product?.photo}`}
-                      alt="no-image"
+                      src={`${product?.photo}`}
+                      alt="image"
                       srcset=""
                     />
                   </Box>

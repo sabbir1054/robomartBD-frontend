@@ -112,70 +112,83 @@ const ProductDetailsPage = () => {
           }
         }
       });
-  }, []);
-  console.log(productDetails);
+  }, [params]);
+
   return (
     <div>
       <Container sx={{ py: "10vh" }}>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           <Grid item md={6} className={styles.left}>
-            <div className={styles.images}>
-              {productDetails?.media?.map((item, index) => (
-                <img
-                  onClick={changeMainImage}
-                  imgindex={index}
-                  className={
-                    index === imageIndex ? styles.activeImage : styles.notActive
-                  }
-                  src={item?.photo}
-                  key={index}
-                  alt={"images"}
-                />
-              ))}
-            </div>
-            <div
-              className={styles.mainImage}
-              onMouseMove={zoom}
-              style={{
-                backgroundImage: `url(${
-                  productDetails?.media &&
-                  productDetails?.media[imageIndex]?.photo
-                })`,
-                backgroundPosition: bgPosition,
-              }}
-            >
-              <img
-                src={`${
-                  productDetails?.media &&
-                  productDetails?.media[imageIndex]?.photo
-                }`}
-                alt="mainImage"
-                style={{
-                  border: "1px solid #f2f2f2",
-                  boxShadow: "1px 1px 20px #e1e1e185",
-                  borderRadius: "5px",
-                }}
-              />
-            </div>
-            {/*  <div className={styles.images}></div>
-            <div
-              className={styles.mainImage}
-              onMouseMove={zoom}
-              style={{
-                backgroundImage: `url(${productDetails?.photo})`,
-                backgroundPosition: bgPosition,
-              }}
-            >
-              <img
-                src={`${productDetails?.photo}`}
-                alt="mainImage"
-                style={{
-                  border: "1px solid #f2f2f2",
-                  boxShadow: "1px 1px 20px #e1e1e185",
-                  borderRadius: "5px",
-                }}
-              />
-            </div> */}
+            {productDetails?.media?.length > 0 && (
+              <>
+                {" "}
+                <div className={styles.images}>
+                  {productDetails?.media?.map((item, index) => (
+                    <img
+                      onClick={changeMainImage}
+                      imgindex={index}
+                      className={
+                        index === imageIndex
+                          ? styles.activeImage
+                          : styles.notActive
+                      }
+                      src={item?.photo}
+                      key={index}
+                      alt={"images"}
+                    />
+                  ))}
+                </div>
+                <div
+                  className={styles.mainImage}
+                  onMouseMove={zoom}
+                  style={{
+                    backgroundImage: `url(${
+                      productDetails?.media &&
+                      productDetails?.media[imageIndex]?.photo
+                    })`,
+                    backgroundPosition: bgPosition,
+                  }}
+                >
+                  <img
+                    src={`${
+                      productDetails?.media &&
+                      productDetails?.media[imageIndex]?.photo
+                    }`}
+                    alt="mainImage"
+                    style={{
+                      border: "1px solid #f2f2f2",
+                      boxShadow: "1px 1px 20px #e1e1e185",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div>
+              </>
+            )}
+
+            {productDetails?.media?.length == 0 && (
+              <>
+                {" "}
+                <div className={styles.images}></div>
+                <div
+                  className={styles.mainImage}
+                  onMouseMove={zoom}
+                  style={{
+                    backgroundImage: `url(${productDetails?.photo})`,
+                    backgroundPosition: bgPosition,
+                  }}
+                >
+                  <img
+                    src={`${productDetails?.photo}`}
+                    alt="mainImage"
+                    style={{
+                      border: "1px solid #f2f2f2",
+                      boxShadow: "1px 1px 20px #e1e1e185",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div>
+              </>
+            )}
           </Grid>
           <Grid item md={6}>
             <div className={styles.right}>
