@@ -13,7 +13,7 @@ const AllComments = () => {
       `https://api.robomartbd.com/blog/${params?.tutorialId}/get_all_comment`
     );
     const data = await response.json();
-    setAllComments(data);
+    setAllComments(data.reverse());
     if (data?.length) {
       setIsLoad(false);
     }

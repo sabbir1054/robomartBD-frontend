@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../redux/api/api";
 import styles from "./ProductDetail.module.scss";
-const WriteYourFeedback = ({ productDetails }) => {
+const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
 
@@ -33,8 +33,8 @@ const WriteYourFeedback = ({ productDetails }) => {
       body: JSON.stringify(data),
     })
       .then((res) => {
-        if (res.ok) {
-          getALLComments();
+        if (res.status == 201 || res.status == 200) {
+          getAllFeedData();
           Swal.fire({
             // position: "top-end",
             icon: "success",
@@ -64,8 +64,7 @@ const WriteYourFeedback = ({ productDetails }) => {
     };
 
     postFeedbackData(newFeedBack);
-    console.log(feedback);
-    console.log(value);
+
     e.preventDefault();
     handleClose();
   };

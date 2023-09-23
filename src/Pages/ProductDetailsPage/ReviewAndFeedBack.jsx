@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import WriteYourFeedback from "./WriteYourFeedback";
 
 const ReviewAndFeedBack = ({ productDetails }) => {
-  console.log(productDetails);
   const [isLoad, setIsLoad] = useState(false);
   const [allFeedback, setAllFeedback] = useState([]);
   const getAllFeedData = async () => {
@@ -12,8 +11,8 @@ const ReviewAndFeedBack = ({ productDetails }) => {
       `https://api.robomartbd.com/feedback/get_all_feedback/${productDetails?.id}`
     );
     const data = await response.json();
-    console.log(data);
-    setAllFeedback(data);
+
+    setAllFeedback(data.reverse());
     if (data?.length) {
       setIsLoad(false);
     }
@@ -30,7 +29,10 @@ const ReviewAndFeedBack = ({ productDetails }) => {
           Review & Feedback :
         </Typography> */}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <WriteYourFeedback productDetails={productDetails} />
+          <WriteYourFeedback
+            productDetails={productDetails}
+            getAllFeedData={getAllFeedData}
+          />
         </Box>
         {allFeedback?.length > 0 &&
           allFeedback?.map((feedback) => (
