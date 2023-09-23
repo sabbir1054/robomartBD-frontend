@@ -1,3 +1,5 @@
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { Button, Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -8,8 +10,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+import SingleTableRaw from "./SingleTableRaw";
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -45,7 +47,8 @@ const TutorialProducts = ({ tutorialDetails }) => {
               <TableRow>
                 <StyledTableCell align="left">Product Code</StyledTableCell>
                 <StyledTableCell align="left">Product Name</StyledTableCell>
-                <StyledTableCell align="left">Quantity</StyledTableCell>
+                <StyledTableCell align="center">Quantity</StyledTableCell>
+                <StyledTableCell align="right">Add to cart</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -53,13 +56,8 @@ const TutorialProducts = ({ tutorialDetails }) => {
                 <StyledTableRow
                 //   key={row.name}
                 >
-                  <StyledTableCell align="left">SKO-AR5541</StyledTableCell>
-                  <StyledTableCell align="left">
-                    {singleItem?.product?.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {singleItem?.quantity}
-                  </StyledTableCell>
+                  <SingleTableRaw singleItem={singleItem } />
+                  
                 </StyledTableRow>
               ))}
             </TableBody>
