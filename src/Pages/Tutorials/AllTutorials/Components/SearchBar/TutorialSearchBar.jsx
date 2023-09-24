@@ -1,8 +1,11 @@
 import { Search as SearchIcon } from "@mui/icons-material";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const TutorialSearchBar = () => {
+  const location = useLocation();
+  console.log(location);
   const [searchValue, setSearchValue] = useState("");
 
   const handleInputChange = (e) => {

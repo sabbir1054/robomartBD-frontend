@@ -113,7 +113,7 @@ const ProductDetailsPage = () => {
         }
       });
   }, [params]);
-
+console.log(productDetails);
   return (
     <div>
       <Container sx={{ py: "10vh" }}>

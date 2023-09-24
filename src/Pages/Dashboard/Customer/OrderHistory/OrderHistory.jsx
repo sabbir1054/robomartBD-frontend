@@ -1,21 +1,23 @@
-import React from 'react';
-
-
-import { styled } from "@mui/material/styles";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
+import { Container, IconButton, Tooltip, Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Container } from '@mui/material';
-
+import { styled } from "@mui/material/styles";
+import React from "react";
+import styles from "./OrderHistory.module.scss";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+
+    fontSize: "15px",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -32,59 +34,144 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 const OrderHistory = () => {
-    return (
-      <div style={{ minHeight: "70vh" }}>
-        <Container maxWidth={"xl"}>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">
-                    Carbs&nbsp;(g)
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    Protein&nbsp;(g)
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.calories}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.protein}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Container>
-      </div>
-    );
+  return (
+    <div style={{ minHeight: "70vh" }}>
+      <Container maxWidth={"lg"}>
+        <Typography
+          variant="h5"
+          style={{
+            padding: "4vh",
+            fontFamily: "Poppins",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          My Orders
+        </Typography>
+
+        <hr
+          style={{
+            margin: "0 0 40px",
+            border: "none",
+            borderBottom: "1px solid #ebebeb",
+          }}
+        />
+        <TableContainer component={Paper} >
+      
+          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+            <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+              <TableRow>
+                <StyledTableCell align="left">Order Id</StyledTableCell>
+                <StyledTableCell align="left">Date</StyledTableCell>
+                <StyledTableCell align="left">Items</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
+                <StyledTableCell align="left">Total</StyledTableCell>
+                <StyledTableCell align="left">Details/Cancel</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <StyledTableRow>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={styles.tdStyle}
+                >
+                  <Typography
+                    variant="subtitle1"
+                    paddingLeft={2}
+                    fontWeight={"bold"}
+                  >
+                    #1254785
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={styles.tdStyle}
+                >
+                  {" "}
+                  <Typography variant="subtitle1" fontWeight={"bold"}>
+                    2023-09-23
+                  </Typography>
+                </StyledTableCell>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={styles.tdStyle}
+                >
+                  {/* <Typography variant="subtitle3"> */}
+                  <div>
+                    {" "}
+                    <a
+                      href=""
+                      style={{ margin: "0 5px", fontFamily: "Roboto" }}
+                    >
+                      Robotics Project Package 3
+                    </a>{" "}
+                    <a href="" style={{ margin: "0 5px" }}>
+                      Arduino Uno
+                    </a>
+                    ,
+                    <a href="" style={{ margin: "0 5px" }}>
+                      Motor Driver
+                    </a>
+                    <br />
+                    <a href="" style={{ margin: "0 5px" }}>
+                      Robotics Project Package 3
+                    </a>
+                    ,
+                    <a href="" style={{ margin: "0 5px" }}>
+                      Arduino Uno
+                    </a>
+                    ,
+                    <a href="" style={{ margin: "0 5px" }}>
+                      Motor Driver
+                    </a>
+                  </div>
+                  ,{/* </Typography> */}
+                </StyledTableCell>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={styles.tdStyle}
+                >
+                  Delivered
+                </StyledTableCell>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={styles.tdStyle}
+                >
+                  BDT 1578
+                </StyledTableCell>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  className={styles.tdStyle}
+                >
+                  <Tooltip title="Details">
+                    <IconButton aria-label="Details" size="large">
+                      <ReadMoreIcon
+                        fontSize="inherit"
+                        style={{ color: "green" }}
+                      />
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title="Delete">
+                    <IconButton aria-label="delete" size="large">
+                      <DeleteIcon fontSize="inherit" style={{ color: "red" }} />
+                    </IconButton>
+                  </Tooltip>
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </div>
+  );
 };
 
 export default OrderHistory;

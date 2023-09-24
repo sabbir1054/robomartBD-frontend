@@ -1,11 +1,13 @@
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import AllBlogsPage from "./Blogs/AllBlogs/AllBlogsPage";
 import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import AuthPages from "./Pages/AuthPages/AuthPages";
 import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
 import OrderHistory from "./Pages/Dashboard/Customer/OrderHistory/OrderHistory";
+import SingleOrderDetailsPage from "./Pages/Dashboard/Customer/OrderHistory/SingleOrderDetailsPage";
 import Profile from "./Pages/Dashboard/Customer/Profile/Profile";
 import ForumMainPage from "./Pages/Forums/ForumMainPage";
 import Home from "./Pages/Home/Home";
@@ -65,7 +67,12 @@ function App() {
           path="/dashboard/user/order_history"
           element={<OrderHistory />}
         />
+        <Route
+          path="/dashboard/user/order_history/:orderId"
+          element={<SingleOrderDetailsPage />}
+        />
         <Route path="/tutorials" element={<AllTutorialPage />} />
+        <Route path="/blogs" element={<AllBlogsPage />} />
         <Route
           path="/tutorials/tag/:tagId/:tagName"
           element={<SingleTagAllTutorial />}

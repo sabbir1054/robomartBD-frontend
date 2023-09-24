@@ -227,8 +227,9 @@ const CheckOutPage = () => {
       position: "top-center",
       icon: "success",
       title: "Thanks for your order",
+      text: "You can cancel order before approved.",
       showConfirmButton: false,
-      timer: 2000,
+      timer: 5000,
     });
     navigate("/");
   }

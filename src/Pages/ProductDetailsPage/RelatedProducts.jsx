@@ -87,7 +87,7 @@ const RelatedProducts = ({ categoriesId }) => {
                     color: "#4f4f4f",
                     "&:hover": { color: "black !important" },
                   }}
-                  to={``}
+                  to={`/product/${product?.id}/${product?.name?.replace(/ /g, "_")}`}
                 >
                   <Box
                     style={{
