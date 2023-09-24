@@ -26,9 +26,8 @@ $orange-gray: #fcb941;
   font-family: "Roboto";
   text-align: center;
   text-decoration: none;
-  padding-bottom:2px ;
+  padding-bottom: 2px;
   color: black;
-  height: 4vh;
 
   &:hover {
     color: var(--primaryColor);
@@ -38,7 +37,7 @@ $orange-gray: #fcb941;
 
 .cardContent {
   text-align: initial;
-  padding: 1rem 1rem 0rem 1rem;
+  padding: 0rem 1rem 0rem 1rem;
   position: relative;
   z-index: 7;
   background: #fff;
@@ -48,18 +47,9 @@ $orange-gray: #fcb941;
     font-weight: 300;
   }
   .price {
-    // font-size: 1rem;
-
-    padding: 10px 0px;
+    font-size: 14px;
+    padding: 2px 0px;
     font-weight: bold;
-    // text-align: center;
-
-    // span {
-    //   color: #ccc;
-    //   margin-left: 8px;
-    //   font-size: 1rem;
-    //   margin-bottom: 1rem;
-    // }
   }
 }
 
