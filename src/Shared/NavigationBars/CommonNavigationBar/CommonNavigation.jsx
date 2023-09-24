@@ -49,11 +49,11 @@ const CommonNavigation = () => {
             <PageNavigationBar />
           </Grid>
           <Grid item md={2}>
-            <div className={styles.loginSectionNav}>
+            <div className={styles.loginSectionNav} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+              {data && data[0]?.email && <AvaterBtnMeny data={data} />}
               <div>
                 {!data && <PermIdentityIcon className={styles.profileIcon} />}
               </div>
-              {data && data[0]?.email && <AvaterBtnMeny data={data} />}
 
               {!data && (
                 <>

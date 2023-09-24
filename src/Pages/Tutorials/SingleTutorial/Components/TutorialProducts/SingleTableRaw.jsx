@@ -3,10 +3,46 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import Swal from "sweetalert2";
+import {
+  useGetUserQuery,
+  usePostToCartMutation,
+} from "../../../../../redux/api/api";
 import { StyledTableCell } from "./TutorialProducts";
+import styles from "./TutorialsProductTable.module.scss";
+
+const successNotify = () => toast.success("Successfully cart updated !");
+const errorNotify = () => toast.error("Something went wrong !");
+
 const SingleTableRaw = ({ singleItem }) => {
-    const [quantity, setQuantity] = useState(singleItem?.quantity);
-    console.log(quantity);
+  const [quantity, setQuantity] = useState(singleItem?.quantity);
+  const { data: userData } = useGetUserQuery();
+  const [postToCart, { isLoading, isError, isSuccess }] =
+    usePostToCartMutation();
+
+  const addToCart = () => {
+    if (!userData) {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please Login First !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      const options = {
+        product: { product: singleItem?.id, quantity: quantity },
+      };
+      postToCart(options);
+      
+    }
+  };
+
+  if (isSuccess) {
+    successNotify();
+  }
+  
   return (
     <>
       <StyledTableCell align="left">{singleItem?.product_code}</StyledTableCell>
@@ -23,6 +59,7 @@ const SingleTableRaw = ({ singleItem }) => {
           }}
         >
           <button
+            className={styles.quantity_btn}
             style={{ backgroundColor: "black", color: "white" }}
             onClick={() => setQuantity(quantity - 1)}
           >
@@ -31,16 +68,18 @@ const SingleTableRaw = ({ singleItem }) => {
           <input
             readOnly
             style={{
-              width: "70px",
+              textAlign: "center",
+              width: "40px",
               //   height: "px",
               padding: "4px",
-              fontSize: "16px",
+              fontSize: "15px",
             }}
             type="number"
             min={1}
             value={quantity}
           />
           <button
+            className={styles.quantity_btn}
             style={{ backgroundColor: "black", color: "white" }}
             onClick={() => setQuantity(quantity + 1)}
           >
@@ -49,7 +88,11 @@ const SingleTableRaw = ({ singleItem }) => {
         </div>
       </StyledTableCell>
       <StyledTableCell align="right">
-        <IconButton color="success" aria-label="add to shopping cart">
+        <IconButton
+          color="success"
+          aria-label="add to shopping cart"
+          onClick={() => addToCart()}
+        >
           <AddShoppingCartIcon />
         </IconButton>
       </StyledTableCell>
