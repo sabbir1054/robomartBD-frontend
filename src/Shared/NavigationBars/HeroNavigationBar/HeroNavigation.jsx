@@ -21,6 +21,7 @@ import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
+import AvarterBtnAdmin from "./AvarterBtnAdmin";
 
 const theme = createTheme({
   palette: {
@@ -139,7 +140,8 @@ const HeroNavigation = () => {
                 <div>
                   {!data && <PermIdentityIcon className={styles.profileIcon} />}
                 </div>
-                {data && data[0]?.email && <AvaterBtnMeny data={data} />}
+                {/* {data && data[0]?.email && <AvaterBtnMeny data={data} />} */}
+                {data && data[0]?.email && <AvarterBtnAdmin data={data} />}
 
                 {!data && (
                   <>

@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React from "react";
 import styles from "./OrderHistory.module.scss";
+import { NavLink } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -57,8 +58,7 @@ const OrderHistory = () => {
             borderBottom: "1px solid #ebebeb",
           }}
         />
-        <TableContainer component={Paper} >
-      
+        <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead style={{ backgroundColor: "#f2f2f2" }}>
               <TableRow>
@@ -152,10 +152,13 @@ const OrderHistory = () => {
                 >
                   <Tooltip title="Details">
                     <IconButton aria-label="Details" size="large">
-                      <ReadMoreIcon
-                        fontSize="inherit"
-                        style={{ color: "green" }}
-                      />
+                      <NavLink to="/dashboard/user/order_history/fgsdgff">
+                        {" "}
+                        <ReadMoreIcon
+                          fontSize="inherit"
+                          style={{ color: "green" }}
+                        />
+                      </NavLink>
                     </IconButton>
                   </Tooltip>
 

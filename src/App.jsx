@@ -26,6 +26,7 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
+import AdminProfile from "./Pages/Dashboard/Admin/Profile/AdminProfile";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           path="/products/scategories/:subCategoryId/:subCategoryName"
           element={<SubCategoryProducts />}
         />
+        {/* Dashboard sections */}
         <Route
           path="/dashboard/portal-admin/addBlogs"
           element={<AddBlogsPage />}
@@ -71,6 +73,13 @@ function App() {
           path="/dashboard/user/order_history/:orderId"
           element={<SingleOrderDetailsPage />}
         />
+        <Route
+          path="/dashboard/portal_admin/profile/"
+          element={<AdminProfile />}
+        />
+
+        {/* Tutorials and Blogs */}
+
         <Route path="/tutorials" element={<AllTutorialPage />} />
         <Route path="/blogs" element={<AllBlogsPage />} />
         <Route
