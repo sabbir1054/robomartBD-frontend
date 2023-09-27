@@ -4,6 +4,8 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import ActiveOrders from "./Components/ActiveOrders/ActiveOrders";
+import CompleteOrders from "./Components/CompleteOrders/CompleteOrders";
 import PendingOrders from "./Components/PendingOrders/PendingOrders";
 
 function CustomTabPanel(props) {
@@ -109,6 +111,12 @@ const OrderManagement = () => {
         <Divider />
         <CustomTabPanel value={value} index={0}>
           <PendingOrders />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <ActiveOrders />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          <CompleteOrders />
         </CustomTabPanel>
       </Container>
     </div>
