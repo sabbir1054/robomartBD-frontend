@@ -12,7 +12,7 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 import styles from "./OrderHistory.module.scss";
 import { NavLink } from "react-router-dom";
-
+import CancelIcon from "@mui/icons-material/Cancel";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -150,23 +150,28 @@ const OrderHistory = () => {
                   scope="row"
                   className={styles.tdStyle}
                 >
-                  <Tooltip title="Details">
-                    <IconButton aria-label="Details" size="large">
-                      <NavLink to="/dashboard/user/order_history/fgsdgff">
-                        {" "}
-                        <ReadMoreIcon
+                  <div style={{display:"flex",justifyContent:"space-around"}}>
+                    {" "}
+                    <Tooltip title="Details">
+                      <IconButton aria-label="Details" size="large">
+                        <NavLink to="/dashboard/user/order_history/fgsdgff">
+                          {" "}
+                          <ReadMoreIcon
+                            fontSize="inherit"
+                            style={{ color: "green" }}
+                          />
+                        </NavLink>
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                      <IconButton aria-label="delete" size="large">
+                        <CancelIcon
                           fontSize="inherit"
-                          style={{ color: "green" }}
+                          style={{ color: "red" }}
                         />
-                      </NavLink>
-                    </IconButton>
-                  </Tooltip>
-
-                  <Tooltip title="Delete">
-                    <IconButton aria-label="delete" size="large">
-                      <DeleteIcon fontSize="inherit" style={{ color: "red" }} />
-                    </IconButton>
-                  </Tooltip>
+                      </IconButton>
+                    </Tooltip>
+                  </div>
                 </StyledTableCell>
               </StyledTableRow>
             </TableBody>

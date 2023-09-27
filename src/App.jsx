@@ -28,6 +28,7 @@ import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
 import AdminProfile from "./Pages/Dashboard/Admin/Profile/AdminProfile";
 import AdminDashboard from "./Pages/Dashboard/Admin/Dashboard/AdminDashboard";
+import OrderManagement from "./Pages/Dashboard/Admin/OrderManagement/OrderManagement";
 
 function App() {
   return (
@@ -85,6 +86,10 @@ function App() {
         <Route
           path="/dashboard/portal_admin/dashboard/"
           element={<AdminDashboard />}
+        />
+        <Route
+          path="/dashboard/portal_admin/order_management/"
+          element={<OrderManagement />}
         />
 
         {/* Tutorials and Blogs */}
