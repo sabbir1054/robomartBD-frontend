@@ -27,6 +27,7 @@ import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mob
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
 import AdminProfile from "./Pages/Dashboard/Admin/Profile/AdminProfile";
+import AdminDashboard from "./Pages/Dashboard/Admin/Dashboard/AdminDashboard";
 
 function App() {
   return (
@@ -76,6 +77,14 @@ function App() {
         <Route
           path="/dashboard/portal_admin/profile/"
           element={<AdminProfile />}
+        />
+        <Route
+          path="/dashboard/portal_admin/profile/"
+          element={<AdminProfile />}
+        />
+        <Route
+          path="/dashboard/portal_admin/dashboard/"
+          element={<AdminDashboard />}
         />
 
         {/* Tutorials and Blogs */}
