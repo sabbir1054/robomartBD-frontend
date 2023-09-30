@@ -5,7 +5,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Bar,
   BarChart,
@@ -17,7 +17,6 @@ import {
 } from "recharts";
 
 import { useState } from "react";
-
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,67 +39,97 @@ const data = [
   {
     month: "January",
     sell: 4000,
+    profit:215
   },
   {
     month: "February",
     sell: 3000,
+    profit:215
   },
   {
     month: "March",
     sell: 2000,
+    profit:215
   },
   {
     month: "April",
     sell: 2780,
+    profit:215
   },
   {
     month: "May",
     sell: 7000,
+    profit:215
   },
   {
     month: "June",
     sell: 2390,
+    profit:215
   },
   {
     month: "July",
     sell: 3490,
+    profit:215
   },
   {
     month: "August",
     sell: 2390,
+    profit:215
   },
   {
     month: "September",
     sell: 2390,
+    profit:215
   },
   {
     month: "October",
     sell: 2780,
+    profit:215
   },
   {
     month: "November",
     sell: 5744,
+    profit:215
   },
   {
     month: "December",
     sell: 4965,
+    profit:215
   },
 ];
 
 const MonthlyBar = () => {
-  const [year, setYear] = useState("");
+  const [yearlyData, setYearlyData] = useState({});
+  const [year, setYear] = useState("2023");
 
   const handleChange = (event) => {
     setYear(event.target.value);
   };
   console.log(year);
+
+  useEffect(() => {
+    const data = { year: year };
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/order_management/get_dashbord_yearly`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => setYearlyData(data));
+  }, [year]);
+
   return (
     <div>
       <Typography
         variant="h5"
         style={{
           fontFamily: "Poppins",
-        
+
           marginTop: "7vh",
           fontWeight: "bold",
         }}
@@ -110,7 +139,9 @@ const MonthlyBar = () => {
       </Typography>
       {/* date picker */}
       <FormControl sx={{ m: 1, width: 150 }} size="small">
-        <InputLabel id="demo-simple-select-autowidth-label">Select Year</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">
+          Select Year
+        </InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
@@ -137,7 +168,7 @@ const MonthlyBar = () => {
         <BarChart
           width={1100}
           height={600}
-          data={data}
+          data={yearlyData}
           margin={{
             top: 5,
             right: 30,
@@ -150,8 +181,8 @@ const MonthlyBar = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          {/* <Bar dataKey="pv" fill="#8884d8" /> */}
-          <Bar dataKey="sell" fill="#82ca9d" barSize={50} />
+          <Bar dataKey="sell" fill="#8884d8" barSize={50} />
+          <Bar dataKey="profit" fill="#82ca9d" barSize={50} />
         </BarChart>
       </div>
     </div>

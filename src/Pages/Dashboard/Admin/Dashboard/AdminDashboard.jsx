@@ -1,8 +1,24 @@
 import { Container, Divider, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MonthlyBar from "./Components/MonthlyBar";
 
 const AdminDashboard = () => {
+  const [dashboardData, setDashboardData] = useState({});
+  useEffect(() => {
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/order_management/get_dashbord`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setDashboardData(data));
+  }, []);
+  console.log(dashboardData);
+
   return (
     <div style={{ minHeight: "80vh" }}>
       <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
@@ -35,8 +51,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                {" "}
-                11478{" "}
+                {dashboardData?.total_order}
               </Typography>
             </div>
           </Grid>
@@ -55,7 +70,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
               >
                 {" "}
-                Active Orders{" "}
+                Active & Pending{" "}
               </Typography>
               <Typography
                 variant="h4"
@@ -63,8 +78,9 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                {" "}
-                4548{" "}
+                {dashboardData &&
+                  parseInt(dashboardData?.active_order) +
+                    parseInt(dashboardData?.pending_order)}
               </Typography>
             </div>
           </Grid>
@@ -91,8 +107,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                {" "}
-                6356{" "}
+                {dashboardData?.completed_order}
               </Typography>
             </div>
           </Grid>
@@ -118,7 +133,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                78%
+                {dashboardData?.success}%
               </Typography>
             </div>
           </Grid>
@@ -143,7 +158,7 @@ const AdminDashboard = () => {
                 fontFamily={"Poppins"}
                 fontWeight={"bold"}
               >
-                Current month Sell
+                This month Sell <small>(BDT)</small>
               </Typography>
               <Typography
                 variant="h4"
@@ -151,8 +166,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                {" "}
-                11478{" "}
+                {dashboardData?.current_month_sell}
               </Typography>
             </div>
           </Grid>
@@ -171,7 +185,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
               >
                 {" "}
-                Last month sell
+                This month profit <small>(BDT)</small>
               </Typography>
               <Typography
                 variant="h4"
@@ -179,8 +193,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                {" "}
-                4548{" "}
+                {dashboardData?.current_month_profit}
               </Typography>
             </div>
           </Grid>
@@ -206,7 +219,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                6356
+                {dashboardData?.total_sell}
               </Typography>
             </div>
           </Grid>
@@ -232,7 +245,7 @@ const AdminDashboard = () => {
                 fontWeight={"bold"}
                 textAlign={"center"}
               >
-                78998
+                {dashboardData?.total_profit}
               </Typography>
             </div>
           </Grid>

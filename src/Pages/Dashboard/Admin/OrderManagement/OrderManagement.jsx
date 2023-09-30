@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ActiveOrders from "./Components/ActiveOrders/ActiveOrders";
 import CompleteOrders from "./Components/CompleteOrders/CompleteOrders";
 import PendingOrders from "./Components/PendingOrders/PendingOrders";
@@ -43,10 +43,14 @@ function a11yProps(index) {
 
 const OrderManagement = () => {
   const [value, setValue] = useState(0);
+ 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+
   return (
     <div style={{ minHeight: "70vh", padding: "2vh 0" }}>
       <Container maxWidth={"xl"}>

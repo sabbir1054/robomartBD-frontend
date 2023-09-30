@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const AvarterBtnAdmin = ({ data }) => {
-  console.log(data);
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();

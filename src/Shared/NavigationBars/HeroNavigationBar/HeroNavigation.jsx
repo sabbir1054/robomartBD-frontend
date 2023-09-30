@@ -74,7 +74,6 @@ const HeroNavigation = () => {
          setData(data);
        });
    }, [userData]);
-   console.log(data);
   return (
     <>
       <AppBar

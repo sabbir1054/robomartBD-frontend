@@ -20,7 +20,7 @@ const suggestionBoxStyle = {
 const SearchBar = () => {
   const navigate = useNavigate();
   const { data, isLoading, isError } = useGetAllProductsQuery();
-  console.log(data);
+
   const [products, setProducts] = useState(data);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
