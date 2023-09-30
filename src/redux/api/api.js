@@ -23,7 +23,9 @@ export const robomartApi = createApi({
     }),
     getUser: builder.query({
       query: () => "/api/auth/users/",
+     
     }),
+
     getUserProfile: builder.query({
       query: () => "/api/profile",
       providesTags: ["profile"],
@@ -50,7 +52,7 @@ export const robomartApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["cartProduct","profile"],
+      invalidatesTags: ["cartProduct", "profile"],
     }),
     deleteProductFromCart: builder.mutation({
       query: ({ data }) => ({

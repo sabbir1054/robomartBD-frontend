@@ -8,6 +8,7 @@ import {
   useGetCartQuery,
   useGetHomeDataQuery,
   useGetUserProfileQuery,
+  useGetUserQuery,
 } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import AvarterBtnAdmin from "./AvarterBtnAdmin";
@@ -25,37 +26,55 @@ const theme = createTheme({
 });
 
 const HeroNavigation = () => {
-  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+   const [data, setData] = useState({});
 
-  const { data, isLoading, isError } = useGetUserProfileQuery();
-  const { data: cartData } = useGetCartQuery();
-  const cartCount = cartData
-    ? cartData?.items?.reduce((acc, item) => acc + item.quantity, 0)
-    : 0;
-  const navigate = useNavigate();
+   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
-  console.log(data);
+   const { data: userData, isLoading, isError } = useGetUserQuery();
 
-  const [category, setCategory] = useState("");
-  const location = useLocation();
+   const { data: cartData } = useGetCartQuery();
+   const cartCount = cartData
+     ? cartData?.items?.reduce((acc, item) => acc + item.quantity, 0)
+     : 0;
+   const navigate = useNavigate();
 
-  const [changeIcon, setChangeIcon] = useState(false);
-  //scrolling navbar
-  const listenScrollEvent = () => {
-    window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
-  };
+   const [category, setCategory] = useState("");
+   const location = useLocation();
 
-  useEffect(() => {
-    window.addEventListener("scroll", listenScrollEvent);
-    return () => {
-      window.removeEventListener("scroll", listenScrollEvent);
-    };
-  }, []);
+   const [changeIcon, setChangeIcon] = useState(false);
+   //scrolling navbar
+   const listenScrollEvent = () => {
+     window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
+   };
 
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
+   useEffect(() => {
+     window.addEventListener("scroll", listenScrollEvent);
+     return () => {
+       window.removeEventListener("scroll", listenScrollEvent);
+     };
+   }, []);
 
+   const handleChange = (event) => {
+     setCategory(event.target.value);
+   };
+
+   useEffect(() => {
+     const storedData = localStorage.getItem("user");
+     const userDataStorage = JSON.parse(storedData);
+
+     fetch(`https://api.robomartbd.com/api/profile`, {
+       method: "GET",
+       headers: {
+         "content-type": "application/json",
+         Authorization: `JWT ${userDataStorage}`,
+       },
+     })
+       .then((res) => res.json())
+       .then((data) => {
+         setData(data);
+       });
+   }, [userData]);
+   console.log(data);
   return (
     <>
       <AppBar
@@ -111,7 +130,7 @@ const HeroNavigation = () => {
               alignItems="center"
               className={styles.navigationIcons}
             >
-              {data && (
+              {data?.email && (
                 <ThemeProvider theme={theme}>
                   <NavLink to="/shopping-cart">
                     <Badge
@@ -138,7 +157,7 @@ const HeroNavigation = () => {
                   <AvaterBtnMeny data={data} />
                 )}
 
-                {!data && (
+                {!data?.email&& (
                   <>
                     <NavLink to="/login">
                       <p>Login</p>
