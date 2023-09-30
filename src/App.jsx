@@ -79,10 +79,7 @@ function App() {
           path="/dashboard/portal_admin/profile/"
           element={<AdminProfile />}
         />
-        <Route
-          path="/dashboard/portal_admin/profile/"
-          element={<AdminProfile />}
-        />
+      
         <Route
           path="/dashboard/portal_admin/dashboard/"
           element={<AdminDashboard />}

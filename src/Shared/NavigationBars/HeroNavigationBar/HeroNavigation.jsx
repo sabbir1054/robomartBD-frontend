@@ -1,27 +1,19 @@
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { AppBar, Badge, Box, Container, Divider, Grid } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {
-  AppBar,
-  Badge,
-  Box,
-  Container,
-  Divider,
-  Grid,
-
-} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   useGetCartQuery,
   useGetHomeDataQuery,
-  useGetUserQuery,
+  useGetUserProfileQuery,
 } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
+import AvarterBtnAdmin from "./AvarterBtnAdmin";
 import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
-import AvarterBtnAdmin from "./AvarterBtnAdmin";
 
 const theme = createTheme({
   palette: {
@@ -35,16 +27,14 @@ const theme = createTheme({
 const HeroNavigation = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
-  const { data, isLoading, isError } = useGetUserQuery();
+  const { data, isLoading, isError } = useGetUserProfileQuery();
   const { data: cartData } = useGetCartQuery();
   const cartCount = cartData
     ? cartData?.items?.reduce((acc, item) => acc + item.quantity, 0)
     : 0;
   const navigate = useNavigate();
 
-  if (data) {
-    // console.log(data[0]?.first_name);
-  }
+  console.log(data);
 
   const [category, setCategory] = useState("");
   const location = useLocation();
@@ -140,8 +130,13 @@ const HeroNavigation = () => {
                 <div>
                   {!data && <PermIdentityIcon className={styles.profileIcon} />}
                 </div>
-                {/* {data && data[0]?.email && <AvaterBtnMeny data={data} />} */}
-                {data && data[0]?.email && <AvarterBtnAdmin data={data} />}
+
+                {data && data?.email && data?.role === "Admin" && (
+                  <AvarterBtnAdmin data={data} />
+                )}
+                {data && data?.email && data?.role === "Customer" && (
+                  <AvaterBtnMeny data={data} />
+                )}
 
                 {!data && (
                   <>

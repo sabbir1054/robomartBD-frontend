@@ -47,7 +47,7 @@ const AvarterBtnAdmin = ({ data }) => {
         </Tooltip>
         <br />
         <small style={{ color: "black", fontFamily: "Poppins" }}>
-          {data && data[0]?.first_name}
+          {data && data?.first_name}
         </small>
         <Menu
           sx={{ mt: "45px" }}
@@ -66,7 +66,7 @@ const AvarterBtnAdmin = ({ data }) => {
           onClose={handleCloseUserMenu}
         >
           <NavLink
-            to="/dashboard/user/profile"
+            to="/dashboard/portal_admin/profile/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
@@ -75,20 +75,20 @@ const AvarterBtnAdmin = ({ data }) => {
           </NavLink>
           <Divider />
           <NavLink
-            to="/dashboard/user/profile"
+            to="/dashboard/portal_admin/dashboard/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">Dashboards</Typography>
+              <Typography textAlign="center">Dashboard</Typography>
             </MenuItem>
           </NavLink>
           <Divider />
           <NavLink
-            to="/shopping-cart"
+            to="/dashboard/portal_admin/order_management/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">Orders</Typography>
+              <Typography textAlign="center">Manage Orders</Typography>
             </MenuItem>
           </NavLink>
           <Divider />

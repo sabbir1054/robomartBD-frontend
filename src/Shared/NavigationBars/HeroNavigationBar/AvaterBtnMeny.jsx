@@ -48,7 +48,7 @@ const AvaterBtnMeny = ({ data }) => {
         </Tooltip>
         <br />
         <small style={{ color: "black", fontFamily: "Poppins" }}>
-          {data && data[0]?.first_name}
+          {data && data?.first_name}
         </small>
         <Menu
           sx={{ mt: "45px" }}

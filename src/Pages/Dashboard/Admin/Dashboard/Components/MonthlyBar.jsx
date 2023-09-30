@@ -38,52 +38,52 @@ const yearsArray = [
 
 const data = [
   {
-    name: "January",
-    uv: 4000,
+    month: "January",
+    sell: 4000,
   },
   {
-    name: "February",
-    uv: 3000,
+    month: "February",
+    sell: 3000,
   },
   {
-    name: "March",
-    uv: 2000,
+    month: "March",
+    sell: 2000,
   },
   {
-    name: "April",
-    uv: 2780,
+    month: "April",
+    sell: 2780,
   },
   {
-    name: "May",
-    uv: 7000,
+    month: "May",
+    sell: 7000,
   },
   {
-    name: "June",
-    uv: 2390,
+    month: "June",
+    sell: 2390,
   },
   {
-    name: "July",
-    uv: 3490,
+    month: "July",
+    sell: 3490,
   },
   {
-    name: "August",
-    uv: 2390,
+    month: "August",
+    sell: 2390,
   },
   {
-    name: "September",
-    uv: 2390,
+    month: "September",
+    sell: 2390,
   },
   {
-    name: "October",
-    uv: 2780,
+    month: "October",
+    sell: 2780,
   },
   {
-    name: "November",
-    uv: 5744,
+    month: "November",
+    sell: 5744,
   },
   {
-    name: "December",
-    uv: 4965,
+    month: "December",
+    sell: 4965,
   },
 ];
 
@@ -146,12 +146,12 @@ const MonthlyBar = () => {
           }}
         >
           <CartesianGrid strokeDasharray="4 4" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
           <Legend />
           {/* <Bar dataKey="pv" fill="#8884d8" /> */}
-          <Bar dataKey="uv" fill="#82ca9d" barSize={50} />
+          <Bar dataKey="sell" fill="#82ca9d" barSize={50} />
         </BarChart>
       </div>
     </div>
