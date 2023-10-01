@@ -1,5 +1,5 @@
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { CircularProgress, IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,6 +14,8 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "../../OrderManagement.module.scss";
+import { useGetDeliveredOrdersQuery } from "../../../../../../redux/api/api";
+import CompleteOrdersSingleRow from "./CompleteOrdersSingleRow";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -37,15 +39,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const CompleteOrders = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+    const {
+      data: deliveredOrdersData,
+      isLoading,
+      isError,
+    } = useGetDeliveredOrdersQuery();
   return (
     <div style={{ minHeight: "70vh" }}>
       <TableContainer component={Paper}>
@@ -65,121 +63,12 @@ const CompleteOrders = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <StyledTableRow>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                <Typography
-                  variant="subtitle1"
-                  paddingLeft={2}
-                  fontWeight={"bold"}
-                >
-                  #1254785
-                </Typography>
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                {" "}
-                <Typography variant="subtitle1" fontWeight={"bold"}>
-                  2023-09-23
-                </Typography>
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                sabbir@gmail.com ,{/* </Typography> */}
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                017332805458
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                Norshinghopur,Ashulia,Savar,Dhaka
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                <span
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "16px",
-                    color: "#007FFF",
-                  }}
-                >
-                  Delivered
-                </span>
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                <span style={{ fontSize: "15px", fontWeight: "bold" }}>
-                  {" "}
-                  1212.364
-                </span>
-              </StyledTableCell>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                className={styles.tdStyle}
-              >
-                <div
-                  style={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <Tooltip title="Details">
-                    <IconButton aria-label="Details" size="large">
-                      <NavLink to="/dashboard/user/order_history/fgsdgff">
-                        {" "}
-                        <ReadMoreIcon
-                          fontSize="inherit"
-                          style={{ color: "green" }}
-                        />
-                      </NavLink>
-                    </IconButton>
-                  </Tooltip>
-
-                  <Button
-                    // id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}
-                    style={{ fontWeight: "bold" }}
-                    color="warning"
-                  >
-                    Update Status
-                  </Button>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                  >
-                    <MenuItem onClick={handleClose}>Returned</MenuItem>
-                  </Menu>
-                </div>
-              </StyledTableCell>
-            </StyledTableRow>
+            {isLoading && <CircularProgress />}
+            {deliveredOrdersData?.length > 0 &&
+              deliveredOrdersData?.map((deliveredOrder) => (
+                <CompleteOrdersSingleRow deliveredOrder={deliveredOrder} />
+              ))}
+          
           </TableBody>
         </Table>
       </TableContainer>

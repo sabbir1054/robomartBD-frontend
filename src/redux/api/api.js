@@ -13,7 +13,13 @@ export const robomartApi = createApi({
       }
     },
   }),
-  tagTypes: ["cartProduct", "profile", "pendingOrders", "activeOrders"],
+  tagTypes: [
+    "cartProduct",
+    "profile",
+    "pendingOrders",
+    "activeOrders",
+    "deliveredOrders",
+  ],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => "/api/products",
@@ -94,7 +100,7 @@ export const robomartApi = createApi({
         url: `/order_management/get_pending_order/${data.id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["pendingOrders","activeOrders"],
+      invalidatesTags: ["pendingOrders", "activeOrders"],
     }),
     getActivesOrders: builder.query({
       query: () => `/order_management/get_active_order`,
@@ -108,6 +114,18 @@ export const robomartApi = createApi({
       }),
       invalidatesTags: ["activeOrders"],
     }),
+    getDeliveredOrders: builder.query({
+      query: () => `/order_management/get_served_order`,
+      providesTags: ["deliveredOrders"],
+    }),
+    updateDeliveredOrderStatus: builder.mutation({
+      query: ({ data }) => ({
+        url: "/order_management/get_served_order",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["deliveredOrders"],
+    }),
   }),
 });
 
@@ -118,12 +136,15 @@ export const {
   useGetCartQuery,
   useGetCategoryListProductsQuery,
   useGetHomeDataQuery,
+  
   usePostToCartMutation,
   useDeleteProductFromCartMutation,
   useChangeQuantityMutation,
+
   useGetAllProductsQuery,
   useGetUserProfileQuery,
   useUpdateUserProfileMutation,
+
   usePostOrderMutation,
 
   useGetPendingOrdersQuery,
@@ -131,5 +152,8 @@ export const {
   useDeletePendingOrderStatusMutation,
 
   useGetActivesOrdersQuery,
-  useUpdateActivesOrderStatusMutation
+  useUpdateActivesOrderStatusMutation,
+
+  useGetDeliveredOrdersQuery,
+  useUpdateDeliveredOrderStatusMutation
 } = robomartApi;

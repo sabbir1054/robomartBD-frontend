@@ -1,22 +1,13 @@
-import CancelIcon from "@mui/icons-material/Cancel";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
-import {
-  CircularProgress,
-  IconButton,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
-import {
-  useDeletePendingOrderStatusMutation,
-  useUpdateActivesOrderStatusMutation,
-} from "../../../../../../redux/api/api";
+import { useUpdateDeliveredOrderStatusMutation } from "../../../../../../redux/api/api";
 import styles from "../../OrderManagement.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,30 +30,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
 const successNotify = () => toast.success("Successfully status changed !");
 const errorNotify = () => toast.error("Something went wrong !");
-
-const SingleActiveOrderRow = ({ activeOrder }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
+const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
   const [
-    updateActiveOrderStatus,
+    updateDeliveredOrderStatus,
     {
       isLoading: updateStatusLoading,
       isError: updateStatusError,
       isSuccess: updateStatusSuccess,
     },
-  ] = useUpdateActivesOrderStatusMutation();
-  const [
-    deletePendingOrderStatus,
-    {
-      isLoading: deleteStatusLoading,
-      isError: deleteStatusError,
-      isSuccess: deleteStatusSuccess,
-    },
-  ] = useDeletePendingOrderStatusMutation();
+  ] = useUpdateDeliveredOrderStatusMutation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,14 +49,9 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
     setAnchorEl(null);
   };
 
-  const handleUpdateActiveOrderStatus = (id) => {
-    const options = { data: { orderid: id, flag: "served_done" } };
-    updateActiveOrderStatus(options);
-  };
-
-  const handleActiveOrderDelete = (id) => {
-    const options = { data: { id: id } };
-    deletePendingOrderStatus(options);
+  const handleUpdateDeliveredOrderStatus = (id) => {
+    const options = { data: { orderid: id, flag: "sell_done" } };
+    updateDeliveredOrderStatus(options);
   };
 
   if (updateStatusSuccess) {
@@ -87,92 +60,73 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
 
   if (updateStatusError) {
     errorNotify();
-  }
-
+    }
+    console.log(deliveredOrder);
   return (
     <>
       <StyledTableRow>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <Typography variant="subtitle1" paddingLeft={2} fontWeight={"bold"}>
-            #{activeOrder?.id}
+            #{deliveredOrder?.id}
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           {" "}
           <Typography variant="subtitle1" fontWeight={"bold"}>
-            {activeOrder?.order_date?.split("T")[0]}
+            {deliveredOrder?.order_date?.split("T")[0]}
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {activeOrder?.email}
+         {deliveredOrder?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {activeOrder?.phone}
+          {deliveredOrder?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {activeOrder?.address}
+          {deliveredOrder?.address}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <span
             style={{
               fontWeight: "bold",
               fontSize: "16px",
-              color: "green",
+              color: "#007FFF",
             }}
           >
-            Approved
+            Delivered
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <span style={{ fontSize: "15px", fontWeight: "bold" }}>
-            {activeOrder?.total_price}
+            {deliveredOrder?.total_price}
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {updateStatusLoading || deleteStatusLoading ? (
-            <CircularProgress />
-          ) : (
-            <>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Tooltip title="Details">
-                  <IconButton aria-label="Details" size="large">
-                    <NavLink to="/dashboard/user/order_history/fgsdgff">
-                      {" "}
-                      <ReadMoreIcon
-                        fontSize="inherit"
-                        style={{ color: "#007FFF" }}
-                      />
-                    </NavLink>
-                  </IconButton>
-                </Tooltip>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Tooltip title="Details">
+              <IconButton aria-label="Details" size="large">
+                <NavLink to="/dashboard/user/order_history/fgsdgff">
+                  {" "}
+                  <ReadMoreIcon fontSize="inherit" style={{ color: "green" }} />
+                </NavLink>
+              </IconButton>
+            </Tooltip>
 
-                <Button
-                  variant="outlined"
-                  onClick={() => handleUpdateActiveOrderStatus(activeOrder?.id)}
-                  style={{
-                    color: "#007FFF",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Delivered
-                </Button>
-
-                <Tooltip title="Delete">
-                  <IconButton
-                    aria-label="delete"
-                    size="large"
-                    onClick={() => handleActiveOrderDelete(activeOrder?.id)}
-                  >
-                    <CancelIcon fontSize="inherit" style={{ color: "red" }} />
-                  </IconButton>
-                </Tooltip>
-              </div>
-            </>
-          )}
+            <Button
+              variant="outlined"
+              style={{ fontWeight: "bold" }}
+              color="warning"
+              onClick={() =>
+                handleUpdateDeliveredOrderStatus(deliveredOrder?.id)
+              }
+            >
+              Order Done
+            </Button>
+          </div>
         </StyledTableCell>
       </StyledTableRow>
     </>
   );
 };
 
-export default SingleActiveOrderRow;
+export default CompleteOrdersSingleRow;
