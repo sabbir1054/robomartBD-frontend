@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ActiveOrders from "./Components/ActiveOrders/ActiveOrders";
 import CompleteOrders from "./Components/CompleteOrders/CompleteOrders";
 import PendingOrders from "./Components/PendingOrders/PendingOrders";
@@ -43,13 +43,10 @@ function a11yProps(index) {
 
 const OrderManagement = () => {
   const [value, setValue] = useState(0);
- 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-
 
   return (
     <div style={{ minHeight: "70vh", padding: "2vh 0" }}>
@@ -117,6 +114,10 @@ const OrderManagement = () => {
           <PendingOrders />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
+          <Typography variant="subtitle2" style={{ color: "red",fontWeight:"bold" }}>
+            [*Note :] After Deliver Products to customer update order status to
+            delivered or before click status returned confirm it
+          </Typography>
           <ActiveOrders />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
