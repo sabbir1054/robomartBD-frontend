@@ -6,6 +6,10 @@ import AuthPages from "./Pages/AuthPages/AuthPages";
 import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
+import AdminDashboard from "./Pages/Dashboard/Admin/Dashboard/AdminDashboard";
+import OrderManagement from "./Pages/Dashboard/Admin/OrderManagement/OrderManagement";
+import OrderSummaryPrint from "./Pages/Dashboard/Admin/OrderSummaryPrint/OrderSummaryPrint";
+import AdminProfile from "./Pages/Dashboard/Admin/Profile/AdminProfile";
 import OrderHistory from "./Pages/Dashboard/Customer/OrderHistory/OrderHistory";
 import SingleOrderDetailsPage from "./Pages/Dashboard/Customer/OrderHistory/SingleOrderDetailsPage";
 import Profile from "./Pages/Dashboard/Customer/Profile/Profile";
@@ -26,9 +30,6 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
-import AdminProfile from "./Pages/Dashboard/Admin/Profile/AdminProfile";
-import AdminDashboard from "./Pages/Dashboard/Admin/Dashboard/AdminDashboard";
-import OrderManagement from "./Pages/Dashboard/Admin/OrderManagement/OrderManagement";
 
 function App() {
   return (
@@ -77,10 +78,18 @@ function App() {
           element={<SingleOrderDetailsPage />}
         />
         <Route
+          path="/dashboard/portal_admin/order_history/:orderId"
+          element={<SingleOrderDetailsPage />}
+        />
+        <Route
+          path="/dashboard/portal_admin/order_summary/:orderId"
+          element={<OrderSummaryPrint />}
+        />
+        <Route
           path="/dashboard/portal_admin/profile/"
           element={<AdminProfile />}
         />
-      
+
         <Route
           path="/dashboard/portal_admin/dashboard/"
           element={<AdminDashboard />}

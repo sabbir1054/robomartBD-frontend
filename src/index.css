@@ -102,8 +102,16 @@ small {
 }
 
 
+@media print {
+  .printContent {
+    display: block; /* Display the content in print mode */
+  }
 
-
+  /* Optionally hide other elements in print mode */
+  .otherElements {
+    display: none;
+  }
+}
 
 /* X-Small devices (portrait phones, less than 576px)  */
 @media (max-width: 575.98px) {

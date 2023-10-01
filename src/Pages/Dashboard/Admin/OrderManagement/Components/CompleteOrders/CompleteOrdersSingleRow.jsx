@@ -77,7 +77,7 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-         {deliveredOrder?.email}
+          {deliveredOrder?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           {deliveredOrder?.email}
@@ -104,12 +104,14 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <Tooltip title="Details">
-              <IconButton aria-label="Details" size="large">
-                <NavLink to="/dashboard/user/order_history/fgsdgff">
+              <NavLink
+                to={`/dashboard/portal_admin/order_summary/${deliveredOrder?.id}`}
+              >
+                <IconButton aria-label="Details" size="large">
                   {" "}
                   <ReadMoreIcon fontSize="inherit" style={{ color: "green" }} />
-                </NavLink>
-              </IconButton>
+                </IconButton>{" "}
+              </NavLink>
             </Tooltip>
 
             <Button

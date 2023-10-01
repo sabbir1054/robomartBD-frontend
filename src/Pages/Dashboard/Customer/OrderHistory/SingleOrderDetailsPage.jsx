@@ -1,9 +1,21 @@
 import { Container, Grid, Typography } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import styles from "./OrderHistory.module.scss";
 
 const SingleOrderDetailsPage = () => {
+  const params = useParams();
+  const [orderData, setOrderData] = useState({});
+
+  useEffect(() => {
+    fetch(``)
+      .then((res) => res.json())
+      .then((data) => setOrderData(data));
+  },[params])
+
+
+
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container style={{ padding: "4vh" }}>
