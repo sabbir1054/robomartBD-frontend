@@ -112,7 +112,7 @@ export const robomartApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["activeOrders"],
+      invalidatesTags: ["activeOrders", "deliveredOrders"],
     }),
     getDeliveredOrders: builder.query({
       query: () => `/order_management/get_served_order`,

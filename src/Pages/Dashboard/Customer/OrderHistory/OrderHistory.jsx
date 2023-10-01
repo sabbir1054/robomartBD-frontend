@@ -1,4 +1,4 @@
-import DeleteIcon from "@mui/icons-material/Delete";
+import CancelIcon from "@mui/icons-material/Cancel";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -9,10 +9,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React from "react";
-import styles from "./OrderHistory.module.scss";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import CancelIcon from "@mui/icons-material/Cancel";
+import styles from "./OrderHistory.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -36,6 +35,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const OrderHistory = () => {
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+    fetch(`https://api.robomartbd.com/order/get_order`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setOrderData(data));
+  }, []);
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container maxWidth={"lg"}>
@@ -67,113 +82,121 @@ const OrderHistory = () => {
                 <StyledTableCell align="left">Items</StyledTableCell>
                 <StyledTableCell align="left">Status</StyledTableCell>
                 <StyledTableCell align="left">Total</StyledTableCell>
-                <StyledTableCell align="left">Details/Cancel</StyledTableCell>
+                <StyledTableCell align="left">Details</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  className={styles.tdStyle}
-                >
-                  <Typography
-                    variant="subtitle1"
-                    paddingLeft={2}
-                    fontWeight={"bold"}
-                  >
-                    #1254785
-                  </Typography>
-                </StyledTableCell>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  className={styles.tdStyle}
-                >
-                  {" "}
-                  <Typography variant="subtitle1" fontWeight={"bold"}>
-                    2023-09-23
-                  </Typography>
-                </StyledTableCell>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  className={styles.tdStyle}
-                >
-                  {/* <Typography variant="subtitle3"> */}
-                  <div>
-                    {" "}
-                    <a
-                      href=""
-                      style={{ margin: "0 5px", fontFamily: "Roboto" }}
-                    >
-                      Robotics Project Package 3
-                    </a>{" "}
-                    <a href="" style={{ margin: "0 5px" }}>
-                      Arduino Uno
-                    </a>
-                    ,
-                    <a href="" style={{ margin: "0 5px" }}>
-                      Motor Driver
-                    </a>
-                    <br />
-                    <a href="" style={{ margin: "0 5px" }}>
-                      Robotics Project Package 3
-                    </a>
-                    ,
-                    <a href="" style={{ margin: "0 5px" }}>
-                      Arduino Uno
-                    </a>
-                    ,
-                    <a href="" style={{ margin: "0 5px" }}>
-                      Motor Driver
-                    </a>
-                  </div>
-                  ,{/* </Typography> */}
-                </StyledTableCell>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  className={styles.tdStyle}
-                >
-                  Delivered
-                </StyledTableCell>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  className={styles.tdStyle}
-                >
-                  BDT 1578
-                </StyledTableCell>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  className={styles.tdStyle}
-                >
-                  <div style={{display:"flex",justifyContent:"space-around"}}>
-                    {" "}
-                    <Tooltip title="Details">
-                      <IconButton aria-label="Details" size="large">
-                        <NavLink to="/dashboard/user/order_history/fgsdgff">
+              {orderData?.length > 0 &&
+                orderData?.map((order) => (
+                  <>
+                    <StyledTableRow>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tdStyle}
+                      >
+                        <Typography
+                          variant="subtitle1"
+                          paddingLeft={2}
+                          fontWeight={"bold"}
+                        >
+                          #{order?.id}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tdStyle}
+                      >
+                        <Typography variant="subtitle1" fontWeight={"bold"}>
+                          {order?.order_date?.split("T")[0]}
+                        </Typography>
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tdStyle}
+                      >
+                        {/* <Typography variant="subtitle3"> */}
+                        <div>
+                          <a
+                            href=""
+                            style={{ margin: "0 5px", fontFamily: "Roboto" }}
+                          >
+                            Robotics Project Package 3
+                          </a>{" "}
+                          <a href="" style={{ margin: "0 5px" }}>
+                            Arduino Uno
+                          </a>
+                          ,
+                          <a href="" style={{ margin: "0 5px" }}>
+                            Motor Driver
+                          </a>
+                          <br />
+                          <a href="" style={{ margin: "0 5px" }}>
+                            Robotics Project Package 3
+                          </a>
+                          ,
+                          <a href="" style={{ margin: "0 5px" }}>
+                            Arduino Uno
+                          </a>
+                          ,
+                          <a href="" style={{ margin: "0 5px" }}>
+                            Motor Driver
+                          </a>
+                        </div>
+                        ,{/* </Typography> */}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tdStyle}
+                      >
+                        Delivered
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tdStyle}
+                      >
+                        BDT 1578
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tdStyle}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-around",
+                          }}
+                        >
                           {" "}
-                          <ReadMoreIcon
-                            fontSize="inherit"
-                            style={{ color: "green" }}
-                          />
-                        </NavLink>
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete">
-                      <IconButton aria-label="delete" size="large">
-                        <CancelIcon
-                          fontSize="inherit"
-                          style={{ color: "red" }}
-                        />
-                      </IconButton>
-                    </Tooltip>
-                  </div>
-                </StyledTableCell>
-              </StyledTableRow>
+                          <Tooltip title="Details">
+                            <IconButton aria-label="Details" size="large">
+                              <NavLink to={`/dashboard/user/order_history/${order?.id}`}>
+                                {" "}
+                                <ReadMoreIcon
+                                  fontSize="inherit"
+                                  style={{ color: "green" }}
+                                />
+                              </NavLink>
+                            </IconButton>
+                          </Tooltip>
+                          {/* <Tooltip title="Delete">
+                            <IconButton aria-label="delete" size="large">
+                              <CancelIcon
+                                fontSize="inherit"
+                                style={{ color: "red" }}
+                              />
+                            </IconButton>
+                          </Tooltip> */}
+                        </div>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  </>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

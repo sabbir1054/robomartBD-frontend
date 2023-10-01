@@ -8,14 +8,22 @@ const SingleOrderDetailsPage = () => {
   const [orderData, setOrderData] = useState({});
 
   useEffect(() => {
-    fetch(``)
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+    fetch(
+      `https://api.robomartbd.com/order_management/get_order/${params?.orderId}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `JWT ${userDataStorage}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setOrderData(data));
-  },[params])
-
-
-
-
+  }, [params]);
+  console.log(orderData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container style={{ padding: "4vh" }}>
@@ -146,7 +154,6 @@ const SingleOrderDetailsPage = () => {
                           3000
                         </td>
                       </tr>
-                  
                     </>
                   </tbody>
                 </table>
