@@ -1,13 +1,15 @@
 import { Container, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import OrderSummaryFooter from "./Components/OrderSummaryFooter";
 import OrderSummaryHeader from "./Components/OrderSummaryHeader";
 import OrderSummaryProducts from "./Components/OrderSummaryProducts";
-import OrderSummaryFooter from "./Components/OrderSummaryFooter";
 
 const OrderSummaryPrint = () => {
   const params = useParams();
   const [orderData, setOrderData] = useState({});
+  const [allUserData, setAllUserData] = useState([]);
+  const [customerData, setCustomerData] = useState({});
   const printPageArea = (areaID) => {
     let printContent = document.getElementById(areaID).innerHTML;
     let originalContent = document.body.innerHTML;
@@ -15,6 +17,27 @@ const OrderSummaryPrint = () => {
     window.print();
     document.body.innerHTML = originalContent;
   };
+  const getCustomerInfo = () => {
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
+
+    fetch(`https://api.robomartbd.com/api/auth/users`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllUserData(data);
+      });
+  };
+
+  useEffect(() => {
+    const customer = allUserData?.find((item) => item?.id === orderData?.user);
+    setCustomerData(customer);
+  }, [allUserData]);
 
   useEffect(() => {
     const storedData = localStorage.getItem("user");
@@ -30,7 +53,12 @@ const OrderSummaryPrint = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => setOrderData(data));
+      .then((data) => {
+        setOrderData(data);
+        if (data?.user) {
+          getCustomerInfo();
+        }
+      });
   }, [params]);
   console.log(orderData);
   return (
@@ -47,7 +75,10 @@ const OrderSummaryPrint = () => {
           style={{ border: "1px dashed #e2e2e2", padding: "10px" }}
           id="printAbleArea"
         >
-          <OrderSummaryHeader ordersInfo={orderData} />
+          <OrderSummaryHeader
+            ordersInfo={orderData}
+            customerInfo={customerData}
+          />
           <Divider color={"black"} />
           <div>
             <OrderSummaryProducts ordersInfo={orderData} />

@@ -3,7 +3,8 @@ import React from "react";
 import Barcode from "react-barcode";
 import { useParams } from "react-router-dom";
 
-const OrderSummaryHeader = ({ ordersInfo }) => {
+const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
+  console.log(ordersInfo);
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
 
@@ -15,6 +16,7 @@ const OrderSummaryHeader = ({ ordersInfo }) => {
   };
 
   const params = useParams();
+  console.log(customerInfo);
   return (
     <div>
       <Grid container spacing={2}>
@@ -34,11 +36,11 @@ const OrderSummaryHeader = ({ ordersInfo }) => {
               fontWeight={"bold"}
               fontFamily={"Poppins"}
             >
-              Asif Khan{" "}
+              {customerInfo?.first_name} {customerInfo?.last_name}
             </Typography>
             <br />
             <Typography variant="title2" fontFamily={"Poppins"}>
-              Daffodil International University, Ashulia , Dhaka
+              {ordersInfo?.address}
             </Typography>
             <br />
             <Typography
@@ -46,7 +48,7 @@ const OrderSummaryHeader = ({ ordersInfo }) => {
               fontFamily={"Poppins"}
               fontWeight={"bold"}
             >
-              014579869634
+              {ordersInfo?.phone}
             </Typography>
             <br />
           </div>
@@ -79,9 +81,23 @@ const OrderSummaryHeader = ({ ordersInfo }) => {
               fontFamily={"Poppins"}
               fontWeight={"bold"}
             >
-              Payment Method: <br />
+              Billing Options:
             </Typography>
+            {ordersInfo?.billing_option}
             <br />
+            {ordersInfo?.payment_id && (
+              <small style={{ fontFamily: "Poppins" }}>
+                Transaction Id:{" "}
+                <span style={{ fontWeight: "bold" }}>
+                  {ordersInfo?.payment_id}
+                </span>
+              </small>
+            )}
+            {ordersInfo?.payment_id && (
+              <small style={{ fontFamily: "Poppins" }}>
+                Number:{ordersInfo?.payment_number}
+              </small>
+            )}
           </div>
         </Grid>
       </Grid>
