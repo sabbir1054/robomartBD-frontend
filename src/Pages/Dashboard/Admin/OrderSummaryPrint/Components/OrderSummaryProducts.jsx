@@ -7,6 +7,10 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 
 const OrderSummaryProducts = ({ ordersInfo }) => {
+  const subTotal = ordersInfo?.items?.reduce(
+    (acc, product) => acc + product.price,
+    0
+  );
   return (
     <div>
       {" "}
@@ -48,30 +52,30 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
                   </div>
                 </TableCell>
                 <TableCell align="right">{row?.quantity}</TableCell>
+                <TableCell align="right">{row?.product?.price}</TableCell>
                 <TableCell align="right">{row?.price}</TableCell>
-                <TableCell align="right">
-                  {row?.quantity * row?.price}
-                </TableCell>
               </TableRow>
             ))}
             <TableRow>
               <TableCell rowSpan={5} />
               <TableCell colSpan={2}>Subtotal</TableCell>
               <TableCell align="right">
-                {ordersInfo?.subtotal ? ordersInfo?.subtotal : 0}
+                {/* {ordersInfo?.subtotal ? ordersInfo?.subtotal : 0} */}
+                {ordersInfo?.items && subTotal}
               </TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell colSpan={2}>Shipping</TableCell>
               <TableCell align="right">
-                {ordersInfo?.shipping ? ordersInfo?.shipping : 0}
+                {ordersInfo?.shiping ? ordersInfo?.shiping : 0}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={2}>Discount</TableCell>
               <TableCell align="right">
-                {ordersInfo?.discount ? ordersInfo?.discount : 0}
+                {/* {ordersInfo?.discount ? ordersInfo?.discount : 0} */}
+                {ordersInfo?.price_after_discount?((subTotal+shiping)-ordersInfo?.price_after_discount):0}
               </TableCell>
             </TableRow>
 

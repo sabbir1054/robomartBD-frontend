@@ -1,10 +1,10 @@
-import { Container, Divider } from "@mui/material";
+import { Button, Container, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderSummaryFooter from "./Components/OrderSummaryFooter";
 import OrderSummaryHeader from "./Components/OrderSummaryHeader";
 import OrderSummaryProducts from "./Components/OrderSummaryProducts";
-
+import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 const OrderSummaryPrint = () => {
   const params = useParams();
   const [orderData, setOrderData] = useState({});
@@ -70,7 +70,18 @@ const OrderSummaryPrint = () => {
           padding: "5vh 0",
         }}
       >
-        <button onClick={() => printPageArea("printAbleArea")}>Print</button>
+        <div  style={{textAlign:'right',margin:"10px 0"}}>
+          <Button
+            startIcon={<LocalPrintshopIcon/>}
+            variant="contained"
+            disableElevation
+            marginY={2}
+            style={{ backgroundColor: "green" }}
+            onClick={() => printPageArea("printAbleArea")}
+          >
+            Print
+          </Button>
+        </div>
         <div
           style={{ border: "1px dashed #e2e2e2", padding: "10px" }}
           id="printAbleArea"
