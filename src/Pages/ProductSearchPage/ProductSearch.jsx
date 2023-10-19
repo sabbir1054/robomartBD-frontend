@@ -9,15 +9,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
 import { retrieveAndDecryptData } from "../../utils/encript";
-import styles from "./ProductSearch.module.scss"
+import styles from "./ProductSearch.module.scss";
 const ProductSearch = () => {
-  // const { data, isLoading, isError } = useGetAllProductsQuery();
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   const [products, setProducts] = useState([]);
-    const params = useParams();
-    const dcryptData = retrieveAndDecryptData();
+  const params = useParams();
+  const dcryptData = retrieveAndDecryptData();
   useEffect(() => {
-    
+    setLoading(true);
     setData(dcryptData);
     const filteredSuggestions = data?.filter(
       (product) =>
@@ -26,7 +26,8 @@ const ProductSearch = () => {
     );
 
     setProducts(filteredSuggestions);
-  }, [params,data]);
+    setLoading(false)
+  }, [params, data]);
 
   return (
     <div style={{ minHeight: "70vh" }}>
@@ -41,7 +42,7 @@ const ProductSearch = () => {
         </Typography>
         <Divider />
 
-        {!products?.length && (
+        {loading && (
           <div
             style={{
               display: "flex",

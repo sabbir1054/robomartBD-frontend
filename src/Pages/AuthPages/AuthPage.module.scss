@@ -92,44 +92,50 @@
 }
 
 @media (max-width: 575.98px) {
+ .eyeIcon {
+    position: absolute;
+    right: 9px !important;
+    bottom: 124px !important;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .eyeIconR {
+    position: absolute;
+    right: 25px;
+    bottom: 245px !important;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .eyeIcon2 {
+    position: absolute;
+    right: 25px;
+    bottom: 109px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .eyeIconR2 {
+    position: absolute;
+    right: 25px;
+    bottom: 125px !important;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   .authTitle {
     font-size: 1.5rem;
   }
   .auth_wrapper {
-    width: 90%;
+    width: 86%;
+  }
+
+  .loginWrapper{
+    display: block;
+    
   }
 }
 @media (max-width: 400px) {
-  .eyeIcon {
-        position: absolute;
-        right: 25px;
-        bottom: 109px;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      .eyeIconR {
-        position: absolute;
-        right: 25px;
-        bottom: 245px !important;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      .eyeIcon2 {
-        position: absolute;
-        right: 25px;
-        bottom: 109px;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      .eyeIconR2 {
-        position: absolute;
-        right: 25px;
-        bottom: 125px !important;
-        &:hover {
-          cursor: pointer;
-        }
-      }
+  
 }

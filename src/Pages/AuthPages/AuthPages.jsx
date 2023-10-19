@@ -63,7 +63,7 @@ const AuthPages = () => {
             </Typography>
           </NavLink>
         </Box>
-        <Box sx={{ py: 3 }} display={"flex"} justifyContent={"center"}>
+        <Box sx={{ py: 3 }} display={"flex"} justifyContent={"center"} className={styles.loginWrapper}>
           {component === "login" && (
             <Login showPass={showPass} setShowPass={setShowPass} />
           )}

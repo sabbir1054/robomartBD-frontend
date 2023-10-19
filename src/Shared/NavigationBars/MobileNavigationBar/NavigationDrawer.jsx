@@ -7,12 +7,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button, Divider, Drawer, List, ListItem } from "@mui/material";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import SelectCategory from "../HeroNavigationBar/SelectCategory";
 import styles from "./MobileNavigation.module.scss";
 import SmallSearch from "./SmallSearch";
-import SelectCategory from "../HeroNavigationBar/SelectCategory";
 
 const NavigationDrawer = () => {
-
   const [open, setOpen] = useState();
   const [isSearchTrigger, setIsSearchTrigger] = useState(false);
   const toggleDrawer = () => {
@@ -46,6 +45,7 @@ const NavigationDrawer = () => {
           <ListItem
             sx={{ borderBottom: "1px solid #cfcfcfdb" }}
             className={styles.drawerListItem}
+            onClick={toggleDrawer}
           >
             <NavLink to={"/shopping-cart"} className={styles.iLink}>
               <ShoppingCartIcon />
@@ -56,6 +56,7 @@ const NavigationDrawer = () => {
           <ListItem
             sx={{ borderBottom: "1px solid #cfcfcfdb" }}
             className={styles.drawerListItem}
+            onClick={toggleDrawer}
           >
             <NavLink to={"/login"} className={styles.iLink}>
               <LoginIcon />
@@ -65,6 +66,7 @@ const NavigationDrawer = () => {
           <ListItem
             sx={{ borderBottom: "1px solid #cfcfcfdb" }}
             className={styles.drawerListItem}
+            onClick={toggleDrawer}
           >
             <NavLink to={"/register"} className={styles.iLink}>
               <AppRegistrationIcon />

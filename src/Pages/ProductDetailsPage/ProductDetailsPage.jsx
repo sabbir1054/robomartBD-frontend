@@ -116,7 +116,7 @@ const ProductDetailsPage = () => {
 console.log(productDetails);
   return (
     <div>
-      <Container sx={{ py: "10vh" }}>
+      <Container sx={{ py: "5vh" }}>
         <Grid container spacing={2} sx={{ justifyContent: "center" }}>
           <Grid item md={6} className={styles.left}>
             {productDetails?.media?.length > 0 && (
