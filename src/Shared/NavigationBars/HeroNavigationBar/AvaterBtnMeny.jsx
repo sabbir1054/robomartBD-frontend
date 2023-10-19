@@ -5,6 +5,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -12,11 +13,14 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+import SearchIcon from "@mui/icons-material/Search";
+
 const AvaterBtnMeny = ({ data }) => {
-  console.log(data);
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +41,20 @@ const AvaterBtnMeny = ({ data }) => {
     localStorage.clear();
     navigate("/");
     window.location.reload();
+  };
+
+  const handleSearch = () => {
+    // Add your search logic here
+    navigate(`/products/search=/${query}`);
+    handleCloseUserMenu();
+    setQuery("");
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+     
+      handleSearch();
+    }
   };
   return (
     <>
@@ -93,8 +111,30 @@ const AvaterBtnMeny = ({ data }) => {
             </MenuItem>
           </NavLink>
           <Divider />
+
           <MenuItem onClick={handleLogout}>
             <Typography textAlign="center">Logout</Typography>
+          </MenuItem>
+          <Divider />
+          <MenuItem>
+            {/* <div style={{ display: "none" }} className={styles.searchBtn}>
+              <SmallSearch />
+            </div> */}
+            <TextField
+              variant="outlined"
+              value={query}
+              fullWidth
+              placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={handleSearch}>
+                    <SearchIcon />
+                  </IconButton>
+                ),
+              }}
+            />
           </MenuItem>
         </Menu>
       </Box>

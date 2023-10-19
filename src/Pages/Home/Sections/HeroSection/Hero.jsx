@@ -4,8 +4,8 @@ import AllCategorySideMenu from "../../../../Shared/AllCategoryListSideMenu/AllC
 import { useGetCategoryListProductsQuery } from "../../../../redux/api/api";
 import OfferCards from "./Components/OfferCards/OfferCards";
 import HeroSlider from "./Components/Slider/HeroSlider";
+import styles from "./Hero.module.scss";
 import OurFeatures from "./OurFeatures/OurFeatures";
-import styles from "./Hero.module.scss"
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const {

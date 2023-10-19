@@ -179,6 +179,7 @@ const Profile = () => {
               md={6}
               borderRight={"1px solid #ddd"}
               minHeight={"10vh"}
+              className={styles.profileLeft}
             >
               <div
                 style={{
