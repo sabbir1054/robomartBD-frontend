@@ -13,7 +13,7 @@ const OurCorporateClients = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  console.log(data);
+ 
   return (
     <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
       <div>

@@ -50,7 +50,7 @@ const OrderHistory = () => {
       .then((res) => res.json())
       .then((data) => setOrderData(data));
   }, []);
-console.log(orderData);
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container maxWidth={"lg"}>

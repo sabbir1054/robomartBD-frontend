@@ -63,12 +63,12 @@ const CartPrice = ({ isDataChange }) => {
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+        
         if (result?.discount) {
           setIsCouponValid(true);
           //discount
           setDisCountPercentage(result.discount);
-          console.log(total * (result.discount / 100));
+          
 
           Swal.fire({
             position: "top-center",
@@ -105,7 +105,7 @@ const CartPrice = ({ isDataChange }) => {
       cupon: coupon,
       useBalance: useBalance,
     };
-    console.log(data);
+   
     dispatch(addCheckoutData(data));
   };
 

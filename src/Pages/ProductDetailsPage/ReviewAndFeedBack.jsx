@@ -17,11 +17,11 @@ const ReviewAndFeedBack = ({ productDetails }) => {
       setIsLoad(false);
     }
   };
-  // console.log(allComments);
+  
   useEffect(() => {
     getAllFeedData();
   }, []);
-  console.log(allFeedback);
+ 
   return (
     <div>
       <Box sx={{ marginTop: "5vh" }}>

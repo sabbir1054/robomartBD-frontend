@@ -87,7 +87,7 @@ const Profile = () => {
   }, [data]);
   const onSubmit = (data) => {};
 
-  // console.log(userProfile);
+
 
   const updateInformation = (updatedData) => {
     const options = { updatedData: updatedData };
@@ -123,7 +123,7 @@ const Profile = () => {
     if (updatedAddress == "") {
       updatedAddress = userProfile?.address;
     }
-    // console.log(mobile);
+   
     updateInformation({ phone: mobile, address: updatedAddress });
 
     setIsUpdate(false);
@@ -151,7 +151,7 @@ const Profile = () => {
     }
   }, [updateError, profileUpdateSuccess]);
 
-  // console.log(userProfile);
+  
   return (
     <div
       style={{
@@ -169,6 +169,7 @@ const Profile = () => {
             container
             border="1px solid #ddd"
             padding="10vh 5vh"
+            className={styles.profileContainer}
             borderRadius={2}
             display={"flex"}
             alignItems={"center"}
@@ -213,7 +214,13 @@ const Profile = () => {
                 {userProfile?.email}
               </Typography>
             </Grid>
-            <Grid item sm={12} md={6} padding={"4vh"}>
+            <Grid
+              item
+              sm={12}
+              md={6}
+              padding={"4vh"}
+              className={styles.profileRight}
+            >
               <label htmlFor="title" className={styles.auth_label}>
                 <Typography
                   variant="title1"

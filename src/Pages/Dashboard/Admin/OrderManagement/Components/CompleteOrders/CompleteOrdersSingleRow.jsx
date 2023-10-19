@@ -61,7 +61,7 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
   if (updateStatusError) {
     errorNotify();
     }
-    console.log(deliveredOrder);
+    
   return (
     <>
       <StyledTableRow>

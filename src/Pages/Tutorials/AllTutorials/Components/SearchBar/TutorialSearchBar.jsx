@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 const TutorialSearchBar = () => {
   const location = useLocation();
-  console.log(location);
+  
   const [searchValue, setSearchValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -14,8 +14,7 @@ const TutorialSearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Search value:", searchValue);
-    console.log("Search triggered by:", e.type); // Logs the event type (e.g., 'submit' or 'keydown')
+  
   };
 
   return (

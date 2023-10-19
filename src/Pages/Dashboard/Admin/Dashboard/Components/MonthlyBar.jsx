@@ -105,7 +105,7 @@ const MonthlyBar = () => {
   const handleChange = (event) => {
     setYear(event.target.value);
   };
-  console.log(year);
+  
 
   useEffect(() => {
     const data = { year: year };

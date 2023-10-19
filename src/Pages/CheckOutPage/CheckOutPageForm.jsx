@@ -139,7 +139,7 @@ const CheckOutPage = () => {
   };
 
   const postAnOrder = (orderData) => {
-    console.log(orderData);
+    
     if (billingOptions !== "op") {
       const options = { data: orderData };
       postOrder(options);

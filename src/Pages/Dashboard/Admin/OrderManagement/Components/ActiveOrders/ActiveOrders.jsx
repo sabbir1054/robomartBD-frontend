@@ -38,7 +38,7 @@ const ActiveOrders = () => {
     isLoading,
     isError,
   } = useGetActivesOrdersQuery();
-console.log(activeOrdersData);
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <TableContainer component={Paper}>

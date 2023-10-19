@@ -23,7 +23,7 @@ const SingleOrderDetailsPage = () => {
       .then((res) => res.json())
       .then((data) => setOrderData(data));
   }, [params]);
-  console.log(orderData);
+  
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container style={{ padding: "4vh" }}>

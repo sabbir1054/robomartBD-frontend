@@ -15,7 +15,7 @@ const TopBlogs = () => {
       });
    
   }, []);
- console.log(blogsData);
+
   return (
     <>
       <Container className={styles.topBlogsWrapper}>

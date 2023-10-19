@@ -12,7 +12,7 @@ const AllCategorySideMenu = ({ category }) => {
     }
   }, [location]);
 
-  console.log(category);
+
   return (
     <div className={styles.sideMenu}>
       <Box

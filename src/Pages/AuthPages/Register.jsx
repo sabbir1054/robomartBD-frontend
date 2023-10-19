@@ -57,7 +57,7 @@ const Register = ({ showPass, setShowPass }) => {
     if (data.password !== data.re_password) {
       notify();
     } else {
-      // console.log(data);
+      
       postNewUser(data);
     }
   };

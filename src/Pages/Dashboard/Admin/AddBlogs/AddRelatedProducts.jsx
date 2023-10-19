@@ -15,7 +15,7 @@ const AddRelatedProducts = ({ setRelatedProducts }) => {
     setRelatedProducts(pidArr);
   };
   const handleChange = (event, newValue) => {
-    console.log(newValue);
+    
     setSelectedItems(newValue);
     makePIDArr(newValue);
   };

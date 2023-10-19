@@ -54,7 +54,7 @@ const ProductDetailsPage = () => {
   };
   if (isError) {
     errorNotify();
-    console.log(postToCart);
+    
   }
   if (isSuccess) {
     successNotify();
@@ -88,7 +88,7 @@ const ProductDetailsPage = () => {
     fetch(`https://api.robomartbd.com/api/product/${params?.productId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+       
         setProductDetails(data);
         // recent view products
         const cacheRecentView = localStorage.getItem("recentViewProducts");
@@ -113,7 +113,7 @@ const ProductDetailsPage = () => {
         }
       });
   }, [params]);
-console.log(productDetails);
+
   return (
     <div>
       <Container sx={{ py: "5vh" }}>

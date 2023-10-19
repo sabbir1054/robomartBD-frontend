@@ -60,7 +60,7 @@ const OrderSummaryPrint = () => {
         }
       });
   }, [params]);
-  console.log(orderData);
+
   return (
     <>
       <Container

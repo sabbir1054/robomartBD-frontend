@@ -17,7 +17,7 @@ const AdminDashboard = () => {
       .then((res) => res.json())
       .then((data) => setDashboardData(data));
   }, []);
-  console.log(dashboardData);
+  
 
   return (
     <div style={{ minHeight: "80vh" }}>

@@ -44,7 +44,7 @@ const SingleCategoryProducts = () => {
     categoryProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  console.log(categoryProducts);
+  
   return (
     <div>
       <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>

@@ -73,7 +73,7 @@ const AddBlogsPage = () => {
     localStorage.removeItem("cacheSections");
     data.relatedProducts = relatedProducts;
     setFinalData(data);
-    console.log(data);
+   
 
     // // window.location.reload();
     // reset();

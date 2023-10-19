@@ -36,7 +36,7 @@ const RelatedProducts = ({ categoriesId }) => {
 
     fetchData();
   }, [categoriesId]);
-  console.log(categoriesId);
+
   return (
     <>
       <div style={{ padding: "3vh 0vh" }}>

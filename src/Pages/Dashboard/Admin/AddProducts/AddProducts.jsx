@@ -73,7 +73,7 @@ const AddProducts = () => {
     data.feedback = [];
     data.category = selectedCategory;
     data.subCategory = selectedSubCategory;
-    console.log(data);
+    
 
     // // window.location.reload();
     // reset();

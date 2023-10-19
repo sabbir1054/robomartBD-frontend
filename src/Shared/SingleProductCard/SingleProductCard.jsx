@@ -28,7 +28,7 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   errorNotify: "Something went wrong !",
 // });
 const SingleProductCard = ({ product }) => {
-   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
   const {
     data: userData,
@@ -56,13 +56,10 @@ const SingleProductCard = ({ product }) => {
   };
   if (isError) {
     errorNotify();
-    console.log(postToCart);
   }
   if (isSuccess) {
     successNotify();
   }
-
-
 
   return (
     <>
@@ -113,12 +110,11 @@ const SingleProductCard = ({ product }) => {
           <Link
             to={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
             className={styles.title}
-            style={{ height: "30px",overflow:"hidden" }}
+            style={{ height: "30px", overflow: "hidden" }}
           >
             {product?.name?.length > 57
               ? product?.name?.substring(0, 57) + "..."
               : product?.name}
-       
           </Link>
           <Box paddingBottom={1} borderBottom={"1px solid #f2f2f2"}>
             {" "}
@@ -135,17 +131,21 @@ const SingleProductCard = ({ product }) => {
             )}
             <p
               className={styles.productDescription}
-              style={{ fontSize: "12px", textAlign: "justify", height: "40px",overflow:"hidden" }}
+              style={{
+                fontSize: "12px",
+                textAlign: "justify",
+                height: "40px",
+                overflow: "hidden",
+              }}
             >
               {product?.discription?.substring(0, 110) + "..."}
-              
             </p>
             <div
               style={{
                 textAlign: "center",
               }}
             >
-              <p className={styles.price} >
+              <p className={styles.price}>
                 BDT <span> {product?.price} </span>{" "}
               </p>
             </div>

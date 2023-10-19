@@ -14,7 +14,7 @@ const TutorialCategoryNav = () => {
     getCategoriesData();
   }, []);
 
-  console.log(categories);
+
 
   return (
     <div>

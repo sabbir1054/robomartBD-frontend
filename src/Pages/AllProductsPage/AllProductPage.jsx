@@ -13,13 +13,13 @@ const AllProductPage = () => {
     isLoading,
     isError,
   } = useGetCategoryListProductsQuery();
-  console.log(categoryList);
+
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     fetch(`https://api.robomartbd.com/api/catagorylist`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+       
         setAllProducts(data);
       });
   }, []);

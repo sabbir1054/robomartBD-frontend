@@ -18,7 +18,7 @@ const AllComments = () => {
       setIsLoad(false);
     }
   };
-  // console.log(allComments);
+ 
   useEffect(() => {
     getALLComments();
   }, []);

@@ -127,7 +127,7 @@ const OurFeatures = () => {
                   fontWeight={"bold"}
                   className={styles.featureTitle}
                 >
-                  24/7 Support
+                  24/7 Fast Support
                 </Typography>
                 <Typography
                   variant="subTitle"

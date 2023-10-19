@@ -11,9 +11,7 @@ import SingleListItem from "./SingleListItem";
 const CategoryList = () => {
   const [toggle, setToggle] = useState(false);
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
-  console.log(
-    homeData1?.catagorylist?.slice(5, homeData1?.catagorylist?.length)
-  );
+ 
 
   const params = useParams();
   const navigation = useNavigate();

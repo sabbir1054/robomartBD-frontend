@@ -20,7 +20,7 @@ const NavigationDrawer = () => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-console.log(userData);
+
   return (
     <>
       <Button variant="text" onClick={toggleDrawer} sx={{ color: "white" }}>

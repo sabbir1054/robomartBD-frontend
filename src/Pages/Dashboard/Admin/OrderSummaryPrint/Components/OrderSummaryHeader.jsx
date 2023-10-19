@@ -4,7 +4,7 @@ import Barcode from "react-barcode";
 import { useParams } from "react-router-dom";
 
 const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
-  console.log(ordersInfo);
+ 
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
 
@@ -16,7 +16,7 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
   };
 
   const params = useParams();
-  console.log(customerInfo);
+ 
   return (
     <div>
       <Grid container spacing={2}>

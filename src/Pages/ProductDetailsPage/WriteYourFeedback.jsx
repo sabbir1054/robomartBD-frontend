@@ -19,7 +19,7 @@ const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
     setOpen(false);
   };
 
-  console.log(userData);
+
 
   const postFeedbackData = (data) => {
     const storedData = localStorage.getItem("user");

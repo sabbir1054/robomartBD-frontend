@@ -48,7 +48,7 @@ const BottomTabs = ({ productDetails }) => {
     setValue(newValue);
   };
 
-  console.log(productDetails);
+
 
   return (
     <>

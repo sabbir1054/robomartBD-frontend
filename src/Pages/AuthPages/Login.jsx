@@ -42,14 +42,7 @@ const Login = ({ showPass, setShowPass }) => {
         if (result.refresh && result.access) {
           // Cookies.set("refreshToken", result.refresh, { expires: 7 });
           localStorage.setItem("user", JSON.stringify(result.access));
-          // localforage
-          //   .setItem("accessToken", result.access)
-          //   .then(() => {
-          //     console.log("");
-          //   })
-          //   .catch((error) => {
-          //     console.error(error);
-          //   });
+       
           reset();
           navigate("/");
           Swal.fire({
