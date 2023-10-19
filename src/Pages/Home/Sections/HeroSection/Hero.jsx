@@ -1,14 +1,18 @@
 import { Box, Grid } from "@mui/material";
 import React, { useState } from "react";
-import CategoryList from "./CategoryList";
+import AllCategorySideMenu from "../../../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
+import { useGetCategoryListProductsQuery } from "../../../../redux/api/api";
 import OfferCards from "./Components/OfferCards/OfferCards";
 import HeroSlider from "./Components/Slider/HeroSlider";
 import OurFeatures from "./OurFeatures/OurFeatures";
-import { useGetCategoryListProductsQuery } from "../../../../redux/api/api";
-import AllCategorySideMenu from "../../../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
+import styles from "./Hero.module.scss"
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { data: categoryList, isLoading, isError } = useGetCategoryListProductsQuery();
+  const {
+    data: categoryList,
+    isLoading,
+    isError,
+  } = useGetCategoryListProductsQuery();
 
   return (
     <>
@@ -16,7 +20,10 @@ const Hero = () => {
         <Grid container paddingTop={1}>
           <Grid item md={3} lg={2}>
             <Box style={{ backgroundColor: "white", margin: "0px 10px" }}>
-              <AllCategorySideMenu category={categoryList?.slice(0, 9)} />
+              <div className={styles.categoryComponent}>
+                {" "}
+                <AllCategorySideMenu category={categoryList?.slice(0, 8)} />
+              </div>
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={9} lg={10}>
@@ -46,7 +53,10 @@ const Hero = () => {
             <Grid item md={3} lg={2}>
               <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
                 {/* <CategoryList /> */}
-                <AllCategorySideMenu category={categoryList?.slice(0, 8)} />
+                <div className={styles.categoryComponent}>
+                  {" "}
+                  <AllCategorySideMenu category={categoryList?.slice(0, 8)} />
+                </div>
               </Box>
             </Grid>
             <Grid item md={9} lg={7} width={"100%"}>

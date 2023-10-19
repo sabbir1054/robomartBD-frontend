@@ -15,7 +15,7 @@ const CategorySection = ({ categoryList }) => {
             categoryList?.map((singleCategory) => (
               <>
                 {" "}
-                <Grid item xs={4} sm={3} md={2}>
+                <Grid item xs={6} sm={3} md={2}>
                   <div
                     style={{
                       display: "flex",
@@ -27,16 +27,18 @@ const CategorySection = ({ categoryList }) => {
                         singleCategory?.id
                       }/${singleCategory?.name?.replace(/ /g, "_")}`}
                       style={{
-                        width: "150px",
+                        minWidth: "100px",
+                        maxWidth: "150px",
                         height: "150px",
                         border: "1px solid #d6d4d4",
                       }}
                     >
                       {" "}
                       <img
-                        src={`${singleCategory?.image}`}
+                        src={singleCategory?.image}
                         style={{
-                          width: "150px",
+                          minWidth: "100px",
+                          maxWidth: "150px",
                           height: "150px",
                           // border: "1px solid #d6d4d4",
                         }}
@@ -45,7 +47,11 @@ const CategorySection = ({ categoryList }) => {
                       />
                     </NavLink>
                   </div>
-                  <Typography variant="subtitle1" textAlign={"center"} fontWeight={"bold"}>
+                  <Typography
+                    variant="subtitle1"
+                    textAlign={"center"}
+                    fontWeight={"bold"}
+                  >
                     {singleCategory?.name}
                   </Typography>
                 </Grid>
@@ -53,7 +59,7 @@ const CategorySection = ({ categoryList }) => {
                   {singleCategory?.sub_category?.map((item) => (
                     <>
                       {" "}
-                      <Grid item xs={4} sm={3} md={2}>
+                      <Grid item xs={6} sm={3} md={2}>
                         <div
                           style={{
                             display: "flex",
@@ -82,7 +88,11 @@ const CategorySection = ({ categoryList }) => {
                             />
                           </NavLink>
                         </div>
-                        <Typography variant="subtitle1" textAlign={"center"} fontWeight={"bold"}>
+                        <Typography
+                          variant="subtitle1"
+                          textAlign={"center"}
+                          fontWeight={"bold"}
+                        >
                           {item?.name}
                         </Typography>
                       </Grid>

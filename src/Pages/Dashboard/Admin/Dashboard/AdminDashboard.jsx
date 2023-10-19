@@ -158,7 +158,7 @@ const AdminDashboard = () => {
                 fontFamily={"Poppins"}
                 fontWeight={"bold"}
               >
-                This month Sell <small>(BDT)</small>
+                This month Sell <small>(product)</small>
               </Typography>
               <Typography
                 variant="h4"
@@ -211,7 +211,7 @@ const AdminDashboard = () => {
                 fontFamily={"Poppins"}
                 fontWeight={"bold"}
               >
-                Total Sell
+                Total Sell <small>(product)</small>
               </Typography>
               <Typography
                 variant="h4"
@@ -237,7 +237,7 @@ const AdminDashboard = () => {
                 fontFamily={"Poppins"}
                 fontWeight={"bold"}
               >
-                Total Profit
+                Total Profit <small>(BDT)</small>
               </Typography>
               <Typography
                 variant="h4"

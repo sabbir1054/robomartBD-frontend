@@ -1,7 +1,8 @@
+import SearchIcon from "@mui/icons-material/Search";
 import { Box, Button, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./MobileNavigation.module.scss";
-import SearchIcon from "@mui/icons-material/Search";
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,10 +17,18 @@ const style = {
   flexDirection: "column",
 };
 
-const SmallSearch = () => {
+const SmallSearch = ({ toggleDrawer }) => {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleSmallSearch = () => {
+    navigate(`/products/search=/${query}`);
+    handleClose();
+    toggleDrawer();
+  };
 
   return (
     <>
@@ -46,11 +55,13 @@ const SmallSearch = () => {
             placeholder="Search "
             variant="outlined"
             className={styles.searchField}
+            onChange={(e) => setQuery(e.target.value)}
           />
           <Button
             variant="contained"
             className={styles.searchBtn}
             disableElevation
+            onClick={handleSmallSearch}
           >
             Search
           </Button>

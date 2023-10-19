@@ -40,9 +40,9 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
             </Typography>
             <br />
             <Typography variant="title2" fontFamily={"Poppins"}>
-              {ordersInfo?.address}
+              <div style={{ maxWidth: "90%" }}> {ordersInfo?.address} </div>
             </Typography>
-            <br />
+            {/* <br /> */}
             <Typography
               variant="title1"
               fontFamily={"Poppins"}

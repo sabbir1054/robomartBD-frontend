@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
 import { retrieveAndDecryptData } from "../../utils/encript";
-
+import styles from "./ProductSearch.module.scss"
 const ProductSearch = () => {
   // const { data, isLoading, isError } = useGetAllProductsQuery();
   const [data, setData] = useState();
@@ -52,7 +52,7 @@ const ProductSearch = () => {
             <CircularProgress />
           </div>
         )}
-        { products?.length === 0 && (
+        {products?.length === 0 && (
           <Typography
             variant="h5"
             style={{ textAlign: "center", padding: "5vh 0" }}
@@ -62,11 +62,30 @@ const ProductSearch = () => {
           </Typography>
         )}
 
-        <Grid container spacing={1} paddingY={3}>
+        <Grid container spacing={2} paddingY={3}>
           {products?.map((product) => (
-            <Grid item>
-              <SingleProductCard product={product} />
-            </Grid>
+            <>
+              <Grid
+                item
+                xs={6}
+                sm={6}
+                md={3}
+                lg={2}
+                xl={2}
+                display={"flex"}
+                justifyContent={"center"}
+                className={styles.item_small_screen}
+              >
+                <SingleProductCard product={product} />
+              </Grid>
+              <Grid
+                item
+                style={{ display: "block" }}
+                className={styles.item_big_screen}
+              >
+                <SingleProductCard product={product} />
+              </Grid>
+            </>
           ))}
         </Grid>
       </Container>

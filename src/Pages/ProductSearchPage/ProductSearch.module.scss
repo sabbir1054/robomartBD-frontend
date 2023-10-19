@@ -1,0 +1,13 @@
+@media (max-width: 1200px) {
+  .item_small_screen {
+    display: flex !important;
+  }
+  .item_big_screen {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .item_small_screen {
+    display: none !important;
+  }
+}

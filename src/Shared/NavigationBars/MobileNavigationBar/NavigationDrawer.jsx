@@ -29,8 +29,8 @@ const NavigationDrawer = () => {
           <ListItem sx={{ borderBottom: "1px solid gray" }}>
             <Button
               onClick={toggleDrawer}
-              startIcon={<CloseIcon  />}
-              sx={{ width: "100%", }}
+              startIcon={<CloseIcon />}
+              sx={{ width: "100%" }}
               variant="contained"
               className={styles.searchBtn}
               disableElevation
@@ -40,7 +40,7 @@ const NavigationDrawer = () => {
             <Divider />
           </ListItem>
           <ListItem sx={{ borderBottom: "1px solid gray" }}>
-            <SelectCategory/>
+            <SelectCategory />
             <Divider />
           </ListItem>
           <ListItem
@@ -79,8 +79,7 @@ const NavigationDrawer = () => {
             }}
             // className={styles.drawerListItem}
           >
-            
-            <SmallSearch />
+            <SmallSearch toggleDrawer={toggleDrawer} />
           </ListItem>
         </List>
       </Drawer>

@@ -30,6 +30,7 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
+import GoogleAuthLink from "./Pages/AuthPages/GoogleAuthLink";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/googleAuth/:link" element={<Home />} />
+        <Route path="/:link" element={<GoogleAuthLink />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<AuthPages />} />
         <Route path="/register" element={<AuthPages />} />

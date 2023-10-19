@@ -14,7 +14,7 @@ const AllCategorySideMenu = ({ category }) => {
 
   console.log(category);
   return (
-    <div>
+    <div className={styles.sideMenu}>
       <Box
         sx={{
           display: "flex",

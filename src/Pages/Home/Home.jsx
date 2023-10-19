@@ -38,7 +38,7 @@ const Home = () => {
 
       <OurCorporateClients />
       <OurSupplierNPartner />
-      <JoinOurCommunity />
+      {/* <JoinOurCommunity /> */}
     </>
   );
 };

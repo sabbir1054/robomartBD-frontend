@@ -21,7 +21,7 @@ const CategoryList = () => {
   const handleNavigation = (id) => {
     navigation(`/products/categories/${id}`);
   };
-  console.log(toggle);
+
   return (
     <>
       <Box

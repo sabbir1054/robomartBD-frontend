@@ -48,10 +48,10 @@ const SingleCategoryProducts = () => {
   return (
     <div>
       <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
-        <Grid item xs={2} padding={2}>
+        <Grid item xs={2} padding={2} hidden={{ xs: true }}>
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12} sm={12} >
           <>
             {" "}
             <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
@@ -81,7 +81,7 @@ const SingleCategoryProducts = () => {
                     currentItems?.map((product) => (
                       <Grid
                         item
-                        xs={12}
+                        xs={6}
                         sm={6}
                         md={3}
                         lg={3}

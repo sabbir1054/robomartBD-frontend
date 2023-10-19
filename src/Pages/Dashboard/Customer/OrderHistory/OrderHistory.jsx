@@ -50,7 +50,7 @@ const OrderHistory = () => {
       .then((res) => res.json())
       .then((data) => setOrderData(data));
   }, []);
-
+console.log(orderData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container maxWidth={"lg"}>
@@ -152,14 +152,16 @@ const OrderHistory = () => {
                         scope="row"
                         className={styles.tdStyle}
                       >
-                        Delivered
+                        s
+                        {order?.is_served?"Shipping":"Pending"}
+                        
                       </StyledTableCell>
                       <StyledTableCell
                         component="th"
                         scope="row"
                         className={styles.tdStyle}
                       >
-                        BDT 1578
+                        BDT {order?.total_price}
                       </StyledTableCell>
                       <StyledTableCell
                         component="th"
