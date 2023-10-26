@@ -41,7 +41,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:link" element={<GoogleAuthLink />} />
+        <Route path="/googleAuth/:link" element={<GoogleAuthLink />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<AuthPages />} />
         <Route path="/register" element={<AuthPages />} />

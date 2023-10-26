@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styles from "./PageNavigation.module.scss";
+import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 const PageNavigationBar = () => {
   const location = useLocation();
   return (
@@ -41,15 +42,15 @@ const PageNavigationBar = () => {
           location.pathname === "/tutorials" ? styles.activeRoute : ""
         } ${styles.navigationMenu_Item}`}
       >
-        <RssFeedSharpIcon /> <span>Tutorials</span>
+        <PlayLessonIcon /> <span>Tutorials</span>
       </NavLink>
       <NavLink
-        to="/forum"
+        to="/blogs"
         className={`${
-          location.pathname === "/forum" ? styles.activeRoute : ""
+          location.pathname === "/blogs" ? styles.activeRoute : ""
         } ${styles.navigationMenu_Item}`}
       >
-        <ForumSharpIcon /> <span> Forum</span>
+        <RssFeedSharpIcon /> <span> Blog</span>
       </NavLink>
     </Box>
   );

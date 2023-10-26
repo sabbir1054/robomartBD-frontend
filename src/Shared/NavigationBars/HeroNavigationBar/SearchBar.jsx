@@ -54,7 +54,11 @@ const SearchBar = () => {
   const handleSearchBtn = () => {
     navigate(`/products/search=/${query}`);
   };
-
+ const handleKeyDown = (event) => {
+   if (event.key === "Enter") {
+     handleSearchBtn();
+   }
+ };
   useEffect(() => {
     setProducts(data);
   }, [data]);
@@ -76,11 +80,7 @@ const SearchBar = () => {
           alignItems: "center",
         }}
       >
-        <img
-          src={`${suggestion.photo}`}
-          alt={suggestion.name}
-          width="75"
-        />
+        <img src={`${suggestion.photo}`} alt={suggestion.name} width="75" />
         <div style={{ marginLeft: "20px" }}>
           {" "}
           <Typography
@@ -107,6 +107,8 @@ const SearchBar = () => {
     </div>
   );
 
+  
+
   return (
     <>
       <Grid container marginLeft={10}>
@@ -128,6 +130,7 @@ const SearchBar = () => {
             onSuggestionSelected={handleSuggestionSelected}
             getSuggestionValue={(suggestion) => suggestion.name}
             renderSuggestion={renderSuggestion}
+            onKeyDown={handleKeyDown}
             theme={{
               container: {
                 position: "relative", // Ensure that the suggestion box is positioned relative to the input

@@ -12,7 +12,7 @@ const NavigationBar = () => {
     <>
       <div className="desktop-navigation">
         {location.pathname.includes("tutorials") ||
-        location.pathname.includes("forum") ? (
+        location.pathname.includes("blogs") ? (
           <CommonNavigation />
         ) : (
           <HeroNavigation />
