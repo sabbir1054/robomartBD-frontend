@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const OurSupplierNPartner = () => {
@@ -13,6 +14,7 @@ const OurSupplierNPartner = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
+  console.log(data);
   return (
     <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
       <div>
@@ -22,7 +24,7 @@ const OurSupplierNPartner = () => {
             fontFamily: "Poppins",
             fontWeight: "bold",
             textAlign: "center",
-            padding:"2vh 0"
+            padding: "2vh 0",
           }}
         >
           Our Partner
@@ -78,16 +80,19 @@ const OurSupplierNPartner = () => {
                       border: "1px solid #e2e2e2",
                     }}
                   >
-                    <img
-                      style={{
-                        width: "150px",
-                        // border: "1px solid #e2e2e2",
-                      }}
-                      // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`${company?.logo}`}
-                      alt="no-image"
-                      srcset=""
-                    />
+                    <NavLink to={`${company?.link}`}>
+                      {" "}
+                      <img
+                        style={{
+                          width: "150px",
+                          // border: "1px solid #e2e2e2",
+                        }}
+                        // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
+                        src={`${company?.logo}`}
+                        alt="no-image"
+                        srcset=""
+                      />
+                    </NavLink>
                   </div>
                 </div>
 

@@ -5,6 +5,7 @@ import RssFeedSharpIcon from "@mui/icons-material/RssFeedSharp";
 import { Box } from "@mui/material";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import styles from "./PageNavigation.module.scss";
 import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 const PageNavigationBar = () => {
@@ -34,7 +35,7 @@ const PageNavigationBar = () => {
           location.pathname === "/products" ? styles.activeRoute : ""
         } ${styles.navigationMenu_Item}`}
       >
-        <PrecisionManufacturingSharpIcon /> <span> Shop</span>
+        <StorefrontIcon /> <span> Shop </span>
       </NavLink>
       <NavLink
         to="/tutorials"

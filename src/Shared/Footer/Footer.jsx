@@ -1,8 +1,12 @@
 import CallIcon from "@mui/icons-material/Call";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MailIcon from "@mui/icons-material/Mail";
+import PlayLessonIcon from "@mui/icons-material/PlayLesson";
+import RssFeedSharpIcon from "@mui/icons-material/RssFeedSharp";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Box, Container, Grid, Typography } from "@mui/material";
@@ -20,28 +24,36 @@ const Footer = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h6" className={styles.footerTitle}>
-                Home
+                <NavLink style={{ color: "black" }} to={"/"}>
+                  Home
+                </NavLink>
               </Typography>
               <ul className={styles.footerLists}>
                 <li>
-                  <NavLink className={styles.footerListItem}>
-                    Best selling items
+                  <NavLink className={styles.footerListItem} to="/products">
+                    <StorefrontIcon /> Shop
                   </NavLink>
                 </li>
                 <li>
                   {" "}
-                  <NavLink className={styles.footerListItem}>Our Blogs</NavLink>
+                  <NavLink className={styles.footerListItem}>
+                    <RssFeedSharpIcon /> Our Blogs
+                  </NavLink>
                 </li>
                 <li>
                   <NavLink className={styles.footerListItem}>
-                    Our Forum{" "}
+                    <PlayLessonIcon /> Tutorial{" "}
                   </NavLink>{" "}
                 </li>
               </ul>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Typography variant="h6" className={styles.footerTitle}>
-                Support
+              <Typography
+                variant="h6"
+                className={styles.footerTitle}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <HelpCenterIcon /> <span style={{margin:"0 5px"}}>Support</span>
               </Typography>
               <ul className={styles.footerLists}>
                 <li>
@@ -58,14 +70,11 @@ const Footer = () => {
                 </li>
                 <li>
                   {" "}
-                  <NavLink className={styles.footerListItem}>
+                  <NavLink className={styles.footerListItem} to={"/tutorials"}>
                     Technical Video
                   </NavLink>
                 </li>
-                <li>
-                  {" "}
-                  <NavLink className={styles.footerListItem}>FAQ</NavLink>
-                </li>
+               
               </ul>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -146,7 +155,9 @@ const Footer = () => {
           }}
         >
           <p className="">Copyright © 2023 RoboMart BD. All Rights Reserved.</p>
-          <Box style={{ display: "flex", alignItems: "center",flexWrap:"wrap" }}>
+          <Box
+            style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
+          >
             <p>Stay Connected:</p>{" "}
             <NavLink to={`${homeData1?.facebook}`} style={{ color: "white" }}>
               {" "}

@@ -21,8 +21,10 @@
   text-decoration: underline;
 }
 .footerLists {
-  list-style: circle;
+  list-style-type: none;
   .footerListItem {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: black;
     font-family: var(--secondaryFont);
