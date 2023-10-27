@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import { useUpdateDeliveredOrderStatusMutation } from "../../../../../../redux/api/api";
@@ -33,6 +33,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const successNotify = () => toast.success("Successfully status changed !");
 const errorNotify = () => toast.error("Something went wrong !");
 const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
+  const [check, setCheck] = useState(false);
+  const [check2, setCheck2] = useState(false);
   const [
     updateDeliveredOrderStatus,
     {
@@ -50,18 +52,21 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
   };
 
   const handleUpdateDeliveredOrderStatus = (id) => {
+    setCheck(true);
     const options = { data: { orderid: id, flag: "sell_done" } };
     updateDeliveredOrderStatus(options);
   };
 
-  if (updateStatusSuccess) {
+  if (updateStatusSuccess && check) {
     successNotify();
+    setCheck(false);
   }
 
-  if (updateStatusError) {
+  if (updateStatusError && check) {
     errorNotify();
-    }
-    
+    setCheck(false);
+  }
+
   return (
     <>
       <StyledTableRow>

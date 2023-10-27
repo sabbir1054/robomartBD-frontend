@@ -10,7 +10,7 @@ import {
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import {
@@ -44,6 +44,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const successNotify = () => toast.success("Successfully order approved !");
 const errorNotify = () => toast.error("Something went wrong !");
 const SinglePendingOrderRow = ({ pendingOrder }) => {
+  const [check, setCheck] = useState(false);
+  const [check2, setCheck2] = useState(false);
+
   const [
     deletePendingOrderStatus,
     {
@@ -62,21 +65,33 @@ const SinglePendingOrderRow = ({ pendingOrder }) => {
   ] = useUpdatePendingOrderStatusMutation();
 
   const handleUpdatePendingStatus = (id) => {
+    setCheck(true);
     const options = { data: { flag: "payment_done", orderid: id } };
     updatePendingOrderStatus(options);
   };
 
   const handlePendingDelete = (id) => {
+    setCheck2(true);
     const options = { data: { id: id } };
     deletePendingOrderStatus(options);
   };
 
-  if (updateStatusSuccess || deleteStatusSuccess) {
+  if (updateStatusSuccess && check) {
     successNotify();
+    setCheck(false);
+  }
+  if (deleteStatusSuccess && check2) {
+    successNotify();
+    setCheck2(false);
   }
 
-  if (updateStatusError || deleteStatusError) {
+  if (updateStatusError && check) {
     errorNotify();
+    setCheck(false);
+  }
+  if (deleteStatusError && check2) {
+    errorNotify();
+    setCheck2(false);
   }
   return (
     <>
@@ -133,7 +148,9 @@ const SinglePendingOrderRow = ({ pendingOrder }) => {
                 }}
               >
                 <Tooltip title="Details">
-                  <NavLink to={`/dashboard/portal_admin/order_history/${pendingOrder?.id}`}>
+                  <NavLink
+                    to={`/dashboard/portal_admin/order_history/${pendingOrder?.id}`}
+                  >
                     <IconButton aria-label="Details" size="large">
                       <ReadMoreIcon
                         fontSize="inherit"

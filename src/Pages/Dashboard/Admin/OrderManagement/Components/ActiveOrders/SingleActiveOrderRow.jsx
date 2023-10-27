@@ -46,7 +46,8 @@ const errorNotify = () => toast.error("Something went wrong !");
 const SingleActiveOrderRow = ({ activeOrder }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const [check, setCheck] = useState(false);
+  const [check2, setCheck2] = useState(false);
   const [
     updateActiveOrderStatus,
     {
@@ -72,21 +73,33 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
   };
 
   const handleUpdateActiveOrderStatus = (id) => {
+    setCheck(true);
     const options = { data: { orderid: id, flag: "served_done" } };
     updateActiveOrderStatus(options);
   };
 
   const handleActiveOrderDelete = (id) => {
+    setCheck2(true);
     const options = { data: { id: id } };
     deletePendingOrderStatus(options);
   };
 
-  if (updateStatusSuccess) {
+  if (updateStatusSuccess && check) {
     successNotify();
+    setCheck(false);
+  }
+  if (deleteStatusSuccess && check2) {
+    successNotify();
+    setCheck2(false);
   }
 
-  if (updateStatusError) {
+  if (updateStatusError && check) {
     errorNotify();
+    setCheck(false);
+  }
+  if (deleteStatusError && check2) {
+    errorNotify();
+    setCheck2(false);
   }
 
   return (
