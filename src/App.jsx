@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import AllBlogsPage from "./Blogs/AllBlogs/AllBlogsPage";
 import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import AuthPages from "./Pages/AuthPages/AuthPages";
+import GoogleAuthLink from "./Pages/AuthPages/GoogleAuthLink";
 import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
@@ -30,7 +31,6 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
-import GoogleAuthLink from "./Pages/AuthPages/GoogleAuthLink";
 
 function App() {
   return (

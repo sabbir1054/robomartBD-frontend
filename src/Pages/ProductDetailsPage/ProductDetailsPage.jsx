@@ -19,6 +19,7 @@ const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
 const ProductDetailsPage = () => {
+  const [check, setCheck] = useState(false);
   const [checkDuplicate, setCheckDuplicate] = useState(false);
   const params = useParams();
   const [productDetails, setProductDetails] = useState({});
@@ -36,6 +37,7 @@ const ProductDetailsPage = () => {
     usePostToCartMutation();
 
   const addToCart = () => {
+    setCheck(true);
     if (!userData) {
       navigate("/login");
       Swal.fire({
@@ -52,12 +54,14 @@ const ProductDetailsPage = () => {
       postToCart(options);
     }
   };
-  if (isError) {
-    errorNotify();
-    
-  }
-  if (isSuccess) {
+
+  if (isSuccess && check) {
     successNotify();
+    setCheck(false);
+  }
+  if (isError && check) {
+    errorNotify();
+    setCheck(false);
   }
 
   const zoom = (e) => {
@@ -88,7 +92,6 @@ const ProductDetailsPage = () => {
     fetch(`https://api.robomartbd.com/api/product/${params?.productId}`)
       .then((res) => res.json())
       .then((data) => {
-       
         setProductDetails(data);
         // recent view products
         const cacheRecentView = localStorage.getItem("recentViewProducts");
@@ -279,10 +282,15 @@ const ProductDetailsPage = () => {
                 </span>
               </span>
               <div className={styles.buttons}>
-                <button className={styles.addToCardBtn} onClick={addToCart}>
-                  <AddShoppingCartIcon />
-                  ADD TO CART
-                </button>
+                {isLoading ? (
+                  <button className={styles.addToCardBtn}>Loading ...</button>
+                ) : (
+                  <button className={styles.addToCardBtn} onClick={addToCart}>
+                    <AddShoppingCartIcon />
+                    ADD TO CART
+                  </button>
+                )}
+
                 {/* <button
                   className={styles.addToWishlist}
              

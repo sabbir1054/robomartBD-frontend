@@ -29,6 +29,7 @@ const errorNotify = () => toast.error("Something went wrong !");
 // });
 const SingleProductCard = ({ product }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const {
     data: userData,
@@ -40,6 +41,7 @@ const SingleProductCard = ({ product }) => {
     usePostToCartMutation();
 
   const addToCart = () => {
+    setCheck(true);
     if (!userData) {
       navigate("/login");
       Swal.fire({
@@ -54,11 +56,13 @@ const SingleProductCard = ({ product }) => {
       postToCart(options);
     }
   };
-  if (isError) {
+  if (isError && check) {
     errorNotify();
+    setCheck(false);
   }
-  if (isSuccess) {
+  if (isSuccess && check) {
     successNotify();
+    setCheck(false);
   }
 
   return (
@@ -99,10 +103,14 @@ const SingleProductCard = ({ product }) => {
           </div>
           <div className={styles.bottom}>
             <div className={styles.content}>
-              <div productid={"props.data.id"} onClick={() => addToCart()}>
-                <AddShoppingCartIcon />
-                <h5>add to cart</h5>
-              </div>
+              {isLoading ? (
+                <span style={{ color: "white" }}> Loading ...</span>
+              ) : (
+                <div productid={"props.data.id"} onClick={() => addToCart()}>
+                  <AddShoppingCartIcon />
+                  <h5>add to cart</h5>
+                </div>
+              )}
             </div>
           </div>
         </Box>

@@ -2,7 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { CircularProgress } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import {
@@ -13,6 +13,8 @@ import styles from "./CartItems.module.scss";
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
 const SingleCartItem = ({ product, setIsDataChange }) => {
+  const [check, setCheck] = useState(false);
+  const [check2, setCheck2] = useState(false);
   const [deleteProductFromCart, { isLoading, isError, isSuccess }] =
     useDeleteProductFromCartMutation();
   const [
@@ -25,6 +27,7 @@ const SingleCartItem = ({ product, setIsDataChange }) => {
   ] = useChangeQuantityMutation();
 
   const handleDeleteItemFromCart = () => {
+    setCheck2(true);
     const options = { data: { id: product?.id } };
 
     deleteProductFromCart(options);
@@ -32,16 +35,27 @@ const SingleCartItem = ({ product, setIsDataChange }) => {
   };
 
   const handleQuantity = (flag) => {
+    setCheck(true);
     const options = { data: { flag: flag, id: product?.id } };
     changeQuantity(options);
-    setIsDataChange(true)
+    setIsDataChange(true);
   };
 
-  if ((isSuccess, updateQuantitySuccess)) {
+  if (isSuccess && check2) {
     successNotify();
+    setCheck2(false);
   }
-  if ((isError, updateQuantityError)) {
+  if (updateQuantitySuccess && check) {
+    successNotify();
+    setCheck(false);
+  }
+  if (isError && check2) {
     errorNotify();
+    setCheck2(false);
+  }
+  if (updateQuantityError && check) {
+    errorNotify();
+    setCheck(false);
   }
   return (
     <>
@@ -95,13 +109,17 @@ const SingleCartItem = ({ product, setIsDataChange }) => {
           {(product?.product?.price * product?.quantity).toFixed(2)}
         </td>
         <td>
-          <div
-            className={styles.deleteBtn}
-            onClick={handleDeleteItemFromCart}
-            // id={product[item.product].id}
-          >
-            <CancelIcon />
-          </div>
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <div
+              className={styles.deleteBtn}
+              onClick={handleDeleteItemFromCart}
+              // id={product[item.product].id}
+            >
+              <CancelIcon />
+            </div>
+          )}
         </td>
       </tr>
     </>
