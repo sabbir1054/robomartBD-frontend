@@ -4,7 +4,6 @@ import Barcode from "react-barcode";
 import { useParams } from "react-router-dom";
 
 const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
- 
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
 
@@ -16,7 +15,7 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
   };
 
   const params = useParams();
- 
+
   return (
     <div>
       <Grid container spacing={2}>
@@ -80,10 +79,20 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
               variant="title1"
               fontFamily={"Poppins"}
               fontWeight={"bold"}
+              marginRight={1}
             >
               Billing Options:
             </Typography>
             {ordersInfo?.billing_option}
+            <Typography
+              variant="title1"
+              fontFamily={"Poppins"}
+              fontWeight={"bold"}
+              margin={1}
+            >
+              Method:
+            </Typography>
+            {ordersInfo?.payment_method}
             <br />
             {ordersInfo?.payment_id && (
               <small style={{ fontFamily: "Poppins" }}>

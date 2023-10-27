@@ -19,8 +19,8 @@ import {
   useGetCartQuery,
   useGetUserProfileQuery,
 } from "../../../../redux/api/api";
-import styles from "./CartPrice.module.scss";
 import { addCheckoutData } from "../../../../redux/features/checkoutSlice";
+import styles from "./CartPrice.module.scss";
 const CartPrice = ({ isDataChange }) => {
   const {
     data: userProfile,
@@ -45,7 +45,7 @@ const CartPrice = ({ isDataChange }) => {
   const handleApplyCoupon = () => {
     setCouponLoading(true);
     const data = { cupon: coupon, total_price: total };
- 
+
     const storedData = localStorage.getItem("user");
     const userData = JSON.parse(storedData);
     fetch(`https://api.robomartbd.com/order/cheak_copun`, {
@@ -63,12 +63,10 @@ const CartPrice = ({ isDataChange }) => {
         return res.json();
       })
       .then((result) => {
-        
         if (result?.discount) {
           setIsCouponValid(true);
           //discount
           setDisCountPercentage(result.discount);
-          
 
           Swal.fire({
             position: "top-center",
@@ -81,7 +79,7 @@ const CartPrice = ({ isDataChange }) => {
         setCouponLoading(false);
       })
       .catch((error) => {
-       setCoupon("")
+        setCoupon("");
         Swal.fire({
           position: "top-center",
           icon: "error",
@@ -95,9 +93,9 @@ const CartPrice = ({ isDataChange }) => {
 
   const setDataForCheckOut = () => {
     let ship = "";
-    if (shipping === 100) {
+    if (shipping === 50) {
       ship = "in_dhaka";
-    } else if (shipping === 150) {
+    } else if (shipping === 100) {
       ship = "out_dhaka";
     }
     const data = {
@@ -105,7 +103,7 @@ const CartPrice = ({ isDataChange }) => {
       cupon: coupon,
       useBalance: useBalance,
     };
-   
+
     dispatch(addCheckoutData(data));
   };
 

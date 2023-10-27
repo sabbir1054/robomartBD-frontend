@@ -73,7 +73,7 @@ const OrderHistory = () => {
             borderBottom: "1px solid #ebebeb",
           }}
         />
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{ marginBottom: "5vh" }}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead style={{ backgroundColor: "#f2f2f2" }}>
               <TableRow>
@@ -87,7 +87,8 @@ const OrderHistory = () => {
             </TableHead>
             <TableBody>
               {orderData?.length > 0 &&
-                orderData?.map((order) => (
+                orderData &&
+                orderData?.reverse().map((order) => (
                   <>
                     <StyledTableRow>
                       <StyledTableCell
@@ -152,9 +153,7 @@ const OrderHistory = () => {
                         scope="row"
                         className={styles.tdStyle}
                       >
-                        s
-                        {order?.is_served?"Shipping":"Pending"}
-                        
+                        s{order?.is_served ? "Shipping" : "Pending"}
                       </StyledTableCell>
                       <StyledTableCell
                         component="th"
@@ -177,7 +176,9 @@ const OrderHistory = () => {
                           {" "}
                           <Tooltip title="Details">
                             <IconButton aria-label="Details" size="large">
-                              <NavLink to={`/dashboard/user/order_history/${order?.id}`}>
+                              <NavLink
+                                to={`/dashboard/user/order_history/${order?.id}`}
+                              >
                                 {" "}
                                 <ReadMoreIcon
                                   fontSize="inherit"

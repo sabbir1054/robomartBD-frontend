@@ -133,7 +133,7 @@ const SinglePendingOrderRow = ({ pendingOrder }) => {
                 }}
               >
                 <Tooltip title="Details">
-                  <NavLink to="/dashboard/portal_admin/order_history/fgsdgff">
+                  <NavLink to={`/dashboard/portal_admin/order_history/${pendingOrder?.id}`}>
                     <IconButton aria-label="Details" size="large">
                       <ReadMoreIcon
                         fontSize="inherit"
