@@ -139,10 +139,19 @@ const CheckOutPage = () => {
   };
 
   const postAnOrder = (orderData) => {
-    
-    if (billingOptions !== "op") {
-      const options = { data: orderData };
-      postOrder(options);
+    if (userProfile?.phone?.length >= 11) {
+      if (billingOptions !== "op") {
+        const options = { data: orderData };
+        postOrder(options);
+      }
+    } else {
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please update phone number from your profile !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

@@ -1,12 +1,4 @@
-import CancelIcon from "@mui/icons-material/Cancel";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
-import {
-  CircularProgress,
-  IconButton,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,14 +7,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
-import {
-  useGetPendingOrdersQuery,
-  useUpdatePendingOrderStatusMutation,
-} from "../../../../../../redux/api/api";
-import styles from "../../OrderManagement.module.scss";
+import { useGetPendingOrdersQuery } from "../../../../../../redux/api/api";
 import SinglePendingOrderRow from "./SinglePendingOrderRow";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -51,16 +38,50 @@ const successNotify = () => toast.success("Successfully order approved !");
 const errorNotify = () => toast.error("Something went wrong !");
 
 const PendingOrders = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
   const {
     data: pendingOrdersData,
     isLoading,
     isError,
   } = useGetPendingOrdersQuery();
 
-  
+  const handleSearch = () => {
+    const filtered = pendingOrdersData?.filter((order) =>
+      Object?.values(order)?.some((value) => {
+        if (typeof value === "string" || typeof value === "number") {
+          const stringValue =
+            typeof value === "number" ? value.toString() : value;
+          return stringValue.toLowerCase().includes(searchQuery.toLowerCase());
+        }
+        return false;
+      })
+    );
+    setFilteredOrders(filtered);
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchQuery]);
 
   return (
     <div style={{ minHeight: "70vh" }}>
+      <div
+        style={{ padding: "10px 0", display: "flex", justifyContent: "end" }}
+      >
+        <TextField
+          style={{ minWidth: "400px" }}
+          id="standard-basic"
+          label="Search"
+          variant="outlined"
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by Order Id, Email, or Phone Number"
+        />
+      </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
           <TableHead style={{ backgroundColor: "#f2f2f2" }}>
@@ -81,11 +102,20 @@ const PendingOrders = () => {
           </TableHead>
           <TableBody>
             {isLoading && <CircularProgress />}
+            {(filteredOrders?.length > 0
+              ? filteredOrders
+              : pendingOrdersData
+            )?.map((pendingOrder) => (
+              <SinglePendingOrderRow pendingOrder={pendingOrder} />
+            ))}
+          </TableBody>
+          {/*  <TableBody>
+            {isLoading && <CircularProgress />}
             {pendingOrdersData?.length > 0 &&
               pendingOrdersData?.map((pendingOrder) => (
                 <SinglePendingOrderRow pendingOrder={pendingOrder} />
               ))}
-          </TableBody>
+          </TableBody> */}
         </Table>
       </TableContainer>
     </div>

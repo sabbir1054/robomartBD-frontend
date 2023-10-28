@@ -275,6 +275,22 @@ const CartPrice = ({ isDataChange }) => {
               <RadioGroup>
                 <FormControlLabel
                   sx={{ mr: 0 }}
+                  value="50"
+                  control={
+                    <Radio
+                      size="small"
+                      color="success"
+                      onClick={() => setShipping(50)}
+                    />
+                  }
+                  label={
+                    <p className={styles.shippingItem}>
+                      Inside Dhaka: <span>50 Tk</span>
+                    </p>
+                  }
+                />
+                <FormControlLabel
+                  sx={{ mr: 0 }}
                   value="100"
                   control={
                     <Radio
@@ -285,23 +301,7 @@ const CartPrice = ({ isDataChange }) => {
                   }
                   label={
                     <p className={styles.shippingItem}>
-                      Inside Dhaka: <span>100 Tk</span>
-                    </p>
-                  }
-                />
-                <FormControlLabel
-                  sx={{ mr: 0 }}
-                  value="150"
-                  control={
-                    <Radio
-                      size="small"
-                      color="success"
-                      onClick={() => setShipping(150)}
-                    />
-                  }
-                  label={
-                    <p className={styles.shippingItem}>
-                      OutSide Dhaka: <span>150 Tk</span>
+                      OutSide Dhaka: <span>100 Tk</span>
                     </p>
                   }
                 />

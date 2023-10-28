@@ -28,18 +28,8 @@ import {
 import FormAddressFieldCheckout from "../../../CheckOutPage/FormAddressFieldCheckout";
 import styles from "./Profile.module.scss";
 const Profile = () => {
-  const [updateData, setUpdateData] = useState(false);
-
-  const [division, setDivision] = useState({});
-  const [district, setDistrict] = useState({});
-  const [upozila, setUpozila] = useState({});
-  const [union, setUnion] = useState({});
-
   const { data, isLoading, isError } = useGetUserQuery();
-  // const [userProfile, setUserProfile] = useState({});
 
-  const [fullAddress, setFullAddress] = useState("");
-  const [mobile, setMobile] = useState("");
   const {
     data: userProfile,
     isLoading: profileLoading,
@@ -54,6 +44,12 @@ const Profile = () => {
       isSuccess: profileUpdateSuccess,
     },
   ] = useUpdateUserProfileMutation();
+  const [updateData, setUpdateData] = useState(false);
+  const [division, setDivision] = useState({});
+  const [district, setDistrict] = useState({});
+  const [upozila, setUpozila] = useState({});
+  const [union, setUnion] = useState({});
+
   const divisionData = getAllDivision("en");
   const districtsData = getAllDistrict("en");
   const upozilaData = getAllUpazila("en");
@@ -86,9 +82,8 @@ const Profile = () => {
     }
   }, [data]);
   const onSubmit = (data) => {};
-
-
-
+  const [fullAddress, setFullAddress] = useState("");
+  const [mobile, setMobile] = useState("");
   const updateInformation = (updatedData) => {
     const options = { updatedData: updatedData };
     updateUserProfile(options);
@@ -115,6 +110,8 @@ const Profile = () => {
     return updatedAddress;
   };
 
+
+
   const handleSaveBtn = () => {
     let updatedAddress = makeAddressString();
     if (mobile == "") {
@@ -123,7 +120,7 @@ const Profile = () => {
     if (updatedAddress == "") {
       updatedAddress = userProfile?.address;
     }
-   
+
     updateInformation({ phone: mobile, address: updatedAddress });
 
     setIsUpdate(false);
@@ -151,7 +148,6 @@ const Profile = () => {
     }
   }, [updateError, profileUpdateSuccess]);
 
-  
   return (
     <div
       style={{
@@ -258,19 +254,19 @@ const Profile = () => {
                     </label>
                     <input
                       type="text"
-                      style={{ display: !isUpdate ? "none" : "block" }}
-                      defaultChecked
+                      // style={{ display: !isUpdate ? "none" : "block" }}
+                      disabled={!isUpdate ? true : false}
                       defaultValue={userProfile?.phone}
                       onChange={(e) => setMobile(e.target.value)}
                       className={styles.auth_form_inputField}
                     />
-                    <input
+                    {/* <input
                       type="text"
                       style={{ display: !isUpdate ? "block" : "none" }}
                       disabled={true}
                       value={userProfile?.phone}
                       className={styles.auth_form_inputField}
-                    />
+                    /> */}
                     <label htmlFor="title" className={styles.auth_label}>
                       <Typography
                         variant="title1"
