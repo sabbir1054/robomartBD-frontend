@@ -1,3 +1,4 @@
+import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
 import {
   Button,
   Card,
@@ -6,12 +7,17 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ForgetPassword = () => {
+  const navigate = useNavigate();
+  const [emailSent, setEmailSent] = useState();
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
   const postEmail = () => {
+    setLoading(true);
     fetch(`https://api.robomartbd.com/api/change_password`, {
       method: "POST",
       headers: {
@@ -20,7 +26,12 @@ const ForgetPassword = () => {
       body: JSON.stringify({ email: email }),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => {
+        if (result.msg === "Done") {
+          setLoading(false);
+          setEmailSent(true);
+        }
+      });
   };
 
   const handleEmailChange = (e) => {
@@ -43,41 +54,86 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "80vh", backgroundColor: "#f2f2f2" }}>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          paddingTop: "5vh",
+          // height: "100vh",
           minWidth: "300px",
         }}
       >
         <Card style={{ minWidth: "300px", width: "600px" }}>
-          <CardContent>
-            <Typography variant="h6" sx={{ py: "15px" }}>
-              Enter your email:
-            </Typography>
-            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-              <div style={{ marginBottom: "1rem" }}>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  variant="outlined"
-                  value={email}
-                  onChange={handleEmailChange}
+          {emailSent ? (
+            <CardContent>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src="/assets/email.png"
+                  alt="email-logo"
+                  width={"200px"}
+                  srcset=""
                 />
               </div>
-              <Button
-                variant="contained"
-                type="submit"
-                color="primary"
-                fullWidth
+              <Typography
+                variant="h6"
+                fontFamily={"Poppins"}
+                fontWeight={"bold"}
+                textAlign={"center"}
               >
-                Submit
-              </Button>
-            </form>
-          </CardContent>
+                {" "}
+                Check Inbox and Spam box{" "}
+              </Typography>
+              <Typography variant="subtitle2" textAlign={"center"}>
+                Password reset link sent to email
+              </Typography>
+
+              <div style={{ textAlign: "center", margin: "15px 0" }}>
+                <a
+                  href="https://mail.google.com/mail/u/0/#inbox"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="contained"
+                    disableElevation
+                    startIcon={<MoveToInboxIcon />}
+                    sx={{ backgroundColor: "green" }}
+                  >
+                    Check Inbox
+                  </Button>
+                </a>
+              </div>
+            </CardContent>
+          ) : (
+            <CardContent>
+              <Typography variant="h6" sx={{ py: "15px" }}>
+                Enter your email:
+              </Typography>
+              <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+                <div style={{ marginBottom: "1rem" }}>
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    variant="outlined"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+                </div>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  fullWidth
+                  sx={{
+                    backgroundColor: "black",
+                    "&:hover": { backgroundColor: "black" },
+                  }}
+                >
+                  Submit
+                </Button>
+              </form>
+            </CardContent>
+          )}
         </Card>
       </div>
     </div>

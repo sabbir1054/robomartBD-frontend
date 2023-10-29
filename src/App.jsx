@@ -5,6 +5,7 @@ import AllProductPage from "./Pages/AllProductsPage/AllProductPage";
 import AuthPages from "./Pages/AuthPages/AuthPages";
 import ForgetPassword from "./Pages/AuthPages/ForgetPassword";
 import GoogleAuthLink from "./Pages/AuthPages/GoogleAuthLink";
+import ProvideNewPassForget from "./Pages/AuthPages/ProvideNewPassForget";
 import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import AddBlogsPage from "./Pages/Dashboard/Admin/AddBlogs/AddBlogsPAge";
 import AddProducts from "./Pages/Dashboard/Admin/AddProducts/AddProducts";
@@ -17,6 +18,7 @@ import SingleOrderDetailsPage from "./Pages/Dashboard/Customer/OrderHistory/Sing
 import Profile from "./Pages/Dashboard/Customer/Profile/Profile";
 import ForumMainPage from "./Pages/Forums/ForumMainPage";
 import Home from "./Pages/Home/Home";
+import Notfound from "./Pages/NotFound/Notfound";
 import ProductDetailsPage from "./Pages/ProductDetailsPage/ProductDetailsPage";
 import ProductSearch from "./Pages/ProductSearchPage/ProductSearch";
 import ShoppingCartPage from "./Pages/ShoppingCart/ShoppingCartPage";
@@ -31,7 +33,6 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
-import Notfound from "./Pages/NotFound/Notfound";
 
 function App() {
   return (
@@ -45,7 +46,10 @@ function App() {
 
         <Route path="/home" element={<Home />} />
         <Route path="/auth/forget_password" element={<ForgetPassword />} />
-        <Route path="/api/renew_password/:code/:email" element={<ForgetPassword />} />
+        <Route
+          path="/api/renew_password/:code/:link"
+          element={<ProvideNewPassForget />}
+        />
         <Route path="/login" element={<AuthPages />} />
         <Route path="/register" element={<AuthPages />} />
         <Route path="/products" element={<AllProductPage />} />
