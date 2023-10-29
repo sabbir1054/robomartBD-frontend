@@ -7,25 +7,23 @@ const GoogleAuthLink = () => {
   const params = useParams();
   const location = useLocation();
 
-  console.log(location.search);
+  console.log(
+    ` Full URL of post : \n  https://api.robomartbd.com/api/auth/o/google-oauth2/${location.search}`
+  );
 
   const postLoginData = () => {
     fetch(
-      `https://api.robomartbd.com/api/auth/o/google-oauth2/${location.search}/`,
+      `https://api.robomartbd.com/api/auth/o/google-oauth2/${location.search}`,
       {
         method: "POST",
-        // headers: {
-        //   "content-type": "application/json",
-        // },
-        // body: JSON.stringify({}),
       }
     )
-        .then((res) => {
-            console.log(res.json());
-            res.json()
-        })
+      .then((res) => {
+        console.log("This is post response :", res);
+        res.json();
+      })
       .then((result) => {
-        console.log(result);
+        console.log("Here i get token :", result);
         if (result.detail) {
           customError(result.detail);
         }
@@ -52,7 +50,11 @@ const GoogleAuthLink = () => {
 
   return (
     <div style={{ minHeight: "80vh" }}>
-      <h1>Loading !!! </h1>
+      <h1>
+
+        Registration loading !!!
+
+      </h1>
     </div>
   );
 };

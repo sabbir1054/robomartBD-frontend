@@ -114,7 +114,7 @@ const Login = ({ showPass, setShowPass }) => {
           <LoginWithGoogle />
           <p style={{ margin: "15px 0px" }}>
             Forget your password ?
-            <NavLink to={"/forget-password"}>Click Here</NavLink>
+            <NavLink to={"/auth/forget_password"}>Click Here</NavLink>
           </p>
         </Box>
       </Box>
