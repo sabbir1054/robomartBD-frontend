@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardContent,
+  CircularProgress,
   TextField,
   Typography,
 } from "@mui/material";
@@ -12,7 +13,7 @@ import Swal from "sweetalert2";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-  const [emailSent, setEmailSent] = useState();
+  const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -65,74 +66,89 @@ const ForgetPassword = () => {
         }}
       >
         <Card style={{ minWidth: "300px", width: "600px" }}>
-          {emailSent ? (
-            <CardContent>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <img
-                  src="/assets/email.png"
-                  alt="email-logo"
-                  width={"200px"}
-                  srcset=""
-                />
-              </div>
-              <Typography
-                variant="h6"
-                fontFamily={"Poppins"}
-                fontWeight={"bold"}
-                textAlign={"center"}
-              >
-                {" "}
-                Check Inbox and Spam box{" "}
-              </Typography>
-              <Typography variant="subtitle2" textAlign={"center"}>
-                Password reset link sent to email
-              </Typography>
-
-              <div style={{ textAlign: "center", margin: "15px 0" }}>
-                <a
-                  href="https://mail.google.com/mail/u/0/#inbox"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    variant="contained"
-                    disableElevation
-                    startIcon={<MoveToInboxIcon />}
-                    sx={{ backgroundColor: "green" }}
-                  >
-                    Check Inbox
-                  </Button>
-                </a>
-              </div>
+          {loading ? (
+            <CardContent
+              style={{
+                minHeight: "150px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress />
             </CardContent>
           ) : (
-            <CardContent>
-              <Typography variant="h6" sx={{ py: "15px" }}>
-                Enter your email:
-              </Typography>
-              <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-                <div style={{ marginBottom: "1rem" }}>
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    variant="outlined"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                </div>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  fullWidth
-                  sx={{
-                    backgroundColor: "black",
-                    "&:hover": { backgroundColor: "black" },
-                  }}
-                >
-                  Submit
-                </Button>
-              </form>
-            </CardContent>
+            <>
+              {emailSent ? (
+                <CardContent>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                      src="/assets/email.png"
+                      alt="email-logo"
+                      width={"200px"}
+                      srcset=""
+                    />
+                  </div>
+                  <Typography
+                    variant="h6"
+                    fontFamily={"Poppins"}
+                    fontWeight={"bold"}
+                    textAlign={"center"}
+                  >
+                    {" "}
+                    Check Inbox and Spam box{" "}
+                  </Typography>
+                  <Typography variant="subtitle2" textAlign={"center"}>
+                    Password reset link sent to email
+                  </Typography>
+
+                  <div style={{ textAlign: "center", margin: "15px 0" }}>
+                    <a
+                      href="https://mail.google.com/mail/u/0/#inbox"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        variant="contained"
+                        disableElevation
+                        startIcon={<MoveToInboxIcon />}
+                        sx={{ backgroundColor: "green" ,"&:hover":{backgroundColor:"var(--primaryColor)"}}}
+                      >
+                        Check Inbox
+                      </Button>
+                    </a>
+                  </div>
+                </CardContent>
+              ) : (
+                <CardContent>
+                  <Typography variant="h6" sx={{ py: "15px" }}>
+                    Enter your email:
+                  </Typography>
+                  <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+                    <div style={{ marginBottom: "1rem" }}>
+                      <TextField
+                        fullWidth
+                        label="Email"
+                        variant="outlined"
+                        value={email}
+                        onChange={handleEmailChange}
+                      />
+                    </div>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      fullWidth
+                      sx={{
+                        backgroundColor: "black",
+                        "&:hover": { backgroundColor: "black" },
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  </form>
+                </CardContent>
+              )}
+            </>
           )}
         </Card>
       </div>

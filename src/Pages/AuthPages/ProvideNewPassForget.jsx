@@ -40,18 +40,18 @@ const ProvideNewPassForget = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const test =
+    "/api/renew_password/cbb80692-1ae9-4fae-a33a-e409d13cf534/studentsabbir9944@gmail.com";
+
   const submitNewPassword = (password) => {
     setIsLoading(true);
-    fetch(
-      `https://api.robomartbd.com${location.pathname}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ new_password: password }),
-      }
-    )
+    fetch(`https://api.robomartbd.com${test}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ new_password: password }),
+    })
       .then((res) => res.json())
       .then((result) => {
         setIsLoading(false);
@@ -100,7 +100,16 @@ const ProvideNewPassForget = () => {
       >
         <Card style={{ minWidth: "300px", width: "600px" }}>
           {loading ? (
-            <CircularProgress />
+            <CardContent
+              style={{
+                minHeight: "150px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress />
+            </CardContent>
           ) : (
             <CardContent>
               <Typography
