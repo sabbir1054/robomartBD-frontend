@@ -1,3 +1,4 @@
+
 import GoogleIcon from "@mui/icons-material/Google";
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -6,13 +7,13 @@ const LoginWithGoogle = () => {
   const [authUrl, setAuthUrl] = useState("");
 
   const openNewTab = (url) => {
-    window.open(url, "_blank");
+    window.location.replace(url);
   };
   const authLoginGoogle = async () => {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-       setAuthUrl(data?.authorization_url);
+      setAuthUrl(data?.authorization_url);
     } catch (err) {
       console.log(err);
     }

@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -21,11 +22,13 @@
     "@mui/x-date-pickers": "^6.15.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@szhsin/react-menu": "^3.5.3",
+    "axios": "^1.6.2",
     "bd-divisions-to-unions": "^1.0.3",
     "crypto-js": "^4.2.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "js-cookie": "^3.0.5",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-autosuggest": "^10.1.0",
     "react-barcode": "^1.4.6",

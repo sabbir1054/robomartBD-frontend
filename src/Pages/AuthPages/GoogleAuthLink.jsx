@@ -1,60 +1,84 @@
+
+
+import { CircularProgress, Typography } from "@mui/material";
+import axios from "axios";
+import queryString from "query-string";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-
 const GoogleAuthLink = () => {
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
 
-  console.log(
-    ` Full URL of post : \n  https://api.robomartbd.com/api/auth/o/google-oauth2/${location.search}`
-  );
+  const postLoginData = (state, code) => {
+    const details = {
+      state: state,
+      code: code,
+    };
 
-  const postLoginData = () => {
-    fetch(
-      `https://api.robomartbd.com/api/auth/o/google-oauth2/${location.search}`,
-      {
-        method: "POST",
-      }
-    )
-      .then((res) => {
-        console.log("This is post response :", res);
-        res.json();
-      })
-      .then((result) => {
-        console.log("Here i get token :", result);
-        if (result.detail) {
-          customError(result.detail);
+    const formBody = Object.keys(details)
+      .map(
+        (key) =>
+          encodeURIComponent(key) + "=" + encodeURIComponent(details[key])
+      )
+      .join("&");
+
+    try {
+      const res = axios.post(
+        `http://localhost:8000/api/auth/o/google-oauth2/?${formBody}`,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         }
+      );
 
-        if (result.refresh && result.access) {
-          localStorage.setItem("user", JSON.stringify(result.access));
+      try {
+        if (res.data.access) {
+          localStorage.setItem("user", JSON.stringify(res.data.access));
 
           //   reset();
           navigate("/");
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "Login Successful",
             showConfirmButton: false,
             timer: 1500,
           });
         }
-      });
+      } catch (e) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong !",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
   };
 
   useEffect(() => {
-    postLoginData();
+    const values = queryString.parse(location.search);
+
+    postLoginData(values.state, values.code);
   }, []);
 
   return (
     <div style={{ minHeight: "80vh" }}>
-      <h1>
-
-        Registration loading !!!
-
-      </h1>
+      <div style={{ marginTop: "10vh" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress />
+        </div>
+        <Typography variant="h4" fontFamily={"Poppins"} textAlign={"center"}>
+          Registration in progress ...{" "}
+        </Typography>
+      </div>
     </div>
   );
 };

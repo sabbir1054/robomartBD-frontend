@@ -28,7 +28,7 @@ const AllTutorialPage = () => {
   const getTutorialsData = async () => {
     setLoad(true);
     const dataToDb = await fetch(
-      `https://api.robomartbd.com/blog/get_blog?page=${currentPage}`
+      `https://api.robomartbd.com/blog/get_tutorial?page=${currentPage}`
     );
     const result = await dataToDb.json();
     if (result?.results) {
