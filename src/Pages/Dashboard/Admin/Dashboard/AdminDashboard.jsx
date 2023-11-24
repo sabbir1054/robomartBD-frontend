@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/order_management/get_dashbord`, {
+    fetch(`https://robomartbd.com/order_management/get_dashbord`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -17,7 +17,6 @@ const AdminDashboard = () => {
       .then((res) => res.json())
       .then((data) => setDashboardData(data));
   }, []);
-  
 
   return (
     <div style={{ minHeight: "80vh" }}>

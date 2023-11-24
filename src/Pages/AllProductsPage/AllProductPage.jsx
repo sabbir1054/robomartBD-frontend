@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import SmallSearch from "../../Shared/NavigationBars/MobileNavigationBar/SmallSearch";
 import { useGetCategoryListProductsQuery } from "../../redux/api/api";
+import styles from "./AllProductsPage.module.scss";
 import AllProductsSection from "./Components/AllProductsSection/AllProductsSection";
 import CategorySection from "./Components/CategorySection/CategorySection";
-import styles from "./AllProductsPage.module.scss"
 
 const AllProductPage = () => {
   const {
@@ -16,10 +16,9 @@ const AllProductPage = () => {
 
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagorylist`)
+    fetch(`https://robomartbd.com/api/catagorylist`)
       .then((res) => res.json())
       .then((data) => {
-       
         setAllProducts(data);
       });
   }, []);
@@ -27,7 +26,15 @@ const AllProductPage = () => {
   return (
     <div>
       <Grid container>
-        <Grid item xs={12} sm={12} md={2} padding={2} className={styles.shop_search} style={{display:"none"}}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={2}
+          padding={2}
+          className={styles.shop_search}
+          style={{ display: "none" }}
+        >
           <SmallSearch />
         </Grid>
         <Grid item xs={12} sm={12} md={2} padding={2}>

@@ -3,7 +3,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "../../SingleTutorial.module.scss";
 import TagBadge from "./TagBadge";
 const TutorialTitleNav = ({
@@ -12,12 +11,10 @@ const TutorialTitleNav = ({
   tutorialDetails,
 }) => {
   const [allTags, setAllTags] = useState([]);
-  
+
   const getData = async () => {
     try {
-      const response = await fetch(
-        `https://api.robomartbd.com/blog/get_all_tag`
-      );
+      const response = await fetch(`https://robomartbd.com/blog/get_all_tag`);
       const data = await response.json();
 
       const newArr = [];
@@ -35,8 +32,6 @@ const TutorialTitleNav = ({
   useEffect(() => {
     getData();
   }, [tutorialDetails]);
-
- 
 
   return (
     <div style={{ width: "100%" }}>

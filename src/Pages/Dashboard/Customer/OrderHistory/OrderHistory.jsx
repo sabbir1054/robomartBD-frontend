@@ -1,4 +1,3 @@
-import CancelIcon from "@mui/icons-material/Cancel";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -40,7 +39,7 @@ const OrderHistory = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/order/get_order`, {
+    fetch(`https://robomartbd.com/order/get_order`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

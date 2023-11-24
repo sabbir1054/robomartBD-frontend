@@ -19,12 +19,10 @@ const WriteYourComment = ({ blogId, getALLComments }) => {
     setOpen(false);
   };
 
-
-
   const postFeedbackData = (data) => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/blog/get_comment`, {
+    fetch(`https://robomartbd.com/blog/get_comment`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

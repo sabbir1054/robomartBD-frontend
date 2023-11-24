@@ -8,7 +8,7 @@ const ReviewAndFeedBack = ({ productDetails }) => {
   const getAllFeedData = async () => {
     setIsLoad(true);
     const response = await fetch(
-      `https://api.robomartbd.com/feedback/get_all_feedback/${productDetails?.id}`
+      `https://robomartbd.com/feedback/get_all_feedback/${productDetails?.id}`
     );
     const data = await response.json();
 
@@ -17,11 +17,11 @@ const ReviewAndFeedBack = ({ productDetails }) => {
       setIsLoad(false);
     }
   };
-  
+
   useEffect(() => {
     getAllFeedData();
   }, []);
- 
+
   return (
     <div>
       <Box sx={{ marginTop: "5vh" }}>

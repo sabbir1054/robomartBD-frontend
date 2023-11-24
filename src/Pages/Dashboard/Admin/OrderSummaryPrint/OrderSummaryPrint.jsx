@@ -1,10 +1,10 @@
+import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import { Button, Container, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import OrderSummaryFooter from "./Components/OrderSummaryFooter";
 import OrderSummaryHeader from "./Components/OrderSummaryHeader";
 import OrderSummaryProducts from "./Components/OrderSummaryProducts";
-import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 const OrderSummaryPrint = () => {
   const params = useParams();
   const [orderData, setOrderData] = useState({});
@@ -21,7 +21,7 @@ const OrderSummaryPrint = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
 
-    fetch(`https://api.robomartbd.com/api/auth/users`, {
+    fetch(`https://robomartbd.com/api/auth/users`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -43,7 +43,7 @@ const OrderSummaryPrint = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
     fetch(
-      `https://api.robomartbd.com/order_management/get_order/${params?.orderId}`,
+      `https://robomartbd.com/order_management/get_order/${params?.orderId}`,
       {
         method: "GET",
         headers: {
@@ -70,9 +70,9 @@ const OrderSummaryPrint = () => {
           padding: "5vh 0",
         }}
       >
-        <div  style={{textAlign:'right',margin:"10px 0"}}>
+        <div style={{ textAlign: "right", margin: "10px 0" }}>
           <Button
-            startIcon={<LocalPrintshopIcon/>}
+            startIcon={<LocalPrintshopIcon />}
             variant="contained"
             disableElevation
             marginY={2}

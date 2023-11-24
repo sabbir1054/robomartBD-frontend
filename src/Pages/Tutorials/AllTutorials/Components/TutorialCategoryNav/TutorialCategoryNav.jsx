@@ -5,7 +5,7 @@ const TutorialCategoryNav = () => {
   const [categories, setCategories] = useState([]);
   const getCategoriesData = async () => {
     const dataToDb = await fetch(
-      `https://api.robomartbd.com/blog/get_all_category`
+      `https://robomartbd.com/blog/get_all_category`
     );
     const result = await dataToDb.json();
     setCategories(result);
@@ -14,8 +14,6 @@ const TutorialCategoryNav = () => {
     getCategoriesData();
   }, []);
 
-
-
   return (
     <div>
       <ul className={styles.categoryList}>
@@ -23,10 +21,9 @@ const TutorialCategoryNav = () => {
           categories?.map((category) => (
             <li>
               <Link
-                to={`/tutorials/category/${category?.id}/${(category?.name).replace(
-                  / /g,
-                  "_"
-                )}`}
+                to={`/tutorials/category/${
+                  category?.id
+                }/${(category?.name).replace(/ /g, "_")}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 {category?.name}

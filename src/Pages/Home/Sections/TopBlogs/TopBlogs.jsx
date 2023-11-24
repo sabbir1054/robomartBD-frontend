@@ -8,12 +8,11 @@ const TopBlogs = () => {
   const [blogsData, setBlogsData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/blog/get_blog?page=1`)
+    fetch(`https://robomartbd.com/blog/get_blog?page=1`)
       .then((res) => res.json())
       .then((data) => {
         setBlogsData(data?.results.slice(0, 4));
       });
-   
   }, []);
 
   return (

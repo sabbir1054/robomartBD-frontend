@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     if (homeData) {
-      fetch(`https://api.robomartbd.com/api/products`)
+      fetch(`https://robomartbd.com/api/products`)
         .then((res) => res.json())
         .then((data) => {
           encryptAndStoreData(data);

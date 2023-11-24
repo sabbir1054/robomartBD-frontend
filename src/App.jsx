@@ -47,7 +47,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/auth/forget_password" element={<ForgetPassword />} />
         <Route
-          path="/api/renew_password/:code/:link"
+          path="/api/renew_password/:email/:code"
           element={<ProvideNewPassForget />}
         />
         <Route path="/login" element={<AuthPages />} />

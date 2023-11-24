@@ -25,7 +25,7 @@ const Register = ({ showPass, setShowPass }) => {
   } = useForm();
 
   const postNewUser = (data) => {
-    fetch(`https://api.robomartbd.com/api/auth/users/`, {
+    fetch(`https://robomartbd.com/api/auth/users/`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -57,7 +57,6 @@ const Register = ({ showPass, setShowPass }) => {
     if (data.password !== data.re_password) {
       notify();
     } else {
-      
       postNewUser(data);
     }
   };
@@ -164,7 +163,7 @@ const Register = ({ showPass, setShowPass }) => {
             <GoogleIcon />{" "}
             <span style={{ margin: "0px 5px" }}> Login with google</span>
           </Button>
-          <p style={{margin:"15px 0px"}}>
+          <p style={{ margin: "15px 0px" }}>
             Already Have an Account ?<NavLink to={"/login"}>Login Here</NavLink>
           </p>
         </Box>

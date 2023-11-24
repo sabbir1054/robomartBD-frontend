@@ -4,16 +4,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-
-
 const OurCorporateClients = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/our_client`)
+    fetch(`https://robomartbd.com/api/our_client`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
- 
+
   return (
     <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
       <div>
@@ -38,43 +36,44 @@ const OurCorporateClients = () => {
                 flexWrap: "wrap",
               }}
             >
-              {data?.length>0&&data?.map((company) => (
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: "15px",
-                  }}
-                >
+              {data?.length > 0 &&
+                data?.map((company) => (
                   <Box
-                    sx={{
-                      width: "150px",
-                      height: "150px",
+                    style={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      border: "2px solid #e2e2e2",
-                      transition:"all 0.3s ease-in",
-                      "&:hover": {
-                        border: "2px solid var(--primaryColor)",
-                        cursor: "pointer",
-                      },
+                      margin: "15px",
                     }}
                   >
-                    <img
-                      style={{
+                    <Box
+                      sx={{
                         width: "150px",
-                        // border: "1px solid #e2e2e2",
+                        height: "150px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        border: "2px solid #e2e2e2",
+                        transition: "all 0.3s ease-in",
+                        "&:hover": {
+                          border: "2px solid var(--primaryColor)",
+                          cursor: "pointer",
+                        },
                       }}
-                      // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`${company?.logo}`}
-                      alt="no-image"
-                      srcset=""
-                    />
+                    >
+                      <img
+                        style={{
+                          width: "150px",
+                          // border: "1px solid #e2e2e2",
+                        }}
+                        // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
+                        src={`${company?.logo}`}
+                        alt="no-image"
+                        srcset=""
+                      />
+                    </Box>
                   </Box>
-                </Box>
-              ))}
+                ))}
             </Box>
           </Container>
           {/* <Swiper
@@ -133,7 +132,7 @@ const OurCorporateClients = () => {
                         // border: "1px solid #e2e2e2",
                       }}
                       // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`https://api.robomartbd.com${company?.logo}`}
+                      src={`https://robomartbd.com${company?.logo}`}
                       alt="no-image"
                       srcset=""
                     />

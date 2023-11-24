@@ -10,7 +10,7 @@ const AllComments = () => {
   const getALLComments = async () => {
     setIsLoad(true);
     const response = await fetch(
-      `https://api.robomartbd.com/blog/${params?.tutorialId}/get_all_comment`
+      `https://robomartbd.com/blog/${params?.tutorialId}/get_all_comment`
     );
     const data = await response.json();
     setAllComments(data.reverse());
@@ -18,7 +18,7 @@ const AllComments = () => {
       setIsLoad(false);
     }
   };
- 
+
   useEffect(() => {
     getALLComments();
   }, []);

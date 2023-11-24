@@ -43,7 +43,7 @@ const ProvideNewPassForget = () => {
   const test = "";
   const submitNewPassword = (password) => {
     setIsLoading(true);
-    fetch(`https://api.robomartbd.com${location.pathname}`, {
+    fetch(`https://robomartbd.com${location.pathname}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

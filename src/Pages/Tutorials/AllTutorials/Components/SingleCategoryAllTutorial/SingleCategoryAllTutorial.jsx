@@ -17,7 +17,7 @@ const SingleCategoryAllTutorial = () => {
   useEffect(() => {
     setLoad(true);
     fetch(
-      `https://api.robomartbd.com/blog/get_all_blog_by_category/${params?.categoryId}`
+      `https://robomartbd.com/blog/get_all_blog_by_category/${params?.categoryId}`
     )
       .then((res) => res.json())
       .then((getData) => {
@@ -31,7 +31,8 @@ const SingleCategoryAllTutorial = () => {
       <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
         <Typography variant="h5" paddingY={4} fontFamily={"Poppins"}>
           {" "}
-          <span style={{fontWeight:"bold"}}>Category:</span> {params?.categoryName}{" "}
+          <span style={{ fontWeight: "bold" }}>Category:</span>{" "}
+          {params?.categoryName}{" "}
         </Typography>
         <Divider />
         <Grid container spacing={2} paddingY={5}>

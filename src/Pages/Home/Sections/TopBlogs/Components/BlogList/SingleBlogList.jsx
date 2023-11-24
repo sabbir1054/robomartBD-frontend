@@ -1,8 +1,15 @@
-import { Button, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React from "react";
-import styles from "./BlogList.module.scss";
 import { NavLink } from "react-router-dom";
-const SingleBlogList = ({blog}) => {
+import styles from "./BlogList.module.scss";
+const SingleBlogList = ({ blog }) => {
   return (
     <>
       <Card className={styles.cardListWrapper}>
@@ -12,10 +19,10 @@ const SingleBlogList = ({blog}) => {
               <CardMedia
                 component="img"
                 className={styles.cardMedia}
-                style={{maxWidth:"200px"}}
+                style={{ maxWidth: "200px" }}
                 image={
                   blog?.image
-                    ? `https://api.robomartbd.com${blog?.image}`
+                    ? `https://robomartbd.com${blog?.image}`
                     : "/assets/no-img.jpg"
                 }
                 title="Blog Image"

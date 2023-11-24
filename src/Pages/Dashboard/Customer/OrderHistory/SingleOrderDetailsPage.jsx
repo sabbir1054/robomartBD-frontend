@@ -15,7 +15,7 @@ const SingleOrderDetailsPage = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
     fetch(
-      `https://api.robomartbd.com/order_management/get_order/${params?.orderId}`,
+      `https://robomartbd.com/order_management/get_order/${params?.orderId}`,
       {
         method: "GET",
         headers: {

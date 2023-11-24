@@ -14,7 +14,7 @@ const SIngleTutorialPage = () => {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/blog/get_blog/${params?.tutorialId}`)
+    fetch(`https://robomartbd.com/blog/get_blog/${params?.tutorialId}`)
       .then((res) => res.json())
       .then((data) => setTutorialDetails(data));
   }, []);

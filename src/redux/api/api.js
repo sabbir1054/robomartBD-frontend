@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const robomartApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.robomartbd.com/",
+    baseUrl: "https://robomartbd.com/",
     prepareHeaders: async (headers) => {
       const storedData = await localStorage.getItem("user");
       const userData = await JSON.parse(storedData);
@@ -136,7 +136,7 @@ export const {
   useGetCartQuery,
   useGetCategoryListProductsQuery,
   useGetHomeDataQuery,
-  
+
   usePostToCartMutation,
   useDeleteProductFromCartMutation,
   useChangeQuantityMutation,
@@ -155,5 +155,5 @@ export const {
   useUpdateActivesOrderStatusMutation,
 
   useGetDeliveredOrdersQuery,
-  useUpdateDeliveredOrderStatusMutation
+  useUpdateDeliveredOrderStatusMutation,
 } = robomartApi;

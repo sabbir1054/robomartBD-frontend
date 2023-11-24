@@ -48,7 +48,7 @@ const CartPrice = ({ isDataChange }) => {
 
     const storedData = localStorage.getItem("user");
     const userData = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/order/cheak_copun`, {
+    fetch(`https://robomartbd.com/order/cheak_copun`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

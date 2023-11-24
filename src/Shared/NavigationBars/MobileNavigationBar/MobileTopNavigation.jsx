@@ -13,7 +13,7 @@ const MobileTopNavigation = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
 
-    fetch(`https://api.robomartbd.com/api/profile`, {
+    fetch(`https://robomartbd.com/api/profile`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

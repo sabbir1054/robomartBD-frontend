@@ -26,9 +26,7 @@ const SingleCategoryProducts = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://api.robomartbd.com/api/catagory/${params.categoryId}/category`
-    )
+    fetch(`https://robomartbd.com/api/catagory/${params.categoryId}/category`)
       .then((res) => res.json())
       .then((data) => {
         setCategoryProducts(data);
@@ -44,14 +42,14 @@ const SingleCategoryProducts = () => {
     categoryProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
   return (
     <div>
       <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
         <Grid item xs={2} padding={2} hidden={{ xs: true }}>
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
-        <Grid item xs={12} sm={12} >
+        <Grid item xs={12} sm={12}>
           <>
             {" "}
             <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>

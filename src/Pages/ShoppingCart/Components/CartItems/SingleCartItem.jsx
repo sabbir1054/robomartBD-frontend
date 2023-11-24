@@ -66,7 +66,7 @@ const SingleCartItem = ({ product, setIsDataChange }) => {
               <img
                 src={
                   product?.product?.photo
-                    ? `https://api.robomartbd.com${product?.product?.photo}`
+                    ? `https://robomartbd.com${product?.product?.photo}`
                     : "assets/no-img.jpg"
                 }
                 alt="product_photo"

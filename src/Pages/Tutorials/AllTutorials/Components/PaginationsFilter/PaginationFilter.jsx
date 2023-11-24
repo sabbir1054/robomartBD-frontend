@@ -28,7 +28,7 @@ const ITEM_HEIGHT = 48;
 const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
   const [tags, seTags] = useState([]);
   const getTagsData = async () => {
-    const dataToDb = await fetch(`https://api.robomartbd.com/blog/get_all_tag`);
+    const dataToDb = await fetch(`https://robomartbd.com/blog/get_all_tag`);
     const result = await dataToDb.json();
     seTags(result);
   };

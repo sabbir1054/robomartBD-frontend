@@ -19,12 +19,10 @@ const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
     setOpen(false);
   };
 
-
-
   const postFeedbackData = (data) => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/feedback/get_feedback`, {
+    fetch(`https://robomartbd.com/feedback/get_feedback`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

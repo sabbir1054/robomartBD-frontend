@@ -19,7 +19,7 @@ const ForgetPassword = () => {
 
   const postEmail = () => {
     setLoading(true);
-    fetch(`https://api.robomartbd.com/api/change_password`, {
+    fetch(`https://robomartbd.com/api/change_password`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -112,7 +112,10 @@ const ForgetPassword = () => {
                         variant="contained"
                         disableElevation
                         startIcon={<MoveToInboxIcon />}
-                        sx={{ backgroundColor: "green" ,"&:hover":{backgroundColor:"var(--primaryColor)"}}}
+                        sx={{
+                          backgroundColor: "green",
+                          "&:hover": { backgroundColor: "var(--primaryColor)" },
+                        }}
                       >
                         Check Inbox
                       </Button>

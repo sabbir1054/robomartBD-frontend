@@ -1,13 +1,12 @@
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Badge, Box, Container, Divider, Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   useGetCartQuery,
   useGetHomeDataQuery,
-  useGetUserProfileQuery,
   useGetUserQuery,
 } from "../../../redux/api/api";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
@@ -26,54 +25,54 @@ const theme = createTheme({
 });
 
 const HeroNavigation = () => {
-   const [data, setData] = useState({});
+  const [data, setData] = useState({});
 
-   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
-   const { data: userData, isLoading, isError } = useGetUserQuery();
+  const { data: userData, isLoading, isError } = useGetUserQuery();
 
-   const { data: cartData } = useGetCartQuery();
-   const cartCount = cartData
-     ? cartData?.items?.reduce((acc, item) => acc + item.quantity, 0)
-     : 0;
-   const navigate = useNavigate();
+  const { data: cartData } = useGetCartQuery();
+  const cartCount = cartData
+    ? cartData?.items?.reduce((acc, item) => acc + item.quantity, 0)
+    : 0;
+  const navigate = useNavigate();
 
-   const [category, setCategory] = useState("");
-   const location = useLocation();
+  const [category, setCategory] = useState("");
+  const location = useLocation();
 
-   const [changeIcon, setChangeIcon] = useState(false);
-   //scrolling navbar
-   const listenScrollEvent = () => {
-     window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
-   };
+  const [changeIcon, setChangeIcon] = useState(false);
+  //scrolling navbar
+  const listenScrollEvent = () => {
+    window.scrollY > 20 ? setChangeIcon(true) : setChangeIcon(false);
+  };
 
-   useEffect(() => {
-     window.addEventListener("scroll", listenScrollEvent);
-     return () => {
-       window.removeEventListener("scroll", listenScrollEvent);
-     };
-   }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => {
+      window.removeEventListener("scroll", listenScrollEvent);
+    };
+  }, []);
 
-   const handleChange = (event) => {
-     setCategory(event.target.value);
-   };
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
 
-   useEffect(() => {
-     const storedData = localStorage.getItem("user");
-     const userDataStorage = JSON.parse(storedData);
+  useEffect(() => {
+    const storedData = localStorage.getItem("user");
+    const userDataStorage = JSON.parse(storedData);
 
-     fetch(`https://api.robomartbd.com/api/profile`, {
-       method: "GET",
-       headers: {
-         "content-type": "application/json",
-         Authorization: `JWT ${userDataStorage}`,
-       },
-     })
-       .then((res) => res.json())
-       .then((data) => {
-         setData(data);
-       });
-   }, [userData]);
+    fetch(`https://robomartbd.com/api/profile`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      });
+  }, [userData]);
   return (
     <>
       <AppBar
@@ -156,7 +155,7 @@ const HeroNavigation = () => {
                   <AvaterBtnMeny data={data} />
                 )}
 
-                {!data?.email&& (
+                {!data?.email && (
                   <>
                     <NavLink to="/login">
                       <p>Login</p>

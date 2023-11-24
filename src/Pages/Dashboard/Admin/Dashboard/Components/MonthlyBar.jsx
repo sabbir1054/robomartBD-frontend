@@ -39,62 +39,62 @@ const data = [
   {
     month: "January",
     sell: 4000,
-    profit:215
+    profit: 215,
   },
   {
     month: "February",
     sell: 3000,
-    profit:215
+    profit: 215,
   },
   {
     month: "March",
     sell: 2000,
-    profit:215
+    profit: 215,
   },
   {
     month: "April",
     sell: 2780,
-    profit:215
+    profit: 215,
   },
   {
     month: "May",
     sell: 7000,
-    profit:215
+    profit: 215,
   },
   {
     month: "June",
     sell: 2390,
-    profit:215
+    profit: 215,
   },
   {
     month: "July",
     sell: 3490,
-    profit:215
+    profit: 215,
   },
   {
     month: "August",
     sell: 2390,
-    profit:215
+    profit: 215,
   },
   {
     month: "September",
     sell: 2390,
-    profit:215
+    profit: 215,
   },
   {
     month: "October",
     sell: 2780,
-    profit:215
+    profit: 215,
   },
   {
     month: "November",
     sell: 5744,
-    profit:215
+    profit: 215,
   },
   {
     month: "December",
     sell: 4965,
-    profit:215
+    profit: 215,
   },
 ];
 
@@ -105,13 +105,12 @@ const MonthlyBar = () => {
   const handleChange = (event) => {
     setYear(event.target.value);
   };
-  
 
   useEffect(() => {
     const data = { year: year };
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://api.robomartbd.com/order_management/get_dashbord_yearly`, {
+    fetch(`https://robomartbd.com/order_management/get_dashbord_yearly`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

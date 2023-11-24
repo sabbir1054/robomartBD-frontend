@@ -89,7 +89,7 @@ const ProductDetailsPage = () => {
   };
 
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/product/${params?.productId}`)
+    fetch(`https://robomartbd.com/api/product/${params?.productId}`)
       .then((res) => res.json())
       .then((data) => {
         setProductDetails(data);

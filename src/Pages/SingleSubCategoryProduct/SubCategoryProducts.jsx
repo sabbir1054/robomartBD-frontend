@@ -27,7 +27,7 @@ const SubCategoryProducts = () => {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `https://api.robomartbd.com/api/catagory/${params.subCategoryId}/subcategory`
+      `https://robomartbd.com/api/catagory/${params.subCategoryId}/subcategory`
     )
       .then((res) => res.json())
       .then((data) => {

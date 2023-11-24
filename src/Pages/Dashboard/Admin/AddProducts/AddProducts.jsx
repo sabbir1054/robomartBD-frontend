@@ -1,14 +1,6 @@
-import {
-  Container,
-  Grid,
-  MenuItem,
-  Select,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Container, Tooltip, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import ImageUploader from "../../../../Shared/ImageUploader/ImageUploader";
+import { useForm } from "react-hook-form";
 import ProductDescriptionEditor from "../../../../Shared/TextEditor/ProductDescriptionEditor";
 import ProductDoc from "../../../../Shared/TextEditor/ProductDoc";
 import styles from "./AddProducts.module.scss";
@@ -59,10 +51,10 @@ const AddProducts = () => {
     //   categories: [],
     // },
   });
-//   const { fields, append, remove } = useFieldArray({
-//     control,
-//     name: "categories",
-//   });
+  //   const { fields, append, remove } = useFieldArray({
+  //     control,
+  //     name: "categories",
+  //   });
   const onSubmit = (data) => {
     // create data
     data.coverPhoto = images && images[0]?.data_url;
@@ -73,14 +65,13 @@ const AddProducts = () => {
     data.feedback = [];
     data.category = selectedCategory;
     data.subCategory = selectedSubCategory;
-    
 
     // // window.location.reload();
     // reset();
   };
 
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/catagorylist`)
+    fetch(`https://robomartbd.com/api/catagorylist`)
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);

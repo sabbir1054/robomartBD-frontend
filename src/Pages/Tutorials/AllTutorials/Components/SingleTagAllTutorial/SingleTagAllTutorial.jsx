@@ -16,9 +16,7 @@ const SingleTagAllTutorial = () => {
 
   useEffect(() => {
     setLoad(true);
-    fetch(
-      `https://api.robomartbd.com/blog/get_all_blog_by_tag/${params?.tagId}`
-    )
+    fetch(`https://robomartbd.com/blog/get_all_blog_by_tag/${params?.tagId}`)
       .then((res) => res.json())
       .then((getData) => {
         setData(getData?.results);

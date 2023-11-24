@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const OurSupplierNPartner = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://api.robomartbd.com/api/our_supplier`)
+    fetch(`https://robomartbd.com/api/our_supplier`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

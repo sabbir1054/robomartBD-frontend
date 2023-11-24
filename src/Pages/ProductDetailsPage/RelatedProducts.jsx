@@ -2,10 +2,10 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import styles from "./CategoryProducts.module.scss";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const RelatedProducts = ({ categoriesId }) => {
@@ -19,7 +19,7 @@ const RelatedProducts = ({ categoriesId }) => {
       for (const id of categoriesId) {
         try {
           const response = await fetch(
-            `https://api.robomartbd.com/api/catagory/${id}/category`
+            `https://robomartbd.com/api/catagory/${id}/category`
           );
           if (response.ok) {
             const categoryData = await response.json();
@@ -87,7 +87,10 @@ const RelatedProducts = ({ categoriesId }) => {
                     color: "#4f4f4f",
                     "&:hover": { color: "black !important" },
                   }}
-                  to={`/product/${product?.id}/${product?.name?.replace(/ /g, "_")}`}
+                  to={`/product/${product?.id}/${product?.name?.replace(
+                    / /g,
+                    "_"
+                  )}`}
                 >
                   <Box
                     style={{
