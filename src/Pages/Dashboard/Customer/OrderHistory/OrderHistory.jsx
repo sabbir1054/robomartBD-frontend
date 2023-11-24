@@ -9,9 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import styles from "./OrderHistory.module.scss";
+import { Link, NavLink } from "react-router-dom";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
+import styles from "./OrderHistory.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -122,33 +122,20 @@ const OrderHistory = () => {
                       >
                         {/* <Typography variant="subtitle3"> */}
                         <div>
-                          <a
-                            href=""
-                            style={{ margin: "0 5px", fontFamily: "Roboto" }}
-                          >
-                            Robotics Project Package 3
-                          </a>{" "}
-                          <a href="" style={{ margin: "0 5px" }}>
-                            Arduino Uno
-                          </a>
-                          ,
-                          <a href="" style={{ margin: "0 5px" }}>
-                            Motor Driver
-                          </a>
-                          <br />
-                          <a href="" style={{ margin: "0 5px" }}>
-                            Robotics Project Package 3
-                          </a>
-                          ,
-                          <a href="" style={{ margin: "0 5px" }}>
-                            Arduino Uno
-                          </a>
-                          ,
-                          <a href="" style={{ margin: "0 5px" }}>
-                            Motor Driver
-                          </a>
+                          {order?.items?.map((product) => (
+                            <Link
+                              to={`/product/${
+                                product?.product?.id
+                              }/${product?.product?.name?.replace(/ /g, "_")}`}
+                            >
+                              <span style={{ margin: "0px 5px" }}>
+                                {product?.product?.name}
+                              </span>{" "}
+                              ,
+                            </Link>
+                          ))}
                         </div>
-                        ,{/* </Typography> */}
+                        {/* </Typography> */}
                       </StyledTableCell>
                       <StyledTableCell
                         component="th"
