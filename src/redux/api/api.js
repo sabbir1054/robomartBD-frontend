@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 // Define a service using a base URL and expected endpoints
 export const robomartApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://robomartbd.com/",
+    baseUrl: `${backendUrl}/`,
     prepareHeaders: async (headers) => {
       const storedData = await localStorage.getItem("user");
       const userData = await JSON.parse(storedData);

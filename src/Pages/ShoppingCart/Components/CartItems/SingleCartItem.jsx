@@ -10,6 +10,7 @@ import {
   useDeleteProductFromCartMutation,
 } from "../../../../redux/api/api";
 import styles from "./CartItems.module.scss";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
 const SingleCartItem = ({ product, setIsDataChange }) => {
@@ -66,7 +67,7 @@ const SingleCartItem = ({ product, setIsDataChange }) => {
               <img
                 src={
                   product?.product?.photo
-                    ? `https://robomartbd.com${product?.product?.photo}`
+                    ? `${backendUrl}${product?.product?.photo}`
                     : "assets/no-img.jpg"
                 }
                 alt="product_photo"

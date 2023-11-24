@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const RelatedProducts = ({ categoriesId }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +20,7 @@ const RelatedProducts = ({ categoriesId }) => {
       for (const id of categoriesId) {
         try {
           const response = await fetch(
-            `https://robomartbd.com/api/catagory/${id}/category`
+            `${backendUrl}/api/catagory/${id}/category`
           );
           if (response.ok) {
             const categoryData = await response.json();

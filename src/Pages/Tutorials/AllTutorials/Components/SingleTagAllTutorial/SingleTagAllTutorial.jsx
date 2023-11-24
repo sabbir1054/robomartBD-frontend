@@ -8,6 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SingleTutorialCard from "../Tutorials/SingleTutorialCard";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 
 const SingleTagAllTutorial = () => {
   const [load, setLoad] = useState(false);
@@ -16,7 +17,7 @@ const SingleTagAllTutorial = () => {
 
   useEffect(() => {
     setLoad(true);
-    fetch(`https://robomartbd.com/blog/get_all_blog_by_tag/${params?.tagId}`)
+    fetch(`${backendUrl}/blog/get_all_blog_by_tag/${params?.tagId}`)
       .then((res) => res.json())
       .then((getData) => {
         setData(getData?.results);

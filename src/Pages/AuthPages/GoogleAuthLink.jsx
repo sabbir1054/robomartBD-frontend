@@ -1,17 +1,16 @@
-
-
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import queryString from "query-string";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 const GoogleAuthLink = () => {
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
 
-  const postLoginData = (state, code) => {
+  const postLoginData = async (state, code) => {
     const details = {
       state: state,
       code: code,
@@ -25,8 +24,8 @@ const GoogleAuthLink = () => {
       .join("&");
 
     try {
-      const res = axios.post(
-        `http://localhost:8000/api/auth/o/google-oauth2/?${formBody}`,
+      const res = await axios.post(
+        `${backendUrl}/api/auth/o/google-oauth2/?${formBody}`,
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -36,7 +35,7 @@ const GoogleAuthLink = () => {
 
       try {
         if (res.data.access) {
-          localStorage.setItem("user", JSON.stringify(res.data.access));
+          localStorage.setItem("user", res.data.access);
 
           //   reset();
           navigate("/");
@@ -60,7 +59,6 @@ const GoogleAuthLink = () => {
     } catch (err) {
       console.log(err);
     }
-
   };
 
   useEffect(() => {

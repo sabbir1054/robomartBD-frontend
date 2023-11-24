@@ -4,11 +4,12 @@ import { NavLink } from "react-router-dom";
 import SingleBlogList from "./Components/BlogList/SingleBlogList";
 import SingleHeroBlog from "./Components/SingleHeroBlog/SingleHeroBlog";
 import styles from "./TopBlogs.module.scss";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 const TopBlogs = () => {
   const [blogsData, setBlogsData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://robomartbd.com/blog/get_blog?page=1`)
+    fetch(`${backendUrl}/blog/get_blog?page=1`)
       .then((res) => res.json())
       .then((data) => {
         setBlogsData(data?.results.slice(0, 4));

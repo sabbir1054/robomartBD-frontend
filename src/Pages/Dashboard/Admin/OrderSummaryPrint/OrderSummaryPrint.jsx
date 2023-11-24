@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import OrderSummaryFooter from "./Components/OrderSummaryFooter";
 import OrderSummaryHeader from "./Components/OrderSummaryHeader";
 import OrderSummaryProducts from "./Components/OrderSummaryProducts";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 const OrderSummaryPrint = () => {
   const params = useParams();
   const [orderData, setOrderData] = useState({});
@@ -21,7 +22,7 @@ const OrderSummaryPrint = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
 
-    fetch(`https://robomartbd.com/api/auth/users`, {
+    fetch(`${backendUrl}/api/auth/users`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -42,16 +43,13 @@ const OrderSummaryPrint = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(
-      `https://robomartbd.com/order_management/get_order/${params?.orderId}`,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `JWT ${userDataStorage}`,
-        },
-      }
-    )
+    fetch(`${backendUrl}/order_management/get_order/${params?.orderId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setOrderData(data);

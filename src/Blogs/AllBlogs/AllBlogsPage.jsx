@@ -12,6 +12,7 @@ import TutorialCategoryNav from "../../Pages/Tutorials/AllTutorials/Components/T
 
 import BottomPagination from "../../Pages/Tutorials/AllTutorials/Components/PaginationsFilter/BottomPagination/BottomPagination";
 import SingleTutorialCard from "../../Pages/Tutorials/AllTutorials/Components/Tutorials/SingleTutorialCard";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const AllBlogsPage = () => {
   const [load, setLoad] = useState(false);
@@ -29,7 +30,7 @@ const AllBlogsPage = () => {
   const getBlogsData = async () => {
     setLoad(true);
     const dataToDb = await fetch(
-      `https://robomartbd.com/blog/get_blog?page=${currentPage}`
+      `${backendUrl}/blog/get_blog?page=${currentPage}`
     );
     const result = await dataToDb.json();
     if (result?.results) {

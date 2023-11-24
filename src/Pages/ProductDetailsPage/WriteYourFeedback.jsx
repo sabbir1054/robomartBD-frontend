@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../redux/api/api";
 import styles from "./ProductDetail.module.scss";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
   const postFeedbackData = (data) => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://robomartbd.com/feedback/get_feedback`, {
+    fetch(`${backendUrl}/feedback/get_feedback`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

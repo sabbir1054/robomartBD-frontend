@@ -1,13 +1,14 @@
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MonthlyBar from "./Components/MonthlyBar";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState({});
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://robomartbd.com/order_management/get_dashbord`, {
+    fetch(`${backendUrl}/order_management/get_dashbord`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../../../../redux/api/api";
 import styles from "../../SingleTutorial.module.scss";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 const WriteYourComment = ({ blogId, getALLComments }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ const WriteYourComment = ({ blogId, getALLComments }) => {
   const postFeedbackData = (data) => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://robomartbd.com/blog/get_comment`, {
+    fetch(`${backendUrl}/blog/get_comment`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

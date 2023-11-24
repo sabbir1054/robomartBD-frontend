@@ -2,6 +2,7 @@ import { Box, Card, CircularProgress, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import WriteYourComment from "./WriteYourComment";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 const AllComments = () => {
   const [isLoad, setIsLoad] = useState(false);
   const params = useParams();
@@ -10,7 +11,7 @@ const AllComments = () => {
   const getALLComments = async () => {
     setIsLoad(true);
     const response = await fetch(
-      `https://robomartbd.com/blog/${params?.tutorialId}/get_all_comment`
+      `${backendUrl}/blog/${params?.tutorialId}/get_all_comment`
     );
     const data = await response.json();
     setAllComments(data.reverse());

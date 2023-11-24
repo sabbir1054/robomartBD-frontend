@@ -7,6 +7,7 @@ import Hero from "./Sections/HeroSection/Hero";
 import OurCorporateClients from "./Sections/OurSupplierPartner/OurCorporateClients";
 import OurSupplierNPartner from "./Sections/OurSupplierPartner/OurSupplierNPartner";
 import TopBlogs from "./Sections/TopBlogs/TopBlogs";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const Home = () => {
   const [reFetch, setRefetch] = useState(false);
@@ -21,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     if (homeData) {
-      fetch(`https://robomartbd.com/api/products`)
+      fetch(`${backendUrl}/api/products`)
         .then((res) => res.json())
         .then((data) => {
           encryptAndStoreData(data);

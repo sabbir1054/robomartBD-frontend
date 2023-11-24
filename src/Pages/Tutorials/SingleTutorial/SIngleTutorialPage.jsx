@@ -7,6 +7,7 @@ import TutorialProducts from "./Components/TutorialProducts/TutorialProducts";
 import TutorialSections from "./Components/TutorialSectionsScroll/TutorialSections";
 import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
 import TutorialHead from "./Components/TutorialsHead/TutorialHead";
+import { backendUrl } from "../../../utils/backendApiUrlProvider";
 const SIngleTutorialPage = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [changePosition, setChangePosition] = useState(false);
@@ -14,7 +15,7 @@ const SIngleTutorialPage = () => {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`https://robomartbd.com/blog/get_blog/${params?.tutorialId}`)
+    fetch(`${backendUrl}/blog/get_blog/${params?.tutorialId}`)
       .then((res) => res.json())
       .then((data) => setTutorialDetails(data));
   }, []);

@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import React, { useEffect, useState } from "react";
 import styles from "../../SingleTutorial.module.scss";
 import TagBadge from "./TagBadge";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 const TutorialTitleNav = ({
   activeSection,
   setActiveSection,
@@ -14,7 +15,7 @@ const TutorialTitleNav = ({
 
   const getData = async () => {
     try {
-      const response = await fetch(`https://robomartbd.com/blog/get_all_tag`);
+      const response = await fetch(`${backendUrl}/blog/get_all_tag`);
       const data = await response.json();
 
       const newArr = [];

@@ -5,6 +5,7 @@ import { useGetUserQuery } from "../../../redux/api/api";
 import AvarterBtnAdmin from "../HeroNavigationBar/AvarterBtnAdmin";
 import AvaterBtnMeny from "../HeroNavigationBar/AvaterBtnMeny";
 import NavigationDrawer from "./NavigationDrawer";
+import { backendUrl } from "../../../utils/backendApiUrlProvider";
 
 const MobileTopNavigation = () => {
   const [data, setData] = useState({});
@@ -13,7 +14,7 @@ const MobileTopNavigation = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
 
-    fetch(`https://robomartbd.com/api/profile`, {
+    fetch(`${backendUrl}/api/profile`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

@@ -14,6 +14,7 @@ import AvarterBtnAdmin from "./AvarterBtnAdmin";
 import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
+import { backendUrl } from "../../../utils/backendApiUrlProvider";
 
 const theme = createTheme({
   palette: {
@@ -61,7 +62,7 @@ const HeroNavigation = () => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
 
-    fetch(`https://robomartbd.com/api/profile`, {
+    fetch(`${backendUrl}/api/profile`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

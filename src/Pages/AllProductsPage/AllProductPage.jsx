@@ -6,6 +6,7 @@ import { useGetCategoryListProductsQuery } from "../../redux/api/api";
 import styles from "./AllProductsPage.module.scss";
 import AllProductsSection from "./Components/AllProductsSection/AllProductsSection";
 import CategorySection from "./Components/CategorySection/CategorySection";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const AllProductPage = () => {
   const {
@@ -16,7 +17,7 @@ const AllProductPage = () => {
 
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
-    fetch(`https://robomartbd.com/api/catagorylist`)
+    fetch(`${backendUrl}/api/catagorylist`)
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data);

@@ -1,6 +1,7 @@
 import { Box, Card, Grid, Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import WriteYourFeedback from "./WriteYourFeedback";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const ReviewAndFeedBack = ({ productDetails }) => {
   const [isLoad, setIsLoad] = useState(false);
@@ -8,7 +9,7 @@ const ReviewAndFeedBack = ({ productDetails }) => {
   const getAllFeedData = async () => {
     setIsLoad(true);
     const response = await fetch(
-      `https://robomartbd.com/feedback/get_all_feedback/${productDetails?.id}`
+      `${backendUrl}/feedback/get_all_feedback/${productDetails?.id}`
     );
     const data = await response.json();
 

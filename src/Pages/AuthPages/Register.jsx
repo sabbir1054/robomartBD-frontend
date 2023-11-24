@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import styles from "./AuthPage.module.scss";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 const notify = () => toast.error("Password not match!");
 const successMassage = () =>
   toast.success("Register successfully! Now Login Here");
@@ -25,7 +26,7 @@ const Register = ({ showPass, setShowPass }) => {
   } = useForm();
 
   const postNewUser = (data) => {
-    fetch(`https://robomartbd.com/api/auth/users/`, {
+    fetch(`${backendUrl}/api/auth/users/`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -34,7 +35,8 @@ const Register = ({ showPass, setShowPass }) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.id) {
+        console.log(result);
+        if (result?.id) {
           Swal.fire({
             position: "top-end",
             icon: "success",

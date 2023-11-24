@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 import styles from "./AuthPage.module.scss";
 import LoginWithGoogle from "./LoginWithGoogle";
 const notify = () => toast.error("Password not match!");
@@ -26,7 +27,7 @@ const Login = ({ showPass, setShowPass }) => {
   } = useForm();
 
   const postLoginData = (data) => {
-    fetch(`https://robomartbd.com/api/auth/jwt/create/`, {
+    fetch(`${backendUrl}/api/auth/jwt/create/`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -46,7 +47,7 @@ const Login = ({ showPass, setShowPass }) => {
           reset();
           navigate("/");
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "Login Successful",
             showConfirmButton: false,

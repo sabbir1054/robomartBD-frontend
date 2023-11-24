@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TutorialCategoryList.module.scss";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 const TutorialCategoryNav = () => {
   const [categories, setCategories] = useState([]);
   const getCategoriesData = async () => {
-    const dataToDb = await fetch(
-      `https://robomartbd.com/blog/get_all_category`
-    );
+    const dataToDb = await fetch(`${backendUrl}/blog/get_all_category`);
     const result = await dataToDb.json();
     setCategories(result);
   };

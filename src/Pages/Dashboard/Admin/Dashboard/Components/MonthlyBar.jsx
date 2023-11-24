@@ -17,6 +17,7 @@ import {
 } from "recharts";
 
 import { useState } from "react";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -110,7 +111,7 @@ const MonthlyBar = () => {
     const data = { year: year };
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://robomartbd.com/order_management/get_dashbord_yearly`, {
+    fetch(`${backendUrl}/order_management/get_dashbord_yearly`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

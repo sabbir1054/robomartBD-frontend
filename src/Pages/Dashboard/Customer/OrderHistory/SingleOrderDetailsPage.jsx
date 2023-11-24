@@ -2,6 +2,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import styles from "./OrderHistory.module.scss";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const SingleOrderDetailsPage = () => {
   const location = useLocation();
@@ -14,16 +15,13 @@ const SingleOrderDetailsPage = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(
-      `https://robomartbd.com/order_management/get_order/${params?.orderId}`,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `JWT ${userDataStorage}`,
-        },
-      }
-    )
+    fetch(`${backendUrl}/order_management/get_order/${params?.orderId}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `JWT ${userDataStorage}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setOrderData(data));
   }, [params]);

@@ -15,6 +15,7 @@ import {
 import BottomTabs from "./BottomTabs";
 import styles from "./ProductDetail.module.scss";
 import RelatedProducts from "./RelatedProducts";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -89,7 +90,7 @@ const ProductDetailsPage = () => {
   };
 
   useEffect(() => {
-    fetch(`https://robomartbd.com/api/product/${params?.productId}`)
+    fetch(`${backendUrl}/api/product/${params?.productId}`)
       .then((res) => res.json())
       .then((data) => {
         setProductDetails(data);

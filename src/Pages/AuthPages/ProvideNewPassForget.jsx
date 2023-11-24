@@ -16,6 +16,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 const errorNotify = () => toast.error("Password not match !");
 const ProvideNewPassForget = () => {
   const [loading, setIsLoading] = useState(false);
@@ -43,7 +44,7 @@ const ProvideNewPassForget = () => {
   const test = "";
   const submitNewPassword = (password) => {
     setIsLoading(true);
-    fetch(`https://robomartbd.com${location.pathname}`, {
+    fetch(`${backendUrl}${location.pathname}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

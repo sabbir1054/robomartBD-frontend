@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import AllCategorySideMenu from "../../Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import SingleProductCard from "../../Shared/SingleProductCard/SingleProductCard";
 import { useGetCategoryListProductsQuery } from "../../redux/api/api";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const SubCategoryProducts = () => {
   const params = useParams();
@@ -26,9 +27,7 @@ const SubCategoryProducts = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://robomartbd.com/api/catagory/${params.subCategoryId}/subcategory`
-    )
+    fetch(`${backendUrl}/api/catagory/${params.subCategoryId}/subcategory`)
       .then((res) => res.json())
       .then((data) => {
         setCategoryProducts(data);

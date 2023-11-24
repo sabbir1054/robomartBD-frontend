@@ -21,6 +21,7 @@ import {
 } from "../../../../redux/api/api";
 import { addCheckoutData } from "../../../../redux/features/checkoutSlice";
 import styles from "./CartPrice.module.scss";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 const CartPrice = ({ isDataChange }) => {
   const {
     data: userProfile,
@@ -48,7 +49,7 @@ const CartPrice = ({ isDataChange }) => {
 
     const storedData = localStorage.getItem("user");
     const userData = JSON.parse(storedData);
-    fetch(`https://robomartbd.com/order/cheak_copun`, {
+    fetch(`${backendUrl}/order/cheak_copun`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

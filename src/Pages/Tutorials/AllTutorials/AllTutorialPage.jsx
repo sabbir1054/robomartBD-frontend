@@ -11,6 +11,7 @@ import PaginationFilter from "./Components/PaginationsFilter/PaginationFilter";
 import TutorialSearchBar from "./Components/SearchBar/TutorialSearchBar";
 import TutorialCategoryNav from "./Components/TutorialCategoryNav/TutorialCategoryNav";
 import SingleTutorialCard from "./Components/Tutorials/SingleTutorialCard";
+import { backendUrl } from "../../../utils/backendApiUrlProvider";
 
 const AllTutorialPage = () => {
   const [load, setLoad] = useState(false);
@@ -28,7 +29,7 @@ const AllTutorialPage = () => {
   const getTutorialsData = async () => {
     setLoad(true);
     const dataToDb = await fetch(
-      `https://robomartbd.com/blog/get_tutorial?page=${currentPage}`
+      `${backendUrl}/blog/get_tutorial?page=${currentPage}`
     );
     const result = await dataToDb.json();
     if (result?.results) {

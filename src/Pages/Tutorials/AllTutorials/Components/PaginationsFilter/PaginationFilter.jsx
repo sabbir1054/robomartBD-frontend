@@ -5,6 +5,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 
 const options = [
   "None",
@@ -28,7 +29,7 @@ const ITEM_HEIGHT = 48;
 const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
   const [tags, seTags] = useState([]);
   const getTagsData = async () => {
-    const dataToDb = await fetch(`https://robomartbd.com/blog/get_all_tag`);
+    const dataToDb = await fetch(`${backendUrl}/blog/get_all_tag`);
     const result = await dataToDb.json();
     seTags(result);
   };

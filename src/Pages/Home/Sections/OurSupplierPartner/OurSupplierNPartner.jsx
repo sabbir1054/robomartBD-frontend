@@ -6,11 +6,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const OurSupplierNPartner = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://robomartbd.com/api/our_supplier`)
+    fetch(`${backendUrl}/api/our_supplier`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

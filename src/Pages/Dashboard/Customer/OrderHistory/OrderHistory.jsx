@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./OrderHistory.module.scss";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -39,7 +40,7 @@ const OrderHistory = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
-    fetch(`https://robomartbd.com/order/get_order`, {
+    fetch(`${backendUrl}/order/get_order`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

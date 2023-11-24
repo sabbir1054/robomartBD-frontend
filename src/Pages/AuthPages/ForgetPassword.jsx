@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const ForgetPassword = () => {
 
   const postEmail = () => {
     setLoading(true);
-    fetch(`https://robomartbd.com/api/change_password`, {
+    fetch(`${backendUrl}/api/change_password`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -28,9 +29,30 @@ const ForgetPassword = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log(result);
         if (result.msg === "Done") {
           setLoading(false);
           setEmailSent(true);
+        } else if (result === "User Not Registered") {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "User not registered ! ",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setLoading(false);
+          navigate("/login");
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Something went wrong ! ",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setLoading(false);
+          navigate("/login");
         }
       });
   };

@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./BlogList.module.scss";
+import { backendUrl } from "../../../../../../utils/backendApiUrlProvider";
 const SingleBlogList = ({ blog }) => {
   return (
     <>
@@ -22,7 +23,7 @@ const SingleBlogList = ({ blog }) => {
                 style={{ maxWidth: "200px" }}
                 image={
                   blog?.image
-                    ? `https://robomartbd.com${blog?.image}`
+                    ? `${backendUrl}${blog?.image}`
                     : "/assets/no-img.jpg"
                 }
                 title="Blog Image"

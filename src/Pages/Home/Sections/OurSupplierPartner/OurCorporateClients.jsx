@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const OurCorporateClients = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`https://robomartbd.com/api/our_client`)
+    fetch(`${backendUrl}/api/our_client`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -132,7 +133,7 @@ const OurCorporateClients = () => {
                         // border: "1px solid #e2e2e2",
                       }}
                       // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`https://robomartbd.com${company?.logo}`}
+                      src={`${backendUrl}${company?.logo}`}
                       alt="no-image"
                       srcset=""
                     />

@@ -5,6 +5,7 @@ import ProductDescriptionEditor from "../../../../Shared/TextEditor/ProductDescr
 import ProductDoc from "../../../../Shared/TextEditor/ProductDoc";
 import styles from "./AddProducts.module.scss";
 import FormLebel from "./FormLebel";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const exampleData = [
   {
@@ -71,7 +72,7 @@ const AddProducts = () => {
   };
 
   useEffect(() => {
-    fetch(`https://robomartbd.com/api/catagorylist`)
+    fetch(`${backendUrl}/api/catagorylist`)
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
