@@ -35,7 +35,7 @@ const GoogleAuthLink = () => {
 
       try {
         if (res.data.access) {
-          localStorage.setItem("user", res.data.access);
+          localStorage.setItem("user", JSON.stringify(res.data.access));
 
           //   reset();
           navigate("/");
