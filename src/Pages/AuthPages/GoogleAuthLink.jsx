@@ -36,7 +36,7 @@ const GoogleAuthLink = () => {
       try {
         if (res.data.access) {
           localStorage.setItem("user", JSON.stringify(res.data.access));
-          window.location.reload();
+
           //   reset();
           navigate("/");
           Swal.fire({
@@ -46,6 +46,7 @@ const GoogleAuthLink = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          window.location.reload();
         }
       } catch (e) {
         Swal.fire({
