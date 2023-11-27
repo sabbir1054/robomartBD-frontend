@@ -12,10 +12,10 @@ import {
   useGetUserQuery,
   usePostToCartMutation,
 } from "../../redux/api/api";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 import BottomTabs from "./BottomTabs";
 import styles from "./ProductDetail.module.scss";
 import RelatedProducts from "./RelatedProducts";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -36,7 +36,7 @@ const ProductDetailsPage = () => {
   const { data: cartData } = useGetCartQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
     usePostToCartMutation();
-
+  console.log(productDetails);
   const addToCart = () => {
     setCheck(true);
     if (!userData) {
@@ -117,6 +117,8 @@ const ProductDetailsPage = () => {
         }
       });
   }, [params]);
+
+  console.log(productDetails);
 
   return (
     <div>
@@ -213,13 +215,13 @@ const ProductDetailsPage = () => {
                 BDT
                 <span style={{ margin: "0 3px" }}>
                   {" "}
-                  {productDetails?.after_discount}
+                  {productDetails?.price}
                 </span>
                 <small>
                   {" "}
-                  <del>{productDetails?.price}</del>
+                  <del>{productDetails?.after_discount}</del>
                 </small>
-                {productDetails?.in_stock === false ? (
+                {productDetails?.stock === 0 ? (
                   <Button
                     sx={{
                       marginLeft: "20px",
