@@ -1,10 +1,4 @@
-import {
-  CircularProgress,
-  Container,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Container, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PaginationFilter from "../../Pages/Tutorials/AllTutorials/Components/PaginationsFilter/PaginationFilter";
 import TutorialSearchBar from "../../Pages/Tutorials/AllTutorials/Components/SearchBar/TutorialSearchBar";
@@ -44,7 +38,7 @@ const AllBlogsPage = () => {
   useEffect(() => {
     getBlogsData();
   }, [currentPage]);
-
+ 
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container maxWidth={"xl"}>
@@ -97,7 +91,7 @@ const AllBlogsPage = () => {
       {/* blogs */}
       <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
         <Grid container spacing={2} padding={1}>
-          {load && <CircularProgress />}
+          {/* {load && <CircularProgress />} */}
           {!load && blogsData?.length == 0 && <h5>No tutorials </h5>}
           {blogsData?.length &&
             blogsData?.map((tutorial) => (
