@@ -6,9 +6,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const OurSupplierNPartner = () => {
+  const theme = useTheme();
+  const isMScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch(`${backendUrl}/api/our_supplier`)
@@ -73,8 +77,8 @@ const OurSupplierNPartner = () => {
                 >
                   <div
                     style={{
-                      width: "150px",
-                      height: "150px",
+                      width: isMScreen ? "70px" : "150px",
+                      height: isMScreen ? "70px" : "150px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -85,7 +89,7 @@ const OurSupplierNPartner = () => {
                       {" "}
                       <img
                         style={{
-                          width: "150px",
+                          width: isMScreen ? "70px" : "150px",
                           // border: "1px solid #e2e2e2",
                         }}
                         // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
@@ -98,7 +102,7 @@ const OurSupplierNPartner = () => {
                 </div>
 
                 <Typography
-                  variant="subtitle1"
+                  variant={isMScreen ? "subtitle2" : "subtitle1"}
                   textAlign={"center"}
                   fontWeight={"bold"}
                   fontFamily={"Poppins"}

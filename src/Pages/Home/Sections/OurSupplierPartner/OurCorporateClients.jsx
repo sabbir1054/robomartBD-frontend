@@ -53,8 +53,8 @@ const OurCorporateClients = () => {
                   >
                     <Box
                       sx={{
-                        width: isMScreen ? "60px" : "150px",
-                        height: isMScreen ? "60px" : "150px",
+                        width: isMScreen ? "70px" : "150px",
+                        height: isMScreen ? "70px" : "150px",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -68,7 +68,7 @@ const OurCorporateClients = () => {
                     >
                       <img
                         style={{
-                          width: isMScreen ? "60px" : "150px",
+                          width: isMScreen ? "70px" : "150px",
                           // border: "1px solid #e2e2e2",
                         }}
                         // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
