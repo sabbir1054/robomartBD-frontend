@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useGetHomeDataQuery } from "../../redux/api/api";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 import { encryptAndStoreData } from "../../utils/encript";
 import CategoryProducts from "./Sections/CategoryWiseProducts/CategoryProducts";
 import Hero from "./Sections/HeroSection/Hero";
 import OurCorporateClients from "./Sections/OurSupplierPartner/OurCorporateClients";
 import OurSupplierNPartner from "./Sections/OurSupplierPartner/OurSupplierNPartner";
 import TopBlogs from "./Sections/TopBlogs/TopBlogs";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const Home = () => {
   const [reFetch, setRefetch] = useState(false);

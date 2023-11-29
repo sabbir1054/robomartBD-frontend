@@ -32,6 +32,25 @@
     background-color: rgb(32, 32, 32);
   }
 }
+.searchField2 {
+  background-color: white;
+  border-radius: 0px;
+  // width: 100%;
+  &:focus-visible {
+    outline: 1px solid red !important;
+  }
+}
+.searchBtn2 {
+  border-radius: 0px;
+  background-color: black;
+  color: white;
+  padding: 9px;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: rgb(32, 32, 32);
+  }
+}
 
 .whishListIcon,
 .cartIcon,
@@ -113,7 +132,7 @@
 // @media (max-width: 575.98px) {
 //   .searchBtn {
 //     display: unset !important;
-   
+
 //   }
 // }
 @media (min-width: 1400px) {
