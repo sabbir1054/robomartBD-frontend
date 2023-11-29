@@ -44,7 +44,7 @@ const OurSupplierNPartner = () => {
             // autoplay={true}
             breakpoints={{
               300: {
-                slidesPerView: 1,
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
               500: {
