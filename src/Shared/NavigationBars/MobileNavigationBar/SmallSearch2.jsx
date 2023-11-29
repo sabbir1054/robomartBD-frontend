@@ -110,7 +110,7 @@ const SmallSearch2 = () => {
   );
 
   return (
-    <div style={{ width: "100%", marginTop: "12px" }}>
+    <div style={{ width: "100%", marginBottom: "2px" }}>
       <Grid container spacing={0} style={{ width: "100" }}>
         <Grid item xs={10}>
           <Autosuggest
@@ -124,6 +124,7 @@ const SmallSearch2 = () => {
                 marginLeft: "12px",
                 padding: "10px 0px",
                 fontSize: "16px",
+                backgroundColor: "black!important",
               },
             }}
             suggestions={suggestions}

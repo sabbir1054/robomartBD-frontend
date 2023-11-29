@@ -7,6 +7,7 @@ import styles from "./AllProductsPage.module.scss";
 import AllProductsSection from "./Components/AllProductsSection/AllProductsSection";
 import CategorySection from "./Components/CategorySection/CategorySection";
 import { backendUrl } from "../../utils/backendApiUrlProvider";
+import SmallSearch2 from "../../Shared/NavigationBars/MobileNavigationBar/SmallSearch2";
 
 const AllProductPage = () => {
   const {
@@ -27,7 +28,7 @@ const AllProductPage = () => {
   return (
     <div>
       <Grid container>
-        <Grid
+      {/*   <Grid
           item
           xs={12}
           sm={12}
@@ -36,9 +37,9 @@ const AllProductPage = () => {
           className={styles.shop_search}
           style={{ display: "none" }}
         >
-          <SmallSearch />
-        </Grid>
-        <Grid item xs={12} sm={12} md={2} padding={2}>
+          <SmallSearch2 />
+        </Grid> */}
+        <Grid item xs={12} sm={12} md={2} padding={2} paddingTop={0}>
           <AllCategorySideMenu category={categoryList} />
         </Grid>
         <Grid item xs={12} sm={12} md={10} paddingY={2}>
