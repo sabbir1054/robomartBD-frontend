@@ -53,7 +53,8 @@ const Footer = () => {
                 className={styles.footerTitle}
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <HelpCenterIcon /> <span style={{margin:"0 5px"}}>Support</span>
+                <HelpCenterIcon />{" "}
+                <span style={{ margin: "0 5px" }}>Support</span>
               </Typography>
               <ul className={styles.footerLists}>
                 <li>
@@ -74,7 +75,6 @@ const Footer = () => {
                     Technical Video
                   </NavLink>
                 </li>
-               
               </ul>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -153,8 +153,9 @@ const Footer = () => {
             justifyContent: "space-between",
             alignItems: "center",
           }}
+          className={styles.copR8}
         >
-          <p className="">Copyright © 2023 RoboMart BD. All Rights Reserved.</p>
+          <p>Copyright © 2023 RoboMart BD. All Rights Reserved.</p>
           <Box
             style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
           >
