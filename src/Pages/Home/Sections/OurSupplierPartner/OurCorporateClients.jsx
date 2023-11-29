@@ -1,4 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -6,6 +8,8 @@ import "swiper/css/pagination";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 
 const OurCorporateClients = () => {
+  const theme = useTheme();
+  const isMScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch(`${backendUrl}/api/our_client`)
@@ -44,13 +48,13 @@ const OurCorporateClients = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      margin: "15px",
+                      margin: "5px",
                     }}
                   >
                     <Box
                       sx={{
-                        width: "150px",
-                        height: "150px",
+                        width: isMScreen ? "60px" : "150px",
+                        height: isMScreen ? "60px" : "150px",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -64,7 +68,7 @@ const OurCorporateClients = () => {
                     >
                       <img
                         style={{
-                          width: "150px",
+                          width: isMScreen ? "60px" : "150px",
                           // border: "1px solid #e2e2e2",
                         }}
                         // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
