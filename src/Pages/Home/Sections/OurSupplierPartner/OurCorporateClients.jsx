@@ -18,7 +18,7 @@ const OurCorporateClients = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
+    <div style={{  padding: "3vh 5vh" }}>
       <div>
         <Typography
           variant="h5"
