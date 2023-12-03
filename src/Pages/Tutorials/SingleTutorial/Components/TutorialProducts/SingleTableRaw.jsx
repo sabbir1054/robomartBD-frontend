@@ -51,7 +51,7 @@ const SingleTableRaw = ({ singleItem }) => {
             singleItem?.product?.id
           }/${(singleItem?.product?.name).replace(/ /g, "_")}`}
         >
-          <img src={`${singleItem?.product?.photo}`} alt="" srcset="" />
+          <img src={`${singleItem?.product?.photo}`} width={100} alt="" srcset="" />
         </Link>
       </StyledTableCell>
       <StyledTableCell align="left">
