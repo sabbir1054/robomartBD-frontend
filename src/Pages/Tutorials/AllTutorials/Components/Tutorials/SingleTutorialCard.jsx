@@ -8,7 +8,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./SingleTutorial.module.scss";
 const SingleTutorialCard = ({ tutorial }) => {
-  
   return (
     <>
       {" "}
@@ -17,11 +16,7 @@ const SingleTutorialCard = ({ tutorial }) => {
           component="img"
           alt="green iguana"
           height="140"
-          image={
-            tutorial?.image
-              ? `${tutorial?.image}`
-              : "/assets/no-img.jpg"
-          }
+          image={tutorial?.image ? `${tutorial?.image}` : "/assets/no-img.jpg"}
         />
         <CardContent>
           <NavLink
@@ -41,7 +36,7 @@ const SingleTutorialCard = ({ tutorial }) => {
             </Typography>
           </NavLink>
           <Typography variant="body2" color="text.secondary">
-            {tutorial?.description}
+            {tutorial?.description?.substring(0, 250) + "..."}
           </Typography>
         </CardContent>
         <CardActions>
@@ -53,7 +48,7 @@ const SingleTutorialCard = ({ tutorial }) => {
             style={{ textDecoration: "none" }}
           >
             {" "}
-            <Button size="small">Read More</Button>
+            <Button size="small" sx={{color:"var(--primaryColor)"}}>Read More</Button>
           </NavLink>
         </CardActions>
       </Card>
