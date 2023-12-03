@@ -84,7 +84,7 @@ const Footer = () => {
               <ul className={styles.footerLists}>
                 <li>
                   {" "}
-                  <NavLink className={styles.footerListItem}>
+                  <NavLink to={"/terms"} className={styles.footerListItem}>
                     Terms & Conditions
                   </NavLink>
                 </li>
@@ -94,7 +94,10 @@ const Footer = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className={styles.footerListItem}>
+                  <NavLink
+                    to={"warranty_policy"}
+                    className={styles.footerListItem}
+                  >
                     Warranty Policy
                   </NavLink>
                 </li>
