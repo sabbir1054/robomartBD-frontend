@@ -33,6 +33,11 @@ import MobileNavigation from "./Shared/NavigationBars/MobileNavigationBar/Mobile
 import MobileTopNavigation from "./Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
 import NavigationBar from "./Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "./utils/ScrollToTop";
+import ContactUs from "./Pages/ContactUsPage/ContactUs";
+import HowToPlaceOrder from "./Pages/HowToPlaceOrder/HowToPlaceOrder";
+import PrivacyPolicy from "./Pages/Policies/PrivacyPolicy";
+import ReturnPolicy from "./Pages/Policies/ReturnPolicy";
+import WarrantyPolicy from "./Pages/Policies/WarrantyPolicy";
 
 function App() {
   return (
@@ -133,12 +138,18 @@ function App() {
           path="/blogs/:tutorialId/:tutorialName"
           element={<SIngleTutorialPage />}
         />
-        <Route path="/forum" element={<ForumMainPage />} />
+
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
         <Route
           path="/product/:productId/:productName"
           element={<ProductDetailsPage />}
         />
+        <Route path="/forum" element={<ForumMainPage />} />
+        <Route path="/contact_us" element={<ContactUs />} />
+        <Route path="/how_order" element={<HowToPlaceOrder />} />
+        <Route path="/terms" element={<PrivacyPolicy />} />
+        <Route path="/return_policy" element={<ReturnPolicy />} />
+        <Route path="/warranty_policy" element={<WarrantyPolicy />} />
       </Routes>
       <Footer />
       <MobileNavigation />
