@@ -84,7 +84,7 @@ const WarrantyPolicy = () => {
             </Typography>
 
             <Typography paragraph>
-              Thank you for choosing [Your Company Name]. We appreciate your
+              Thank you for choosing Robomart bd. We appreciate your
               trust in our products.
             </Typography>
           </div>

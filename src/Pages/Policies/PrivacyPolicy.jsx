@@ -4,10 +4,10 @@ import React from "react";
 const PrivacyPolicy = () => {
   return (
     <Container maxWidth={"lg"} style={{ padding: "5vh 0" }}>
-      <Typography textAlign={"center"} marginTop={5} variant="h4">
+      <Typography textAlign={"center"} marginTop={5} marginBottom={2} variant="h4">
         Terms & Conditions
       </Typography>
-      <Typography paragraph>
+      <Typography paragraph gutterBottom style={{ margin: "10vh 0 !important" }}>
         Please carefully read these terms of service before using the Robomart
         Bd website or placing an order. Your use of this website confirms your
         unconditional acceptance of the following terms of service. If you do
@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
       </Typography>
       {/* Returning Purchased Items */}
 
-      <Typography fontWeight={"bold"} variant="h5" gutterBottom>
+      <Typography fontWeight={"bold"} variant="h5" gutterBottom id="return">
         Returning Purchased Items
       </Typography>
       <Typography paragraph>
@@ -118,7 +118,7 @@ const PrivacyPolicy = () => {
       <Typography fontWeight={"bold"} variant="h5" gutterBottom>
         Limitations of Liability
       </Typography>
-      <Typography  paragraph>
+      <Typography paragraph>
         Robomart Bd is not liable for damages or viruses/malware resulting from
         website use. In no event will Robomart Bd be liable for indirect,
         special, punitive, incidental, or consequential damages.

@@ -148,7 +148,7 @@ function App() {
         <Route path="/contact_us" element={<ContactUs />} />
         <Route path="/how_order" element={<HowToPlaceOrder />} />
         <Route path="/terms" element={<PrivacyPolicy />} />
-        <Route path="/return_policy" element={<ReturnPolicy />} />
+        <Route path="/terms/#return" element={<PrivacyPolicy />} />
         <Route path="/warranty_policy" element={<WarrantyPolicy />} />
       </Routes>
       <Footer />
