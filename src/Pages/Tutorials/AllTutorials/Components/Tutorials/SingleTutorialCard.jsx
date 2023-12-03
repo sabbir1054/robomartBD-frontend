@@ -5,9 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styles from "./SingleTutorial.module.scss";
 const SingleTutorialCard = ({ tutorial }) => {
+  const location = useLocation();
+  console.log(location);
   return (
     <>
       {" "}
@@ -20,10 +22,9 @@ const SingleTutorialCard = ({ tutorial }) => {
         />
         <CardContent>
           <NavLink
-            to={`/tutorials/${tutorial?.id}/${(tutorial?.title).replace(
-              / /g,
-              "_"
-            )}`}
+            to={`/${location?.pathname === "/blogs" ? "blogs" : "tutorials"}/${
+              tutorial?.id
+            }/${(tutorial?.title).replace(/ /g, "_")}`}
             style={{ textDecoration: "none" }}
           >
             <Typography
@@ -48,7 +49,9 @@ const SingleTutorialCard = ({ tutorial }) => {
             style={{ textDecoration: "none" }}
           >
             {" "}
-            <Button size="small" sx={{color:"var(--primaryColor)"}}>Read More</Button>
+            <Button size="small" sx={{ color: "var(--primaryColor)" }}>
+              Read More
+            </Button>
           </NavLink>
         </CardActions>
       </Card>

@@ -122,7 +122,15 @@ function App() {
           element={<SingleCategoryAllTutorial />}
         />
         <Route
+          path="/blogs/category/:categoryId/:categoryName"
+          element={<SingleCategoryAllTutorial />}
+        />
+        <Route
           path="/tutorials/:tutorialId/:tutorialName"
+          element={<SIngleTutorialPage />}
+        />
+        <Route
+          path="/blogs/:tutorialId/:tutorialName"
           element={<SIngleTutorialPage />}
         />
         <Route path="/forum" element={<ForumMainPage />} />
