@@ -75,16 +75,7 @@ const NavigationDrawer = () => {
               Register
             </NavLink>
           </ListItem>
-          <ListItem
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              borderBottom: "1px solid #cfcfcfdb",
-            }}
-            // className={styles.drawerListItem}
-          >
-            <SmallSearch toggleDrawer={toggleDrawer} />
-          </ListItem>
+          
         </List>
       </Drawer>
     </>

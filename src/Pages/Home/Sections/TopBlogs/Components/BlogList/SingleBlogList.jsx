@@ -23,7 +23,7 @@ const SingleBlogList = ({ blog }) => {
                 style={{ maxWidth: "200px" }}
                 image={
                   blog?.image
-                    ? `${backendUrl}${blog?.image}`
+                    ? `${blog?.image}`
                     : "/assets/no-img.jpg"
                 }
                 title="Blog Image"

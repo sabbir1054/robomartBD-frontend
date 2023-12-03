@@ -21,6 +21,8 @@ const SIngleTutorialPage = () => {
   }, []);
 
   /* track */
+  console.log(tutorialDetails);
+  console.log("ok");
 
   useEffect(() => {
     const handleScroll = () => {

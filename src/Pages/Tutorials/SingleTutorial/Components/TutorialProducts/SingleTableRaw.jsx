@@ -4,6 +4,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
   useGetUserQuery,
@@ -20,7 +21,7 @@ const SingleTableRaw = ({ singleItem }) => {
   const { data: userData } = useGetUserQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
     usePostToCartMutation();
-
+  console.log(singleItem);
   const addToCart = () => {
     if (!userData) {
       Swal.fire({
@@ -35,17 +36,24 @@ const SingleTableRaw = ({ singleItem }) => {
         product: { product: singleItem?.id, quantity: quantity },
       };
       postToCart(options);
-      
     }
   };
 
   if (isSuccess) {
     successNotify();
   }
-  
+
   return (
     <>
-      <StyledTableCell align="left">{singleItem?.product_code}</StyledTableCell>
+      <StyledTableCell align="left">
+        <Link
+          to={`/product/${
+            singleItem?.product?.id
+          }/${(singleItem?.product?.name).replace(/ /g, "_")}`}
+        >
+          <img src={`${singleItem?.product?.photo}`} alt="" srcset="" />
+        </Link>
+      </StyledTableCell>
       <StyledTableCell align="left">
         {singleItem?.product?.name}
       </StyledTableCell>

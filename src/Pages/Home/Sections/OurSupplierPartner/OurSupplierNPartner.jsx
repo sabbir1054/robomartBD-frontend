@@ -1,14 +1,15 @@
 import { Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Navigation } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
+import styles from "./OurPartnerClinet.module.scss";
 
 const OurSupplierNPartner = () => {
   const theme = useTheme();
@@ -19,9 +20,11 @@ const OurSupplierNPartner = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  console.log(data);
+
   return (
-    <div style={{ minHeight: "25vh", padding: "3vh 5vh" }}>
+    <div
+      style={{ minHeight: "25vh", padding: "0vh 5vh", marginBottom: "15vh" }}
+    >
       <div>
         <Typography
           variant="h5"
@@ -38,10 +41,9 @@ const OurSupplierNPartner = () => {
           <Swiper
             slidesPerView={5}
             spaceBetween={20}
-            // pagination={{ clickable: true }}
             navigation={true}
-            modules={[Navigation]}
-            // autoplay={true}
+            autoplay={true}
+            modules={[Navigation, Autoplay]}
             breakpoints={{
               300: {
                 slidesPerView: 2,
@@ -60,14 +62,14 @@ const OurSupplierNPartner = () => {
                 spaceBetween: 40,
               },
               1024: {
-                slidesPerView: 5,
-                spaceBetween: 50,
+                slidesPerView: 6,
+                spaceBetween: 2,
               },
             }}
             className="mySwiper"
           >
             {data?.map((company) => (
-              <SwiperSlide>
+              <SwiperSlide className={styles.singlePartner}>
                 <div
                   style={{
                     display: "flex",
@@ -82,11 +84,10 @@ const OurSupplierNPartner = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      border: "1px solid #e2e2e2",
+                      // border: "1px solid #e2e2e2",
                     }}
                   >
                     <NavLink to={`${company?.link}`}>
-                      {" "}
                       <img
                         style={{
                           width: isMScreen ? "70px" : "150px",

@@ -69,7 +69,7 @@ const MobileTopNavigation = () => {
                   style={{
                     color: "white",
                     backgroundColor: "black",
-                    marginTop: "8px",
+                    marginTop: "-18px",
                   }}
                   size="small"
                 >

@@ -1,12 +1,14 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useEffect, useState } from "react";
+import { Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
-
+import styles from "./OurPartnerClinet.module.scss"
 const OurCorporateClients = () => {
   const theme = useTheme();
   const isMScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -18,7 +20,7 @@ const OurCorporateClients = () => {
   }, []);
 
   return (
-    <div style={{  padding: "3vh 5vh" }}>
+    <div style={{ padding: "3vh 5vh", marginBottom: "15vh" }}>
       <div>
         <Typography
           variant="h5"
@@ -33,7 +35,7 @@ const OurCorporateClients = () => {
         </Typography>
         <>
           {/* grid */}
-          <Container maxWidth={"lg"}>
+          {/*  <Container maxWidth={"lg"}>
             <Box
               sx={{
                 display: "flex",
@@ -80,17 +82,18 @@ const OurCorporateClients = () => {
                   </Box>
                 ))}
             </Box>
-          </Container>
-          {/* <Swiper
+          </Container> */}
+          <Swiper
             slidesPerView={5}
             spaceBetween={20}
-            // pagination={{ clickable: true }}
             navigation={true}
-            modules={[Navigation]}
-            // autoplay={true}
+            autoplay={{
+              delay: 2500,
+            }}
+            modules={[Navigation, Autoplay]}
             breakpoints={{
               300: {
-                slidesPerView: 1,
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
               500: {
@@ -106,14 +109,14 @@ const OurCorporateClients = () => {
                 spaceBetween: 40,
               },
               1024: {
-                slidesPerView: 5,
-                spaceBetween: 50,
+                slidesPerView: 6,
+                spaceBetween: 2,
               },
             }}
             className="mySwiper"
           >
-            {data?.map((company) => (
-              <SwiperSlide>
+            {data?.map((company, idx) => (
+              <SwiperSlide key={idx} className={styles.singlePartner}>
                 <div
                   style={{
                     display: "flex",
@@ -128,7 +131,7 @@ const OurCorporateClients = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      border: "1px solid #e2e2e2",
+                      // border: "1px solid #e2e2e2",
                     }}
                   >
                     <img
@@ -137,7 +140,7 @@ const OurCorporateClients = () => {
                         // border: "1px solid #e2e2e2",
                       }}
                       // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`${backendUrl}${company?.logo}`}
+                      src={`${company?.logo}`}
                       alt="no-image"
                       srcset=""
                     />
@@ -154,7 +157,7 @@ const OurCorporateClients = () => {
                 </Typography>
               </SwiperSlide>
             ))}
-          </Swiper> */}
+          </Swiper>
         </>
       </div>
     </div>

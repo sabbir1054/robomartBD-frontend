@@ -1,5 +1,3 @@
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import { Button, Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -32,6 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TutorialProducts = ({ tutorialDetails }) => {
+  console.log(tutorialDetails);
   return (
     <Container style={{ padding: "5vh" }}>
       <Typography
@@ -45,19 +44,18 @@ const TutorialProducts = ({ tutorialDetails }) => {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">Product Code</StyledTableCell>
+                <StyledTableCell align="left">Product photo</StyledTableCell>
                 <StyledTableCell align="left">Product Name</StyledTableCell>
                 <StyledTableCell align="center">Quantity</StyledTableCell>
                 <StyledTableCell align="right">Add to cart</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {tutorialDetails?.items?.map((singleItem) => (
+              {tutorialDetails?.items?.map((singleItem,idx) => (
                 <StyledTableRow
-                //   key={row.name}
+                  key={idx}
                 >
-                  <SingleTableRaw singleItem={singleItem } />
-                  
+                  <SingleTableRaw singleItem={singleItem} />
                 </StyledTableRow>
               ))}
             </TableBody>

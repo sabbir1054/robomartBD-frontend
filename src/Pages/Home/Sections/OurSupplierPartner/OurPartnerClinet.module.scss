@@ -1,0 +1,7 @@
+.singlePartner{
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        background-color: #b6b6b624;
+        cursor: pointer;
+    }
+}

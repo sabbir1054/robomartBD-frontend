@@ -5,7 +5,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -13,8 +12,6 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-import SearchIcon from "@mui/icons-material/Search";
 
 const AvaterBtnMeny = ({ data }) => {
   const navigate = useNavigate();
@@ -52,7 +49,6 @@ const AvaterBtnMeny = ({ data }) => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-     
       handleSearch();
     }
   };
@@ -60,7 +56,7 @@ const AvaterBtnMeny = ({ data }) => {
     <>
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title={`Your dashboard`}>
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0,}}>
             <Avatar alt="Remy Sharp" style={{ backgroundColor: "black" }} />
           </IconButton>
         </Tooltip>
@@ -116,26 +112,6 @@ const AvaterBtnMeny = ({ data }) => {
             <Typography textAlign="center">Logout</Typography>
           </MenuItem>
           <Divider />
-          <MenuItem>
-            {/* <div style={{ display: "none" }} className={styles.searchBtn}>
-              <SmallSearch />
-            </div> */}
-            <TextField
-              variant="outlined"
-              value={query}
-              fullWidth
-              placeholder="Search..."
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={handleSearch}>
-                    <SearchIcon />
-                  </IconButton>
-                ),
-              }}
-            />
-          </MenuItem>
         </Menu>
       </Box>
     </>
