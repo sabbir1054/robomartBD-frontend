@@ -1,10 +1,10 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 import SingleBlogList from "./Components/BlogList/SingleBlogList";
 import SingleHeroBlog from "./Components/SingleHeroBlog/SingleHeroBlog";
 import styles from "./TopBlogs.module.scss";
-import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 const TopBlogs = () => {
   const [blogsData, setBlogsData] = useState([]);
 
@@ -26,7 +26,7 @@ const TopBlogs = () => {
           fontWeight={"bold"}
           borderBottom={"1px solid #f2f2f2"}
         >
-          Top Tutorials
+          Top Blogs
         </Typography>
         <Grid
           container
@@ -47,13 +47,13 @@ const TopBlogs = () => {
           </Grid>
         </Grid>
         <Box display={"flex"} justifyContent={"center"} paddingY={3}>
-          <NavLink to={`/tutorials`}>
+          <NavLink to={`/blogs`}>
             <Button
               variant="contained"
               sx={{ backgroundColor: "black" }}
               className={styles.blogSectionBtn}
             >
-              Explore Tutorial Section
+              Explore More Blogs
             </Button>
           </NavLink>
         </Box>

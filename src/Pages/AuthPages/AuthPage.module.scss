@@ -136,6 +136,15 @@
     
   }
 }
+
+.googleBtn{
+  transition: all 0.3s ease-in-out;
+  &:hover{
+    background-color: var(--primaryColor) !important;
+    color: black !important;
+    font-weight: bold;
+  }
+}
 @media (max-width: 400px) {
   
 }

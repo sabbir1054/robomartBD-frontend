@@ -1,17 +1,10 @@
 import React from "react";
 
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 
-import styles from "./SingleHeroBolg.module.scss";
 import { NavLink } from "react-router-dom";
-const SingleHeroBlog = ({blog}) => {
+import styles from "./SingleHeroBolg.module.scss";
+const SingleHeroBlog = ({ blog }) => {
   return (
     <>
       <Card className={styles.cardWrapper}>
@@ -19,12 +12,8 @@ const SingleHeroBlog = ({blog}) => {
           {" "}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              style={{ maxWidth: "300px" }}
-              src={
-                blog?.image
-                  ? `${blog?.image}`
-                  : "/assets/no-img.jpg"
-              }
+              style={{ maxHeight: "500px" }}
+              src={blog?.image ? `${blog?.image}` : "/assets/no-img.jpg"}
               alt=""
               srcset=""
             />
@@ -47,10 +36,12 @@ const SingleHeroBlog = ({blog}) => {
           <Box display={"flex"} justifyContent={"flex-end"}>
             {" "}
             <NavLink to={`/blog/${blog?.id}`}>
-              <Button variant="contained" className={styles.buyThisBtn}>
-                <Typography variant="body1" component="p">
-                  Details
-                </Typography>
+              <Button
+                variant="contained"
+                size="small"
+                className={styles.buyThisBtn}
+              >
+                <Typography variant="body">Details</Typography>
               </Button>
             </NavLink>
           </Box>

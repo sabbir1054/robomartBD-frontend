@@ -2,6 +2,7 @@
 import GoogleIcon from "@mui/icons-material/Google";
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import styles from "./AuthPage.module.scss"
 const LoginWithGoogle = () => {
   const apiUrl = import.meta.env.VITE_GOOGLE_AUTH_LINK;
   const [authUrl, setAuthUrl] = useState("");
@@ -36,6 +37,7 @@ const LoginWithGoogle = () => {
           width: "100%",
           padding: "10px",
         }}
+        className={styles.googleBtn}
       >
         <GoogleIcon />{" "}
         <span style={{ margin: "0px 5px" }}> Login with google</span>

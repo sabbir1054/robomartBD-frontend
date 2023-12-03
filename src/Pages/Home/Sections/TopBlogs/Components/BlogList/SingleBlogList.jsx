@@ -9,7 +9,6 @@ import {
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./BlogList.module.scss";
-import { backendUrl } from "../../../../../../utils/backendApiUrlProvider";
 const SingleBlogList = ({ blog }) => {
   return (
     <>
@@ -20,12 +19,8 @@ const SingleBlogList = ({ blog }) => {
               <CardMedia
                 component="img"
                 className={styles.cardMedia}
-                style={{ maxWidth: "200px" }}
-                image={
-                  blog?.image
-                    ? `${blog?.image}`
-                    : "/assets/no-img.jpg"
-                }
+                style={{ maxHeight: "200px" }}
+                image={blog?.image ? `${blog?.image}` : "/assets/no-img.jpg"}
                 title="Blog Image"
               />
             </NavLink>
@@ -42,7 +37,6 @@ const SingleBlogList = ({ blog }) => {
                   {blog?.title}
                 </Typography>
               </NavLink>
-
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -56,7 +50,7 @@ const SingleBlogList = ({ blog }) => {
                   to={`/blog/${blog?.id}`}
                   style={{ color: "white", textDecoration: "none" }}
                 >
-                  <Typography variant="body1" component="p">
+                  <Typography variant="body">
                     Details
                   </Typography>
                 </NavLink>

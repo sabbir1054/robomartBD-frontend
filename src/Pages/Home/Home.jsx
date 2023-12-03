@@ -8,6 +8,7 @@ import Hero from "./Sections/HeroSection/Hero";
 import OurCorporateClients from "./Sections/OurSupplierPartner/OurCorporateClients";
 import OurSupplierNPartner from "./Sections/OurSupplierPartner/OurSupplierNPartner";
 import TopBlogs from "./Sections/TopBlogs/TopBlogs";
+import TopTutorial from "./Sections/TopTutorial/TopTutorial";
 
 const Home = () => {
   const [reFetch, setRefetch] = useState(false);
@@ -53,7 +54,7 @@ const Home = () => {
       <Hero />
       <CategoryProducts />
       <TopBlogs />
-
+      <TopTutorial />
       <OurCorporateClients />
       <OurSupplierNPartner />
       {/* <JoinOurCommunity /> */}
