@@ -146,7 +146,7 @@ function App() {
         />
         <Route path="/forum" element={<ForumMainPage />} />
         <Route path="/contact_us" element={<ContactUs />} />
-        <Route path="/how_order" element={<HowToPlaceOrder />} />
+        <Route path="/how_place_order" element={<HowToPlaceOrder />} />
         <Route path="/terms" element={<PrivacyPolicy />} />
         <Route path="/terms/#return" element={<PrivacyPolicy />} />
         <Route path="/warranty_policy" element={<WarrantyPolicy />} />

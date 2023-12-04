@@ -59,17 +59,19 @@ const Footer = () => {
               <ul className={styles.footerLists}>
                 <li>
                   {" "}
-                  <NavLink className={styles.footerListItem}>
+                  <NavLink to={"/contact_us"} className={styles.footerListItem}>
                     Contact Us
                   </NavLink>
                 </li>
                 <li>
                   {" "}
-                  <NavLink className={styles.footerListItem}>
+                  <NavLink
+                    to={"/how_place_order"}
+                    className={styles.footerListItem}
+                  >
                     How to place order
                   </NavLink>
                 </li>
-                
               </ul>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -84,7 +86,10 @@ const Footer = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/terms/#return"} className={styles.footerListItem}>
+                  <NavLink
+                    to={"/terms/#return"}
+                    className={styles.footerListItem}
+                  >
                     Return Policy
                   </NavLink>
                 </li>

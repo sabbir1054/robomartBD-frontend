@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import EditorTextViewer from "../../../../../Shared/EditorTextViewer/EditorTextViewer";
-import styles from "./TutorialSinglePageStyle.module.scss"
 const TutorialSections = ({
   activeSection,
   setActiveSection,
@@ -47,9 +46,7 @@ const TutorialSections = ({
             {test?.page_title}
           </Typography>
           <Typography variant="body1" textAlign={"justify"}>
-            <div className={styles.allSections}>
-              {test?.content && <EditorTextViewer froalaHTML={test?.content} />}
-            </div>
+            {test?.content && <EditorTextViewer froalaHTML={test?.content} />}
           </Typography>
         </div>
       ))}
