@@ -13,6 +13,7 @@ const MobileTopNavigation = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [data, setData] = useState({});
   const { data: userData, isLoading, isError } = useGetUserQuery();
+  console.log(userData);
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
@@ -48,13 +49,29 @@ const MobileTopNavigation = () => {
           display={`flex`}
           justifyContent={`space-between`}
         >
-          <Grid item xs={10}>
+          <Grid item xs={8}>
             <NavLink to="/">
               {" "}
               <img src="/assets/logo.png" alt="" width={200} srcset="" />
             </NavLink>
           </Grid>
-
+          <Grid item xs={2} display={"flex"} justifyContent={"end"}>
+            {
+              <div>
+                <IconButton
+                  onClick={() => setShowSearchBar(!showSearchBar)}
+                  style={{
+                    color: "white",
+                    backgroundColor: "black",
+                    marginTop: "18px",
+                  }}
+                  size="small"
+                >
+                  <SearchIcon />
+                </IconButton>
+              </div>
+            }
+          </Grid>
           <Grid item xs={2} paddingRight={1} marginTop={1}>
             <div
               style={{
@@ -63,19 +80,7 @@ const MobileTopNavigation = () => {
                 alignItems: "center",
               }}
             >
-              <div>
-                <IconButton
-                  onClick={() => setShowSearchBar(!showSearchBar)}
-                  style={{
-                    color: "white",
-                    backgroundColor: "black",
-                    marginTop: "-18px",
-                  }}
-                  size="small"
-                >
-                  <SearchIcon />
-                </IconButton>
-              </div>
+           
               {data && data?.email && data?.role === "Admin" && (
                 <AvarterBtnAdmin data={data} />
               )}
