@@ -55,7 +55,7 @@ const SIngleTutorialPage = () => {
         </Typography>
 
         <Grid container spacing={2}>
-          <Grid item md={12} lg={8}>
+          <Grid item xs={12} md={12} lg={8}>
             <TutorialHead
               setActiveSection={setActiveSection}
               activeSection={activeSection}
