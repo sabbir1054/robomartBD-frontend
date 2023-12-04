@@ -17,7 +17,7 @@ import SingleTutorialCard from "./Components/Tutorials/SingleTutorialCard";
 const AllTutorialPage = () => {
   const [load, setLoad] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(30);
   const [tutorialsData, setTutorialsData] = useState([]);
 
   /* pagination value */
