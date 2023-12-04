@@ -25,7 +25,7 @@ const NavigationDrawer = () => {
     <>
       <IconButton variant="text" onClick={toggleDrawer} sx={{ color: "white" }}>
         <MenuIcon
-          sx={{ fontWeight: "bold", fontSize: "35px", marginTop: "10px" }}
+          sx={{ fontWeight: "bold", fontSize: "35px",}}
         />{" "}
       </IconButton>
       <Drawer anchor="right" open={open} onClose={toggleDrawer}>
