@@ -11,7 +11,7 @@ import { backendUrl } from "../../utils/backendApiUrlProvider";
 const AllBlogsPage = () => {
   const [load, setLoad] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10);
+  const [itemsPerPage] = useState(5);
   const [blogsData, setBlogsData] = useState([]);
 
   /* pagination value */
@@ -30,15 +30,20 @@ const AllBlogsPage = () => {
     if (result?.results) {
       setLoad(false);
     }
-    // set data
-    setTotalPages(result?.count);
+    
     setBlogsData(result?.results);
   };
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = blogsData?.slice(indexOfFirstItem, indexOfLastItem);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     getBlogsData();
   }, [currentPage]);
- 
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container maxWidth={"xl"}>
@@ -84,7 +89,7 @@ const AllBlogsPage = () => {
       <Container maxWidth={"xl"}>
         <PaginationFilter
           handlePageChange={handlePageChange}
-          totalPages={totalPages}
+          totalPages={Math.ceil(blogsData?.length / itemsPerPage)}
           page={currentPage}
         />
       </Container>
@@ -93,8 +98,8 @@ const AllBlogsPage = () => {
         <Grid container spacing={2} padding={1}>
           {/* {load && <CircularProgress />} */}
           {!load && blogsData?.length == 0 && <h5>No tutorials </h5>}
-          {blogsData?.length &&
-            blogsData?.map((tutorial) => (
+          {currentItems?.length &&
+            currentItems?.map((tutorial) => (
               <Grid item xs={6} sm={6} md={4} lg={3}>
                 <SingleTutorialCard tutorial={tutorial} />
               </Grid>
@@ -110,7 +115,7 @@ const AllBlogsPage = () => {
       >
         <BottomPagination
           handlePageChange={handlePageChange}
-          totalPages={totalPages}
+          totalPages={Math.ceil(blogsData?.length / itemsPerPage)}
           page={currentPage}
         />
       </div>

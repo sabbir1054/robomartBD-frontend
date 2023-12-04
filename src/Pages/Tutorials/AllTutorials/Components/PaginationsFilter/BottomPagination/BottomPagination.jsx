@@ -2,8 +2,8 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
 
-const BottomPagination = ({ handlePageChange, totalPages, page }) => {
-  
+const BottomPagination = ({ handlePageChange, totalPages, }) => {
+  console.log(totalPages);
 
   return (
     <>
@@ -11,7 +11,6 @@ const BottomPagination = ({ handlePageChange, totalPages, page }) => {
         <Pagination
           color="success"
           count={totalPages}
-          page={totalPages}
           onChange={handlePageChange}
         />
       </Stack>

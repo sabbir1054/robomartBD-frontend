@@ -6,17 +6,18 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { backendUrl } from "../../../utils/backendApiUrlProvider";
 import BottomPagination from "./Components/PaginationsFilter/BottomPagination/BottomPagination";
 import PaginationFilter from "./Components/PaginationsFilter/PaginationFilter";
 import TutorialSearchBar from "./Components/SearchBar/TutorialSearchBar";
 import TutorialCategoryNav from "./Components/TutorialCategoryNav/TutorialCategoryNav";
 import SingleTutorialCard from "./Components/Tutorials/SingleTutorialCard";
-import { backendUrl } from "../../../utils/backendApiUrlProvider";
 
+  
 const AllTutorialPage = () => {
   const [load, setLoad] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10);
+  const [itemsPerPage] = useState(5);
   const [tutorialsData, setTutorialsData] = useState([]);
 
   /* pagination value */
@@ -35,11 +36,14 @@ const AllTutorialPage = () => {
     if (result?.results) {
       setLoad(false);
     }
-    // set data
-    setTotalPages(result?.count);
+
     setTutorialsData(result?.results);
   };
-
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = tutorialsData?.slice(indexOfFirstItem, indexOfLastItem);
+const paginate = (pageNumber) => setCurrentPage(pageNumber);
   useEffect(() => {
     getTutorialsData();
   }, [currentPage]);
@@ -89,7 +93,7 @@ const AllTutorialPage = () => {
       <Container maxWidth={"xl"}>
         <PaginationFilter
           handlePageChange={handlePageChange}
-          totalPages={totalPages}
+          totalPages={Math.ceil(tutorialsData?.length / itemsPerPage)}
           page={currentPage}
         />
       </Container>
@@ -98,8 +102,8 @@ const AllTutorialPage = () => {
         <Grid container spacing={2} padding={1}>
           {load && <CircularProgress />}
           {!load && tutorialsData?.length == 0 && <h5>No tutorials </h5>}
-          {tutorialsData?.length &&
-            tutorialsData?.map((tutorial) => (
+          {currentItems?.length &&
+            currentItems?.map((tutorial) => (
               <Grid item xs={6} sm={6} md={4} lg={3}>
                 <SingleTutorialCard tutorial={tutorial} />
               </Grid>
@@ -111,7 +115,7 @@ const AllTutorialPage = () => {
       >
         <BottomPagination
           handlePageChange={handlePageChange}
-          totalPages={totalPages}
+          totalPages={Math.ceil(tutorialsData?.length / itemsPerPage)}
           page={currentPage}
         />
       </div>

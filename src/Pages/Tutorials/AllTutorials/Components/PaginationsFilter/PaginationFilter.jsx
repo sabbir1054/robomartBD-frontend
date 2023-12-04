@@ -7,26 +7,11 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 
-const options = [
-  "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel",
-];
 
 const ITEM_HEIGHT = 48;
 
-const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
+const PaginationFilter = ({ handlePageChange, totalPages, page, }) => {
+  
   const [tags, seTags] = useState([]);
   const getTagsData = async () => {
     const dataToDb = await fetch(`${backendUrl}/blog/get_all_tag`);
@@ -99,7 +84,7 @@ const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
           </div>
         </Grid>
         <Grid item xs={12} sm={6} display={"flex"} justifyContent={"end"}>
-          <Stack spacing={2}>
+          {/* <Stack spacing={2}>
             <Pagination
               count={totalPages}
               variant="outlined"
@@ -107,8 +92,9 @@ const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
               onChange={handlePageChange}
               color="success"
             />
-          </Stack>
+          </Stack> */}
         </Grid>
+      
       </Grid>
     </div>
   );

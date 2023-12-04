@@ -138,7 +138,7 @@
 }
 
 .googleBtn{
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; 
   &:hover{
     background-color: var(--primaryColor) !important;
     color: black !important;
