@@ -120,11 +120,10 @@ const SmallSearch2 = () => {
               value: query,
               onChange: handleInputChange,
               style: {
-                width: "95%",
+                width: "100%",
                 marginLeft: "12px",
                 padding: "10px 0px",
                 fontSize: "16px",
-                backgroundColor: "black!important",
               },
             }}
             suggestions={suggestions}
