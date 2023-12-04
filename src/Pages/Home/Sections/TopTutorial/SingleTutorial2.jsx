@@ -42,7 +42,7 @@ const SingleTutorial2 = ({ tutorial }) => {
         </CardContent>
         <CardActions>
           <NavLink
-            to={`/tutorials/${tutorial?.id}/${(tutorial?.title).replace(
+            to={`/tutorials/${tutorial?.id}/${(tutorial?.title)?.replace(
               / /g,
               "_"
             )}`}

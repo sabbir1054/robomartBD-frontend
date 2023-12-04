@@ -20,13 +20,13 @@ const TopTutorial = () => {
     fetch(`${backendUrl}/blog/get_tutorial?page=1`)
       .then((res) => res.json())
       .then((data) => {
-        setTutorialsData(data?.results.slice(0, 6));
+        setTutorialsData(data?.results.slice(0, 4));
         setLoad(false);
       });
   }, []);
 
   return (
-    <div>
+    <div style={{ margin: "5vh 0px" }}>
       <Container maxWidth="xl">
         <Typography
           textAlign={"center"}
@@ -39,9 +39,9 @@ const TopTutorial = () => {
           Top Tutorials
         </Typography>
         <Grid container spacing={2}>
-          {load && <CircularProgress />}
-          {tutorialsData?.map((tutorial) => (
-            <Grid item xs={"4"} marginY={2}>
+          {load && !tutorialsData && <CircularProgress />}
+          {tutorialsData?.map((tutorial, idx) => (
+            <Grid item xs={"3"} marginY={2} key={idx}>
               <SingleTutorial2 tutorial={tutorial} />
             </Grid>
           ))}

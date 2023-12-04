@@ -47,12 +47,10 @@ const SingleBlogList = ({ blog }) => {
 
               <Button variant="contained" className={styles.buyThisBtn}>
                 <NavLink
-                  to={`/blog/${blog?.id}`}
+                  to={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
                   style={{ color: "white", textDecoration: "none" }}
                 >
-                  <Typography variant="body">
-                    Details
-                  </Typography>
+                  <Typography variant="body">Details</Typography>
                 </NavLink>
               </Button>
             </CardContent>

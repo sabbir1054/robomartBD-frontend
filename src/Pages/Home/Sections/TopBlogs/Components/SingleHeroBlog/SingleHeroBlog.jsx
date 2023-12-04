@@ -35,7 +35,12 @@ const SingleHeroBlog = ({ blog }) => {
           </Typography> */}
           <Box display={"flex"} justifyContent={"flex-end"}>
             {" "}
-            <NavLink to={`/blog/${blog?.id}`}>
+            <NavLink
+              to={`/blogs/${blog?.id}/${(blog?.title)?.replace(
+                / /g,
+                "_"
+              )}`}
+            >
               <Button
                 variant="contained"
                 size="small"
