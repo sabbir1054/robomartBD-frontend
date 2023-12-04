@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
+import styles from "./TutorialsProductTable.module.scss"
 import * as React from "react";
 import SingleTableRaw from "./SingleTableRaw";
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,7 +33,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const TutorialProducts = ({ tutorialDetails }) => {
   console.log(tutorialDetails);
   return (
-    <Container style={{ padding: "5vh" }}>
+    <Container
+      className={styles.product_table_container}
+      style={{ padding: "5vh" }}
+    >
       <Typography
         variant="h6"
         style={{ fontFamily: "Poppins", fontWeight: "bold", padding: "2vh 0" }}
@@ -51,10 +55,8 @@ const TutorialProducts = ({ tutorialDetails }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tutorialDetails?.items?.map((singleItem,idx) => (
-                <StyledTableRow
-                  key={idx}
-                >
+              {tutorialDetails?.items?.map((singleItem, idx) => (
+                <StyledTableRow key={idx}>
                   <SingleTableRaw singleItem={singleItem} />
                 </StyledTableRow>
               ))}

@@ -8,6 +8,7 @@ import TutorialProducts from "./Components/TutorialProducts/TutorialProducts";
 import TutorialSections from "./Components/TutorialSectionsScroll/TutorialSections";
 import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
 import TutorialHead from "./Components/TutorialsHead/TutorialHead";
+import styles from "./SingleTutorial.module.scss"
 const SIngleTutorialPage = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [changePosition, setChangePosition] = useState(false);
@@ -20,9 +21,6 @@ const SIngleTutorialPage = () => {
       .then((data) => setTutorialDetails(data));
   }, []);
 
-  /* track */
-  console.log(tutorialDetails);
-  console.log("ok");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +48,7 @@ const SIngleTutorialPage = () => {
             fontFamily: "Poppins",
             fontWeight: "bold",
           }}
+          className={styles.tutorialTitle}
         >
           {tutorialDetails?.title}
         </Typography>
@@ -62,7 +61,7 @@ const SIngleTutorialPage = () => {
               tutorialDetails={tutorialDetails}
             />
             <TutorialProducts tutorialDetails={tutorialDetails} />
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%" }} className={styles.allSections}>
               {" "}
               <TutorialSections
                 setActiveSection={setActiveSection}

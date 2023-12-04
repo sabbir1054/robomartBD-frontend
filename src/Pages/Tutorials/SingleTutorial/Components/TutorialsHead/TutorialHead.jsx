@@ -36,7 +36,7 @@ const TutorialHead = ({ activeSection, setActiveSection, tutorialDetails }) => {
         avatar={<Avatar sx={{ bgcolor: "red" }} aria-label="recipe"></Avatar>}
         title={`${tutorialDetails?.created_by?.first_name}
           ${tutorialDetails?.created_by?.last_name}`}
-        subheader={tutorialDetails?.created_by?.email}
+        
       />
       <Divider color={"#f2f2f2"} />
       <div id={divId} className="scroll-spy-section">
@@ -47,6 +47,7 @@ const TutorialHead = ({ activeSection, setActiveSection, tutorialDetails }) => {
             fontWeight: "bold",
             marginTop: "3vh",
           }}
+          
         >
           {tutorialDetails?.pages?.length > 0 &&
             tutorialDetails?.pages[0]?.page_title}
@@ -56,27 +57,7 @@ const TutorialHead = ({ activeSection, setActiveSection, tutorialDetails }) => {
             <EditorTextViewer froalaHTML={tutorialDetails?.pages[0]?.content} />
           )}
         </Typography>
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-
-            margin: "2vh 0",
-          }}
-        >
-          <img
-            src="/assets/photo-blog.jpg"
-            alt=""
-            style={{
-              maxWidth: "400px",
-              transition: "transform 0.3s",
-              border: "1px solid #e2e2e2",
-            }}
-            srcset=""
-            onMouseOver={(e) => (e.target.style.transform = "scale(1.03)")}
-            onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-          />
-        </div> */}
+     
       </div>
     </>
   );

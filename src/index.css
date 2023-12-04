@@ -73,20 +73,17 @@ small {
   cursor: pointer;
 }
 
-
 .active-scroll-spy {
   background-color: yellowgreen;
   border-radius: 15px;
 }
 
-.code_area{
+.code_area {
   padding: 10px;
   border-radius: 10px;
-  background-color: #383B40;
-  color: #D3D3D3;
+  background-color: #383b40;
+  color: #d3d3d3;
 }
-
-
 
 .custom-suggestions-container {
   color: black;
@@ -100,7 +97,6 @@ small {
   max-height: 300px;
   overflow-y: auto;
 }
-
 
 @media print {
   .printContent {
@@ -150,4 +146,23 @@ small {
 }
 .swiper-pagination-bullet {
   background-color: rgb(255, 255, 255);
+}
+
+/* X-Small devices (portrait phones, less than 576px)  */
+@media (max-width: 575.98px) {
+  .section_img {
+    width: 300px !important;
+  }
+  .scroll-spy-section h1{
+    font-size: 25px !important;
+  }
+  .scroll-spy-section h2{
+    font-size: 23px !important;
+  }
+  .scroll-spy-section h3{
+    font-size: 20px !important;
+  }
+  .scroll-spy-section h4{
+    font-size: 18px !important;
+  }
 }

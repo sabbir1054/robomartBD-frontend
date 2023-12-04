@@ -16,7 +16,6 @@
   }
 }
 
-
 .ModalContainer {
   top: 30%;
   left: 30%;
@@ -36,3 +35,28 @@
     }
   }
 }
+@media (max-width: 575.98px) {
+  .allSections {
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      width: 300px;
+    }
+  }
+}
+
+/* X-Small devices (portrait phones, less than 576px)  */
+@media (max-width: 575.98px) {
+  .allSections {
+    .sectionImg {
+      width: 300px !important;
+    }
+   
+  }
+  .tutorialTitle {
+    font-size: 22px !important;
+  }
+}
+
