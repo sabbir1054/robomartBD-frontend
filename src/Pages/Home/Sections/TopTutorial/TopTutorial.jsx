@@ -41,7 +41,7 @@ const TopTutorial = () => {
         <Grid container spacing={2}>
           {load && !tutorialsData && <CircularProgress />}
           {tutorialsData?.map((tutorial, idx) => (
-            <Grid item xs={"3"} marginY={2} key={idx}>
+            <Grid item xs={6} sm={3} marginY={2} key={idx}>
               <SingleTutorial2 tutorial={tutorial} />
             </Grid>
           ))}

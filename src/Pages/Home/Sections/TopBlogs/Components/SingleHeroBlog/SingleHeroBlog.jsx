@@ -5,10 +5,11 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styles from "./SingleHeroBolg.module.scss";
 const SingleHeroBlog = ({ blog }) => {
+  console.log(blog);
   return (
     <>
       <Card className={styles.cardWrapper}>
-        <NavLink to={`/blog/${blog?.id}`}>
+        <NavLink to={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}>
           {" "}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
@@ -22,7 +23,10 @@ const SingleHeroBlog = ({ blog }) => {
 
         <CardContent className={styles.cardContent}>
           <Typography variant="h5" component="h2">
-            <NavLink to={`/blog/${blog?.id}`} className={styles.blogTitle}>
+            <NavLink
+              to={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
+              className={styles.blogTitle}
+            >
               {" "}
               {blog?.title}
             </NavLink>
@@ -36,10 +40,7 @@ const SingleHeroBlog = ({ blog }) => {
           <Box display={"flex"} justifyContent={"flex-end"}>
             {" "}
             <NavLink
-              to={`/blogs/${blog?.id}/${(blog?.title)?.replace(
-                / /g,
-                "_"
-              )}`}
+              to={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
             >
               <Button
                 variant="contained"
