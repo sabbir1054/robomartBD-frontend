@@ -1,7 +1,11 @@
 import { Typography } from "@mui/material";
 import React from "react";
+import { useGetHomeDataQuery } from "../../../../../redux/api/api";
 
 const OrderSummaryFooter = () => {
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  console.log(homeData1);
+
   return (
     <div style={{ marginTop: "5px" }}>
       {/* <Divider /> */}
@@ -23,7 +27,7 @@ const OrderSummaryFooter = () => {
           <Typography variant="title1" textAlign={"center"}>
             <span style={{ fontWeight: "bold" }}> Email: </span>{" "}
             support@robomartbd.com ,{" "}
-            <span style={{ fontWeight: "bold" }}> Mobile: </span> 0147856325
+            <span style={{ fontWeight: "bold" }}> Mobile: </span> {homeData1?.phone}
           </Typography>
           <Typography
             variant="title1"

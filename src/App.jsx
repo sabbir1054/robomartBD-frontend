@@ -38,6 +38,7 @@ import HowToPlaceOrder from "./Pages/HowToPlaceOrder/HowToPlaceOrder";
 import PrivacyPolicy from "./Pages/Policies/PrivacyPolicy";
 import ReturnPolicy from "./Pages/Policies/ReturnPolicy";
 import WarrantyPolicy from "./Pages/Policies/WarrantyPolicy";
+import PayBillSlip from "./Pages/Dashboard/Admin/OrderSummaryPrint/PayBillSlip";
 
 function App() {
   return (
@@ -99,6 +100,10 @@ function App() {
         <Route
           path="/dashboard/portal_admin/order_summary/:orderId"
           element={<OrderSummaryPrint />}
+        />
+        <Route
+          path="/dashboard/portal_admin/bill/:orderId"
+          element={<PayBillSlip />}
         />
         <Route
           path="/dashboard/portal_admin/profile/"

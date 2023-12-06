@@ -3,7 +3,7 @@ import React from "react";
 import Barcode from "react-barcode";
 import { useParams } from "react-router-dom";
 
-const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
+const PayBillHeader = ({ ordersInfo, customerInfo }) => {
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
 
@@ -20,16 +20,19 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
+          {" "}
           <Typography
             variant="h4"
             textAlign={"center"}
             fontWeight={"bold"}
             fontFamily={"Roboto"}
           >
-            INVOICE
+            Delivery Slip
           </Typography>
         </Grid>
         <Grid item md={7}>
+          {/* logo */}
+
           <img src="/assets/logo.png" alt="" width={"200px"} srcset="" />
 
           <div>
@@ -63,7 +66,7 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
           </div>
         </Grid>
         <Grid item md={5}>
-          <Barcode value={`#INV${ordersInfo?.id}`} height={50} />
+          <Barcode value={`#RMBD${ordersInfo?.id}`} height={50} />
           <div>
             <Typography
               variant="title2"
@@ -124,4 +127,4 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
   );
 };
 
-export default OrderSummaryHeader;
+export default PayBillHeader;
