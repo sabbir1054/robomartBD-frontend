@@ -35,7 +35,7 @@ const OurSupplierNPartner = () => {
             padding: "2vh 0",
           }}
         >
-          Our Partner
+          Our Partners
         </Typography>
         <>
           <Swiper

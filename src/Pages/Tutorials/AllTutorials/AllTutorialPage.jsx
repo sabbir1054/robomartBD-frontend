@@ -9,11 +9,9 @@ import React, { useEffect, useState } from "react";
 import { backendUrl } from "../../../utils/backendApiUrlProvider";
 import BottomPagination from "./Components/PaginationsFilter/BottomPagination/BottomPagination";
 import PaginationFilter from "./Components/PaginationsFilter/PaginationFilter";
-import TutorialSearchBar from "./Components/SearchBar/TutorialSearchBar";
 import TutorialCategoryNav from "./Components/TutorialCategoryNav/TutorialCategoryNav";
 import SingleTutorialCard from "./Components/Tutorials/SingleTutorialCard";
 
-  
 const AllTutorialPage = () => {
   const [load, setLoad] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,7 +41,7 @@ const AllTutorialPage = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = tutorialsData?.slice(indexOfFirstItem, indexOfLastItem);
-const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   useEffect(() => {
     getTutorialsData();
   }, [currentPage]);
@@ -78,11 +76,11 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber);
             }}
           >
             {" "}
-            Search anything you need
+            Choose your favorite category
           </Typography>
         </p>
         <Container maxWidth={"xl"}>
-          <TutorialSearchBar />
+          {/* <TutorialSearchBar /> */}
 
           {/* Category Nav */}
           <TutorialCategoryNav />

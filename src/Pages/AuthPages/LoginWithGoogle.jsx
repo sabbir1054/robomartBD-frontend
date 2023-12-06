@@ -1,8 +1,7 @@
-
 import GoogleIcon from "@mui/icons-material/Google";
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import styles from "./AuthPage.module.scss"
+import styles from "./AuthPage.module.scss";
 const LoginWithGoogle = () => {
   const apiUrl = import.meta.env.VITE_GOOGLE_AUTH_LINK;
   const [authUrl, setAuthUrl] = useState("");
@@ -31,11 +30,10 @@ const LoginWithGoogle = () => {
       <Button
         onClick={() => authLoginGoogle()}
         disableElevation
-        style={{
-          backgroundColor: "black",
+        sx={{
           color: "white",
           width: "100%",
-          padding: "10px",
+          padding: "7px",
         }}
         className={styles.googleBtn}
       >

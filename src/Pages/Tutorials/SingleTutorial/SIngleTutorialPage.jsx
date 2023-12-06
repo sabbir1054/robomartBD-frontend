@@ -40,7 +40,7 @@ const SIngleTutorialPage = () => {
 
   return (
     <>
-      <Container maxWidth={"xxl"} style={{ minHeight: "80vh" }}>
+      <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>
         <Typography
           variant="h4"
           style={{
@@ -73,10 +73,10 @@ const SIngleTutorialPage = () => {
             {/* Comments Section */}
             <AllComments />
           </Grid>
-          <Grid item md={12} lg={4}>
+          <Grid item md={12} lg={4} >
             <div
               style={{
-                width: "100%",
+                // width: "100%",
                 position: changePosition ? "sticky" : "",
                 top: changePosition ? "20px" : "",
                 marginBottom: "3vh",

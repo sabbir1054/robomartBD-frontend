@@ -153,16 +153,21 @@ small {
   .section_img {
     width: 300px !important;
   }
-  .scroll-spy-section h1{
+  .scroll-spy-section h1 {
     font-size: 25px !important;
   }
-  .scroll-spy-section h2{
+  .scroll-spy-section h2 {
     font-size: 23px !important;
   }
-  .scroll-spy-section h3{
+  .scroll-spy-section h3 {
     font-size: 20px !important;
   }
-  .scroll-spy-section h4{
+  .scroll-spy-section h4 {
     font-size: 18px !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .section_img {
+    width: 720px !important;
   }
 }

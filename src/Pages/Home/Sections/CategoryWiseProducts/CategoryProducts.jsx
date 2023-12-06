@@ -6,8 +6,9 @@ const CategoryProducts = () => {
 
   return (
     <>
-      {homeData?.catagory?.map((category) => (
+      {homeData?.catagory?.map((category, idx) => (
         <SingleCategoryProducts
+          key={idx}
           title={category?.name}
           id={category?.id}
           fetchProducts={category?.product}

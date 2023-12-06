@@ -46,7 +46,7 @@ const TopTutorial = () => {
             </Grid>
           ))}
         </Grid>
-        <Box display={"flex"} justifyContent={"center"} paddingY={3}>
+        <Box display={"flex"} justifyContent={"end"} paddingY={3}>
           <NavLink to={`/tutorials`}>
             <Button
               variant="contained"

@@ -1,7 +1,6 @@
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PaginationFilter from "../../Pages/Tutorials/AllTutorials/Components/PaginationsFilter/PaginationFilter";
-import TutorialSearchBar from "../../Pages/Tutorials/AllTutorials/Components/SearchBar/TutorialSearchBar";
 import TutorialCategoryNav from "../../Pages/Tutorials/AllTutorials/Components/TutorialCategoryNav/TutorialCategoryNav";
 
 import BottomPagination from "../../Pages/Tutorials/AllTutorials/Components/PaginationsFilter/BottomPagination/BottomPagination";
@@ -30,7 +29,7 @@ const AllBlogsPage = () => {
     if (result?.results) {
       setLoad(false);
     }
-    
+
     setBlogsData(result?.results);
   };
 
@@ -74,11 +73,11 @@ const AllBlogsPage = () => {
             }}
           >
             {" "}
-            Search for blogs
+            Choose your favorite category
           </Typography>
         </p>
         <Container maxWidth={"xl"}>
-          <TutorialSearchBar />
+          {/* <TutorialSearchBar /> */}
 
           {/* Category Nav */}
           <TutorialCategoryNav />

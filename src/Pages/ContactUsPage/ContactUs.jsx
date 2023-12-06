@@ -1,6 +1,8 @@
 // Import necessary modules
 import { Button, Container, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 // ContactUsForm component
 const ContactUs = () => {
@@ -17,11 +19,52 @@ const ContactUs = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const sendEmail = (data) => {
+    console.log(data);
+    fetch(`${backendUrl}/order_management/post_contact`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.msg === "Done!") {
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          });
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Email send Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Something went wrong !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     // Add your logic for handling form submission here
-    console.log("Form Submitted:", formData);
+    sendEmail({
+      name: formData?.name,
+      email: formData?.email,
+      msg: formData?.message,
+    });
+    console.log(formData);
   };
 
   return (

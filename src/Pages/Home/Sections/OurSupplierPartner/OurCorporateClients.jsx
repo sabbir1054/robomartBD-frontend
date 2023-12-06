@@ -31,7 +31,7 @@ const OurCorporateClients = () => {
             padding: "2vh 0",
           }}
         >
-          Our Corporate Client
+          Our Corporate Clients
         </Typography>
         <>
           {/* grid */}
