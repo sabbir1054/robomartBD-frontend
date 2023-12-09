@@ -15,7 +15,9 @@ const SingleBlogList = ({ blog }) => {
       <Card className={styles.cardListWrapper}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <NavLink to={`/blog/${blog?.id}`}>
+            <NavLink
+              to={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
+            >
               <CardMedia
                 component="img"
                 className={styles.cardMedia}
@@ -27,7 +29,10 @@ const SingleBlogList = ({ blog }) => {
           </Grid>
           <Grid item xs={12} md={6}>
             <CardContent className={styles.cardContent}>
-              <NavLink to={`/blog/${blog?.id}`} style={{ color: "black" }}>
+              <NavLink
+                to={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
+                style={{ color: "black" }}
+              >
                 {" "}
                 <Typography
                   variant="subtitle2"

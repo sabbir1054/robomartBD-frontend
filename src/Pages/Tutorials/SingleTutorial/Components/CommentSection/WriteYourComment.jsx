@@ -3,8 +3,8 @@ import { Button, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../../../../redux/api/api";
-import styles from "../../SingleTutorial.module.scss";
 import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
+import styles from "../../SingleTutorial.module.scss";
 const WriteYourComment = ({ blogId, getALLComments }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
@@ -85,7 +85,11 @@ const WriteYourComment = ({ blogId, getALLComments }) => {
         variant="contained"
         color="primary"
         onClick={handleReviewOpenBtn}
-        sx={{ marginTop: "10px" }}
+        sx={{
+          marginTop: "10px",
+          backgroundColor: "var(--primaryColor)",
+          "&:hover": { backgroundColor: "green" },
+        }}
         startIcon={<CreateIcon />}
       >
         Write Comment

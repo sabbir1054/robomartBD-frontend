@@ -63,7 +63,10 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
           </div>
         </Grid>
         <Grid item md={5}>
-          <Barcode value={`#INV${ordersInfo?.id}`} height={50} />
+          <Barcode
+            value={`#INV${ordersInfo?.invoiceId? ordersInfo?.invoiceId:""}`}
+            height={50}
+          />
           <div>
             <Typography
               variant="title2"

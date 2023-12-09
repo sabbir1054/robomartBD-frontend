@@ -29,14 +29,14 @@ const OrderSummaryFooter = () => {
             support@robomartbd.com ,{" "}
             <span style={{ fontWeight: "bold" }}> Mobile: </span> {homeData1?.phone}
           </Typography>
-          <Typography
+          {/* <Typography
             variant="title1"
             fontWeight={"normal"}
             textAlign={"center"}
           >
             <span style={{ fontWeight: "bold" }}> Address: </span>Ashulia,
             Savar, Dhaka
-          </Typography>
+          </Typography> */}
           <Typography
             variant="title1"
             fontFamily={"Poppins"}

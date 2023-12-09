@@ -3,8 +3,8 @@ import { Button, Modal, Rating, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useGetUserQuery } from "../../redux/api/api";
-import styles from "./ProductDetail.module.scss";
 import { backendUrl } from "../../utils/backendApiUrlProvider";
+import styles from "./ProductDetail.module.scss";
 const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
   const [open, setOpen] = useState(false);
@@ -86,9 +86,12 @@ const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
     <div>
       <Button
         variant="contained"
-        color="primary"
         onClick={handleReviewOpenBtn}
-        sx={{ marginTop: "10px" }}
+        sx={{
+          marginTop: "10px",
+          backgroundColor: "var(--primaryColor)",
+          "&:hover": { backgroundColor: "green" },
+        }}
         startIcon={<CreateIcon />}
       >
         Write your review
