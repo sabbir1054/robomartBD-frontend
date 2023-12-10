@@ -56,7 +56,7 @@ const ActiveOrders = () => {
   useEffect(() => {
     handleSearch();
   }, [searchQuery]);
-
+console.log(activeOrdersData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <div

@@ -11,6 +11,7 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
     (acc, product) => acc + product.price,
     0
   );
+  console.log(ordersInfo);
   return (
     <div>
       {" "}
@@ -18,12 +19,14 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={3}>
+              <TableCell align="center" colSpan={5}>
                 Details
               </TableCell>
-              <TableCell align="right">Price</TableCell>
+              <TableCell align="right">Price(BDT)</TableCell>
             </TableRow>
             <TableRow>
+              <TableCell>Sl no </TableCell>
+              <TableCell>Product Code</TableCell>
               <TableCell>Item </TableCell>
               <TableCell align="right">Qty.</TableCell>
               <TableCell align="right">Unit</TableCell>
@@ -31,8 +34,10 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {ordersInfo?.items?.map((row) => (
+            {ordersInfo?.items?.map((row, idx) => (
               <TableRow key={row?.id}>
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell>{row?.product?.product_code}</TableCell>
                 <TableCell>
                   <div
                     style={{
@@ -48,7 +53,9 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
                       width={"50px"}
                       srcset=""
                     />
-                    {row?.product?.name}
+                    <span style={{ marginLeft: "10px" }}>
+                      {row?.product?.name}
+                    </span>
                   </div>
                 </TableCell>
                 <TableCell align="right">{row?.quantity}</TableCell>
@@ -57,6 +64,8 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
               </TableRow>
             ))}
             <TableRow>
+              <TableCell rowSpan={5} />
+              <TableCell rowSpan={5} />
               <TableCell rowSpan={5} />
               <TableCell colSpan={2}>Subtotal</TableCell>
               <TableCell align="right">
@@ -75,13 +84,19 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
               <TableCell colSpan={2}>Discount</TableCell>
               <TableCell align="right">
                 {/* {ordersInfo?.discount ? ordersInfo?.discount : 0} */}
-                {ordersInfo?.price_after_discount?((subTotal+shiping)-ordersInfo?.price_after_discount):0}
+                {ordersInfo?.price_after_discount
+                  ? subTotal + shiping - ordersInfo?.price_after_discount
+                  : 0}
               </TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell colSpan={2}>Total</TableCell>
               <TableCell align="right">{ordersInfo?.total_price}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell colSpan={2}>Payment Status</TableCell>
+              <TableCell align="right">Paid</TableCell>
             </TableRow>
           </TableBody>
         </Table>

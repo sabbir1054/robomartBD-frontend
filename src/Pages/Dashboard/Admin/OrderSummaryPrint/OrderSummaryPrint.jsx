@@ -7,6 +7,7 @@ import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 import OrderSummaryFooter from "./Components/OrderSummaryFooter";
 import OrderSummaryHeader from "./Components/OrderSummaryHeader";
 import OrderSummaryProducts from "./Components/OrderSummaryProducts";
+import OrderSummaryHeader2 from "./Components/OrderSummaryHeader2";
 const OrderSummaryPrint = () => {
   const params = useParams();
   const [orderData, setOrderData] = useState({});
@@ -40,7 +41,7 @@ const OrderSummaryPrint = () => {
     const customer = allUserData?.find((item) => item?.id === orderData?.user);
     setCustomerData(customer);
   }, [allUserData]);
-
+console.log(customerData);
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
@@ -59,7 +60,7 @@ const OrderSummaryPrint = () => {
         }
       });
   }, [params]);
-
+console.log(orderData);
   return (
     <>
       <Container
@@ -103,7 +104,7 @@ const OrderSummaryPrint = () => {
           style={{ border: "1px dashed #e2e2e2", padding: "10px" }}
           id="printAbleArea"
         >
-          <OrderSummaryHeader
+          <OrderSummaryHeader2
             ordersInfo={orderData}
             customerInfo={customerData}
           />

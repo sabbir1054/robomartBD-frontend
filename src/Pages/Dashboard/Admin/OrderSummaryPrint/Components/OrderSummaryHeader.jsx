@@ -48,6 +48,37 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
               {customerInfo?.first_name} {customerInfo?.last_name}
             </Typography>
             <br />
+
+            <Typography variant="title2" fontFamily={"Poppins"}>
+              <div style={{ maxWidth: "90%" }}> {ordersInfo?.address} </div>
+            </Typography>
+            {/* <br /> */}
+            <Typography
+              variant="title1"
+              fontFamily={"Poppins"}
+              fontWeight={"bold"}
+            >
+              {ordersInfo?.phone}
+            </Typography>
+            <br />
+          </div>
+          <div>
+            <Typography
+              variant="title2"
+              style={{ textDecoration: "underline" }}
+            >
+              Client Info:
+            </Typography>
+
+            <Typography
+              variant="title1"
+              fontWeight={"bold"}
+              fontFamily={"Poppins"}
+            >
+              {customerInfo?.first_name} {customerInfo?.last_name}
+            </Typography>
+            <br />
+
             <Typography variant="title2" fontFamily={"Poppins"}>
               <div style={{ maxWidth: "90%" }}> {ordersInfo?.address} </div>
             </Typography>
@@ -64,7 +95,7 @@ const OrderSummaryHeader = ({ ordersInfo, customerInfo }) => {
         </Grid>
         <Grid item md={5}>
           <Barcode
-            value={`#INV${ordersInfo?.invoiceId? ordersInfo?.invoiceId:""}`}
+            value={`#INV${ordersInfo?.invoiceId ? ordersInfo?.invoiceId : ""}`}
             height={50}
           />
           <div>
