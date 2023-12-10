@@ -11,28 +11,28 @@ const PayBillProduct = ({ ordersInfo }) => {
     (acc, product) => acc + product.price,
     0
   );
+  console.log(ordersInfo);
   return (
     <div>
       {" "}
       <TableContainer style={{ borderBottom: "1px solid black" }}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
           <TableHead>
+            
             <TableRow>
-              <TableCell align="center" colSpan={3}>
-                Details
-              </TableCell>
-              <TableCell align="right">Price</TableCell>
-            </TableRow>
-            <TableRow>
+              <TableCell>Sl no </TableCell>
+              <TableCell>Product Code</TableCell>
               <TableCell>Item </TableCell>
               <TableCell align="right">Qty.</TableCell>
-              {/* <TableCell align="right">Unit</TableCell>
-              <TableCell align="right">Sum</TableCell> */}
+              {/* <TableCell align="right">Unit</TableCell> */}
+              {/* <TableCell align="right">Sum</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
-            {ordersInfo?.items?.map((row) => (
+            {ordersInfo?.items?.map((row, idx) => (
               <TableRow key={row?.id}>
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell>{row?.product?.product_code}</TableCell>
                 <TableCell>
                   <div
                     style={{
@@ -48,43 +48,17 @@ const PayBillProduct = ({ ordersInfo }) => {
                       width={"50px"}
                       srcset=""
                     />
-                    {row?.product?.name}
+                    <span style={{ marginLeft: "10px" }}>
+                      {row?.product?.name}
+                    </span>
                   </div>
                 </TableCell>
                 <TableCell align="right">{row?.quantity}</TableCell>
-                {/* <TableCell align="right">{row?.product?.price}</TableCell>
-                <TableCell align="right">{row?.price}</TableCell> */}
+                {/* <TableCell align="right">{row?.product?.price}</TableCell> */}
+                {/* <TableCell align="right">{row?.price}</TableCell> */}
               </TableRow>
             ))}
-           {/*  <TableRow>
-              <TableCell rowSpan={5} />
-              <TableCell colSpan={2}>Subtotal</TableCell>
-              <TableCell align="right">
-              
-                {ordersInfo?.items && subTotal}
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell colSpan={2}>Shipping</TableCell>
-              <TableCell align="right">
-                {ordersInfo?.shiping ? ordersInfo?.shiping : 0}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={2}>Discount</TableCell>
-              <TableCell align="right">
             
-                {ordersInfo?.price_after_discount
-                  ? subTotal + shiping - ordersInfo?.price_after_discount
-                  : 0}
-              </TableCell>
-            </TableRow> */}
-
-            <TableRow>
-              <TableCell colSpan={2}>Total</TableCell>
-              <TableCell align="right">{ordersInfo?.total_price}</TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
