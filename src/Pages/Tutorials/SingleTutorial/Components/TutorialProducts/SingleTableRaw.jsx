@@ -16,7 +16,7 @@ import styles from "./TutorialsProductTable.module.scss";
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
 
-const SingleTableRaw = ({ singleItem }) => {
+const SingleTableRaw = ({ singleItem, idx }) => {
   const [quantity, setQuantity] = useState(singleItem?.quantity);
   const { data: userData } = useGetUserQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
@@ -45,13 +45,19 @@ const SingleTableRaw = ({ singleItem }) => {
 
   return (
     <>
+      <StyledTableCell align="left">{idx + 1}</StyledTableCell>
       <StyledTableCell align="left">
         <Link
           to={`/product/${
             singleItem?.product?.id
           }/${(singleItem?.product?.name).replace(/ /g, "_")}`}
         >
-          <img src={`${singleItem?.product?.photo}`} width={100} alt="" srcset="" />
+          <img
+            src={`${singleItem?.product?.photo}`}
+            width={100}
+            alt=""
+            srcset=""
+          />
         </Link>
       </StyledTableCell>
       <StyledTableCell align="left">

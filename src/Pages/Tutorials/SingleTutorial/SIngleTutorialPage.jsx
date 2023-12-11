@@ -37,7 +37,7 @@ const SIngleTutorialPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+console.log(tutorialDetails);
   return (
     <>
       <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>

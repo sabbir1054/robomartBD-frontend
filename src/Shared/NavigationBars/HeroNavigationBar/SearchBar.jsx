@@ -120,8 +120,9 @@ const SearchBar = () => {
               value: query,
               onChange: handleInputChange,
               style: {
+                borderRadius:"10px",
                 width: "100%",
-                padding: "10px 0px",
+                padding: "10px 5px",
                 fontSize: "16px",
                 // marginTop: "12px",
               },
@@ -145,6 +146,7 @@ const SearchBar = () => {
             variant="contained"
             className={styles.searchBtn}
             disableElevation
+           
           >
             Search
           </Button>

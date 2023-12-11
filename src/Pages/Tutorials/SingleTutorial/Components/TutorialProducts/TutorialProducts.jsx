@@ -7,9 +7,36 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import styles from "./TutorialsProductTable.module.scss"
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import {
+  useGetUserQuery,
+  usePostAllToCartMutation,
+} from "../../../../../redux/api/api";
 import SingleTableRaw from "./SingleTableRaw";
+import styles from "./TutorialsProductTable.module.scss";
+
+function extractProductIdAndQuantity(products) {
+  // Map the array to a new array containing only product id and quantity
+  const result = products.map((product) => {
+    // Check if the product has 'id' and 'quantity' properties
+    if (
+      product &&
+      product?.product?.id !== undefined &&
+      product?.quantity !== undefined
+    ) {
+      return { product: product?.product?.id, quantity: product?.quantity };
+    } else {
+      // If the required properties are not present, return null or handle it accordingly
+      return null;
+    }
+  });
+
+  // Filter out the null values (optional, depending on your use case)
+  return result.filter((item) => item !== null);
+}
+
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -31,7 +58,52 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TutorialProducts = ({ tutorialDetails }) => {
-  console.log(tutorialDetails);
+  const navigate = useNavigate();
+  const [postAllToCart, { isLoading, isError, isSuccess, errors }] =
+    usePostAllToCartMutation();
+
+  console.log(isError);
+  console.log(errors);
+
+  const {
+    data: userData,
+    isLoading: userLoading,
+    isError: userError,
+  } = useGetUserQuery();
+  const [products, setProducts] = React.useState([]);
+  React.useEffect(() => {
+    if (tutorialDetails?.items?.length > 0) {
+      const results = extractProductIdAndQuantity(tutorialDetails?.items);
+      setProducts(results);
+    }
+  }, [tutorialDetails]);
+
+  const addToCart = () => {
+    if (!userData) {
+      navigate("/login");
+      Swal.fire({
+        position: "top-center",
+        icon: "warning",
+        title: "Please Login First !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      const options = { product: products };
+      postAllToCart(options);
+    }
+  };
+  console.log(isSuccess);
+  console.log(userData);
+  if (isSuccess) {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "All products Added",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
   return (
     <Container
       className={styles.product_table_container}
@@ -48,6 +120,7 @@ const TutorialProducts = ({ tutorialDetails }) => {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
+                <StyledTableCell align="left">Sl no</StyledTableCell>
                 <StyledTableCell align="left">Product photo</StyledTableCell>
                 <StyledTableCell align="left">Product Name</StyledTableCell>
                 <StyledTableCell align="center">Quantity</StyledTableCell>
@@ -57,23 +130,28 @@ const TutorialProducts = ({ tutorialDetails }) => {
             <TableBody>
               {tutorialDetails?.items?.map((singleItem, idx) => (
                 <StyledTableRow key={idx}>
-                  <SingleTableRaw singleItem={singleItem} />
+                  <SingleTableRaw singleItem={singleItem} idx={idx} />
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
         <Paper sx={{ display: "flex", justifyContent: "end", padding: "2vh" }}>
-          <Button
-            disableElevation
-            variant="contained"
-            style={{
-              backgroundColor: "var(--primaryColor)",
-              "&:hover": { backgroundColor: "green !important" },
-            }}
-          >
-            Add All To Cart{" "}
-          </Button>
+          {isLoading ? (
+            <p>Loading</p>
+          ) : (
+            <Button
+              disableElevation
+              variant="contained"
+              onClick={() => addToCart()}
+              style={{
+                backgroundColor: "var(--primaryColor)",
+                "&:hover": { backgroundColor: "green !important" },
+              }}
+            >
+              Add All To Cart{" "}
+            </Button>
+          )}
         </Paper>
       </Paper>
     </Container>

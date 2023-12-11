@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import styles from "../../AllProductsPage.module.scss";
 const CategorySection = ({ categoryList }) => {
   return (
     <>
@@ -36,6 +36,7 @@ const CategorySection = ({ categoryList }) => {
                       {" "}
                       <img
                         src={singleCategory?.image}
+                        className={styles.category}
                         style={{
                           minWidth: "100px",
                           maxWidth: "150px",
@@ -77,6 +78,7 @@ const CategorySection = ({ categoryList }) => {
                             }}
                           >
                             <img
+                              className={styles.category}
                               src={`${item?.image}`}
                               style={{
                                 width: "150px",
