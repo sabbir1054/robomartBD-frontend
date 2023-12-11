@@ -58,12 +58,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TutorialProducts = ({ tutorialDetails }) => {
+  const [track, setTrack] = React.useState(false);
   const navigate = useNavigate();
   const [postAllToCart, { isLoading, isError, isSuccess, errors }] =
     usePostAllToCartMutation();
 
-  console.log(isError);
-  console.log(errors);
 
   const {
     data: userData,
@@ -79,6 +78,7 @@ const TutorialProducts = ({ tutorialDetails }) => {
   }, [tutorialDetails]);
 
   const addToCart = () => {
+    setTrack(true);
     if (!userData) {
       navigate("/login");
       Swal.fire({
@@ -93,9 +93,8 @@ const TutorialProducts = ({ tutorialDetails }) => {
       postAllToCart(options);
     }
   };
-  console.log(isSuccess);
-  console.log(userData);
-  if (isSuccess) {
+
+  if (isSuccess && track) {
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -103,7 +102,9 @@ const TutorialProducts = ({ tutorialDetails }) => {
       showConfirmButton: false,
       timer: 1500,
     });
+    setTrack(false);
   }
+
   return (
     <Container
       className={styles.product_table_container}

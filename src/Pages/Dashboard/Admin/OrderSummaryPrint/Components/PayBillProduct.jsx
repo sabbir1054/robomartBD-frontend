@@ -11,7 +11,7 @@ const PayBillProduct = ({ ordersInfo }) => {
     (acc, product) => acc + product.price,
     0
   );
-  console.log(ordersInfo);
+ 
   return (
     <div>
       {" "}

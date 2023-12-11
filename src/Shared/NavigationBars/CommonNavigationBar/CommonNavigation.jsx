@@ -9,6 +9,7 @@ import styles from "./CommnNavigation.module.scss";
 // this navigation is  use in blogs and forum page
 const CommonNavigation = () => {
   const { data, isLoading, isError } = useGetUserQuery();
+ 
   return (
     <AppBar
       sx={{ backgroundColor: "var(--primaryColor)", boxShadow: "unset" }}
@@ -49,12 +50,23 @@ const CommonNavigation = () => {
             <PageNavigationBar />
           </Grid>
           <Grid item md={2}>
-            <div className={styles.loginSectionNav} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-              {data && data[0]?.email && <AvaterBtnMeny data={data} />}
+            <div
+              className={styles.loginSectionNav}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {data && data[0]?.email && (
+                <>
+                  <AvaterBtnMeny data={data[0]} />
+                </>
+              )}
               <div>
                 {!data && <PermIdentityIcon className={styles.profileIcon} />}
-              </div>
-
+              </div> <br />
+             
               {!data && (
                 <>
                   <NavLink to="/login">

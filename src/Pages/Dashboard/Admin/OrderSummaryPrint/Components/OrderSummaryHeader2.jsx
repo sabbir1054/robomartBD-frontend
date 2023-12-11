@@ -41,8 +41,7 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
   };
 
   const params = useParams();
-  // const shippingAddress = insertNewlineAfterThreeWords(ordersInfo?.address);
-  console.log(ordersInfo);
+ 
   return (
     <div>
       <Grid container>

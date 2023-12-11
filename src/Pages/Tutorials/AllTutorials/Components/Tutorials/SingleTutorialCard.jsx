@@ -9,7 +9,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import styles from "./SingleTutorial.module.scss";
 const SingleTutorialCard = ({ tutorial }) => {
   const location = useLocation();
-  console.log(location);
+ 
   return (
     <>
       {" "}

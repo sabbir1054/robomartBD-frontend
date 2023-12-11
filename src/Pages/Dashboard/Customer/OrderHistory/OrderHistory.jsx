@@ -51,7 +51,7 @@ const OrderHistory = () => {
       .then((data) => setOrderData(data));
   }, []);
 
-  console.log(orderData);
+  
 
   return (
     <div style={{ minHeight: "70vh" }}>

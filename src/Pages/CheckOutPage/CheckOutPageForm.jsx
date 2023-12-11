@@ -79,10 +79,7 @@ const CheckOutPage = () => {
       error: postOrderErrors,
     },
   ] = usePostOrderMutation();
-  console.log(postOrderLoading);
-  console.log(postOrderError);
-  console.log(postOrderSuccess);
-  console.log(postOrderErrors);
+  
   const {
     register,
     control,
@@ -233,7 +230,7 @@ const CheckOutPage = () => {
     }
     postAnOrder(data);
   };
-  console.log(postOrderSuccess);
+
   if (postOrderSuccess) {
     Swal.fire({
       position: "top-center",

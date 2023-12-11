@@ -5,7 +5,7 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styles from "./SingleHeroBolg.module.scss";
 const SingleHeroBlog = ({ blog }) => {
-  console.log(blog);
+ 
   return (
     <>
       <Card className={styles.cardWrapper}>

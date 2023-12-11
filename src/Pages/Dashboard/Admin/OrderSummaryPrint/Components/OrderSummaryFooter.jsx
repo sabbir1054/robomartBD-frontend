@@ -4,7 +4,7 @@ import { useGetHomeDataQuery } from "../../../../../redux/api/api";
 
 const OrderSummaryFooter = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
-  console.log(homeData1);
+
 
   return (
     <div style={{ marginTop: "5px" }}>

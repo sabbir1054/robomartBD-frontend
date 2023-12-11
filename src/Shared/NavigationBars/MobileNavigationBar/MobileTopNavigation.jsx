@@ -13,7 +13,7 @@ const MobileTopNavigation = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [data, setData] = useState({});
   const { data: userData, isLoading, isError } = useGetUserQuery();
-  console.log(userData);
+ 
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);

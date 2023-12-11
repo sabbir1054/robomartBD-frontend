@@ -54,7 +54,7 @@ const ProvideNewPassForget = () => {
       .then((res) => res.json())
       .then((result) => {
         setIsLoading(false);
-        console.log(result);
+       
         if (result?.msg === "Done") {
           Swal.fire({
             position: "center",
@@ -81,7 +81,7 @@ const ProvideNewPassForget = () => {
     e.preventDefault();
 
     if (newPassword === confirmPassword) {
-      console.log("Password changed successfully", confirmPassword);
+      
       submitNewPassword(confirmPassword);
     } else {
       errorNotify();

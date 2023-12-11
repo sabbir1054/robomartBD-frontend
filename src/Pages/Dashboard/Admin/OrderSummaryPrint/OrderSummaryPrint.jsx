@@ -41,7 +41,7 @@ const OrderSummaryPrint = () => {
     const customer = allUserData?.find((item) => item?.id === orderData?.user);
     setCustomerData(customer);
   }, [allUserData]);
-console.log(customerData);
+
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     const userDataStorage = JSON.parse(storedData);
@@ -60,7 +60,7 @@ console.log(customerData);
         }
       });
   }, [params]);
-console.log(orderData);
+
   return (
     <>
       <Container

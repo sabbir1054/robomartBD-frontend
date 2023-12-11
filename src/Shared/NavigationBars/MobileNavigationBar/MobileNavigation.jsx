@@ -12,7 +12,7 @@ const MobileNavigation = () => {
   const handleNavigation = (link) => {
     navigate(`${link}`);
   };
-  console.log(location);
+
   return (
     <>
       <Paper

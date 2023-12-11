@@ -20,7 +20,7 @@ const ContactUs = () => {
   };
 
   const sendEmail = (data) => {
-    console.log(data);
+   
     fetch(`${backendUrl}/order_management/post_contact`, {
       method: "POST",
       headers: {
@@ -64,7 +64,7 @@ const ContactUs = () => {
       email: formData?.email,
       msg: formData?.message,
     });
-    console.log(formData);
+   
   };
 
   return (

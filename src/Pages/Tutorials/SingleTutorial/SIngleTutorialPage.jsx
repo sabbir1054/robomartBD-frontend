@@ -5,10 +5,11 @@ import { useParams } from "react-router-dom";
 import { backendUrl } from "../../../utils/backendApiUrlProvider";
 import AllComments from "./Components/CommentSection/AllComments";
 import TutorialProducts from "./Components/TutorialProducts/TutorialProducts";
+import TutorialRelatedProducts from "./Components/TutorialRelatedProducts/TutorialRelatedProducts";
 import TutorialSections from "./Components/TutorialSectionsScroll/TutorialSections";
 import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
 import TutorialHead from "./Components/TutorialsHead/TutorialHead";
-import styles from "./SingleTutorial.module.scss"
+import styles from "./SingleTutorial.module.scss";
 const SIngleTutorialPage = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [changePosition, setChangePosition] = useState(false);
@@ -20,7 +21,6 @@ const SIngleTutorialPage = () => {
       .then((res) => res.json())
       .then((data) => setTutorialDetails(data));
   }, []);
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +37,7 @@ const SIngleTutorialPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-console.log(tutorialDetails);
+
   return (
     <>
       <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>
@@ -69,11 +69,12 @@ console.log(tutorialDetails);
                 tutorialDetails={tutorialDetails}
               />
             </div>
-
+          
+            <TutorialRelatedProducts data={tutorialDetails?.related_Product} />
             {/* Comments Section */}
             <AllComments />
           </Grid>
-          <Grid item md={12} lg={4} >
+          <Grid item md={12} lg={4}>
             <div
               style={{
                 // width: "100%",

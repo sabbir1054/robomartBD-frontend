@@ -17,12 +17,14 @@ const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
 
 const SingleTableRaw = ({ singleItem, idx }) => {
+  const [check, setCheck] = useState(false);
   const [quantity, setQuantity] = useState(singleItem?.quantity);
   const { data: userData } = useGetUserQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
     usePostToCartMutation();
-  console.log(singleItem);
+  
   const addToCart = () => {
+    setCheck(true)
     if (!userData) {
       Swal.fire({
         position: "top-center",
@@ -39,8 +41,9 @@ const SingleTableRaw = ({ singleItem, idx }) => {
     }
   };
 
-  if (isSuccess) {
+  if (isSuccess&&check) {
     successNotify();
+    setCheck(false)
   }
 
   return (
@@ -102,13 +105,17 @@ const SingleTableRaw = ({ singleItem, idx }) => {
         </div>
       </StyledTableCell>
       <StyledTableCell align="right">
-        <IconButton
-          color="success"
-          aria-label="add to shopping cart"
-          onClick={() => addToCart()}
-        >
-          <AddShoppingCartIcon />
-        </IconButton>
+        {isLoading ? (
+          <p>Loading ...</p>
+        ) : (
+          <IconButton
+            color="success"
+            aria-label="add to shopping cart"
+            onClick={() => addToCart()}
+          >
+            <AddShoppingCartIcon />
+          </IconButton>
+        )}
       </StyledTableCell>
     </>
   );

@@ -36,7 +36,7 @@ const ProductDetailsPage = () => {
   const { data: cartData } = useGetCartQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
     usePostToCartMutation();
-  console.log(productDetails);
+
   const addToCart = () => {
     setCheck(true);
     if (!userData) {
@@ -118,8 +118,7 @@ const ProductDetailsPage = () => {
       });
   }, [params]);
 
-  console.log(productDetails);
-
+  
   return (
     <div>
       <Container sx={{ py: "5vh" }}>

@@ -3,7 +3,6 @@ import Stack from "@mui/material/Stack";
 import * as React from "react";
 
 const BottomPagination = ({ handlePageChange, totalPages, }) => {
-  console.log(totalPages);
 
   return (
     <>
