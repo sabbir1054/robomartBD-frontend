@@ -52,13 +52,15 @@ const SearchBar = () => {
   };
 
   const handleSearchBtn = () => {
-    navigate(`/products/search=/${query}`);
+    if (query !== "") {
+      navigate(`/products/search=/${query}`);
+    }
   };
- const handleKeyDown = (event) => {
-   if (event.key === "Enter") {
-     handleSearchBtn();
-   }
- };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearchBtn();
+    }
+  };
   useEffect(() => {
     setProducts(data);
   }, [data]);
@@ -107,22 +109,21 @@ const SearchBar = () => {
     </div>
   );
 
-  
-
   return (
     <>
       <Grid container marginLeft={10}>
         <Grid item sm={9}>
           <Autosuggest
-            // className={styles.searchField}
             inputProps={{
               placeholder: "Search for products",
               value: query,
               onChange: handleInputChange,
+
               style: {
-                borderRadius:"10px",
+                borderRadius: "10px",
                 width: "100%",
-                padding: "10px 5px",
+                border: "0px solid ",
+                padding: "12px 5px",
                 fontSize: "16px",
                 // marginTop: "12px",
               },
@@ -146,7 +147,6 @@ const SearchBar = () => {
             variant="contained"
             className={styles.searchBtn}
             disableElevation
-           
           >
             Search
           </Button>

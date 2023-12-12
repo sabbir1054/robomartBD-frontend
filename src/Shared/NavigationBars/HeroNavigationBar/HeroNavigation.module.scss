@@ -16,17 +16,18 @@
 .selectMenuItem {
 }
 .searchField {
-  background-color: white;
-  border-radius: 0px;
-  width: 70%;
+  // background-color: white;
+  // border-radius: 0px;
+  // width: 70%;
   &:focus-visible {
-    outline: 1px solid red !important;
+    border: 1px solid red !important;
+    // font-size: 100px;
   }
 }
 .searchBtn {
   border-radius: 2px 10px 10px 0px;
   background-color: black;
-  padding: 7px 25px;
+  padding: 9px 25px;
 
   &:hover {
     background-color: rgb(32, 32, 32);
