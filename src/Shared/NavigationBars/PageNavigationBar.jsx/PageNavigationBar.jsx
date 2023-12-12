@@ -1,13 +1,12 @@
-import ForumSharpIcon from "@mui/icons-material/ForumSharp";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
 import HomeIcon from "@mui/icons-material/Home";
-import PrecisionManufacturingSharpIcon from "@mui/icons-material/PrecisionManufacturingSharp";
+import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 import RssFeedSharpIcon from "@mui/icons-material/RssFeedSharp";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import { Box } from "@mui/material";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import StorefrontIcon from "@mui/icons-material/Storefront";
 import styles from "./PageNavigation.module.scss";
-import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 const PageNavigationBar = () => {
   const location = useLocation();
   return (
@@ -52,6 +51,14 @@ const PageNavigationBar = () => {
         } ${styles.navigationMenu_Item}`}
       >
         <RssFeedSharpIcon /> <span> Blog</span>
+      </NavLink>
+      <NavLink
+        to="/contact_us"
+        className={`${
+          location.pathname === "/contact_us" ? styles.activeRoute : ""
+        } ${styles.navigationMenu_Item}`}
+      >
+        <ContactMailIcon /> <span style={{marginLeft:"5px"}}> Contact</span>
       </NavLink>
     </Box>
   );
