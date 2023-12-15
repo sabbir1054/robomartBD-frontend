@@ -28,7 +28,7 @@ function insertNewlineAfterThreeWords(inputString) {
   return outputString;
 }
 
-const PayBillHeader = ({ ordersInfo, customerInfo }) => {
+const PayBillHeader = ({ ordersInfo }) => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -64,7 +64,9 @@ const PayBillHeader = ({ ordersInfo, customerInfo }) => {
         </Grid>
         <Grid item xs={5} display={"flex"} justifyContent={"center"}>
           <Barcode
-            value={`#INV${ordersInfo?.invoiceId ? ordersInfo?.invoiceId : ""}`}
+            value={`#INV${
+              ordersInfo?.invoiceId?.id ? ordersInfo?.invoiceId?.id : ""
+            }`}
             height={50}
           />
         </Grid>
@@ -88,7 +90,8 @@ const PayBillHeader = ({ ordersInfo, customerInfo }) => {
                 // fontWeight={"bold"}
                 fontFamily={"Poppins"}
               >
-                Name : {customerInfo?.first_name} {customerInfo?.last_name}
+                Name : {ordersInfo?.user?.first_name}{" "}
+                {ordersInfo?.user?.last_name}
               </Typography>
               {/* <br /> */}
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
@@ -118,7 +121,8 @@ const PayBillHeader = ({ ordersInfo, customerInfo }) => {
                 // fontWeight={"bold"}
                 fontFamily={"Poppins"}
               >
-                Name : {customerInfo?.first_name} {customerInfo?.last_name}
+                Name : {ordersInfo?.user?.first_name}{" "}
+                {ordersInfo?.user?.last_name}
               </Typography>
               {/* <br /> */}
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
@@ -168,7 +172,7 @@ const PayBillHeader = ({ ordersInfo, customerInfo }) => {
                 // fontWeight={"bold"}
                 fontFamily={"Poppins"}
               >
-                Invoice Id: {ordersInfo?.invoiceId}
+                Invoice Id: {ordersInfo?.invoiceId?.id}
               </Typography>
               {/* <br /> */}
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
@@ -188,7 +192,7 @@ const PayBillHeader = ({ ordersInfo, customerInfo }) => {
               </Typography>
               <br />
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
-                Status : Paid <br />
+                Status :{ordersInfo?.invoiceId?.status} <br />
                 Option: {ordersInfo?.billing_option} <br />
                 Method: {ordersInfo?.payment_method}
                 <br />

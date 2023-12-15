@@ -55,9 +55,9 @@ const OrderSummaryPrint = () => {
       .then((res) => res.json())
       .then((data) => {
         setOrderData(data);
-        if (data?.user) {
+        /* if (data?.user) {
           getCustomerInfo();
-        }
+        } */
       });
   }, [params]);
 
@@ -106,7 +106,7 @@ const OrderSummaryPrint = () => {
         >
           <OrderSummaryHeader2
             ordersInfo={orderData}
-            customerInfo={customerData}
+            // customerInfo={customerData}
           />
           <Divider color={"black"} />
           <div>

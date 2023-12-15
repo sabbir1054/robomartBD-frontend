@@ -85,7 +85,7 @@ const ActiveOrders = () => {
               <StyledTableCell align="left">Status</StyledTableCell>
               <StyledTableCell align="left">Total</StyledTableCell>
               <StyledTableCell align="left">
-                Details/Update Status/Cancel
+                Details/Update Status
               </StyledTableCell>
             </TableRow>
           </TableHead>
@@ -98,13 +98,7 @@ const ActiveOrders = () => {
               <SingleActiveOrderRow activeOrder={activeOrder} />
             ))}
           </TableBody>
-          {/*  <TableBody>
-            {isLoading && <CircularProgress />}
-            {activeOrdersData?.length > 0 &&
-              activeOrdersData?.map((activeOrder) => (
-                <SingleActiveOrderRow activeOrder={activeOrder} />
-              ))}
-          </TableBody> */}
+         
         </Table>
       </TableContainer>
     </div>

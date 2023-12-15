@@ -11,7 +11,7 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
     (acc, product) => acc + product.price,
     0
   );
- 
+
   return (
     <div>
       {" "}
@@ -96,7 +96,9 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
             </TableRow>
             <TableRow>
               <TableCell colSpan={2}>Payment Status</TableCell>
-              <TableCell align="right">Paid</TableCell>
+              <TableCell align="right">
+                {ordersInfo?.invoiceId?.status}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

@@ -1,4 +1,5 @@
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
+import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 import { IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -7,7 +8,10 @@ import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
-import { useUpdateDeliveredOrderStatusMutation } from "../../../../../../redux/api/api";
+import {
+  useDeletePendingOrderStatusMutation,
+  useUpdateDeliveredOrderStatusMutation,
+} from "../../../../../../redux/api/api";
 import styles from "../../OrderManagement.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,6 +47,14 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
       isSuccess: updateStatusSuccess,
     },
   ] = useUpdateDeliveredOrderStatusMutation();
+  const [
+    deletePendingOrderStatus,
+    {
+      isLoading: deleteStatusLoading,
+      isError: deleteStatusError,
+      isSuccess: deleteStatusSuccess,
+    },
+  ] = useDeletePendingOrderStatusMutation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,7 +62,11 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const handleActiveOrderDelete = (id) => {
+    setCheck2(true);
+    const options = { data: { id: id } };
+    deletePendingOrderStatus(options);
+  };
   const handleUpdateDeliveredOrderStatus = (id) => {
     setCheck(true);
     const options = { data: { orderid: id, flag: "sell_done" } };
@@ -67,6 +83,15 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
     setCheck(false);
   }
 
+  if (deleteStatusSuccess && check2) {
+    successNotify();
+    setCheck2(false);
+  }
+
+  if (deleteStatusError && check2) {
+    errorNotify();
+    setCheck2(false);
+  }
   return (
     <>
       <StyledTableRow>
@@ -129,6 +154,15 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
             >
               Order Done
             </Button>
+            <Tooltip title="Return">
+              <IconButton
+                aria-label="delete"
+                size="large"
+                onClick={() => handleActiveOrderDelete(deliveredOrder?.id)}
+              >
+                <ReplyAllIcon fontSize="inherit" style={{ color: "red" }} />
+              </IconButton>
+            </Tooltip>
           </div>
         </StyledTableCell>
       </StyledTableRow>

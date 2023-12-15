@@ -1,18 +1,11 @@
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
-import {
-  CircularProgress,
-  IconButton,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import Button from "@mui/material/Button";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
-import { useUpdateActivesOrderStatusMutation } from "../../../../../../redux/api/api";
 import styles from "../../OrderManagement.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,22 +32,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const successNotify = () => toast.success("Successfully status changed !");
 const errorNotify = () => toast.error("Something went wrong !");
 
-const SingleActiveOrderRow = ({ activeOrder }) => {
+const SingleReturn = ({ activeOrder }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [check, setCheck] = useState(false);
   const [check2, setCheck2] = useState(false);
-  const [
-    updateActiveOrderStatus,
-    {
-      isLoading: updateStatusLoading,
-      isError: updateStatusError,
-      isSuccess: updateStatusSuccess,
-      errors,
-    },
-  ] = useUpdateActivesOrderStatusMutation();
-
-  console.log(errors);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -62,23 +44,6 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const handleUpdateActiveOrderStatus = (id) => {
-    setCheck(true);
-    const options = { data: { orderid: id, flag: "served_done" } };
-    updateActiveOrderStatus(options);
-  };
-
-  if (updateStatusSuccess && check) {
-    successNotify();
-    setCheck(false);
-  }
-
-  if (updateStatusError && check) {
-    errorNotify();
-    setCheck(false);
-  }
-
 
   return (
     <>
@@ -108,10 +73,10 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
             style={{
               fontWeight: "bold",
               fontSize: "16px",
-              color: "green",
+              color: "#c79d01",
             }}
           >
-            Approved
+            Return
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
@@ -120,41 +85,24 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {updateStatusLoading ? (
-            <CircularProgress />
-          ) : (
-            <>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Tooltip title="Details">
-                  <NavLink
-                    to={`/dashboard/portal_admin/order_summary/${activeOrder?.id}`}
-                  >
-                    <IconButton aria-label="Details" size="large">
-                      <ReadMoreIcon
-                        fontSize="inherit"
-                        style={{ color: "#007FFF" }}
-                      />
-                    </IconButton>
-                  </NavLink>
-                </Tooltip>
-
-                <Button
-                  variant="outlined"
-                  onClick={() => handleUpdateActiveOrderStatus(activeOrder?.id)}
-                  style={{
-                    color: "#007FFF",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Delivered
-                </Button>
-              </div>
-            </>
-          )}
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Tooltip title="Details">
+              <NavLink
+                to={`/dashboard/portal_admin/order_summary/${activeOrder?.id}`}
+              >
+                <IconButton aria-label="Details" size="large">
+                  <ReadMoreIcon
+                    fontSize="inherit"
+                    style={{ color: "#007FFF" }}
+                  />
+                </IconButton>
+              </NavLink>
+            </Tooltip>
+          </div>
         </StyledTableCell>
       </StyledTableRow>
     </>
   );
 };
 
-export default SingleActiveOrderRow;
+export default SingleReturn;

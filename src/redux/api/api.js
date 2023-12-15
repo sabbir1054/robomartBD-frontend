@@ -20,6 +20,8 @@ export const robomartApi = createApi({
     "pendingOrders",
     "activeOrders",
     "deliveredOrders",
+    "successOrders",
+    "returnOrders",
   ],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
@@ -102,14 +104,20 @@ export const robomartApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["pendingOrders"],
+      invalidatesTags: ["pendingOrders", "activeOrders"],
     }),
     deletePendingOrderStatus: builder.mutation({
       query: ({ data }) => ({
         url: `/order_management/get_pending_order/${data.id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["pendingOrders", "activeOrders"],
+      invalidatesTags: [
+        "pendingOrders",
+        "activeOrders",
+        "successOrders",
+        "returnOrders",
+        "deliveredOrders",
+      ],
     }),
     getActivesOrders: builder.query({
       query: () => `/order_management/get_active_order`,
@@ -121,7 +129,12 @@ export const robomartApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["activeOrders", "deliveredOrders"],
+      invalidatesTags: [
+        "activeOrders",
+        "deliveredOrders",
+        "returnOrders",
+        "successOrders",
+      ],
     }),
     getDeliveredOrders: builder.query({
       query: () => `/order_management/get_served_order`,
@@ -133,7 +146,20 @@ export const robomartApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["deliveredOrders"],
+      invalidatesTags: [
+        "deliveredOrders",
+        "activeOrders",
+        "returnOrders",
+        "successOrders",
+      ],
+    }),
+    getSuccessOrders: builder.query({
+      query: () => `/order_management/get_all_success_order`,
+      providesTags: ["successOrders"],
+    }),
+    getReturnOrders: builder.query({
+      query: () => `/order_management/get_all_cancel_order`,
+      providesTags: ["returnOrders"],
     }),
   }),
 });
@@ -166,4 +192,7 @@ export const {
 
   useGetDeliveredOrdersQuery,
   useUpdateDeliveredOrderStatusMutation,
+
+  useGetSuccessOrdersQuery,
+  useGetReturnOrdersQuery,
 } = robomartApi;

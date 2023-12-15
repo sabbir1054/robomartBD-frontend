@@ -8,8 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { useGetDeliveredOrdersQuery } from "../../../../../../redux/api/api";
-import CompleteOrdersSingleRow from "./CompleteOrdersSingleRow";
+import { useGetSuccessOrdersQuery } from "../../../../../../redux/api/api";
+import SingleSuccess from "./SingleSuccess";
+// import SingleActiveOrderRow from "./SingleActiveOrderRow";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -32,17 +33,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CompleteOrders = () => {
+const AllSuccess = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const {
-    data: deliveredOrdersData,
+    data: successOrdersData,
     isLoading,
     isError,
-  } = useGetDeliveredOrdersQuery();
-
+  } = useGetSuccessOrdersQuery();
   const handleSearch = () => {
-    const filtered = deliveredOrdersData?.filter((order) =>
+    const filtered = successOrdersData?.filter((order) =>
       Object?.values(order)?.some((value) => {
         if (typeof value === "string" || typeof value === "number") {
           const stringValue =
@@ -85,23 +85,17 @@ const CompleteOrders = () => {
               <StyledTableCell align="left">Delivery Address</StyledTableCell>
               <StyledTableCell align="left">Status</StyledTableCell>
               <StyledTableCell align="left">Total</StyledTableCell>
-              <StyledTableCell align="left">
-                Details/Update Status/Return orders
-              </StyledTableCell>
+              <StyledTableCell align="left">Invoice</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {isLoading && <CircularProgress />}
             {(filteredOrders?.length > 0
               ? filteredOrders
-              : deliveredOrdersData
-            )?.map((deliveredOrder) => (
-              <CompleteOrdersSingleRow deliveredOrder={deliveredOrder} />
+              : successOrdersData
+            )?.map((activeOrder) => (
+              <SingleSuccess activeOrder={activeOrder} />
             ))}
-            {/* {deliveredOrdersData?.length > 0 &&
-              deliveredOrdersData?.map((deliveredOrder) => (
-                <CompleteOrdersSingleRow deliveredOrder={deliveredOrder} />
-              ))} */}
           </TableBody>
         </Table>
       </TableContainer>
@@ -109,4 +103,4 @@ const CompleteOrders = () => {
   );
 };
 
-export default CompleteOrders;
+export default AllSuccess;

@@ -12,7 +12,6 @@ const AllCategorySideMenu = ({ category }) => {
     }
   }, [location]);
 
-
   return (
     <div className={styles.sideMenu}>
       <Box
@@ -20,6 +19,7 @@ const AllCategorySideMenu = ({ category }) => {
           display: "flex",
           flexDirection: "column",
           border: "1px solid #e2e2e2",
+          borderRadius: "5px 5px 0px 0px",
         }}
       >
         <div

@@ -1,4 +1,4 @@
-import { CircularProgress, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,8 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { useGetDeliveredOrdersQuery } from "../../../../../../redux/api/api";
-import CompleteOrdersSingleRow from "./CompleteOrdersSingleRow";
+import { useGetReturnOrdersQuery } from "../../../../../../redux/api/api";
+import SingleReturn from "./SingleReturn";
+// import SingleActiveOrderRow from "./SingleActiveOrderRow";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -32,17 +33,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CompleteOrders = () => {
+const AllReturn = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const {
-    data: deliveredOrdersData,
+    data: returnOrdersData,
     isLoading,
     isError,
-  } = useGetDeliveredOrdersQuery();
-
+  } = useGetReturnOrdersQuery();
   const handleSearch = () => {
-    const filtered = deliveredOrdersData?.filter((order) =>
+    const filtered = returnOrdersData?.filter((order) =>
       Object?.values(order)?.some((value) => {
         if (typeof value === "string" || typeof value === "number") {
           const stringValue =
@@ -57,7 +57,7 @@ const CompleteOrders = () => {
   useEffect(() => {
     handleSearch();
   }, [searchQuery]);
-
+  console.log(returnOrdersData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <div
@@ -85,23 +85,16 @@ const CompleteOrders = () => {
               <StyledTableCell align="left">Delivery Address</StyledTableCell>
               <StyledTableCell align="left">Status</StyledTableCell>
               <StyledTableCell align="left">Total</StyledTableCell>
-              <StyledTableCell align="left">
-                Details/Update Status/Return orders
-              </StyledTableCell>
+              <StyledTableCell align="left">Invoice</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading && <CircularProgress />}
             {(filteredOrders?.length > 0
               ? filteredOrders
-              : deliveredOrdersData
-            )?.map((deliveredOrder) => (
-              <CompleteOrdersSingleRow deliveredOrder={deliveredOrder} />
+              : returnOrdersData
+            )?.map((activeOrder) => (
+              <SingleReturn activeOrder={activeOrder} />
             ))}
-            {/* {deliveredOrdersData?.length > 0 &&
-              deliveredOrdersData?.map((deliveredOrder) => (
-                <CompleteOrdersSingleRow deliveredOrder={deliveredOrder} />
-              ))} */}
           </TableBody>
         </Table>
       </TableContainer>
@@ -109,4 +102,4 @@ const CompleteOrders = () => {
   );
 };
 
-export default CompleteOrders;
+export default AllReturn;

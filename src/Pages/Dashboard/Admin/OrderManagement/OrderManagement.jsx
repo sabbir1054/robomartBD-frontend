@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import ActiveOrders from "./Components/ActiveOrders/ActiveOrders";
 import CompleteOrders from "./Components/CompleteOrders/CompleteOrders";
 import PendingOrders from "./Components/PendingOrders/PendingOrders";
+import AllReturn from "./Components/ReturnOrders/AllReturn";
+import AllSuccess from "./Components/SuccessOrders/AllSuccess";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -106,6 +108,26 @@ const OrderManagement = () => {
                 fontSize: "16px", // Change font size
               }}
             />
+            <Tab
+              label="Success Orders"
+              {...a11yProps(3)}
+              style={{ color: "black" }}
+              sx={{
+                // color:"black", // Change active and inactive tab font color
+                fontWeight: value === 2 ? "bold" : "normal",
+                fontSize: "16px", // Change font size
+              }}
+            />
+            <Tab
+              label="Return Orders"
+              {...a11yProps(4)}
+              style={{ color: "black" }}
+              sx={{
+                // color:"black", // Change active and inactive tab font color
+                fontWeight: value === 2 ? "bold" : "normal",
+                fontSize: "16px", // Change font size
+              }}
+            />
           </Tabs>
         </Box>
 
@@ -114,7 +136,10 @@ const OrderManagement = () => {
           <PendingOrders />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <Typography variant="subtitle2" style={{ color: "red",fontWeight:"bold" }}>
+          <Typography
+            variant="subtitle2"
+            style={{ color: "red", fontWeight: "bold" }}
+          >
             [*Note :] After Deliver Products to customer update order status to
             delivered or before click status returned confirm it
           </Typography>
@@ -122,6 +147,12 @@ const OrderManagement = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <CompleteOrders />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
+          <AllSuccess />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={4}>
+          <AllReturn />
         </CustomTabPanel>
       </Container>
     </div>

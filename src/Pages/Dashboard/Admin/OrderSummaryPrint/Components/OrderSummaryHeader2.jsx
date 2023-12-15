@@ -41,7 +41,7 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
   };
 
   const params = useParams();
- 
+  console.log(ordersInfo);
   return (
     <div>
       <Grid container>
@@ -60,11 +60,12 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
           >
             Invoice
           </Typography>
-         
         </Grid>
         <Grid item xs={5} display={"flex"} justifyContent={"center"}>
           <Barcode
-            value={`#INV${ordersInfo?.invoiceId ? ordersInfo?.invoiceId : ""}`}
+            value={`#INV${
+              ordersInfo?.invoiceId?.id ? ordersInfo?.invoiceId?.id : ""
+            }`}
             height={50}
           />
         </Grid>
@@ -88,7 +89,8 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
                 // fontWeight={"bold"}
                 fontFamily={"Poppins"}
               >
-                Name : {customerInfo?.first_name} {customerInfo?.last_name}
+                Name : {ordersInfo?.user?.first_name}{" "}
+                {ordersInfo?.user?.last_name}
               </Typography>
               {/* <br /> */}
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
@@ -102,7 +104,6 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
                 {ordersInfo?.phone}
               </Typography>
-             
             </Grid>
             <Grid item xs={6}>
               <Typography
@@ -119,7 +120,8 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
                 // fontWeight={"bold"}
                 fontFamily={"Poppins"}
               >
-                Name : {customerInfo?.first_name} {customerInfo?.last_name}
+                Name : {ordersInfo?.user?.first_name}{" "}
+                {ordersInfo?.user?.last_name}
               </Typography>
               {/* <br /> */}
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
@@ -141,10 +143,6 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
           </Grid>
         </Grid>
         <Grid item xs={5}>
-          {/* <Barcode
-            value={`#INV${ordersInfo?.invoiceId ? ordersInfo?.invoiceId : ""}`}
-            height={50}
-          /> */}
           <Grid container>
             <Grid item xs={6}>
               <Typography
@@ -169,7 +167,7 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
                 // fontWeight={"bold"}
                 fontFamily={"Poppins"}
               >
-                Invoice Id: {ordersInfo?.invoiceId}
+                Invoice Id: {ordersInfo?.invoiceId?.id}
               </Typography>
               {/* <br /> */}
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
@@ -189,7 +187,8 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
               </Typography>
               <br />
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
-                Status : Paid <br />
+                Status : {ordersInfo?.invoiceId?.status}
+                <br />
                 Option: {ordersInfo?.billing_option} <br />
                 Method: {ordersInfo?.payment_method}
                 <br />
