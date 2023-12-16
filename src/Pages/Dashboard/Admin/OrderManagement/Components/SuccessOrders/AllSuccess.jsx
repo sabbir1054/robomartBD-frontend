@@ -32,7 +32,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
 const AllSuccess = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
@@ -41,17 +40,18 @@ const AllSuccess = () => {
     isLoading,
     isError,
   } = useGetSuccessOrdersQuery();
+
   const handleSearch = () => {
-    const filtered = successOrdersData?.filter((order) =>
-      Object?.values(order)?.some((value) => {
-        if (typeof value === "string" || typeof value === "number") {
-          const stringValue =
-            typeof value === "number" ? value.toString() : value;
-          return stringValue.toLowerCase().includes(searchQuery.toLowerCase());
-        }
-        return false;
-      })
-    );
+    const filtered = successOrdersData?.filter((order) => {
+      const orderId = order?.id?.toString();
+      const email = order?.user?.email?.toString()?.toLowerCase();
+
+      return (
+        orderId?.includes(searchQuery.toLowerCase()) ||
+        email?.includes(searchQuery.toLowerCase())
+      );
+    });
+
     setFilteredOrders(filtered);
   };
   useEffect(() => {

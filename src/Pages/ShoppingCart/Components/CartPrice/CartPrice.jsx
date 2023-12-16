@@ -20,8 +20,8 @@ import {
   useGetUserProfileQuery,
 } from "../../../../redux/api/api";
 import { addCheckoutData } from "../../../../redux/features/checkoutSlice";
-import styles from "./CartPrice.module.scss";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
+import styles from "./CartPrice.module.scss";
 const CartPrice = ({ isDataChange }) => {
   const {
     data: userProfile,
@@ -41,7 +41,7 @@ const CartPrice = ({ isDataChange }) => {
   const navigate = useNavigate();
   const [shipping, setShipping] = useState(0);
   const [discount, setDiscount] = useState(0);
-  let total = parseInt(cartData?.price + shipping - discount);
+  let total = parseInt(cartData?.price + shipping - discountPercentage);
 
   const handleApplyCoupon = () => {
     setCouponLoading(true);
@@ -72,7 +72,7 @@ const CartPrice = ({ isDataChange }) => {
           Swal.fire({
             position: "top-center",
             icon: "success",
-            title: `You get discount ${result?.discount}%`,
+            title: `You get discount ${result?.discount} BDT`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -113,13 +113,13 @@ const CartPrice = ({ isDataChange }) => {
     navigate("/checkOut");
   };
 
-  useEffect(() => {
-    if (discountPercentage > 0) {
-      const discountAmount = total * (discountPercentage / 100);
+  // useEffect(() => {
+  //   if (discountPercentage > 0) {
+  //     const discountAmount = total * (discountPercentage / 100);
 
-      setDiscount(parseInt(discountAmount));
-    }
-  }, [discountPercentage]);
+  //     setDiscount(parseInt(discountAmount));
+  //   }
+  // }, [discountPercentage]);
   useEffect(() => {
     setDiscount(0);
     setIsCouponValid(false);
@@ -263,7 +263,7 @@ const CartPrice = ({ isDataChange }) => {
                 Subtotal: <span>{cartData?.price}</span>
               </p>
               <p style={{ color: "#025a0e", fontWeight: "bold" }}>
-                Discount: <span> - {discount}</span>
+                Discount: <span> - {discountPercentage}</span>
               </p>
             </div>
             <div className={styles.shipping}>

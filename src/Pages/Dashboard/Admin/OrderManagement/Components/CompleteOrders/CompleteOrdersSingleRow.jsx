@@ -110,7 +110,7 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
           {deliveredOrder?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {deliveredOrder?.email}
+          {deliveredOrder?.phone}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           {deliveredOrder?.address}

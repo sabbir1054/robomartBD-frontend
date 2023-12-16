@@ -11,6 +11,7 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
     (acc, product) => acc + product.price,
     0
   );
+ 
 
   return (
     <div>
@@ -84,9 +85,7 @@ const OrderSummaryProducts = ({ ordersInfo }) => {
               <TableCell colSpan={2}>Discount</TableCell>
               <TableCell align="right">
                 {/* {ordersInfo?.discount ? ordersInfo?.discount : 0} */}
-                {ordersInfo?.price_after_discount
-                  ? subTotal + shiping - ordersInfo?.price_after_discount
-                  : 0}
+                {ordersInfo?.price_after_add_copun}
               </TableCell>
             </TableRow>
 

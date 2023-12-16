@@ -41,22 +41,22 @@ const ActiveOrders = () => {
     isError,
   } = useGetActivesOrdersQuery();
   const handleSearch = () => {
-    const filtered = activeOrdersData?.filter((order) =>
-      Object?.values(order)?.some((value) => {
-        if (typeof value === "string" || typeof value === "number") {
-          const stringValue =
-            typeof value === "number" ? value.toString() : value;
-          return stringValue.toLowerCase().includes(searchQuery.toLowerCase());
-        }
-        return false;
-      })
-    );
+    const filtered = activeOrdersData?.filter((order) => {
+      const orderId = order?.id?.toString();
+      const email = order?.user?.email?.toString()?.toLowerCase();
+
+      return (
+        orderId?.includes(searchQuery.toLowerCase()) ||
+        email?.includes(searchQuery.toLowerCase())
+      );
+    });
+
     setFilteredOrders(filtered);
   };
   useEffect(() => {
     handleSearch();
   }, [searchQuery]);
- 
+
   return (
     <div style={{ minHeight: "70vh" }}>
       <div
@@ -98,7 +98,6 @@ const ActiveOrders = () => {
               <SingleActiveOrderRow activeOrder={activeOrder} />
             ))}
           </TableBody>
-         
         </Table>
       </TableContainer>
     </div>

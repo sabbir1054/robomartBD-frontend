@@ -4,7 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 import styles from "./OrderHistory.module.scss";
 
-const SingleOrderDetailsPage = () => {
+const SingleOrderDetailsPage2 = () => {
   const location = useLocation();
   const [isAdmin, setIsAdmin] = useState(
     location?.pathname?.includes("portal_admin") ? true : false
@@ -38,8 +38,7 @@ const SingleOrderDetailsPage = () => {
 
     return `${day}/${month}/${year}`;
   };
-
-  console.log(orderData);
+  console.log(orderData?.price_after_add_copun);
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container style={{ padding: "4vh" }}>
@@ -192,13 +191,7 @@ const SingleOrderDetailsPage = () => {
                       Subtotal: <span>{subTotal}</span>
                     </p>
                     <p style={{ color: "#025a0e", fontWeight: "bold" }}>
-                      Discount:{" "}
-                      <span>
-                        {" "}
-                        {orderData?.price_after_discount
-                          ? subTotal + shiping - orderData?.price_after_discount
-                          : 0}
-                      </span>
+                      Discount: <span> {orderData?.price_after_add_copun}</span>
                     </p>
                     <p>
                       Shipping Cost: <span> {orderData?.shiping} </span>
@@ -234,4 +227,4 @@ const SingleOrderDetailsPage = () => {
   );
 };
 
-export default SingleOrderDetailsPage;
+export default SingleOrderDetailsPage2;

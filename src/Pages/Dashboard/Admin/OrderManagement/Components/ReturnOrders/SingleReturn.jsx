@@ -60,7 +60,7 @@ const SingleReturn = ({ activeOrder }) => {
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {activeOrder?.email}
+          {activeOrder?.user?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           {activeOrder?.phone}

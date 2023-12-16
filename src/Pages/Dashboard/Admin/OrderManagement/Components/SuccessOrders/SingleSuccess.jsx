@@ -44,7 +44,7 @@ const SingleSuccess = ({ activeOrder }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  console.log(activeOrder);
   return (
     <>
       <StyledTableRow>
@@ -60,7 +60,7 @@ const SingleSuccess = ({ activeOrder }) => {
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {activeOrder?.email}
+          {activeOrder?.user?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           {activeOrder?.phone}

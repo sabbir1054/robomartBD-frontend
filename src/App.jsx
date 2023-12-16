@@ -39,6 +39,7 @@ import PrivacyPolicy from "./Pages/Policies/PrivacyPolicy";
 import ReturnPolicy from "./Pages/Policies/ReturnPolicy";
 import WarrantyPolicy from "./Pages/Policies/WarrantyPolicy";
 import PayBillSlip from "./Pages/Dashboard/Admin/OrderSummaryPrint/PayBillSlip";
+import SingleOrderDetailsPage2 from "./Pages/Dashboard/Customer/OrderHistory/SingleOrderDetailsPage2";
 
 function App() {
   return (
@@ -95,7 +96,7 @@ function App() {
         />
         <Route
           path="/dashboard/portal_admin/order_history/:orderId"
-          element={<SingleOrderDetailsPage />}
+          element={<SingleOrderDetailsPage2 />}
         />
         <Route
           path="/dashboard/portal_admin/order_summary/:orderId"
