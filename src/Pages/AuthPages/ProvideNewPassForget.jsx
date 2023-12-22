@@ -14,12 +14,13 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { backendUrl } from "../../utils/backendApiUrlProvider";
 const errorNotify = () => toast.error("Password not match !");
 const ProvideNewPassForget = () => {
   const [loading, setIsLoading] = useState(false);
+  const params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -40,21 +41,24 @@ const ProvideNewPassForget = () => {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
-
+  console.log(params);
   const test = "";
   const submitNewPassword = (password) => {
     setIsLoading(true);
-    fetch(`${backendUrl}${location.pathname}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ new_password: password }),
-    })
+    fetch(
+      `${backendUrl}/api/renew_password/${params?.email}/${params?.code}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ new_password: password }),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         setIsLoading(false);
-       
+
         if (result?.msg === "Done") {
           Swal.fire({
             position: "center",
@@ -81,7 +85,6 @@ const ProvideNewPassForget = () => {
     e.preventDefault();
 
     if (newPassword === confirmPassword) {
-      
       submitNewPassword(confirmPassword);
     } else {
       errorNotify();
